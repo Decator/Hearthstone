@@ -6,7 +6,7 @@ package engine;
 * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
 * @version 0.0.1
 */
-class abstract Card {
+abstract class Card {
     protected int id;
     protected String type;
     protected String name;
@@ -56,7 +56,7 @@ class abstract Card {
     * @return the name
     */
     public String getName() {
-        return this.name
+        return this.name;
     }
 
     /**

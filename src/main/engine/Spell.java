@@ -6,7 +6,7 @@ package engine;
 * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
 * @version 0.0.1
 */
-class Spell {
+class Spell extends Card {
     private int nbSummon;
     private int idInvocation;
     private int attackBuff;
@@ -82,10 +82,10 @@ class Spell {
     }
 
     /**
-    * This method return the polymorph of the card
-    * @return the polymorph
+    * This method return true or false according to the polymorph of the card
+    * @return the true or false
     */
-    public int getPolymorph() {
+    public boolean getPolymorph() {
         return this.polymorph;
     }
 }

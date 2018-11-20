@@ -29,7 +29,7 @@ class abstract Card {
         this.id = id;
         this.type = type;
         this.name = name;
-        this.manaCost = manaCost;
+        this.manaCost = damage;
         this.damage = damage;
         this.target = target;
         this.description = description;

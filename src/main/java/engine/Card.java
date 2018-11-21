@@ -1,12 +1,13 @@
 package engine;
 
 /**
-* This class is the complete description of a card wich can be either a Minion or a Spell
-*
-* @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
-* @version 0.0.1
-*/
+ * The complete description of a card wich can be either a Minion or a Spell. 
+ *
+ * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
+ * @version 0.0.1
+ */
 abstract class Card {
+	
     protected int id;
     protected String type;
     protected String name;
@@ -16,15 +17,15 @@ abstract class Card {
     protected String description;
 
     /**
-    * This constructor allows to initialize the attributes of this class
-    * @param id It's the id of the card
-    * @param type There are five types : common, mage, paladin, warrior and invocation 
-    * @param name It's the name of the card
-    * @param manaCost It's the number of mana that the card costs
-    * @param damage It's the number of damage that the card can inflict
-    * @param target It's a simple text with the target of the card
-    * @param description It's the description of the card
-    */
+     * Initialize the attributes of this class. 
+     * @param id the id of the card
+     * @param type There are five types : common, mage, paladin, warrior and invocation 
+     * @param name the name of the card
+     * @param manaCost the amount of mana the card costs
+     * @param damage the amount of damage that the card can inflict
+     * @param target a simple text with the target of the card
+     * @param description the description of the card
+     */
     Card(int id, String type, String name, int manaCost, int damage, String target, String description ) {
         this.id = id;
         this.type = type;
@@ -36,57 +37,57 @@ abstract class Card {
     }
 
     /**
-    * This method return the id of the card
-    * @return the id
-    */
+     * Get the id of the card. 
+     * @return the id of the card
+     */
     public int getId() {
         return this.id;
     }
 
     /**
-    * This method return the type of the card
-    * @return the type
-    */
+     * Get the type of the card. 
+     * @return the type of the card
+     */
     public String getType() {
         return this.type;
     }
 
     /**
-    * This method return the name of the card
-    * @return the name
-    */
+     * Get the name of the card. 
+     * @return the name of the card
+     */
     public String getName() {
         return this.name;
     }
 
     /**
-    * This method return the manaCost of the card
-    * @return the manaCost
-    */
+     * Get the manaCost of the card. 
+     * @return the manaCost of the card
+     */
     public int getManaCost() {
         return this.manaCost;
     }
 
     /**
-    * This method return the damage of the card
-    * @return the damage
-    */
+     * Get the damage of the card. 
+     * @return the damage of the card
+     */
     public int getDamage() {
         return this.damage;
     }
 
     /**
-    * This method return the target of the card
-    * @return the target
-    */
+     * Get the target of the card. 
+     * @return the target of the card
+     */
     public String getTarget() {
         return this.target;
     }
 
     /**
-    * This method return the description of the card
-    * @return the description
-    */
+     * Get the description of the card. 
+     * @return the description of the card
+     */
     public String getDescription() {
         return this.description;
     }

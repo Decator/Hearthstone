@@ -10,7 +10,7 @@ class Minion extends Card {
 	
 	private int healthPoints;
 	private boolean taunt;
-	private boolean lifesteal;
+	private boolean lifeSteal;
 	private boolean charge;
 	private int attackBuff;
 	private boolean attacked;
@@ -35,7 +35,7 @@ class Minion extends Card {
 		super(id, type, name, manaCost, damage, target, description);
 		this.healthPoints = healthPoints;
 		this.taunt = taunt;
-		this.lifesteal = lifesteal;
+		this.lifeSteal = lifeSteal;
 		this.charge = charge;
 		this.attackBuff = attackBuff;
 		this.attacked = true;	
@@ -62,7 +62,7 @@ class Minion extends Card {
      * @return the lifeSteal
      */
 	public boolean getLifesteal() {
-		return this.lifesteal;
+		return this.lifeSteal;
 	}
 	
 	/**
@@ -74,28 +74,26 @@ class Minion extends Card {
 	}
 	
 	/**
-     * Get the nbSummon of the card. 
-     * @return the nbSummon
+     * Get the attackBuff of the card. 
+     * @return the attackBuff
      */
 	public int getAttackBuff() {
 		return this.attackBuff;
 	}
 	
 	/**
-     * Get the nbSummon of the card. 
-     * @return the nbSummon
+     * Get the attacked of the card. 
+     * @return the attacked
      */
 	public boolean getAttacked() {
 		return this.attacked;
 	}
 	
 	/**
-     * Get the nbSummon of the card. 
-     * @return the nbSummon
+     * Replaces the attacked variable by its reverse (true, false).
      */
 	void setAttacked() {
 		this.attacked = !this.attacked;
 	}
 	
-
 }

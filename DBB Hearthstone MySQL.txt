@@ -1,0 +1,59 @@
+DROP TABLE Minion;
+CREATE TABLE Minion (
+id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type_minion VARCHAR(255) NOT NULL,
+name_minion VARCHAR(255) NOT NULL,
+mana_cost_minion SMALLINT UNSIGNED NOT NULL,
+damage_minion SMALLINT UNSIGNED NOT NULL,
+health_minion SMALLINT UNSIGNED NOT NULL,
+taunt BOOLEAN DEFAULT 0 NOT NULL,
+charge BOOLEAN DEFAULT 0 NOT NULL,
+lifesteal BOOLEAN DEFAULT 0 NOT NULL,
+attack_buff SMALLINT DEFAULT 0,
+target_minion VARCHAR(255),
+description_minion VARCHAR(255)
+)
+Engine=InnoDB;
+
+DROP TABLE Spell;
+CREATE TABLE Spell (
+id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type_spell VARCHAR(255) NOT NULL,
+name_spell VARCHAR(255) NOT NULL,
+mana_cost_spell SMALLINT UNSIGNED NOT NULL,
+damage_spell SMALLINT UNSIGNED,
+nb_summon SMALLINT UNSIGNED,
+id_invocation SMALLINT UNSIGNED,
+attack_buff SMALLINT UNSIGNED,
+armor_buff SMALLINT UNSIGNED,
+nb_draw SMALLINT UNSIGNED,
+polymorph BOOLEAN DEFAULT 0 NOT NULL,
+target_spell VARCHAR(255),
+description VARCHAR(255)
+)
+Engine=InnoDB;
+
+DROP TABLE Hero;
+CREATE TABLE Hero (
+id SMALLINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+type_hero VARCHAR(255) NOT NULL,
+name_hero VARCHAR(255) NOT NULL,
+damage_hero_power SMALLINT UNSIGNED,
+nb_summon_hero_power SMALLINT UNSIGNED,
+id_invocation_hero_power SMALLINT UNSIGNED,
+armor_buff_hero_power SMALLINT UNSIGNED,
+target_hero_power VARCHAR(255),
+description_hero_power VARCHAR(255) NOT NULL
+)
+Engine=InnoDB;
+
+ALTER TABLE Spell
+ADD CONSTRAINT fk_invocation_minion FOREIGN KEY (id_invocation) REFERENCES Minion(id);
+
+ALTER TABLE Hero 
+ADD CONSTRAINT fk_invocation_hero_power_minion FOREIGN KEY (id_invocation_hero_power) REFERENCES Minion(id);
+
+INSERT INTO Minion (type_minion, name_minion, mana_cost_minion, damage_minion, health_minion, taunt, charge, lifesteal, attack_buff, target_minion, description_minion)
+VALUES ('common', 'Sanglier brocheroc', 1, 1, 1, 0, 0, 0, NULL, NULL, NULL);
+
+SELECT * FROM Minion;

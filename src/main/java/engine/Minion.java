@@ -3,7 +3,7 @@ package engine;
  * 
  * The complete description of a Minion Card. 
  * 
- * @author Martin Ars Alexis Claveau Alexis Loret Maud Van Dorssen
+ * @author Martin Ars, Alexis Claveau, Alexis Loret, Maud Van Dorssen
  * @version 0.0.1
  */
 class Minion extends Card {

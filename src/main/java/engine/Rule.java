@@ -7,4 +7,9 @@ package engine;
  */
 class Rule {
 
+	public static boolean checkManaTurn(int manaMaxTurn) {
+		
+		return false;
+	}
+
 }

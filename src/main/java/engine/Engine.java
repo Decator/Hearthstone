@@ -15,7 +15,7 @@ public class Engine implements EngineBridge {
 		return null;
 	}
 
-	public Player createPlayer(int idHero, String pseudo) {
+	public Player createPlayer(int idHero, String username) {
 		// TODO Auto-generated method stub
 		return null;
 	}

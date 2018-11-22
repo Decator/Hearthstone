@@ -7,34 +7,32 @@ package engine;
  * @author Martin Ars Alexis Claveau Alexis Loret Maud Van Dorssen
  * @version 0.0.1
  */
-
 class Hero {
     private int id;
     private String type;
     private String name;
     private int healthPoints;
     private int armorPoints;
-    private boolean heroPowerUsed;
     private HeroPower heroPower;
+    private boolean heroPowerUsed;
 
     /**
      * Initialize the attributes of this class.
-     * @param id the id of the card
-     * @param type There are five types : common, mage, paladin, warrior and invocation
-     * @param name the name of the card
+     * @param id the id of the hero
+     * @param type There are three types : mage, paladin, warrior
+     * @param name the name of the hero
      */
-
     Hero(int id, String type, String name) {
         this.id = id;
         this.type = type;
         this.name = name;
+        this.heroPowerUsed = false;
     }
 
     /**
      * Get the id of the hero.
      * @return the id of the hero
      */
-
     public int getId() {
         return this.id;
     }
@@ -43,7 +41,6 @@ class Hero {
      * Get the type (class) of the hero.
      * @return the type of the hero
      */
-
     public String getType() {
         return this.type;
     }
@@ -52,7 +49,6 @@ class Hero {
      * Get the name of the hero.
      * @return the name of the hero
      */
-
     public String getName() {
         return this.name;
     }
@@ -61,7 +57,6 @@ class Hero {
      * Get the healthPoints of the hero.
      * @return the healthPoints of the hero
      */
-
     public int getHealthPoints() {
         return this.healthPoints;
     }
@@ -70,7 +65,6 @@ class Hero {
      * Get the armorPoints of the hero.
      * @return the armorPoints of the hero
      */
-
     public int getArmorPoints() {
         return this.armorPoints;
     }
@@ -79,7 +73,6 @@ class Hero {
      * Get the boolean which checks if the hero has already used his power.
      * @return the boolean which checks if the hero has already used his power
      */
-
     public boolean getHeroPowerUsed() {
         return this.heroPowerUsed;
     }
@@ -88,7 +81,6 @@ class Hero {
      * Get the HeroPower.
      * @return the HeroPower
      */
-
     public HeroPower getHeroPower() {
         return this.heroPower;
     }
@@ -97,7 +89,6 @@ class Hero {
      * Set the amout of healthPoints
      * @param healthPoints the amout of healthPoints
      */
-
     void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
     }
@@ -106,7 +97,6 @@ class Hero {
      * Set the amout of armorPoints
      * @param armorPoints the amout of armorPoints
      */
-
     void setArmorPoints(int armorPoints) {
         this.armorPoints = armorPoints;
     }
@@ -114,7 +104,6 @@ class Hero {
     /**
      * Replaces the heroPowerUsed variable by its reverse (true, false).
      */
-
     void setHeroPowerUsed() {
         this.heroPowerUsed = !this.heroPowerUsed;
     }

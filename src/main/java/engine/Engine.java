@@ -3,6 +3,11 @@ package engine;
 import java.util.ArrayList;
 import java.util.UUID;
 
+/**
+ * 
+ * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
+ * @version 0.0.1
+ */
 public class Engine implements EngineBridge {
 	
 	public ArrayList<Hero> getHeros() {

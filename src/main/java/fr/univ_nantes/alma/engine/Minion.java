@@ -45,9 +45,7 @@ public class Minion extends Card {
 		this.attacked = true;	
 	}
 	
-	public Minion() {
-		
-	}
+	public Minion() {}
 	
 	/**
      * Get the healthPoints of the minion

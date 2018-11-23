@@ -44,6 +44,8 @@ public class Spell extends Card {
         this.nbDraw = nbDraw;
         this.polymorph = polymorph;
     }
+    
+    public Spell() {}
 
     /**
      * Get the nbSummon of the card. 

@@ -12,7 +12,7 @@ import javax.persistence.Id;
  * @version 0.0.1
  */
 @Entity
-public abstract class Card {
+abstract class Card {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -34,7 +34,7 @@ public abstract class Card {
      * @param target a simple text with the target of the card
      * @param description the description of the card
      */
-    public Card(int id, String type, String name, int manaCost, int damage, String target, String description ) {
+    Card(int id, String type, String name, int manaCost, int damage, String target, String description ) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -44,9 +44,7 @@ public abstract class Card {
         this.description = description;
     }
     
-    public Card() {
-    	
-    }
+    Card() {}
 
     /**
      * Get the id of the card. 

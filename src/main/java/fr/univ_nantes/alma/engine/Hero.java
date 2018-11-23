@@ -1,5 +1,10 @@
 package fr.univ_nantes.alma.engine;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  *
  * The complete description of a Hero.
@@ -7,13 +12,22 @@ package fr.univ_nantes.alma.engine;
  * @author Martin Ars Alexis Claveau Alexis Loret Maud Van Dorssen
  * @version 0.0.1
  */
-class Hero {
+@Entity
+public class Hero {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     private String type;
     private String name;
     private int healthPoints;
     private int armorPoints;
-    private HeroPower heroPower;
+    private int damage;
+	private int nbSummon;
+	private int idInvocation;
+	private int armorBuff;
+	private String target;
+	private String description;
     private boolean heroPowerUsed;
 
     /**
@@ -21,13 +35,27 @@ class Hero {
      * @param id the id of the hero
      * @param type There are three types : mage, paladin, warrior
      * @param name the name of the hero
+     * @param damage the amount of damage that the hero can inflict
+	 * @param nbSummon the amount of invocations that the hero can perfom
+	 * @param idInvocation the id of the hero's invocation
+	 * @param armorBuff the amount of armor buff that the hero can give
+	 * @param target a simple text with the target of the hero
+	 * @param description the description of the hero
      */
-    Hero(int id, String type, String name) {
+    public Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String target, String description) {
         this.id = id;
         this.type = type;
         this.name = name;
+        this.damage = damage;
+		this.nbSummon = nbSummon;
+		this.idInvocation = idInvocation;
+		this.armorBuff = armorBuff;
+		this.target = target;
+		this.description = description;
         this.heroPowerUsed = false;
     }
+    
+    public Hero() {}
 
     /**
      * Get the id of the hero.
@@ -78,11 +106,51 @@ class Hero {
     }
 
     /**
-     * Get the HeroPower.
-     * @return the HeroPower
+     * Get the amount of damage that the hero can inflict. 
+     * @return the amount of damage
      */
-    public HeroPower getHeroPower() {
-        return this.heroPower;
+    public int getDamage() {
+        return this.damage;
+    }
+    
+    /**
+     * Get the amount of invocations that the hero can perfom. 
+     * @return the amount of invocations
+     */
+    public int getNbSummon() {
+        return this.nbSummon;
+    }
+    
+    /**
+     * Get the id of the hero's invocation. 
+     * @return the id
+     */
+    public int getIdInvocation() {
+        return this.idInvocation;
+    }
+    
+    /**
+     * Get the amount of armor buff that the hero can give. 
+     * @return the amount of armor buff
+     */
+    public int getArmorBuff() {
+        return this.armorBuff;
+    }
+    
+    /**
+     * Get the target of the hero. 
+     * @return the target of the hero
+     */
+    public String getTarget() {
+        return this.target;
+    }
+    
+    /**
+     * Get the description of the hero. 
+     * @return the description of the hero
+     */
+    public String getDescription() {
+        return this.description;
     }
 
     /**

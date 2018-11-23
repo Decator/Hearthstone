@@ -1,4 +1,9 @@
-package engine;
+package fr.univ_nantes.alma.engine;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * The complete description of a card wich can be either a Minion or a Spell. 
@@ -6,8 +11,11 @@ package engine;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-abstract class Card {
+@Entity
+public abstract class Card {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
     protected int id;
     protected String type;
     protected String name;
@@ -26,7 +34,7 @@ abstract class Card {
      * @param target a simple text with the target of the card
      * @param description the description of the card
      */
-    Card(int id, String type, String name, int manaCost, int damage, String target, String description ) {
+    public Card(int id, String type, String name, int manaCost, int damage, String target, String description ) {
         this.id = id;
         this.type = type;
         this.name = name;
@@ -34,6 +42,10 @@ abstract class Card {
         this.damage = damage;
         this.target = target;
         this.description = description;
+    }
+    
+    public Card() {
+    	
     }
 
     /**

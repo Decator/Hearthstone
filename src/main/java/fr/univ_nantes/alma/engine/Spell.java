@@ -1,4 +1,6 @@
-package engine;
+package fr.univ_nantes.alma.engine;
+
+import javax.persistence.Entity;
 
 /**
  * The complete description of a Spell Card. 
@@ -6,7 +8,8 @@ package engine;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-class Spell extends Card {
+@Entity
+public class Spell extends Card {
 	
     private int nbSummon;
     private int idInvocation;
@@ -31,7 +34,7 @@ class Spell extends Card {
      * @param nbDraw the amount of cards that the player can draw
      * @param polymorph a boolean to indicate if the card is polymorphic or not
      */
-    Spell(int id, String type, String name, int manaCost, int damage, String target, String description, int nbSummon, int idInvocation, int attackBuff, int armorBuff, int nbDraw, boolean polymorph) {
+    public Spell(int id, String type, String name, int manaCost, int damage, String target, String description, int nbSummon, int idInvocation, int attackBuff, int armorBuff, int nbDraw, boolean polymorph) {
         super(id, type, name, manaCost, damage, target, description);
         
         this.nbSummon = nbSummon;

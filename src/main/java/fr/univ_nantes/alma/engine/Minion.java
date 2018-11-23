@@ -1,4 +1,7 @@
-package engine;
+package fr.univ_nantes.alma.engine;
+
+import javax.persistence.Entity;
+
 /**
  * 
  * The complete description of a Minion Card. 
@@ -6,7 +9,8 @@ package engine;
  * @author Martin Ars, Alexis Claveau, Alexis Loret, Maud Van Dorssen
  * @version 0.0.1
  */
-class Minion extends Card {
+@Entity
+public class Minion extends Card {
 	
 	private int healthPoints;
 	private boolean taunt;
@@ -31,7 +35,7 @@ class Minion extends Card {
      * @param healthPoints the amount of health points the minion has
      */
 	
-	Minion(int id, String type, String name, int manaCost, int damage, String target, String description, int healthPoints, boolean taunt, boolean lifeSteal, boolean charge, int attackBuff) {
+	public Minion(int id, String type, String name, int manaCost, int damage, String target, String description, int healthPoints, boolean taunt, boolean lifeSteal, boolean charge, int attackBuff) {
 		super(id, type, name, manaCost, damage, target, description);
 		this.healthPoints = healthPoints;
 		this.taunt = taunt;
@@ -39,6 +43,10 @@ class Minion extends Card {
 		this.charge = charge;
 		this.attackBuff = attackBuff;
 		this.attacked = true;	
+	}
+	
+	public Minion() {
+		
 	}
 	
 	/**

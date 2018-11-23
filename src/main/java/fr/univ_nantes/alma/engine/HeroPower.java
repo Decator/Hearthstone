@@ -1,4 +1,4 @@
-package engine;
+package fr.univ_nantes.alma.engine;
 
 /**
  * The complete description of a Hero's Power. 

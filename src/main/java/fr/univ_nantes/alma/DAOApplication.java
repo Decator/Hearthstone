@@ -18,7 +18,7 @@ public class DAOApplication {
     @Bean
 	public CommandLineRunner demo(MinionRepository repository) {
 		return (args) -> {
-			// save a couple of customers
+			
 			repository.save(new Minion(1, "common", "chevalier", 2, 1, "target", "description", 2, false, false, false, 0));
 
 			for (Minion minion : repository.findAll()) {

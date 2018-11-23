@@ -6,5 +6,4 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface MinionRepository extends CrudRepository<Minion, Integer> {
 	ArrayList<Minion> findAll();
-
 }

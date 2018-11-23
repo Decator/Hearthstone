@@ -1,5 +1,7 @@
 package fr.univ_nantes.alma;
 
+import java.util.ArrayList;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +20,7 @@ public class DAOApplication {
     public static void main(String[] args) {
         SpringApplication.run(DAOApplication.class, args);
     }
+    
     
     @Bean
 	public CommandLineRunner retrieveMinions(MinionRepository repository) {

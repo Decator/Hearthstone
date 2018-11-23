@@ -9,7 +9,7 @@ import java.util.UUID;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-class Game {
+public class Game {
 	private UUID idGame;
 	private Player player1;
 	private Player player2;
@@ -21,7 +21,7 @@ class Game {
 	 * @param player1 the first player of the game
 	 * @param player2 the second player of the game
 	 */
-	Game(UUID idGame, Player player1, Player player2) {
+	public Game(UUID idGame, Player player1, Player player2) {
 		this.idGame = idGame;
 		this.player1 = player1;
 		this.player2 = player2;

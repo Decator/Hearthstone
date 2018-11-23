@@ -68,7 +68,11 @@ class Game {
 	 */
 	void playCard(int idCard) {
 		if(this.currentPlayer.getHand().get(idCard) instanceof Minion) {
-			this.currentPlayer.addCardToBoard(this.currentPlayer.getHand().get(idCard));
+			try {
+				this.currentPlayer.addCardToBoard(this.currentPlayer.getHand().get(idCard));
+			} catch (EngineException e) {
+				e.printStackTrace();
+			}
 		}
 		else {
 			// Cast spell

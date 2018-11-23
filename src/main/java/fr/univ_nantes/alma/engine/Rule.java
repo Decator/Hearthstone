@@ -1,5 +1,7 @@
 package fr.univ_nantes.alma.engine;
 
+import java.util.Vector;
+
 /**
  * Manage all the game's rule.
  *
@@ -31,8 +33,8 @@ class Rule {
      * @param handSize the hand's size
      * @return true of false
      */
-	static boolean checkHandSize(int handSize) {
-        if(handSize < MAX_HAND_SIZE) {
+	static boolean checkHandSize(Vector<Card> hand) {
+        if(hand.size() < MAX_HAND_SIZE) {
             return true;
         }
         return false;
@@ -43,8 +45,8 @@ class Rule {
      * @param boardSize the board's size
      * @return true of false
      */
-    static boolean checkBoardSize(int boardSize) {
-        if(boardSize < MAX_BOARD_SIZE) {
+    static boolean checkBoardSize(Vector<Card> board) {
+        if(board.size() < MAX_BOARD_SIZE) {
             return true;
         }
         return false;

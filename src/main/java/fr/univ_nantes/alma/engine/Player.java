@@ -111,43 +111,57 @@ public class Player {
 
 	/**
 	 * Increase the mana pool each turn until it reaches 10
+	 * @throws EngineException 
 	 */
-	void setManaMaxTurn() {
+	void setManaMaxTurn() throws EngineException {
 		if(Rule.checkManaTurn(this.manaMaxTurn))
 			this.manaMaxTurn++;
-		/*else
-			throw new EngineException();*/
+		else
+			throw new EngineException();
 	}
 
 	/**
 	 * Add a card to the player's hand
 	 * @param card the card to add
+	 * @throws EngineException 
 	 */
-	void addCardToHand(Card card) {
-		this.getHand().add(card);
+	void addCardToHand(Card card) throws EngineException {
+		if(Rule.checkHandSize(this.getHand()))
+			this.getHand().add(card);
+		else
+		 	throw new EngineException();
 	}
 
 	/**
 	 * Add a card to the player's board
 	 * @param card the card to add
+	 * @throws EngineException 
 	 */
-	void addCardToBoard(Card card) {
-		this.getBoard().add(card);
+	void addCardToBoard(Card card) throws EngineException {
+		if(Rule.checkBoardSize(this.getBoard()))
+			this.getBoard().add(card);
+		else
+	 		throw new EngineException();
 	}
 
 	/**
 	 * Remove a card from the player's hand
 	 * @param id the card to remove
+	 * @throws EngineException 
 	 */
-	void removeCardFromHand(int id) {
-		this.getHand().remove(id);
+	void removeCardFromHand(Card card) throws EngineException {
+		if(!this.getHand().remove(card))
+	 		throw new EngineException();
 	}
 
 	/**
 	 * Remove a card from the player's board
 	 * @param id the card to remove
+	 * @throws EngineException 
 	 */
-	void removeCardFromBoard(int id) {
-		this.getBoard().remove(id);
+	void removeCardFromBoard(Card card) throws EngineException {
+		if(this.getBoard().remove(card))
+			throw new EngineException();
+		
 	}
 }

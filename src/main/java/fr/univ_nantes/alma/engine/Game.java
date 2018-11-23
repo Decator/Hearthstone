@@ -41,7 +41,11 @@ class Game {
 	 * Draw a card from the player's deck and place it into his hand.
 	 */
 	void drawCard() {
-		this.currentPlayer.addCardToHand(this.currentPlayer.getDeck()[(int)(this.currentPlayer.getDeck().length * Math.random())]);
+		try {
+			this.currentPlayer.addCardToHand(this.currentPlayer.getDeck()[(int)(this.currentPlayer.getDeck().length * Math.random())]);
+		} catch (EngineException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	void attack() {

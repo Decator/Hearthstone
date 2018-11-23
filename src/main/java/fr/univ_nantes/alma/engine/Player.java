@@ -102,22 +102,18 @@ public class Player {
 	}
 
 	/**
-	 * Set the specified mana into the mana pool.
-	 * @param mana the mana
+	 * Set the mana pool at manaMaxTurn.
 	 */
-	void setManaPool(int mana) {
-		this.manaPool = mana;
+	void setManaPool() {
+		this.manaPool = this.manaMaxTurn;
 	}
 
 	/**
 	 * Increase the mana pool each turn until it reaches 10
-	 * @throws EngineException 
 	 */
-	void setManaMaxTurn() throws EngineException {
+	void setManaMaxTurn() {
 		if(Rule.checkManaTurn(this.manaMaxTurn))
 			this.manaMaxTurn++;
-		else
-			throw new EngineException();
 	}
 
 	/**
@@ -133,13 +129,13 @@ public class Player {
 	}
 
 	/**
-	 * Add a card to the player's board
-	 * @param card the card to add
+	 * Add a minion to the player's board
+	 * @param minion the minion to add
 	 * @throws EngineException 
 	 */
-	void addCardToBoard(Card card) throws EngineException {
+	void addCardToBoard(Minion minion) throws EngineException {
 		if(Rule.checkBoardSize(this.getBoard()))
-			this.getBoard().add(card);
+			this.getBoard().add(minion);
 		else
 	 		throw new EngineException();
 	}
@@ -155,13 +151,12 @@ public class Player {
 	}
 
 	/**
-	 * Remove a card from the player's board
-	 * @param id the card to remove
+	 * Remove a minion from the player's board
+	 * @param id the minion to remove
 	 * @throws EngineException 
 	 */
-	void removeCardFromBoard(Card card) throws EngineException {
-		if(this.getBoard().remove(card))
+	void removeCardFromBoard(Minion minion) throws EngineException {
+		if(this.getBoard().remove(minion))
 			throw new EngineException();
-		
 	}
 }

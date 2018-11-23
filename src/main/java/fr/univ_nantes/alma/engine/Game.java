@@ -32,7 +32,6 @@ class Game {
 	 * Get the id of the game
 	 * @return the id of the game
 	 */
-	
 	public UUID getIdGame() {
 		return this.idGame;
 	}
@@ -42,7 +41,8 @@ class Game {
 	 */
 	void drawCard() {
 		try {
-			this.currentPlayer.addCardToHand(this.currentPlayer.getDeck()[(int)(this.currentPlayer.getDeck().length * Math.random())]);
+			int random = (int)(this.currentPlayer.getDeck().length * Math.random());
+			this.currentPlayer.addCardToHand(this.currentPlayer.getDeck()[random]);
 		} catch (EngineException e) {
 			e.printStackTrace();
 		}
@@ -69,7 +69,7 @@ class Game {
 	void playCard(int idCard) {
 		if(this.currentPlayer.getHand().get(idCard) instanceof Minion) {
 			try {
-				this.currentPlayer.addCardToBoard(this.currentPlayer.getHand().get(idCard));
+				this.currentPlayer.addCardToBoard((Minion)this.currentPlayer.getHand().get(idCard));
 			} catch (EngineException e) {
 				e.printStackTrace();
 			}

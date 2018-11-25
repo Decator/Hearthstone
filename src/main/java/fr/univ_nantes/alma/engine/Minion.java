@@ -102,4 +102,13 @@ public class Minion extends Card {
 		this.attacked = !this.attacked;
 	}
 	
+	public String toString() {
+		return "Minion " + super.toString()
+				+ "HealthPoints : " + this.healthPoints + "\n"
+				+ "Taunt : " + this.taunt + "\n"
+				+ "LifeSteal : " + this.lifeSteal + "\n"
+				+ "Charge : " + this.charge + "\n"
+				+ "AttackBuff : " + this.attackBuff + "\n"
+				+ "Attacked : " + this.attacked + "\n";
+	}
 }

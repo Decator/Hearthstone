@@ -122,10 +122,11 @@ public class Player {
 	 * @throws EngineException 
 	 */
 	void addCardToHand(Card card) throws EngineException {
-		if(Rule.checkHandSize(this.getHand()))
+		if(Rule.checkHandSize(this.getHand())) {
 			this.getHand().add(card);
-		else
-		 	throw new EngineException();
+		} else {
+		 	throw new EngineException("Error adding the card to hand : player has reached the maximum hand size.");
+		}
 	}
 
 	/**
@@ -134,10 +135,11 @@ public class Player {
 	 * @throws EngineException 
 	 */
 	void addCardToBoard(Minion minion) throws EngineException {
-		if(Rule.checkBoardSize(this.getBoard()))
+		if(Rule.checkBoardSize(this.getBoard())) {
 			this.getBoard().add(minion);
-		else
-	 		throw new EngineException();
+		} else {
+	 		throw new EngineException("Error adding card to board : player has reached the maximum board size.");
+		}
 	}
 
 	/**
@@ -146,8 +148,9 @@ public class Player {
 	 * @throws EngineException 
 	 */
 	void removeCardFromHand(Card card) throws EngineException {
-		if(!this.getHand().remove(card))
-	 		throw new EngineException();
+		if(!this.getHand().remove(card)) {
+	 		throw new EngineException("Error removing the card from the hand.");
+		}
 	}
 
 	/**
@@ -156,7 +159,8 @@ public class Player {
 	 * @throws EngineException 
 	 */
 	void removeCardFromBoard(Minion minion) throws EngineException {
-		if(this.getBoard().remove(minion))
-			throw new EngineException();
+		if(this.getBoard().remove(minion)) {
+			throw new EngineException("Error removing the minion from the board.");
+		}
 	}
 }

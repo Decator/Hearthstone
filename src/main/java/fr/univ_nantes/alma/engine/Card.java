@@ -101,4 +101,14 @@ abstract class Card {
     public String getDescription() {
         return this.description;
     }
+    
+    public String toString() {
+    	return "Card " + this.id + "\n"
+    			+ "Type : " + this.type + "\n"
+    			+ "Name : " + this.name + "\n"
+    			+ "ManaCost : " + this.manaCost + "\n"
+    			+ "Damage : " + this.damage + "\n"
+    			+ "Target : " + this.target + "\n"
+    			+ "Description : " + this.description + "\n";
+    }
 }

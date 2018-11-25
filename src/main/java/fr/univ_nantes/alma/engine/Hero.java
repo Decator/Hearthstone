@@ -20,15 +20,15 @@ public class Hero {
     private int id;
     private String type;
     private String name;
-    private int healthPoints;
-    private int armorPoints;
+    private int healthPoints; //
+    private int armorPoints; //
     private int damage;
 	private int nbSummon;
 	private int idInvocation;
 	private int armorBuff;
 	private String target;
 	private String description;
-    private boolean heroPowerUsed;
+    private boolean heroPowerUsed; //
 
     /**
      * Initialize the attributes of this class.
@@ -174,5 +174,20 @@ public class Hero {
      */
     void setHeroPowerUsed() {
         this.heroPowerUsed = !this.heroPowerUsed;
+    }
+    
+    public String toString() {
+    	return "Hero " + this.id + "\n"
+    			+ "Type : " + this.type + "\n"
+    			+ "Name : " + this.name + "\n"
+    			+ "Damage : " + this.damage + "\n"
+    			+ "NbSummon : " + this.nbSummon + "\n"
+    			+ "IdInvocation : " + this.idInvocation + "\n"
+    			+ "ArmorBuff : " + this.armorBuff + "\n"
+    			+ "Target : " + this.target + "\n"
+    			+ "Description : " + this.description + "\n"
+    			+ "HealthPoints : " + this.healthPoints + "\n"
+    			+ "ArmorPoints : " + this.armorPoints + "\n"
+    			+ "HeroPowerUsed : " + this.heroPowerUsed + "\n";
     }
 }

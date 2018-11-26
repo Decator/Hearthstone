@@ -11,7 +11,8 @@ import java.util.UUID;
  * @version 0.0.1
  */
 public interface EngineBridge {
-	
+
+
 	/**
 	 * Get the list of available heros. 
 	 * @return the list of available heros

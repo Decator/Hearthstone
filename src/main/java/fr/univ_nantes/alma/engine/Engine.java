@@ -9,24 +9,26 @@ import java.util.UUID;
  * @version 0.0.1
  */
 public class Engine implements EngineBridge {
-	
+	private ArrayList<Game> games = new ArrayList<Game>();
 	public ArrayList<Hero> getHeros() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public Player createPlayer(int idHero, String username) {
-		// TODO Auto-generated method stub
-		return null;
+		UUID idPlayer = new UUID(0, 10000);
+		Player player = new Player(idPlayer, username, this.getHeros().get(idHero));
+		return player;
 	}
 	
 	public Game createGame(UUID uuidGame, Player player1, Player player2) {
-		// TODO Auto-generated method stub
-		return null;
+		Game game = new Game(uuidGame, player1, player2);
+		this.games.add(game);
+		return game;
 	}
 
 	public void endTurn() {
-		// TODO Auto-generated method stub
+
 
 	}
 

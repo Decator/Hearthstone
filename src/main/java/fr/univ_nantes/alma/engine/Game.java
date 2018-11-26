@@ -78,6 +78,15 @@ public class Game {
 			// Cast spell
 		}
 	}
+
+	/**
+	 * Get the current player.
+	 * @return the current player
+	 */
+
+	Player getCurrentPlayer() {
+		return this.currentPlayer;
+	}
 	
 	void heroPower() {
 		

@@ -29,11 +29,10 @@ public class Engine implements EngineBridge {
 
 	public void endTurn() {
 
-
 	}
 
 	public void playCard(int idCard) {
-		// TODO Auto-generated method stub
+
 
 	}
 

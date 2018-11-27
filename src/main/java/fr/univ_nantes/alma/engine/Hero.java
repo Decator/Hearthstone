@@ -53,6 +53,8 @@ public class Hero {
 		this.target = target;
 		this.description = description;
         this.heroPowerUsed = false;
+        this.armorPoints = 0;
+        this.healthPoints = Rule.MAX_HERO_HEALTH_POINTS;
     }
     
     public Hero() {}

@@ -102,10 +102,21 @@ public class Player {
 	}
 
 	/**
-     * Set the mana pool at mana.
+     * Set the mana pool at manaMaxTurn.
      */
-    void setManaPool(int mana) {
-        this.manaPool = mana;
+    void setManaPoolForNewTurn() {
+        this.manaPool = manaMaxTurn;
+    }
+    
+    /**
+     * Set the mana pool at manaMaxTurn.
+     * @throws EngineException 
+     */
+    void setManaPoolAfterPlayCard(int mana) throws EngineException {
+    	if(Rule.checkManaPool(manaPool, mana))
+    		this.manaPool -= mana;
+    	else
+    		throw new EngineException("Error adding the card to hand : player has reached the maximum hand size.");
     }
 
 	/**
@@ -122,11 +133,10 @@ public class Player {
 	 * @throws EngineException 
 	 */
 	void addCardToHand(Card card) throws EngineException {
-		if(Rule.checkHandSize(this.getHand())) {
+		if(Rule.checkHandSize(this.getHand()))
 			this.getHand().add(card);
-		} else {
+		else
 		 	throw new EngineException("Error adding the card to hand : player has reached the maximum hand size.");
-		}
 	}
 
 	/**
@@ -135,11 +145,10 @@ public class Player {
 	 * @throws EngineException 
 	 */
 	void addCardToBoard(Minion minion) throws EngineException {
-		if(Rule.checkBoardSize(this.getBoard())) {
+		if(Rule.checkBoardSize(this.getBoard()))
 			this.getBoard().add(minion);
-		} else {
-	 		throw new EngineException("Error adding card to board : player has reached the maximum board size.");
-		}
+		else
+			throw new EngineException("Error adding card to board : player has reached the maximum board size.");
 	}
 
 	/**
@@ -148,9 +157,8 @@ public class Player {
 	 * @throws EngineException 
 	 */
 	void removeCardFromHand(Card card) throws EngineException {
-		if(!this.getHand().remove(card)) {
+		if(!this.getHand().remove(card))
 	 		throw new EngineException("Error removing the card from the hand.");
-		}
 	}
 
 	/**
@@ -159,8 +167,7 @@ public class Player {
 	 * @throws EngineException 
 	 */
 	void removeCardFromBoard(Minion minion) throws EngineException {
-		if(this.getBoard().remove(minion)) {
+		if(this.getBoard().remove(minion))
 			throw new EngineException("Error removing the minion from the board.");
-		}
 	}
 }

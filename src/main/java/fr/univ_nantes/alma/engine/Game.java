@@ -112,7 +112,7 @@ public class Game {
         }
     }
 	
-	void heroPower(Player player, int idTarget) {
+	void heroPower() {
 		
 	}
 }

@@ -58,17 +58,16 @@ class Rule {
      * @param manaPool the player's manaPool
      * @return true of false
      */
-   static boolean checkManaPool(int manaPool, int manaCost) {
-        return manaPool - manaCost >= 0;
+    static boolean checkManaPool(int manaPool, int manaCost) {
+    	return manaPool - manaCost >= 0;
     }
    
-   /**
-    * Check if the minion or Hero is alive
-    * @param healthPoints minion's/hero's health points
-    * @return true or false
-    */
-   
-   static boolean checkAlive(int healthPoints) {
-	   return healthPoints > 0;
-   }
+    /**
+     * Check if the minion or Hero is alive
+     * @param healthPoints minion's/hero's health points
+     * @return true or false
+     */
+    static boolean checkAlive(int healthPoints) {
+    	return healthPoints > 0;
+    }
 }

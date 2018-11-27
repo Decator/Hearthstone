@@ -70,6 +70,7 @@ public class Game {
 	}
 	
 	void attack(int idAttack, int idTarget) {
+		//Check if the minion already attacked or not
 		int attack = this.players[this.idCurrentPlayer].getBoard().get(idAttack).getDamage();
 		
 		if(idTarget == 0) {

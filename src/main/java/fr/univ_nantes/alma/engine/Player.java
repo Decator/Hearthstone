@@ -17,7 +17,7 @@ public class Player {
 	private int manaMaxTurn;
 	private Card[] deck;
 	private Vector<Card> hand;
-	private Vector<Card> board;
+	private Vector<Minion> board;
 
 	/**
 	 * Initialize the attributes of this class.
@@ -34,7 +34,7 @@ public class Player {
 		this.manaMaxTurn = 1;
 		this.deck = null; //TODO
 		this.hand = new Vector<Card>();
-		this.board = new Vector<Card>();
+		this.board = new Vector<Minion>();
 	}
 
 	/**
@@ -97,16 +97,16 @@ public class Player {
 	 * Return the board of the player.
 	 * @return the board of the player
 	 */
-	public Vector<Card> getBoard() {
+	public Vector<Minion> getBoard() {
 		return this.board;
 	}
 
 	/**
-	 * Set the mana pool at manaMaxTurn.
-	 */
-	void setManaPool() {
-		this.manaPool = this.manaMaxTurn;
-	}
+     * Set the mana pool at mana.
+     */
+    void setManaPool(int mana) {
+        this.manaPool = mana;
+    }
 
 	/**
 	 * Increase the mana pool each turn until it reaches 10

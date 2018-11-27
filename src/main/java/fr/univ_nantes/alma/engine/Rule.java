@@ -39,7 +39,7 @@ class Rule {
      * @param boardSize the board's size
      * @return true of false
      */
-    static boolean checkBoardSize(Vector<Card> board) {
+    static boolean checkBoardSize(Vector<Minion> board) {
         return board.size() < MAX_BOARD_SIZE;
     }
 

@@ -11,9 +11,10 @@ import java.util.UUID;
  */
 public class Game {
 	private UUID idGame;
-	private Player player1;
-	private Player player2;
-	private Player currentPlayer;
+	private Player[] players;
+//	private Player player1;
+//	private Player player2;
+	private int idCurrentPlayer;
 
 	/**
 	 * Initialize the attributes of this class.
@@ -23,9 +24,13 @@ public class Game {
 	 */
 	public Game(UUID idGame, Player player1, Player player2) {
 		this.idGame = idGame;
-		this.player1 = player1;
-		this.player2 = player2;
-		this.currentPlayer = player1;
+		this.players = new Player[2];
+		this.players[0] = player1;
+		this.players[1] = player2;
+		this.idCurrentPlayer = 0;
+//		this.player1 = player1;
+//		this.player2 = player2;
+//		this.currentPlayer = player1;
 	}
 
 	/**
@@ -37,27 +42,19 @@ public class Game {
 	}
 	
 	/**
-	 * Get the player1.
-	 * @return the player1
+	 * Get an array containing the two players
+	 * @return the players
 	 */
-	Player getPlayer1() {
-		return this.player1;
+	Player[] getPlayers() {
+		return this.players;
 	}
 	
 	/**
-	 * Get the player2.
-	 * @return the player2
+	 * Get the index of the current player.
+	 * @return the index of the current player
 	 */
-	Player getPlayer2() {
-		return this.player2;
-	}
-	
-	/**
-	 * Get the current player.
-	 * @return the current player
-	 */
-	Player getCurrentPlayer() {
-		return this.currentPlayer;
+	int getIdCurrentPlayer() {
+		return this.idCurrentPlayer;
 	}
 
 	/**
@@ -65,50 +62,54 @@ public class Game {
 	 */
 	void drawCard() {
 		try {
-			int random = (int)(this.currentPlayer.getDeck().length * Math.random());
-			this.currentPlayer.addCardToHand(this.currentPlayer.getDeck()[random]);
+			int random = (int)(this.players[this.idCurrentPlayer].getDeck().length * Math.random());
+			this.players[this.idCurrentPlayer].addCardToHand(this.players[this.idCurrentPlayer].getDeck()[random]);
 		} catch (EngineException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	void attack() {
+	void attack(int idAttack, int idTarget) {
+		int attack = this.players[this.idCurrentPlayer].getBoard().get(idAttack).getDamage();
 		
+		if(idTarget == 0) {
+			this.players[this.idCurrentPlayer ^ 1].getHero(). //attack the hero
+		} else {
+			this.players[this.idCurrentPlayer ^ 1].getBoard().get(idTarget). //attack the minion
+		}
 	}
 
 	/**
 	 * End the turn and switch the current player.
 	 */
 	void endTurn() {
-		if(this.currentPlayer == player1) {
-			this.currentPlayer = player2;
-		}
-		else this.currentPlayer = player1;
+		this.idCurrentPlayer ^= 1;
 	}
 
 	/**
-	 * Play the card with the specified id.
-	 * @param idCard the id of the card
-	 * @throws EngineException 
-	 */
-	void playCard(int idCard) throws EngineException {
-		Card card = this.currentPlayer.getHand().get(idCard); // Create the card accroding to the id given on parameters
-		
-		if(Rule.checkManaPool(this.currentPlayer.getManaPool(), card.getManaCost())) { // Check manaCost
-			if(card instanceof Minion) {
-				try {
-					this.currentPlayer.addCardToBoard((Minion)this.currentPlayer.getHand().get(idCard));
-				} catch (EngineException e) {
-					e.printStackTrace();
-				}
-			}
-			else {
-				// Cast spell
-			}
-		} else {
-			throw new EngineException("Error adding card to board : player has reached the maximum board size.");
-		}
-	}
+     * Play the card with the specified id.
+     * @param idCard the id of the card
+     * @throws EngineException 
+     */
+    void playCard(int idCard) throws EngineException {
+        Card card = this.players[this.idCurrentPlayer].getHand().get(idCard); // Create the card according to the id given on parameters
+
+        if(Rule.checkManaPool(this.players[this.idCurrentPlayer].getManaPool(), card.getManaCost())) { // Check manaCost
+            if(card instanceof Minion) {
+                try {
+                    this.players[this.idCurrentPlayer].addCardToBoard((Minion)this.players[this.idCurrentPlayer].getHand().get(idCard));
+                } catch (EngineException e) {
+                    e.printStackTrace();
+                }
+            }
+            else {
+                // Cast spell
+            }
+            this.players[this.idCurrentPlayer].setManaPool(this.players[this.idCurrentPlayer].getManaPool()-card.getManaCost());
+        } else {
+            throw new EngineException("Blablablabla");
+        }
+    }
 	
 	void heroPower() {
 		

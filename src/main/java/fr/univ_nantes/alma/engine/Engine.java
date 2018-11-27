@@ -6,11 +6,13 @@ import java.util.UUID;
 
 /**
  * 
+ * 
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
 public class Engine implements EngineBridge {
 	private HashMap<UUID, Game> games = new HashMap<UUID, Game>();
+	
 	public ArrayList<Hero> getHeros() { // get to the bdd
 		ArrayList<Hero> heros = null;
 		return heros;
@@ -33,19 +35,18 @@ public class Engine implements EngineBridge {
 	}
 
 	public void playCard(UUID uuidGame, int idCard) {
-		games.get(uuidGame).playCard(idCard);
-
+		try {
+			games.get(uuidGame).playCard(idCard);
+		} catch(EngineException e) {
+			e.printStackTrace();
+		}
 	}
-
 
 	public void heroPower(UUID uuidGame, Player player, int idTarget) {
 		games.get(uuidGame).heroPower(player, idTarget);
-
 	}
 
 	public void attack(UUID uuidGame, int idAttack, int idTarget) {
 		games.get(uuidGame).attack(idAttack, idTarget);
-
 	}
-
 }

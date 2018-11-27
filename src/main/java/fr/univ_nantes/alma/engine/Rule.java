@@ -76,4 +76,17 @@ class Rule {
         }
         return false;
     }
+   
+   /**
+    * Check if the minion or Hero is alive
+    * @param healthPoints minion's/hero's health points
+    * @return true or false
+    */
+   
+   static boolean checkAlive(int healthPoints) {
+	   if (healthPoints > 0) {
+		   return true;
+	   }
+	   return false;
+   }
 }

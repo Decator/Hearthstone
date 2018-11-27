@@ -14,7 +14,7 @@ public interface EngineBridge {
 
 
 	/**
-	 * Get the list of available heros. 
+	 * Get the list of available heros.
 	 * @return the list of available heros
 	 */
 	public ArrayList<Hero> getHeros();
@@ -39,24 +39,27 @@ public interface EngineBridge {
 	/**
 	 * End the turn. 
 	 */
-	public void endTurn();
+	public void endTurn(UUID uuidGame);
 	
 	/**
 	 * Play a card. Either put a minion card on the board or activate a spell card. 
 	 * @param idCard the id of the card
+	 * @param uuidGame the id of the game
 	 */
-	public void playCard(int idCard);
+	public void playCard(UUID uuidGame, int idCard);
 	
 	/**
-	 * Activate the hero's power.  
+	 * Activate the hero's power.
+	 * @param uuidGame the id of the game
 	 * @param idTarget the id of the target, if the power doesn't need a target then set idTarget to -1
 	 */
-	public void heroPower(int idTarget);
+	public void heroPower(UUID uuidGame, Player player, int idTarget);
 	
 	/**
-	 * Attack a card or a hero. 
+	 * Attack a card or a hero.
+	 * @param uuidGame the id of the game
 	 * @param idAttack the id of the attacker
 	 * @param idTarget the id of the target
 	 */
-	public void attack(int idAttack, int idTarget);
+	public void attack(UUID uuidGame, int idAttack, int idTarget);
 }

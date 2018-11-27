@@ -1,6 +1,7 @@
 package fr.univ_nantes.alma.engine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -9,10 +10,10 @@ import java.util.UUID;
  * @version 0.0.1
  */
 public class Engine implements EngineBridge {
-	private ArrayList<Game> games = new ArrayList<Game>();
-	public ArrayList<Hero> getHeros() {
-		// TODO Auto-generated method stub
-		return null;
+	private HashMap<UUID, Game> games = new HashMap<UUID, Game>();
+	public ArrayList<Hero> getHeros() { // get to the bdd
+		ArrayList<Hero> heros = null;
+		return heros;
 	}
 
 	public Player createPlayer(int idHero, String username) {
@@ -23,30 +24,27 @@ public class Engine implements EngineBridge {
 	
 	public Game createGame(UUID uuidGame, Player player1, Player player2) {
 		Game game = new Game(uuidGame, player1, player2);
-		this.games.add(game);
+		this.games.put(uuidGame, game);
 		return game;
 	}
 
-	public void endTurn() {
-		Game game = // la game du joueur
-		game.endTurn();
+	public void endTurn(UUID uuidGame) {
+		games.get(uuidGame).endTurn();
 	}
 
-	public void playCard(int idCard) {
-		Game game = // la game du joueur
-		game.playCard(idCard);
-
-	}
-
-	public void
-
-	public void heroPower(int idTarget) {
-
+	public void playCard(UUID uuidGame, int idCard) {
+		games.get(uuidGame).playCard(idCard);
 
 	}
 
-	public void attack(int idAttack, int idTarget) {
-		// TODO Auto-generated method stub
+
+	public void heroPower(UUID uuidGame, Player player, int idTarget) {
+		games.get(uuidGame).heroPower(player, idTarget);
+
+	}
+
+	public void attack(UUID uuidGame, int idAttack, int idTarget) {
+		games.get(uuidGame).attack(idAttack, idTarget);
 
 	}
 

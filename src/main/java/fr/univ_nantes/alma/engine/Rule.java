@@ -22,10 +22,7 @@ class Rule {
      * @return true of false
      */
     static boolean checkManaTurn(int manaMaxTurn) {
-		if(manaMaxTurn < MANA_MAX) {
-		    return true;
-        }
-		return false;
+		return manaMaxTurn < MANA_MAX;
 	}
 
     /**
@@ -34,10 +31,7 @@ class Rule {
      * @return true of false
      */
 	static boolean checkHandSize(Vector<Card> hand) {
-        if(hand.size() < MAX_HAND_SIZE) {
-            return true;
-        }
-        return false;
+        return hand.size() < MAX_HAND_SIZE;
     }
 
     /**
@@ -45,11 +39,8 @@ class Rule {
      * @param boardSize the board's size
      * @return true of false
      */
-    static boolean checkBoardSize(Vector<Card> board) {
-        if(board.size() < MAX_BOARD_SIZE) {
-            return true;
-        }
-        return false;
+    static boolean checkBoardSize(Vector<Minion> board) {
+        return board.size() < MAX_BOARD_SIZE;
     }
 
     /**
@@ -58,10 +49,7 @@ class Rule {
      * @return true of false
      */
     static boolean checkHealthPoints(int healthPoints) {
-        if(healthPoints < MAX_HERO_HEALTH_POINTS) {
-            return true;
-        }
-        return false;
+        return healthPoints < MAX_HERO_HEALTH_POINTS;
     }
 
     /**
@@ -71,10 +59,7 @@ class Rule {
      * @return true of false
      */
    static boolean checkManaPool(int manaPool, int manaCost) {
-        if(manaPool - manaCost >= 0) {
-            return true;
-        }
-        return false;
+        return manaPool - manaCost >= 0;
     }
    
    /**
@@ -84,9 +69,6 @@ class Rule {
     */
    
    static boolean checkAlive(int healthPoints) {
-	   if (healthPoints > 0) {
-		   return true;
-	   }
-	   return false;
+	   return healthPoints > 0;
    }
 }

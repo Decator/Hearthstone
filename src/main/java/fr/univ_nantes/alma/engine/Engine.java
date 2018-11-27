@@ -28,11 +28,13 @@ public class Engine implements EngineBridge {
 	}
 
 	public void endTurn() {
-
+		Game game = // la game du joueur
+		game.endTurn();
 	}
 
 	public void playCard(int idCard) {
-
+		Game game = // la game du joueur
+		game.playCard(idCard);
 
 	}
 

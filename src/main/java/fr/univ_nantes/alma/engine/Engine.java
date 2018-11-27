@@ -38,8 +38,10 @@ public class Engine implements EngineBridge {
 
 	}
 
+	public void
+
 	public void heroPower(int idTarget) {
-		// TODO Auto-generated method stub
+
 
 	}
 

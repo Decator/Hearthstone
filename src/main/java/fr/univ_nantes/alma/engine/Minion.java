@@ -102,6 +102,15 @@ public class Minion extends Card {
 		this.attacked = !this.attacked;
 	}
 	
+	/**
+	 * Receive damage from an attack. 
+	 * @param damage the received damage
+	 */
+	void recieveDamage(int damage){
+		//check rules
+		this.healthPoints -= damage;
+	}
+	
 	public String toString() {
 		return "Minion " + super.toString()
 				+ "HealthPoints : " + this.healthPoints + "\n"

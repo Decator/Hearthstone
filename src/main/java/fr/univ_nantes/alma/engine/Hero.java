@@ -178,6 +178,15 @@ public class Hero {
         this.heroPowerUsed = !this.heroPowerUsed;
     }
     
+	/**
+	 * Receive damage from an attack. 
+	 * @param damage the received damage
+	 */
+	void recieveDamage(int damage){
+		//check rules
+		this.healthPoints -= damage;
+	}
+    
     public String toString() {
     	return "Hero " + this.id + "\n"
     			+ "Type : " + this.type + "\n"

@@ -70,4 +70,13 @@ class Rule {
     static boolean checkAlive(int healthPoints) {
     	return healthPoints > 0;
     }
+    
+    /**
+     * Check if the minion has already attacked. 
+     * @param minion the minion to check
+     * @return true or false
+     */
+    static boolean checkMinionAttacked(Minion minion) {
+    	return minion.getAttacked();
+    }
 }

@@ -69,14 +69,36 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param idAttack
+	 * @param idTarget
+	 */
 	void attack(int idAttack, int idTarget) {
 		//Check if the minion already attacked or not
-		int attack = this.players[this.idCurrentPlayer].getBoard().get(idAttack).getDamage();
-		
-		if(idTarget == 0) {
-			this.players[this.idCurrentPlayer ^ 1].getHero(). //attack the hero
+		Minion minion = this.players[this.idCurrentPlayer].getBoard().get(idAttack);
+		if(minion != null && !Rule.checkMinionAttacked(minion)) {
+			int damage = minion.getDamage();
+			
+			if(idTarget == 0) {
+				Hero hero = this.players[this.idCurrentPlayer ^ 1].getHero();
+				hero.recieveDamage(damage); //attack the hero
+				if(hero.getHealthPoints() <= 0) {
+					//end game
+				}
+			} else {
+				Minion victim = this.players[this.idCurrentPlayer ^ 1].getBoard().get(idTarget);
+				if(victim != null) {
+					victim.recieveDamage(damage); //attack the minion
+					if(victim.getHealthPoints() <= 0) {
+						this.players[this.idCurrentPlayer ^ 1].getBoard().remove(idTarget);
+					}
+				} else {
+					//exception
+				}
+			}
 		} else {
-			this.players[this.idCurrentPlayer ^ 1].getBoard().get(idTarget). //attack the minion
+			//exception
 		}
 	}
 
@@ -92,23 +114,20 @@ public class Game {
      * @param idCard the id of the card
      * @throws EngineException 
      */
-    void playCard(int idCard) throws EngineException {
+	void playCard(int idCard) throws EngineException {
         Card card = this.players[this.idCurrentPlayer].getHand().get(idCard); // Create the card according to the id given on parameters
 
-        if(Rule.checkManaPool(this.players[this.idCurrentPlayer].getManaPool(), card.getManaCost())) { // Check manaCost
-            if(card instanceof Minion) {
-                try {
-                    this.players[this.idCurrentPlayer].addCardToBoard((Minion)this.players[this.idCurrentPlayer].getHand().get(idCard));
-                } catch (EngineException e) {
-                    e.printStackTrace();
-                }
+        this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(card.getManaCost()); // Check manaCost
+
+        if(card instanceof Minion) {
+            try {
+                this.players[this.idCurrentPlayer].addCardToBoard((Minion)this.players[this.idCurrentPlayer].getHand().get(idCard));
+            } catch (EngineException e) {
+                e.printStackTrace();
             }
-            else {
-                // Cast spell
-            }
-            this.players[this.idCurrentPlayer].setManaPool(this.players[this.idCurrentPlayer].getManaPool()-card.getManaCost());
-        } else {
-            throw new EngineException("Blablablabla");
+        }
+        else {
+            // Cast spell
         }
     }
 	

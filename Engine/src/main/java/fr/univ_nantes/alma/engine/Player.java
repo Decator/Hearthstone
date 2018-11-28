@@ -4,7 +4,7 @@ import java.util.UUID;
 import java.util.Vector;
 
 /**
- * The copmlete description of a player.
+ * The complete description of a player.
  *
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1

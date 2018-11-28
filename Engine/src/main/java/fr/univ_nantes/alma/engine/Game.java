@@ -83,7 +83,7 @@ public class Game {
 			if(idTarget == 0) {
 				Hero hero = this.players[this.idCurrentPlayer ^ 1].getHero();
 				hero.receiveDamage(damage); //attack the hero
-				if(!Rule.checkAlive(Hero.getHealthPoints())) {
+				if(!Rule.checkAlive(hero.getHealthPoints())) {
 					//end game
 				}
 			} else {
@@ -135,7 +135,29 @@ public class Game {
         }
     }
 	
-	void heroPower() {
+	void heroPower(Player player, int idTarget) throws EngineException {
+		Hero hero = this.players[this.idCurrentPlayer].getHero();
+		if (!hero.getHeroPowerUsed()) {
+			switch (hero.getType())
+			{
+			case "Warrior":
+				hero.setArmorPoints(hero.getArmorPoints() + hero.getArmorBuff());
+				break;
+			case "Mage":
+				if (idTarget == 0) {
+					player.getHero().receiveDamage(hero.getDamage());
+				} else {
+					player.getBoard().get(idTarget).receiveDamage(hero.getDamage());
+				}
+				break;
+			case "Paladin":
+				break;
+			}
+			
+		} else {
+			throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !")
+		}
+		
 		
 	}
 }

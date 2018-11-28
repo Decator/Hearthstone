@@ -19,6 +19,3 @@
 *.classpath
 *.project
 *.settings
-/target/
-/bin/
-/doc/

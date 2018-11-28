@@ -174,8 +174,8 @@ public class Hero {
     /**
      * Replaces the heroPowerUsed variable by its reverse (true, false).
      */
-    void setHeroPowerUsed() {
-        this.heroPowerUsed = !this.heroPowerUsed;
+    void setHeroPowerUsed(boolean bool) {
+        this.heroPowerUsed = bool;
     }
     
 	/**

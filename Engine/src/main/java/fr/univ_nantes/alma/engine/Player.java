@@ -116,7 +116,7 @@ public class Player {
     	if(Rule.checkManaPool(manaPool, mana))
     		this.manaPool -= mana;
     	else
-    		throw new EngineException("Error adding the card to hand : player has reached the maximum hand size.");
+    		throw new EngineException("Vous n'avez pas assez de mana !");
     }
 
 	/**
@@ -136,7 +136,7 @@ public class Player {
 		if(Rule.checkHandSize(this.getHand()))
 			this.getHand().add(card);
 		else
-		 	throw new EngineException("Error adding the card to hand : player has reached the maximum hand size.");
+		 	throw new EngineException("Votre main est pleine !");
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class Player {
 		if(Rule.checkBoardSize(this.getBoard()))
 			this.getBoard().add(minion);
 		else
-			throw new EngineException("Error adding card to board : player has reached the maximum board size.");
+			throw new EngineException("Vous avez atteint le nombre maximum de serviteurs sur le plateau !");
 	}
 
 	/**

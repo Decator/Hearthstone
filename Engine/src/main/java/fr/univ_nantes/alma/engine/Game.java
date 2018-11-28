@@ -83,6 +83,7 @@ public class Game {
 			if(idTarget == 0) {
 				Hero hero = this.players[this.idCurrentPlayer ^ 1].getHero();
 				hero.receiveDamage(damage); //attack the hero
+				minion.setAttacked(true);
 				if(!Rule.checkAlive(hero.getHealthPoints())) {
 					//end game
 				}
@@ -91,6 +92,7 @@ public class Game {
 				if(victim != null) {
 					minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
 					victim.receiveDamage(damage); //attack the minion
+					minion.setAttacked(true);
 					if(!Rule.checkAlive(minion.getHealthPoints())) {
 						this.players[this.idCurrentPlayer].getBoard().remove(idAttack);
 					}
@@ -121,8 +123,6 @@ public class Game {
 	void playCard(int idCard) throws EngineException {
         Card card = this.players[this.idCurrentPlayer].getHand().get(idCard); // Create the card according to the id given on parameters
 
-        this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(card.getManaCost()); // Check manaCost
-
         if(card instanceof Minion) {
             try {
                 this.players[this.idCurrentPlayer].addCardToBoard((Minion)this.players[this.idCurrentPlayer].getHand().get(idCard));
@@ -133,29 +133,46 @@ public class Game {
         else {
             // Cast spell
         }
+        
+        this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(card.getManaCost()); // Check manaCost
     }
 	
 	void heroPower(Player player, int idTarget) throws EngineException {
 		Hero hero = this.players[this.idCurrentPlayer].getHero();
 		if (!hero.getHeroPowerUsed()) {
-			switch (hero.getType())
-			{
-			case "Warrior":
-				hero.setArmorPoints(hero.getArmorPoints() + hero.getArmorBuff());
-				break;
-			case "Mage":
-				if (idTarget == 0) {
-					player.getHero().receiveDamage(hero.getDamage());
-				} else {
-					player.getBoard().get(idTarget).receiveDamage(hero.getDamage());
+			if (this.players[this.idCurrentPlayer].getManaPool() >= Rule.MANA_COST_HERO_POWER) {
+				switch (hero.getType())
+				{
+				case "Warrior":
+					hero.setArmorPoints(hero.getArmorPoints() + hero.getArmorBuff());
+					hero.setHeroPowerUsed(true);
+					this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(Rule.MANA_COST_HERO_POWER);
+					break;
+				case "Mage":
+					if (idTarget == 0) {
+						player.getHero().receiveDamage(hero.getDamage());
+					} else {
+						player.getBoard().get(idTarget).receiveDamage(hero.getDamage());
+					}
+					hero.setHeroPowerUsed(true);
+					this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(Rule.MANA_COST_HERO_POWER);
+					break;
+				case "Paladin":
+					if (Rule.checkBoardSize(this.players[this.idCurrentPlayer].getBoard())) {
+						ArrayList<Minion> = Engine.retrieveMinion
+						Minion minion = this.players[this.idCurrentPlayer].[9];
+						this.players[this.idCurrentPlayer].addCardToBoard((minion) card);
+						hero.setHeroPowerUsed(true);
+						this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(Rule.MANA_COST_HERO_POWER);
+					}
+					break;
 				}
-				break;
-			case "Paladin":
-				break;
+			} else {
+				throw new EngineException("Vous n'avez pas assez de mana!");
 			}
 			
 		} else {
-			throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !")
+			throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour!");
 		}
 		
 		

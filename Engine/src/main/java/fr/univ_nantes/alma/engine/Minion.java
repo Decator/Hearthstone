@@ -98,8 +98,8 @@ public class Minion extends Card {
 	/**
      * Replaces the attacked variable by its reverse (true, false).
      */
-	void setAttacked() {
-		this.attacked = !this.attacked;
+	void setAttacked(boolean bool) {
+		this.attacked = bool;
 	}
 	
 	/**

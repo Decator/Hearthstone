@@ -12,8 +12,6 @@ import java.util.UUID;
 public class Game {
 	private UUID idGame;
 	private Player[] players;
-//	private Player player1;
-//	private Player player2;
 	private int idCurrentPlayer;
 
 	/**
@@ -28,9 +26,6 @@ public class Game {
 		this.players[0] = player1;
 		this.players[1] = player2;
 		this.idCurrentPlayer = 0;
-//		this.player1 = player1;
-//		this.player2 = player2;
-//		this.currentPlayer = player1;
 	}
 
 	/**
@@ -144,20 +139,17 @@ public class Game {
 				hero.setArmorPoints(hero.getArmorPoints() + hero.getArmorBuff());
 				break;
 			case "Mage":
-				if (idTarget == 0) {
+				if (idTarget == 0)
 					player.getHero().receiveDamage(hero.getDamage());
-				} else {
+				else
 					player.getBoard().get(idTarget).receiveDamage(hero.getDamage());
-				}
 				break;
 			case "Paladin":
 				break;
 			}
 			
 		} else {
-			throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !")
+			throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !");
 		}
-		
-		
 	}
 }

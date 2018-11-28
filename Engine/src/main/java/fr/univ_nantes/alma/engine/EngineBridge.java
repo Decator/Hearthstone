@@ -34,7 +34,7 @@ public interface EngineBridge {
 	 * @param player2 the second player
 	 * @return the game
 	 */
-	public Game createGame(UUID uuidGame, Player player1, Player player2);
+	public Game createGame(Player player1, Player player2);
 	
 	/**
 	 * End the turn. 

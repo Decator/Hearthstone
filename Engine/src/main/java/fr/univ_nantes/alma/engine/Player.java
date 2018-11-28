@@ -26,14 +26,14 @@ public class Player {
 	 * @param hero the hero of the player
 	 */
 	
-	Player(UUID uuid, String username, Hero hero) {
+	Player(UUID uuid, String username, Hero hero, Card[] deck, Vector<Card> hand) {
 		this.uuid = uuid;
 		this.username = username;
 		this.hero = hero;
 		this.manaPool = 0;
 		this.manaMaxTurn = 1;
-		this.deck = null; //TODO
-		this.hand = new Vector<Card>();
+		this.deck = deck; //TODO
+		this.hand = hand;
 		this.board = new Vector<Minion>();
 	}
 

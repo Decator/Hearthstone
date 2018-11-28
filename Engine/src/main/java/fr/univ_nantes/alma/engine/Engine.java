@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.Vector;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -52,39 +53,45 @@ public class Engine implements EngineBridge {
     		this.heroRepository = repository;
 		};
 	}
-	
+    
+    @Override
 	public ArrayList<Hero> getHeros() {
-		return this.heroRepository.findAll();
+    	return this.heroRepository.findAll();
+	}
+    
+    @Override
+    public Player createPlayer(int idHero, String username) {
+    	Hero hero = this.retrieveHero(idHero);
+    	ArrayList<Minion> minion = retrieveMinions(hero.getType());
+    	ArrayList<Spell> spell = retrieveSpells(hero.getType());
+    	
+    	// Create deck
+    	ArrayList<Card> card = new ArrayList<Card>();
+    	card.addAll(minion);
+    	card.addAll(spell);
+		Card[] deck = card.toArray(new Card[card.size()]);
+		
+		// Create hand
+		Vector<Card> hand = new Vector<Card>();
+		int random = (int)(Math.random() * deck.length);
+		hand.add(deck[random]);
+		
+		return new Player(UUID.randomUUID(), username, hero, deck, hand);
 	}
 	
-	public Hero getHero(int idHero) throws EngineException {
-		if(this.heroRepository.findById(idHero).isPresent()) {
-			return this.heroRepository.findById(idHero).get();
-		} else {
-			throw new EngineException("There is no Hero with this id : " + idHero);
-		}
-	}
-
-	public Player createPlayer(int idHero, String username) {
-		try {
-			return new Player(UUID.randomUUID(), username, this.getHero(idHero));
-		} catch (EngineException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return new Player(UUID.randomUUID(), username, this.getHeros().get(0));
-	}
-	
-	public Game createGame(Player player1, Player player2) {
+    @Override
+    public Game createGame(Player player1, Player player2) {
 		Game game = new Game(UUID.randomUUID(), player1, player2);
 		this.games.put(game.getIdGame(), game);
 		return game;
 	}
-
+    
+    @Override
 	public void endTurn(UUID uuidGame) {
 		games.get(uuidGame).endTurn();
 	}
-
+	
+	@Override
 	public void playCard(UUID uuidGame, int idCard) {
 		try {
 			games.get(uuidGame).playCard(idCard);
@@ -92,13 +99,23 @@ public class Engine implements EngineBridge {
 			e.printStackTrace();
 		}
 	}
-
+	
+	@Override
 	public void heroPower(UUID uuidGame, Player player, int idTarget) {
-//		games.get(uuidGame).heroPower(player, idTarget);
+		try {
+			games.get(uuidGame).heroPower(player, idTarget);
+		} catch (EngineException e) {
+			e.printStackTrace();
+		}
 	}
-
+	
+	@Override
 	public void attack(UUID uuidGame, int idAttack, int idTarget) {
-		games.get(uuidGame).attack(idAttack, idTarget);
+		try {
+			games.get(uuidGame).attack(idAttack, idTarget);
+		} catch (EngineException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -131,5 +148,13 @@ public class Engine implements EngineBridge {
 	 */
 	public ArrayList<Minion> retrieveInvocations(){
 		return this.minionRepository.findByType("invocation");
+	}
+	
+	/**
+	 * Get the hero. 
+	 * @return the hero
+	 */
+    public Hero retrieveHero(int hero) {
+		return this.heroRepository.findById(hero);
 	}
 }

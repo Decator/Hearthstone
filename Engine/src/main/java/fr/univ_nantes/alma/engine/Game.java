@@ -1,6 +1,7 @@
 package fr.univ_nantes.alma.engine;
 
 import java.util.UUID;
+import java.util.Vector;
 
 
 /**
@@ -54,28 +55,31 @@ public class Game {
 
 	/**
 	 * Draw a card from the player's deck and place it into his hand.
+	 * @throws EngineException
 	 */
-	void drawCard() {
-		try {
-			int random = (int)(this.players[this.idCurrentPlayer].getDeck().length * Math.random());
+	void drawCard() throws EngineException {
+		int random = (int)(this.players[this.idCurrentPlayer].getDeck().length * Math.random());
+		
+		if(Rule.checkHandSize(this.players[this.idCurrentPlayer].getHand()))
 			this.players[this.idCurrentPlayer].addCardToHand(this.players[this.idCurrentPlayer].getDeck()[random]);
-		} catch (EngineException e) {
-			e.printStackTrace();
-		}
+		else 
+			throw new EngineException("blabla");
 	}
 	
 	/**
-	 * 
-	 * @param idAttack
-	 * @param idTarget
+	 * Attack a target with a attacker given in parameter
+	 * @param idAttack the id of the attacker
+	 * @param idTarget the id of the target
+	 * @throws EngineException 
 	 */
-	void attack(int idAttack, int idTarget) {
-		//Check if the minion already attacked or not
+	void attack(int idAttack, int idTarget) throws EngineException {
 		Minion minion = this.players[this.idCurrentPlayer].getBoard().get(idAttack);
+		
+		//Check if the minion already attacked or not
 		if(minion != null && !Rule.checkMinionAttacked(minion)) {
 			int damage = minion.getDamage();
 			
-			if(idTarget == 0) {
+			if(idTarget == 0) { // If it's the hero
 				Hero hero = this.players[this.idCurrentPlayer ^ 1].getHero();
 				hero.receiveDamage(damage); //attack the hero
 				minion.setAttacked(true);
@@ -95,11 +99,11 @@ public class Game {
 						this.players[this.idCurrentPlayer ^ 1].getBoard().remove(idTarget);
 					}
 				} else {
-					//exception
+					throw new EngineException("blabla");
 				}
 			}
 		} else {
-			//exception
+			throw new EngineException("blabla");
 		}
 	}
 
@@ -117,48 +121,53 @@ public class Game {
      */
 	void playCard(int idCard) throws EngineException {
         Card card = this.players[this.idCurrentPlayer].getHand().get(idCard); // Create the card according to the id given on parameters
-
-        if(card instanceof Minion) {
-            try {
-                this.players[this.idCurrentPlayer].addCardToBoard((Minion)this.players[this.idCurrentPlayer].getHand().get(idCard));
-            } catch (EngineException e) {
-                e.printStackTrace();
+        
+        if(Rule.checkManaPool(this.players[this.idCurrentPlayer].getManaPool(), card.getManaCost())) { // If the player have enought mana
+        	if(card instanceof Minion) { // If it's a Minion
+            	if(Rule.checkBoardSize(this.players[this.idCurrentPlayer].getBoard()))
+            		this.players[this.idCurrentPlayer].addCardToBoard((Minion)this.players[this.idCurrentPlayer].getHand().get(idCard));
+            	else
+            		throw new EngineException("blabla");
             }
-        }
-        else {
-            // Cast spell
+            else {
+                // Cast spell
+            }
+            
+            this.players[this.idCurrentPlayer].setManaPoolAfterPlay(card.getManaCost()); // Check manaCost
+        } else {
+        	throw new EngineException("blabla");
         }
         
-        this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(card.getManaCost()); // Check manaCost
     }
 	
 	void heroPower(Player player, int idTarget) throws EngineException {
 		Hero hero = this.players[this.idCurrentPlayer].getHero();
-		if (!hero.getHeroPowerUsed()) {
+		
+		if (!hero.getHeroPowerUsed()) { // If the hero have use already use his power
 			if (this.players[this.idCurrentPlayer].getManaPool() >= Rule.MANA_COST_HERO_POWER) {
+				
 				switch (hero.getType())
 				{
 				case "Warrior":
 					hero.setArmorPoints(hero.getArmorPoints() + hero.getArmorBuff());
 					hero.setHeroPowerUsed(true);
-					this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(Rule.MANA_COST_HERO_POWER);
+					this.players[this.idCurrentPlayer].setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
 					break;
 				case "Mage":
-					if (idTarget == 0) {
+					if (idTarget == 0)
 						player.getHero().receiveDamage(hero.getDamage());
-					} else {
+					else
 						player.getBoard().get(idTarget).receiveDamage(hero.getDamage());
-					}
 					hero.setHeroPowerUsed(true);
-					this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(Rule.MANA_COST_HERO_POWER);
+					this.players[this.idCurrentPlayer].setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
 					break;
 				case "Paladin":
 					if (Rule.checkBoardSize(this.players[this.idCurrentPlayer].getBoard())) {
-						ArrayList<Minion> = Engine.retrieveMinion
+						/*ArrayList<Minion> = Engine.retrieveMinion
 						Minion minion = this.players[this.idCurrentPlayer].[9];
-						this.players[this.idCurrentPlayer].addCardToBoard((minion) card);
+						this.players[this.idCurrentPlayer].addCardToBoard((minion) card);*/
 						hero.setHeroPowerUsed(true);
-						this.players[this.idCurrentPlayer].setManaPoolAfterPlayCard(Rule.MANA_COST_HERO_POWER);
+						this.players[this.idCurrentPlayer].setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
 					}
 					break;
 				}

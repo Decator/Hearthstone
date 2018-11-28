@@ -107,7 +107,6 @@ public class Minion extends Card {
 	 * @param damage the received damage
 	 */
 	void receiveDamage(int damage){
-		//check rules
 		this.healthPoints -= damage;
 	}
 	

@@ -21,3 +21,4 @@
 *.settings
 /target/
 /bin/
+/doc/

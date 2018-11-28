@@ -19,4 +19,4 @@
 *.classpath
 *.project
 *.settings
-/target/
+/Engine/target/

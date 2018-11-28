@@ -186,6 +186,10 @@ public class Hero {
 		//check rules
 		this.healthPoints -= damage;
 	}
+	
+	void receiveHealing(int healing) {
+		this.healthPoints += healing;
+	}
     
     public String toString() {
     	return "Hero " + this.id + "\n"

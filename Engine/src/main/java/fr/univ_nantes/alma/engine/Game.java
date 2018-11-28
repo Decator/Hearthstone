@@ -12,8 +12,6 @@ import java.util.UUID;
 public class Game {
 	private UUID idGame;
 	private Player[] players;
-//	private Player player1;
-//	private Player player2;
 	private int idCurrentPlayer;
 
 	/**
@@ -28,9 +26,6 @@ public class Game {
 		this.players[0] = player1;
 		this.players[1] = player2;
 		this.idCurrentPlayer = 0;
-//		this.player1 = player1;
-//		this.player2 = player2;
-//		this.currentPlayer = player1;
 	}
 
 	/**
@@ -140,6 +135,7 @@ public class Game {
 	void heroPower(Player player, int idTarget) throws EngineException {
 		Hero hero = this.players[this.idCurrentPlayer].getHero();
 		if (!hero.getHeroPowerUsed()) {
+<<<<<<< HEAD
 			if (this.players[this.idCurrentPlayer].getManaPool() >= Rule.MANA_COST_HERO_POWER) {
 				switch (hero.getType())
 				{
@@ -173,8 +169,25 @@ public class Game {
 			
 		} else {
 			throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour!");
+=======
+			switch (hero.getType())
+			{
+			case "Warrior":
+				hero.setArmorPoints(hero.getArmorPoints() + hero.getArmorBuff());
+				break;
+			case "Mage":
+				if (idTarget == 0)
+					player.getHero().receiveDamage(hero.getDamage());
+				else
+					player.getBoard().get(idTarget).receiveDamage(hero.getDamage());
+				break;
+			case "Paladin":
+				break;
+			}
+			
+		} else {
+			throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !");
+>>>>>>> 479bbcd29b0866b90ddc1c28363b535dce34aea4
 		}
-		
-		
 	}
 }

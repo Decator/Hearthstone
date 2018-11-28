@@ -19,4 +19,6 @@
 *.classpath
 *.project
 *.settings
-/Engine/target/
+/target/
+/bin/
+/doc/

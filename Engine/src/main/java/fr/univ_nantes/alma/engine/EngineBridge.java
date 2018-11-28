@@ -1,6 +1,7 @@
 package fr.univ_nantes.alma.engine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -11,7 +12,6 @@ import java.util.UUID;
  * @version 0.0.1
  */
 public interface EngineBridge {
-
 
 	/**
 	 * Get the list of available heros.

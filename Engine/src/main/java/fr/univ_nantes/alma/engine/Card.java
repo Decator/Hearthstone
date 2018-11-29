@@ -21,7 +21,6 @@ abstract class Card {
     protected String name;
     protected int manaCost;
     protected int damage;
-    protected String target;
     protected String description;
 
     /**
@@ -31,16 +30,14 @@ abstract class Card {
      * @param name the name of the card
      * @param manaCost the amount of mana the card costs
      * @param damage the amount of damage that the card can inflict
-     * @param target a simple text with the target of the card
      * @param description the description of the card
      */
-    Card(int id, String type, String name, int manaCost, int damage, String target, String description ) {
+    Card(int id, String type, String name, int manaCost, int damage, String description ) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.manaCost = manaCost;
         this.damage = damage;
-        this.target = target;
         this.description = description;
     }
     
@@ -87,14 +84,6 @@ abstract class Card {
     }
 
     /**
-     * Get the target of the card. 
-     * @return the target of the card
-     */
-    public String getTarget() {
-        return this.target;
-    }
-
-    /**
      * Get the description of the card. 
      * @return the description of the card
      */
@@ -108,7 +97,6 @@ abstract class Card {
     			+ "Name : " + this.name + "\n"
     			+ "ManaCost : " + this.manaCost + "\n"
     			+ "Damage : " + this.damage + "\n"
-    			+ "Target : " + this.target + "\n"
     			+ "Description : " + this.description + "\n";
     }
 }

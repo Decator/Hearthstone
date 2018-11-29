@@ -16,7 +16,7 @@ public class Minion extends Card {
 	private boolean taunt;
 	private boolean lifeSteal;
 	private boolean charge;
-	private int attackBuff;
+	private int attackBuffAura;
 	private boolean attacked;
 	
 	/**
@@ -35,13 +35,13 @@ public class Minion extends Card {
      * @param healthPoints the amount of health points the minion has
      */
 	
-	public Minion(int id, String type, String name, int manaCost, int damage, String target, String description, int healthPoints, boolean taunt, boolean lifeSteal, boolean charge, int attackBuff) {
-		super(id, type, name, manaCost, damage, target, description);
+	public Minion(int id, String type, String name, int manaCost, int damage, String description, int healthPoints, boolean taunt, boolean lifeSteal, boolean charge, int attackBuffAura) {
+		super(id, type, name, manaCost, damage, description);
 		this.healthPoints = healthPoints;
 		this.taunt = taunt;
 		this.lifeSteal = lifeSteal;
 		this.charge = charge;
-		this.attackBuff = attackBuff;
+		this.attackBuffAura = attackBuffAura;
 		this.attacked = true;	
 	}
 	
@@ -80,11 +80,11 @@ public class Minion extends Card {
 	}
 	
 	/**
-     * Get the attackBuff of the card. 
-     * @return the attackBuff
+     * Get the attackBuffAura of the card. 
+     * @return the attackBuffAura
      */
-	public int getAttackBuff() {
-		return this.attackBuff;
+	public int getAttackBuffAura() {
+		return this.attackBuffAura;
 	}
 	
 	/**
@@ -116,7 +116,7 @@ public class Minion extends Card {
 				+ "Taunt : " + this.taunt + "\n"
 				+ "LifeSteal : " + this.lifeSteal + "\n"
 				+ "Charge : " + this.charge + "\n"
-				+ "AttackBuff : " + this.attackBuff + "\n"
+				+ "AttackBuff : " + this.attackBuffAura + "\n"
 				+ "Attacked : " + this.attacked + "\n";
 	}
 }

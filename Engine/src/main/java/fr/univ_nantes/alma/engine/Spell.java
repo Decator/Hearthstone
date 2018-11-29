@@ -17,6 +17,7 @@ public class Spell extends Card {
     private int armorBuff;
     private int nbDraw;
     private boolean polymorph;
+    private String target;
 
     /**
      * Initialize the attributes of this class. 
@@ -25,7 +26,6 @@ public class Spell extends Card {
      * @param name the name of the card
      * @param manaCost the amount of mana that the card costs
      * @param damage the amount of damage that the card can inflict
-     * @param target a simple text with the target of the card
      * @param description the description of the card
      * @param nbSummon the amount of invocations that the card can perfom
      * @param idInvocation the card's id of the invocation
@@ -33,9 +33,10 @@ public class Spell extends Card {
      * @param armorBuff the amount of the armor buff that the card can give
      * @param nbDraw the amount of cards that the player can draw
      * @param polymorph a boolean to indicate if the card is polymorphic or not
+     * @param target a simple text with the target of the card
      */
-    public Spell(int id, String type, String name, int manaCost, int damage, String target, String description, int nbSummon, int idInvocation, int attackBuff, int armorBuff, int nbDraw, boolean polymorph) {
-        super(id, type, name, manaCost, damage, target, description);
+    public Spell(int id, String type, String name, int manaCost, int damage, String description, int nbSummon, int idInvocation, int attackBuff, int armorBuff, int nbDraw, boolean polymorph, String target) {
+        super(id, type, name, manaCost, damage, description);
         
         this.nbSummon = nbSummon;
         this.idInvocation = idInvocation;
@@ -43,6 +44,7 @@ public class Spell extends Card {
         this.armorBuff = armorBuff;
         this.nbDraw = nbDraw;
         this.polymorph = polymorph;
+        this.target = target;
     }
     
     public Spell() {}
@@ -95,6 +97,14 @@ public class Spell extends Card {
         return this.polymorph;
     }
     
+    /**
+     * Get the target of the card. 
+     * @return the target of the card
+     */
+    public String getTarget() {
+        return this.target;
+    }
+    
     public String toString() {
     	return "Spell " + super.toString()
     			+ "NbSummon : " + this.nbSummon + "\n"
@@ -102,6 +112,7 @@ public class Spell extends Card {
     			+ "AttackBuff : " + this.attackBuff + "\n"
     			+ "ArmorBuff : " + this.armorBuff + "\n"
     			+ "NbDraw : " + this.nbDraw + "\n"
-    			+ "Polymorph : " + this.polymorph + "\n";
+    			+ "Polymorph : " + this.polymorph + "\n"
+    			+ "Target : " + this.target + "\n";
     }
 }

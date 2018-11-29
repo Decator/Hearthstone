@@ -25,33 +25,10 @@ public class Engine implements EngineBridge {
 	private SpellRepository spellRepository;
 	private HeroRepository heroRepository;
 	
-	public static void main(String[] args) {
-		System.out.println("Run SpringApplication");
-        SpringApplication.run(Engine.class, args);
-    }
-	
-	@Bean
-	public CommandLineRunner retrieveMinionRepository(MinionRepository repository) {
-		return (args) -> {
-			System.out.println("MinionRepository saved");
-			this.minionRepository = repository;
-		};
-	}
-	
-	@Bean
-	public CommandLineRunner retrieveSpellRepository(SpellRepository repository) {
-		return (args) -> {
-			System.out.println("SpellRepository saved");
-			this.spellRepository = repository;
-		};
-	}
-    
-    @Bean
-	public CommandLineRunner retrieveHeoRepository(HeroRepository repository) {
-    	return (args) -> {
-        	System.out.println("HeroRepository saved");
-    		this.heroRepository = repository;
-		};
+	public Engine(MinionRepository minion, SpellRepository spell, HeroRepository hero) {
+		this.minionRepository = minion;
+		this.spellRepository = spell;
+		this.heroRepository = hero;
 	}
     
     @Override
@@ -155,6 +132,9 @@ public class Engine implements EngineBridge {
 	 * @return the hero
 	 */
     public Hero retrieveHero(int hero) {
-		return this.heroRepository.findById(hero);
+    	if(this.heroRepository.findById(hero) != null ) {
+    		this.heroRepository.findById(hero);
+    	}
+    	return this.heroRepository.findById(1);
 	}
 }

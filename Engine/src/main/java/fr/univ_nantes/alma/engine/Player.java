@@ -140,17 +140,17 @@ class Player {
 
 	/**
 	 * Remove a card from the player's hand
-	 * @param id the card to remove
+	 * @param idCard the id of the card to remove
 	 */
-	void removeCardFromHand(Card card) {
-		this.getHand().remove(card);
+	void removeCardFromHand(int idCard) {
+		this.getHand().remove(idCard);
 	}
 
 	/**
 	 * Remove a minion from the player's board
-	 * @param id the minion to remove
+	 * @param idCard the id of the minion to remove
 	 */
-	void removeCardFromBoard(Minion minion) {
-		this.getBoard().remove(minion);
+	void removeCardFromBoard(int idCard) {
+		this.getBoard().remove(idCard);
 	}
 }

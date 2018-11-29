@@ -135,7 +135,20 @@ public class Game {
 			lastMinionPlayed.setAttacked(true); // else has to wait a turn
 		}
 	}
-		
+	/**
+	 * 
+	 * @param board the board that needs to be checked for taunt minions
+	 * @return true if a minion as taunt, else return false
+	 */
+	boolean Taunt(Vector<Minion> board) {
+		for (Minion minionEnemy : board) // Check if an enemy minion has taunt
+		{
+			if (minionEnemy.getTaunt()) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * Attacks a target with an attacker given in parameter
@@ -145,21 +158,12 @@ public class Game {
 	 */
 	void attack(int idAttack, int idTarget) throws EngineException {
 		Minion minion = this.players[this.idCurrentPlayer].getBoard().get(idAttack);
-		Minion victim = this.players[this.idCurrentPlayer ^ 1].getBoard().get(idTarget);
 		Hero hero = this.players[this.idCurrentPlayer].getHero();
 		Hero heroEnemy = this.players[this.idCurrentPlayer ^ 1].getHero();
 		Player playerEnemy = this.players[this.idCurrentPlayer ^ 1];
 		Player currentPlayer = this.players[this.idCurrentPlayer];
-		
-		boolean taunt = false;
-		
-		for (Minion minionEnemy : playerEnemy.getBoard()) // Check if an enemy minion has taunt
-		{
-			if (minionEnemy.getTaunt()) {
-				taunt = true;
-			}
-		}
-		if (!taunt || victim.getTaunt()) { // If no minion has taunt or the target victim minion has taunt, then attacking is possible
+	
+		if (!Taunt(playerEnemy.getBoard()) && idTarget == -1) { // If no enemy minion has taunt and enemy Hero is target, then attacking is possible
 			//Check if the minion already attacked or not
 			if(minion != null && !Rule.checkMinionAttacked(minion)) {
 				int damage = minion.getDamage();
@@ -170,7 +174,8 @@ public class Game {
 					if(!Rule.checkAlive(heroEnemy.getHealthPoints())) {
 						//end game
 					}
-				} else {
+				} else if (!Taunt(playerEnemy.getBoard()) || playerEnemy.getBoard().get(idTarget).getTaunt()) {
+					Minion victim = playerEnemy.getBoard().get(idTarget);
 					if(victim != null) {
 						minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
 						LifeSteal(hero, minion);

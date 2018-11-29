@@ -96,10 +96,18 @@ public class Minion extends Card {
 	}
 	
 	/**
-     * Replaces the attacked variable by its reverse (true, false).
+     * Replaces the attacked variable by (true, false).
      */
 	void setAttacked(boolean bool) {
 		this.attacked = bool;
+	}
+	
+	/**
+	 * Sets the damage attribute of a minion
+	 * @param damage
+	 */
+	void setDamage(int damage) {
+		this.damage = damage;
 	}
 	
 	/**

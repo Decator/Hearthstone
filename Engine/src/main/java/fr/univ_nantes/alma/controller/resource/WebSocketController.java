@@ -15,13 +15,36 @@ public class WebSocketController {
 	
 	@MessageMapping("/getHeros")
     public void getHeros(String message) {
-    	System.out.println(message);
     	this.template.convertAndSend("/greeting", Application.engine.getHeros());
     }
 
     @MessageMapping("/createPlayer")
     public void createPlayer(String message) {
-    	System.out.println(message);
+    	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
+    }
+    
+    @MessageMapping("/createGame")
+    public void createGame(String message) {
+    	this.template.convertAndSend("/greeting", Application.engine.createGame(1, "Bob"));
+    }
+    
+    @MessageMapping("/endTurn")
+    public void endTurn(String message) {
+    	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
+    }
+    
+    @MessageMapping("/playCard")
+    public void playCard(String message) {
+    	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
+    }
+    
+    @MessageMapping("/heroPower")
+    public void heroPower(String message) {
+    	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
+    }
+    
+    @MessageMapping("/attack")
+    public void attack(String message) {
     	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
     }
 }

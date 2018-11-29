@@ -81,7 +81,7 @@ public class Engine implements EngineBridge {
 	
     @Override
     public Game createGame(Player player1, Player player2) {
-		Game game = new Game(UUID.randomUUID(), player1, player2);
+		Game game = new Game(UUID.randomUUID(), player1, player2, retrieveInvocations());
 		this.games.put(game.getIdGame(), game);
 		return game;
 	}

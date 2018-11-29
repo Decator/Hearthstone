@@ -1,5 +1,6 @@
 package fr.univ_nantes.alma.engine;
 
+import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -14,6 +15,7 @@ public class Game {
 	private UUID idGame;
 	private Player[] players;
 	private int idCurrentPlayer;
+	private ArrayList<Minion> inovations;
 
 	/**
 	 * Initialize the attributes of this class.
@@ -21,12 +23,13 @@ public class Game {
 	 * @param player1 the first player of the game
 	 * @param player2 the second player of the game
 	 */
-	public Game(UUID idGame, Player player1, Player player2) {
+	public Game(UUID idGame, Player player1, Player player2, ArrayList<Minion> invocations) {
 		this.idGame = idGame;
 		this.players = new Player[2];
 		this.players[0] = player1;
 		this.players[1] = player2;
 		this.idCurrentPlayer = 0;
+		this.inovations = invocations;
 	}
 
 	/**
@@ -41,7 +44,7 @@ public class Game {
 	 * Get an array containing the two players
 	 * @return the players
 	 */
-	Player[] getPlayers() {
+	public Player[] getPlayers() {
 		return this.players;
 	}
 	
@@ -49,7 +52,7 @@ public class Game {
 	 * Get the index of the current player.
 	 * @return the index of the current player
 	 */
-	int getIdCurrentPlayer() {
+	public int getIdCurrentPlayer() {
 		return this.idCurrentPlayer;
 	}
 

@@ -16,6 +16,6 @@ public class SchedulerConfig {
 
     @Scheduled(fixedDelay = 3000)
     public void sendAdhocMessages() {
-        template.convertAndSend("/topic/user", new UserResponse("Fixed Delay Scheduler"));
+        template.convertAndSend("/topic/game", new UserResponse("Fixed Delay Scheduler"));
     }
 }

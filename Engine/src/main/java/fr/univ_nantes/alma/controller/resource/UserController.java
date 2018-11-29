@@ -11,10 +11,9 @@ import fr.univ_nantes.alma.controller.model.User;
 public class UserController {
 
 
-    @MessageMapping("/user")
-    @SendTo("/topic/user")
+    @MessageMapping("/game")
+    @SendTo("/topic/greetings")
     public UserResponse getUser(User user) {
-
         return new UserResponse("Hi " + user.getName());
     }
 }

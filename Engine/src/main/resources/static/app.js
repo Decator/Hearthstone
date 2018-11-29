@@ -13,12 +13,12 @@ function setConnected(connected) {
 }
 
 function connect() {
-    var socket = new SockJS('/websocket-example');
+    var socket = new SockJS('/hearthstone-websocket');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/user', function (greeting) {
+        stompClient.subscribe('/topic/grettings', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
     });
@@ -33,7 +33,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/user", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/app/game", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
 function showGreeting(message) {

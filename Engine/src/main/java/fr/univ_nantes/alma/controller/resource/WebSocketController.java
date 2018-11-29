@@ -10,15 +10,17 @@ import fr.univ_nantes.alma.Application;
 @Controller
 public class WebSocketController {
 	
-	private final SimpMessagingTemplate template;
-	
 	@Autowired
-	WebSocketController(SimpMessagingTemplate template) {
-		this.template = template;
-	}
+	private SimpMessagingTemplate template;
+	
+	@MessageMapping("/getHeros")
+    public void getHeros(String message) {
+    	System.out.println(message);
+    	this.template.convertAndSend("/greeting", Application.engine.getHeros());
+    }
 
-    @MessageMapping("/game")
-    public void onReceivemessage(String message) {
+    @MessageMapping("/createPlayer")
+    public void createPlayer(String message) {
     	System.out.println(message);
     	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
     }

@@ -37,7 +37,8 @@ public interface EngineBridge {
 	public Game createGame(Player player1, Player player2);
 	
 	/**
-	 * End the turn. 
+	 * End the turn.
+	 * @param uuidGame the id of the game 
 	 */
 	public void endTurn(UUID uuidGame);
 	

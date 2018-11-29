@@ -1,8 +1,6 @@
 package fr.univ_nantes.alma.engine;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -15,7 +13,6 @@ import javax.persistence.Id;
 abstract class Card {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
     protected int id;
     protected String type;
     protected String name;

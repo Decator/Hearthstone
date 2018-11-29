@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import $ from 'jquery';
+import { Player } from './app.models';
 
 @Component({
 	selector: 'app-root',
@@ -25,11 +26,8 @@ export class AppComponent {
 			that.stompClient.subscribe("/greeting", (message) => {
 				if (message.body) {
 					// $(".topic").append("<div class='message'>" + message.body + "</div>")
-					console.log(message.body);
-					console.log("ok");
-					console.log(message.body.json());
+					console.log(new Player(JSON.parse(message.body)));
 				}
-				console.log("nok");
 			});
 		});
 	}

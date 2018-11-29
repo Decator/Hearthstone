@@ -43,8 +43,9 @@ public class Engine implements EngineBridge {
 		
 		// Create hand
 		Vector<Card> hand = new Vector<Card>();
-		int random = (int)(Math.random() * deck.length);
-		hand.add(deck[random]);
+		hand.add(deck[(int)(Math.random() * deck.length)]);
+		hand.add(deck[(int)(Math.random() * deck.length)]);
+		hand.add(deck[(int)(Math.random() * deck.length)]);
 		
 		return new Player(UUID.randomUUID(), username, hero, deck, hand);
 	}

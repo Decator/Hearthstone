@@ -42,11 +42,12 @@ public interface EngineBridge {
 	public void endTurn(UUID uuidGame);
 	
 	/**
-	 * Play a card. Either put a minion card on the board or activate a spell card. 
-	 * @param idCard the id of the card
+	 * Play a card. Either put a minion card on the board or activate a spell card.
 	 * @param uuidGame the id of the game
+	 * @param idCard the id of the card
+	 * @param idTarget the id of the target
 	 */
-	public void playCard(UUID uuidGame, int idCard);
+	public void playCard(UUID uuidGame, int idCard, int idTarget);
 	
 	/**
 	 * Activate the hero's power.

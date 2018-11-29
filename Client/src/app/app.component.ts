@@ -27,7 +27,9 @@ export class AppComponent {
 					// $(".topic").append("<div class='message'>" + message.body + "</div>")
 					console.log(message.body);
 					console.log("ok");
+					console.log(message.body.json());
 				}
+				console.log("nok");
 			});
 		});
 	}

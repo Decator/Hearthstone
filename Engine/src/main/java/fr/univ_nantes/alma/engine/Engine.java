@@ -62,9 +62,9 @@ public class Engine implements EngineBridge {
 	}
 	
 	@Override
-	public void playCard(UUID uuidGame, int idCard) {
+	public void playCard(UUID uuidGame, int idCard, int idTarget) {
 		try {
-			games.get(uuidGame).playCard(idCard);
+			games.get(uuidGame).playCard(idCard, idTarget);
 		} catch(EngineException e) {
 			e.printStackTrace();
 		}

@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * @version 0.0.1
  */
 @Entity
-public class Hero {
+public class Hero extends Card {
 	
 	@Id
     private int id;
@@ -25,7 +25,8 @@ public class Hero {
 	private int armorBuff;
 	private String target;
 	private String description;
-    private boolean heroPowerUsed; //
+    private boolean heroPowerUsed;
+    private int manaCost;//
 
     /**
      * Initialize the attributes of this class.
@@ -33,11 +34,12 @@ public class Hero {
      * @param type There are three types : mage, paladin, warrior
      * @param name the name of the hero
      * @param damage the amount of damage that the hero can inflict
-	 * @param nbSummon the amount of invocations that the hero can perfom
+	 * @param nbSummon the amount of invocations that the hero can perform
 	 * @param idInvocation the id of the hero's invocation
 	 * @param armorBuff the amount of armor buff that the hero can give
 	 * @param target a simple text with the target of the hero
 	 * @param description the description of the hero
+	 * @param manaCost the manaCost of the hero, irrelevant
      */
     public Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String target, String description) {
         this.id = id;
@@ -52,6 +54,7 @@ public class Hero {
         this.heroPowerUsed = false;
         this.armorPoints = 0;
         this.healthPoints = Rule.MAX_HERO_HEALTH_POINTS;
+        this.manaCost = 0;
     }
     
     public Hero() {}

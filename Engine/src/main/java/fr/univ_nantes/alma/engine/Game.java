@@ -94,6 +94,13 @@ public class Game {
 				if(idTarget == -1) { // If it's the hero
 					heroEnemy.receiveDamage(damage); //attack the enemy Hero
 					minion.setAttacked(true);
+					if (minion.getLifesteal()) { //check for lifesteal
+						if (!Rule.checkHealthPoints(hero.getHealthPoints() + minion.damage)) {
+							hero.setHealthPoints(Rule.MAX_HERO_HEALTH_POINTS); // if going over max HP, then HP = max
+						} else {
+							hero.receiveHealing(minion.damage); // if not, heal for the damage inflicted by the minion
+						}
+					}
 					if(!Rule.checkAlive(heroEnemy.getHealthPoints())) {
 						//end game
 					}

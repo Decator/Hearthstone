@@ -19,13 +19,13 @@ public class WebSocketController {
     }
 
     @MessageMapping("/createPlayer")
-    public void createPlayer(String message) {
+    public void createPlayer() {
     	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
     }
     
     @MessageMapping("/createGame")
     public void createGame(String message) {
-    	this.template.convertAndSend("/greeting", Application.engine.createGame(1, "Bob"));
+    	//this.template.convertAndSend("/greeting", Application.engine.createGame(1, "Bob"));
     }
     
     @MessageMapping("/endTurn")

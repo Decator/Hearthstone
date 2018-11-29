@@ -33,7 +33,7 @@ export class AppComponent {
 	}
 
 	sendMessage(message) {
-		this.stompClient.send("/app/game", {}, message);
+		this.stompClient.send("/app/createPlayer");
 		// $('#input').val('');
 	}
 }

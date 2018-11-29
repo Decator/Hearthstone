@@ -4,6 +4,5 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
-  SERVER_URL: "http://localhost:8091/hearthstone-websocket" //mettre l'url du serveur
+  production: false
 };

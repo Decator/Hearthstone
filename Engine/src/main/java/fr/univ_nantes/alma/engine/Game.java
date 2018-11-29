@@ -174,7 +174,7 @@ public class Game {
 					if(!Rule.checkAlive(heroEnemy.getHealthPoints())) {
 						//end game
 					}
-				} else if (!Taunt(playerEnemy.getBoard()) || playerEnemy.getBoard().get(idTarget).getTaunt()) {
+				} else if (!Taunt(playerEnemy.getBoard()) || playerEnemy.getBoard().get(idTarget).getTaunt()) { // If no enemy minion has taunt, or target minion has taunt, attacking is possible
 					Minion victim = playerEnemy.getBoard().get(idTarget);
 					if(victim != null) {
 						minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
@@ -235,11 +235,15 @@ public class Game {
 	/**
      * Play the card with the specified id.
      * @param idCard the id of the card the player wants to play
+     * @param idTarget the id of the target
      * @throws EngineException 
      */
-	void playCard(int idCard) throws EngineException {
+	void playCard(int idCard, int idTarget) throws EngineException {
         Card card = this.players[this.idCurrentPlayer].getHand().get(idCard); // Create the card according to the id given on parameters
         Player player = this.players[this.idCurrentPlayer];
+        Hero hero = this.players[this.idCurrentPlayer].getHero();
+        Player playerEnemy = this.players[this.idCurrentPlayer ^ 1];
+        Hero heroEnemy = this.players[this.idCurrentPlayer ^ 1].getHero();
         if(Rule.checkManaPool(player.getManaPool(), card.getManaCost())) { // If the player has enough mana, play the card
         	if(card instanceof Minion) { // If it's a Minion
             	if(Rule.checkBoardSize(player.getBoard())) {
@@ -252,7 +256,25 @@ public class Game {
             		throw new EngineException("Vous avez atteint le nombre maximum de serviteurs sur le plateau !");
             	}
         	} else if (card instanceof Spell) {
+        		Spell spell = (Spell) card;
         		
+        		if (spell.getNbDraw() != 0) { // Add cards to hand if relevant
+        			for (int i =0; i < spell.getNbDraw(); i++) { // Draw as many cards as needed
+        				try {
+        					drawCard();
+        				} catch (EngineException e) {
+        					throw e;
+        				}
+        			}
+        		}
+        		
+        		if (spell.getArmorBuff() != 0) { // Adds Armor points if relevant
+        			hero.setArmorPoints(hero.getArmorPoints() + spell.getArmorBuff());
+        		}
+        		
+        		if (spell.getAttackBuff() !=0) { // Adds
+        			
+        		}
                 // Cast spell
             }
             player.setManaPoolAfterPlay(card.getManaCost()); // Decrements manaCost from player's manaPool
@@ -304,6 +326,7 @@ public class Game {
 						}
 						if (minion != null) {
 							currentPlayer.addCardToBoard(minion); 
+							giveAttackAuraToOtherMinions(currentPlayer.getBoard(), currentPlayer.getBoard().lastElement());
 							getAttackAuraFromOtherMinions(currentPlayer.getBoard(), currentPlayer.getBoard().lastElement()); //get attack aura buff from other minions if relevant
 						} else {
 							throw new EngineException("Le minion n'a pas pu être invoqué");

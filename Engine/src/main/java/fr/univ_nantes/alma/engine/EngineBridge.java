@@ -47,7 +47,7 @@ public interface EngineBridge {
 	 * @param idCard the id of the card
 	 * @param idTarget the id of the target
 	 */
-	public void playCard(UUID uuidGame, int idCard, int idTarget);
+	public void playCard(UUID uuidGame, int idCard, Player targetPlayer, int idTarget);
 	
 	/**
 	 * Activate the hero's power.

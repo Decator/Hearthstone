@@ -2,14 +2,8 @@ package fr.univ_nantes.alma.engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.Vector;
-
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 /**
  * 
@@ -17,7 +11,6 @@ import org.springframework.context.annotation.Bean;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-@SpringBootApplication
 public class Engine implements EngineBridge {
 	private HashMap<UUID, Game> games = new HashMap<UUID, Game>();
 	

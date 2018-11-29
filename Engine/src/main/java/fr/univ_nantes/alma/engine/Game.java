@@ -68,15 +68,26 @@ public class Game {
 		else 
 			throw new EngineException("Votre main est pleine !");
 	}
-	
+	/**
+	 * Gives attack aura buff from played minion to other minions on the board
+	 * @param board
+	 * @param lastMinionPlayed
+	 */
 	void giveAttackAuraToOtherMinions(Vector<Minion> board, Minion lastMinionPlayed) {
-		int attackBuffAura = lastMinionPlayed.getAttackBuffAura();
-		for (int i = 0; i < board.size() - 1; i++) { // gives attack aura to all allies minions but itself
-			Minion minion = board.get(i);
-			minion.setDamage(minion.getDamage() + attackBuffAura);
+		if (lastMinionPlayed.getAttackBuffAura() != 0) { //if minion has attack aura
+			int attackBuffAura = lastMinionPlayed.getAttackBuffAura();
+			for (int i = 0; i < board.size() - 1; i++) { // gives attack aura to all allies minions but itself
+				Minion minion = board.get(i);
+				minion.setDamage(minion.getDamage() + attackBuffAura);
+			}
 		}
 	}
 	
+	/**
+	 * Gets the cumulated attack aura buffs of other minions and add them to the played minion
+	 * @param board the board of the player playing the minion
+	 * @param lastMinionPlayed
+	 */
 	void getAttackAuraFromOtherMinions(Vector<Minion> board, Minion lastMinionPlayed) {
 		int attackBuffAura = 0;
 		for (int i = 0; i < board.size() - 1; i++) { //if there are minions with attack auras on the board
@@ -87,15 +98,47 @@ public class Game {
 		}
 		lastMinionPlayed.setDamage(lastMinionPlayed.getDamage() + attackBuffAura); // gives attack aura to played minion
 	}
-	
+	/**
+	 * Removes the attack aura buff from all minions of the board upon the death of the minion generating the buff
+	 * @param board the board containing the dying minion
+	 * @param dyingMinion
+	 */
 	void removeAttackAuraFromMinions(Vector<Minion> board, Minion dyingMinion) {
-		for (int i = 0; i < board.size(); i++) {
-			board.get(i).setDamage(board.get(i).getDamage() - dyingMinion.getAttackBuffAura());
+		if (dyingMinion.getAttackBuffAura() != 0) { //if minion has attack aura
+			for (int i = 0; i < board.size(); i++) {
+				board.get(i).setDamage(board.get(i).getDamage() - dyingMinion.getAttackBuffAura());
+			}
 		}
 	}
+	/**
+	 * Heals the hero for the damage inflicted by its lifestealing minion
+	 * @param hero the hero healed by lifesteal
+	 * @param minion the minion having lifesteal
+	 */
+	void LifeSteal(Hero hero, Minion minion) {
+		if (minion.getLifesteal()) { //check for lifesteal
+			if (!Rule.checkHealthPoints(hero.getHealthPoints() + minion.damage)) {
+				hero.setHealthPoints(Rule.MAX_HERO_HEALTH_POINTS); // if going over max HP, then HP = max
+			} else {
+				hero.receiveHealing(minion.damage); // if not, heal for the damage inflicted by the minion
+			}
+		}
+	}
+	/**
+	 * If played minion has charge, it can attack right away
+	 * @param lastMinionPlayed
+	 */
+	void Charge(Minion lastMinionPlayed){
+		if (lastMinionPlayed.getCharge()) { // If played minion has charge
+			lastMinionPlayed.setAttacked(false); //can attack right away
+		} else  {
+			lastMinionPlayed.setAttacked(true); // else has to wait a turn
+		}
+	}
+		
 	
 	/**
-	 * Attack a target with a attacker given in parameter
+	 * Attacks a target with an attacker given in parameter
 	 * @param idAttack the id of the attacker
 	 * @param idTarget the id of the target
 	 * @throws EngineException 
@@ -106,6 +149,7 @@ public class Game {
 		Hero hero = this.players[this.idCurrentPlayer].getHero();
 		Hero heroEnemy = this.players[this.idCurrentPlayer ^ 1].getHero();
 		Player playerEnemy = this.players[this.idCurrentPlayer ^ 1];
+		Player currentPlayer = this.players[this.idCurrentPlayer];
 		
 		boolean taunt = false;
 		
@@ -122,40 +166,24 @@ public class Game {
 				if(idTarget == -1) { // If it's the hero
 					heroEnemy.receiveDamage(damage); //attack the enemy Hero
 					minion.setAttacked(true);
-					if (minion.getLifesteal()) { //check for lifesteal
-						if (!Rule.checkHealthPoints(hero.getHealthPoints() + minion.damage)) {
-							hero.setHealthPoints(Rule.MAX_HERO_HEALTH_POINTS); // if going over max HP, then HP = max
-						} else {
-							hero.receiveHealing(minion.damage); // if not, heal for the damage inflicted by the minion
-						}
-					}
+					LifeSteal(hero, minion);
 					if(!Rule.checkAlive(heroEnemy.getHealthPoints())) {
 						//end game
 					}
 				} else {
 					if(victim != null) {
 						minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
-						if (minion.getLifesteal()) { //check for lifesteal
-							if (!Rule.checkHealthPoints(hero.getHealthPoints() + minion.damage)) {
-								hero.setHealthPoints(Rule.MAX_HERO_HEALTH_POINTS); // if going over max HP, then HP = max
-							} else {
-								hero.receiveHealing(minion.damage); // if not, heal for the damage inflicted by the minion
-							}
-						}
+						LifeSteal(hero, minion);
 						victim.receiveDamage(damage); //attack the minion
-						if (victim.getLifesteal()) { //check for lifesteal
-							if (!Rule.checkHealthPoints(heroEnemy.getHealthPoints() + victim.damage)) {
-								heroEnemy.setHealthPoints(Rule.MAX_HERO_HEALTH_POINTS); // if going over max HP, then HP = max
-							} else {
-								heroEnemy.receiveHealing(victim.damage); // if not, heal for the damage inflicted by the victim
-							}
-						}
+						LifeSteal(heroEnemy, victim);
 						minion.setAttacked(true);
 						if(!Rule.checkAlive(minion.getHealthPoints())) {
-							this.players[this.idCurrentPlayer].getBoard().remove(idAttack);
+							removeAttackAuraFromMinions(currentPlayer.getBoard(), minion); //removes attack buff from other minions if relevant
+							currentPlayer.getBoard().remove(idAttack);
 						}
 						if(!Rule.checkAlive(victim.getHealthPoints())) {
-							this.players[this.idCurrentPlayer ^ 1].getBoard().remove(idTarget);
+							removeAttackAuraFromMinions(playerEnemy.getBoard(), victim); //removes attack buff from other minions if relevant
+							playerEnemy.getBoard().remove(idTarget);
 						}
 					} else {
 						throw new EngineException("Le serviteur que vous cherchez à attaquer n'existe pas !");
@@ -212,17 +240,9 @@ public class Game {
             	if(Rule.checkBoardSize(player.getBoard())) {
             		player.addCardToBoard((Minion)player.getHand().get(idCard));
             		Minion lastMinionPlayed = player.getBoard().lastElement();
-            		if (lastMinionPlayed.getCharge()) { // If played minion has charge
-            			lastMinionPlayed.setAttacked(false); //can attack right away
-            		} else  {
-            			lastMinionPlayed.setAttacked(true); // else has to wait a turn
-            		}
-            		int attackBuffAura = 0;
-            		if (lastMinionPlayed.getAttackBuffAura() != 0) { //if minion has attack aura
-            			giveAttackAuraToOtherMinions(player.getBoard(), lastMinionPlayed);
-            		}
-            		getAttackAuraFromOtherMinions(player.getBoard(), lastMinionPlayed);
-            			
+            		Charge(lastMinionPlayed);
+            		giveAttackAuraToOtherMinions(player.getBoard(), lastMinionPlayed); //give attack aura buff to other minions if it exists
+            		getAttackAuraFromOtherMinions(player.getBoard(), lastMinionPlayed); // get attack auras buffs from other minions if they exist
             	} else {
             		throw new EngineException("Vous avez atteint le nombre maximum de serviteurs sur le plateau !");
             	}
@@ -230,7 +250,7 @@ public class Game {
         		
                 // Cast spell
             }
-            player.setManaPoolAfterPlay(card.getManaCost()); // Check manaCost is lower than player's manaPool
+            player.setManaPoolAfterPlay(card.getManaCost()); // Decrements manaCost from player's manaPool
         } else {
         	throw new EngineException("Vous n'avez pas assez de mana !");
         }
@@ -243,15 +263,15 @@ public class Game {
 		
 		if (!heroCurrentPlayer.getHeroPowerUsed()) { // If the hero has already used his power
 			if (Rule.checkManaPool(currentPlayer.getManaPool(), Rule.MANA_COST_HERO_POWER)) {
-				switch (heroCurrentPlayer.getType())
+				switch (heroCurrentPlayer.getType()) //check class of the hero
 				{
-				case "Warrior":
+				case "Warrior": //gives armor buff
 					heroCurrentPlayer.setArmorPoints(heroCurrentPlayer.getArmorPoints() + heroCurrentPlayer.getArmorBuff());
 					heroCurrentPlayer.setHeroPowerUsed(true);
 					currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
 					break;
 				case "Mage":
-					if (idTarget == -1){
+					if (idTarget == -1){ //if target is a hero
 						playerTarget.getHero().receiveDamage(heroCurrentPlayer.getDamage());
 						heroCurrentPlayer.setHeroPowerUsed(true);
 						currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
@@ -259,25 +279,27 @@ public class Game {
 							//end game
 						}
 					}
-					else {
+					else { // if target is a minion
 						playerTarget.getBoard().get(idTarget).receiveDamage(heroCurrentPlayer.getDamage()); //Inflicts damage to minion
 						heroCurrentPlayer.setHeroPowerUsed(true);
 						currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER); //Decrement manaCost from manaPool
 						if(!Rule.checkAlive(playerTarget.getBoard().get(idTarget).getHealthPoints())){
+							removeAttackAuraFromMinions(playerTarget.getBoard(), playerTarget.getBoard().get(idTarget)); //remove attack buff from other minions if relevant
 							playerTarget.getBoard().remove(idTarget); //If minion healthPoints <= 0, remove minion from board
 						}
 					}
 					break;
 				case "Paladin":
-					if (Rule.checkBoardSize(currentPlayer.getBoard())) {
+					if (Rule.checkBoardSize(currentPlayer.getBoard())) { // if board is not full
 						Minion minion = null;
-						for(Minion invoc : this.invocations) {
+						for(Minion invoc : this.invocations) { //get specific minion
 							if (invoc.getId() == 9) {
 								minion = invoc;
 							}
 						}
 						if (minion != null) {
-							currentPlayer.addCardToBoard(minion);
+							currentPlayer.addCardToBoard(minion); 
+							getAttackAuraFromOtherMinions(currentPlayer.getBoard(), currentPlayer.getBoard().lastElement()); //get attack aura buff from other minions if relevant
 						} else {
 							throw new EngineException("Le minion n'a pas pu être invoqué");
 						}

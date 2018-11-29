@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  SERVER_URL: "ws://echo.websocket.org/" //mettre l'url du serveur
+  SERVER_URL: "http://localhost:8091/hearthstone-websocket" //mettre l'url du serveur
 };

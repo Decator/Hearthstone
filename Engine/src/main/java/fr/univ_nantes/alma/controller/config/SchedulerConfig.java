@@ -1,6 +1,5 @@
 package fr.univ_nantes.alma.controller.config;
 
-import fr.univ_nantes.alma.controller.model.UserResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -14,8 +13,8 @@ public class SchedulerConfig {
     @Autowired
     SimpMessagingTemplate template;
 
-    @Scheduled(fixedDelay = 3000)
+    @Scheduled(fixedDelay = 5000)
     public void sendAdhocMessages() {
-        template.convertAndSend("/topic/game", new UserResponse("Fixed Delay Scheduler"));
+        template.convertAndSend("/topic/game", "Fixed Delay Scheduler");
     }
 }

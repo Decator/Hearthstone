@@ -18,6 +18,6 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer  {
     
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-    	registry.addEndpoint("/hearthstone-websocket").withSockJS();
+    	registry.addEndpoint("/hearthstone-websocket").setAllowedOrigins("*").withSockJS();
     }
 }

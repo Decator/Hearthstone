@@ -18,8 +18,7 @@ public class WebSocketController {
 	}
 
     @MessageMapping("/game")
-    @SendTo("/topic/greetings")
     public void onReceivemessage(String message) {
-    	this.template.convertAndSend("/topic", message);
+    	this.template.convertAndSend("/greeting", message);
     }
 }

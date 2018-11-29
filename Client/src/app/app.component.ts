@@ -9,7 +9,7 @@ import $ from 'jquery';
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-	private serverUrl = 'http://localhost:8091/hearthstone-websocket';
+	private serverUrl = 'http://localhost:8080/hearthstone-websocket';
 	private title = 'HearthStone';
 	private stompClient;
 
@@ -22,17 +22,18 @@ export class AppComponent {
 		this.stompClient = Stomp.over(ws);
 		let that = this;
 		this.stompClient.connect({}, function (frame) {
-			that.stompClient.subscribe("/topic", (message) => {
+			that.stompClient.subscribe("/greeting", (message) => {
 				if (message.body) {
-					$(".topic").append("<div class='message'>" + message.body + "</div>")
+					// $(".topic").append("<div class='message'>" + message.body + "</div>")
 					console.log(message.body);
+					console.log("ok");
 				}
 			});
 		});
 	}
 
 	sendMessage(message) {
-		this.stompClient.send("/app/send/message", {}, message);
-		$('#input').val('');
+		this.stompClient.send("/app/game", {}, message);
+		// $('#input').val('');
 	}
 }

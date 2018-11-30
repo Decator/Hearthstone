@@ -13,20 +13,13 @@ import javax.persistence.Id;
 @Entity
 public class Hero extends Card {
 	
-	@Id
-    private int id;
-    private String type;
-    private String name;
     private int healthPoints; //
     private int armorPoints; //
-    private int damage;
 	private int nbSummon;
 	private int idInvocation;
 	private int armorBuff;
 	private String target;
-	private String description;
     private boolean heroPowerUsed;
-    private int manaCost;//
 
     /**
      * Initialize the attributes of this class.
@@ -42,19 +35,14 @@ public class Hero extends Card {
 	 * @param manaCost the manaCost of the hero, irrelevant
      */
     public Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String target, String description) {
-        this.id = id;
-        this.type = type;
-        this.name = name;
-        this.damage = damage;
+    	super(id, type, name, 0, damage, description);
 		this.nbSummon = nbSummon;
 		this.idInvocation = idInvocation;
 		this.armorBuff = armorBuff;
 		this.target = target;
-		this.description = description;
         this.heroPowerUsed = false;
         this.armorPoints = 0;
         this.healthPoints = Rule.MAX_HERO_HEALTH_POINTS;
-        this.manaCost = 0;
     }
     
     public Hero() {}
@@ -192,15 +180,11 @@ public class Hero extends Card {
 	}
     
     public String toString() {
-    	return "Hero " + this.id + "\n"
-    			+ "Type : " + this.type + "\n"
-    			+ "Name : " + this.name + "\n"
-    			+ "Damage : " + this.damage + "\n"
+    	return "Hero " + super.toString()
     			+ "NbSummon : " + this.nbSummon + "\n"
     			+ "IdInvocation : " + this.idInvocation + "\n"
     			+ "ArmorBuff : " + this.armorBuff + "\n"
     			+ "Target : " + this.target + "\n"
-    			+ "Description : " + this.description + "\n"
     			+ "HealthPoints : " + this.healthPoints + "\n"
     			+ "ArmorPoints : " + this.armorPoints + "\n"
     			+ "HeroPowerUsed : " + this.heroPowerUsed + "\n";

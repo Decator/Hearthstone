@@ -23,7 +23,7 @@ public class Application {
 	
 	@Bean
 	public String engine(MinionRepository minionRepository, SpellRepository spellRepository, HeroRepository heroRepository) {
-		heroRepository.save(new Hero(1, "mage", "name", 1, 0, 0, 0, "target", "description"));
+		heroRepository.save(new Hero(3, "mage", "name", 1, 0, 0, 0, "target", "description"));
 		minionRepository.save(new Minion(1, "common", "name", 1, 1, "description", 1, false, false, false, 0));
 		spellRepository.save(new Spell(2, "mage", "name", 0, 0, null, 0, 0, 0, 0, 0, false, null));
 		Application.engine = new Engine(minionRepository, spellRepository, heroRepository);

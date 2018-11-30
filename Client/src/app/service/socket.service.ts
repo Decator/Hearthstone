@@ -24,10 +24,11 @@ export class SocketService {
     this.stompClient.connect({}, (frame) => { });
   }
 
-  createPlayer(username: string) {
+  play(username: string){
     this.playerSubscription = this.stompClient.subscribe(`/greeting/player/${username}`, (message) => {
       this.player = new Player(JSON.parse(message.body));
       this.playerSubscription.unsubscribe();
+      this.createGame();
     });
     this.stompClient.send("/app/createPlayer", {}, username);
   }

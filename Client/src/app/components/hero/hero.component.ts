@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SocketService } from '../../service/socket.service';
 
 @Component({
 	selector: 'hero-component',
@@ -6,6 +7,9 @@ import { Component } from '@angular/core';
 })
 export class HeroComponent {
 
-	constructor() {
+	constructor(private socketService: SocketService) {}
+
+	play(username: string) {
+		this.socketService.play(username);
 	}
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SocketService } from '../../service/socket.service';
 
 @Component({
 	selector: 'game-component',
@@ -6,6 +7,5 @@ import { Component } from '@angular/core';
 })
 export class GameComponent {
 
-	constructor() {
-	}
+	constructor(private socketService: SocketService) {}
 }

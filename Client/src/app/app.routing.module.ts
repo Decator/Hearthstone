@@ -6,7 +6,7 @@ import { GameComponent } from './components/game/game.component';
 
 const AppRoutes: Routes = [
     { path: 'start', component: StartComponent },
-    { path: 'choose-hero', component: HeroComponent },
+    { path: 'hero', component: HeroComponent },
     { path: 'game', component: GameComponent },
     { path: '', redirectTo: '/start', pathMatch: 'full'},
     { path: '**', redirectTo: '/start', pathMatch: 'full'}

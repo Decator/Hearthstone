@@ -1,1 +1,11 @@
-<h2>This is the Hero Component</h2>
+<div style="text-align:center">
+    <div class="chat-container">
+        <div class="chat">
+            <div class="message"></div>
+        </div>
+    </div>
+</div>
+<div class="send-button">
+    <input id="input" type="text" #input>
+    <button routerLink="/game" routerLinkActive="active" class="send" (click)="play(input.value)">Play</button>
+</div>

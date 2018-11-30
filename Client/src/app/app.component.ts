@@ -12,10 +12,12 @@ import { Player, Game } from './app.models';
 export class AppComponent {
 	private serverUrl = 'http://localhost:8080/hearthstone-websocket';
 	private title = 'HearthStone';
-	private stompClient;
+	private stompClient: any;
 
 	private player: Player;
 	private game: Game;
+
+	private playerSubscription: any;
 
 	constructor() {
 		this.initializeWebSocketConnection();
@@ -24,24 +26,23 @@ export class AppComponent {
 	initializeWebSocketConnection() {
 		let ws = new SockJS(this.serverUrl);
 		this.stompClient = Stomp.over(ws);
-		this.stompClient.connect({}, (frame) => {
-			this.stompClient.subscribe("/greeting/player", (message) => {
-				this.player = new Player(JSON.parse(message.body));
-				console.log(this.player);
-			});
-			this.stompClient.subscribe("/greeting/game", (message) => {
-				console.log(JSON.parse(message.body));
-				this.game = new Game(JSON.parse(message.body));
-				console.log(this.game);
-			});
-		});
+		this.stompClient.connect({}, (frame) => {});
 	}
 
-	createPlayer(message) {
-		this.stompClient.send("/app/createPlayer");
+	createPlayer(userName: string) {
+		this.stompClient.send("/app/createPlayer", {}, userName);
+		this.playerSubscription = this.stompClient.subscribe(`/greeting/player/${userName}`, (message) => {
+			this.player = new Player(JSON.parse(message.body));
+			this.playerSubscription.unsubscribe();
+		});
 	}
 
 	createGame(){
 		this.stompClient.send("/app/createGame", {}, this.player.uuid);
+		this.stompClient.subscribe(`/greeting/game/${this.player.uuid}`, (message) => {
+			console.log(JSON.parse(message.body));
+			this.game = new Game(JSON.parse(message.body));
+			console.log(this.game);
+		});
 	}
 }

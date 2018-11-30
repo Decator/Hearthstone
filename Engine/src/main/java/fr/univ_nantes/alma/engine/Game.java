@@ -27,7 +27,7 @@ public class Game {
 	 * @param player1 the first player of the game
 	 * @param player2 the second player of the game
 	 */
-	public Game(UUID idGame, Player player1, Player player2, ArrayList<Minion> invocations) {
+	Game(UUID idGame, Player player1, Player player2, ArrayList<Minion> invocations) {
 		this.idGame = idGame;
 		this.players = new Player[2];
 		this.players[0] = player1;

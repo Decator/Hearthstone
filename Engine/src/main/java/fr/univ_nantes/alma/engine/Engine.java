@@ -2,6 +2,8 @@ package fr.univ_nantes.alma.engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -12,7 +14,9 @@ import java.util.Vector;
  * @version 0.0.1
  */
 public class Engine implements EngineBridge {
-	private HashMap<UUID, Game> games = new HashMap<UUID, Game>();
+	private HashMap<UUID, Game> games;
+	private HashMap<UUID, Player> players;
+	private Player waitingPlayer;
 	
 	private MinionRepository minionRepository;
 	private SpellRepository spellRepository;
@@ -22,6 +26,8 @@ public class Engine implements EngineBridge {
 		this.minionRepository = minion;
 		this.spellRepository = spell;
 		this.heroRepository = hero;
+		this.games = new HashMap<UUID, Game>();
+		this.players = new HashMap<UUID, Player>();
 	}
     
     @Override
@@ -47,13 +53,27 @@ public class Engine implements EngineBridge {
 		hand.add(deck[(int)(Math.random() * deck.length)]);
 		hand.add(deck[(int)(Math.random() * deck.length)]);
 		
-		return new Player(UUID.randomUUID(), username, hero, deck, hand);
+		Player player = new Player(UUID.randomUUID(), username, hero, deck, hand);
+		this.players.put(player.getUUID(), player); // Put in hashmap
+		return player;
 	}
 	
     @Override
-    public Game createGame(Player player1, Player player2) {
-		Game game = new Game(UUID.randomUUID(), player1, player2, retrieveInvocations());
-		this.games.put(game.getIdGame(), game);
+    public Game createGame(UUID uuidPlayer) {
+    	Game game = null;
+    	if(this.waitingPlayer == null) {
+    		if(this.players.containsKey(uuidPlayer)) {
+    			this.waitingPlayer = this.players.get(uuidPlayer);
+    		}
+    	} else {
+    		if(this.players.containsKey(uuidPlayer)) {
+    			game = new Game(UUID.randomUUID(), this.waitingPlayer, this.players.get(uuidPlayer), retrieveInvocations());
+    			this.players.remove(uuidPlayer);
+    			this.players.remove(this.waitingPlayer.getUUID());
+    			this.waitingPlayer = null;
+    			this.games.put(game.getIdGame(), game);
+    		}
+    	}
 		return game;
 	}
     

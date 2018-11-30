@@ -1,11 +1,14 @@
 package fr.univ_nantes.alma.controller.resource;
 
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import fr.univ_nantes.alma.Application;
+import fr.univ_nantes.alma.engine.Game;
 
 @Controller
 public class WebSocketController {
@@ -24,8 +27,13 @@ public class WebSocketController {
     }
     
     @MessageMapping("/createGame")
-    public void createGame(String message) {
-    	//this.template.convertAndSend("/greeting", Application.engine.createGame(1, "Bob"));
+    public void createGame(UUID uuidPlayer) {
+    	Game game = Application.engine.createGame(uuidPlayer);
+    	if(game == null) {
+        	this.template.convertAndSend("/greeting", "Wait for second Player");
+    	} else {
+        	this.template.convertAndSend("/greeting", Application.engine.createGame(uuidPlayer));
+    	}
     }
     
     @MessageMapping("/endTurn")

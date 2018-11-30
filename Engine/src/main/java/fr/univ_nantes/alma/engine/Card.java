@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * @version 0.0.1
  */
 @Entity
-abstract class Card {
+public abstract class Card {
 	
 	@Id
     protected int id;

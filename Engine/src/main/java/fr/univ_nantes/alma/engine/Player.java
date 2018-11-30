@@ -9,7 +9,7 @@ import java.util.Vector;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-class Player {
+public class Player {
 	private UUID uuid;
 	private String username;
 	private Hero hero;

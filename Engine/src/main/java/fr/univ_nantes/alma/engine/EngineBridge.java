@@ -29,12 +29,10 @@ public interface EngineBridge {
 	
 	/**
 	 * Create a game with an uuid and two players. 
-	 * @param uuidGame the uuid of the game
-	 * @param player1 the first player
-	 * @param player2 the second player
+	 * @param uuidPlyaer the uuid of the player
 	 * @return the game
 	 */
-	public Game createGame(Player player1, Player player2);
+	public Game createGame(UUID uuidPlayer);
 	
 	/**
 	 * End the turn.

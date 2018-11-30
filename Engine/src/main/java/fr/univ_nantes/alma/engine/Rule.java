@@ -8,7 +8,7 @@ import java.util.Vector;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-class Rule {
+public class Rule {
 
     static final int MANA_MAX = 10;
     static final int MANA_COST_HERO_POWER = 2;

@@ -1,3 +1,32 @@
+export interface IGame {
+    idGame: string;
+	players: Array<Player>;
+	idCurrentPlayer: number;
+	invocations: Array<Minion>;
+}
+
+export class Game {
+    idGame: string;
+	players: Array<Player>;
+	idCurrentPlayer: number;
+    invocations: Array<Minion>;
+    
+    constructor(obj?: IGame){
+        if(obj){
+            this.idGame = obj.idGame;
+            this.players = new Array<Player>();
+            for(let player of obj.players){
+                this.players.push(new Player(player));
+            }
+            this.idCurrentPlayer = obj.idCurrentPlayer;
+            this.invocations = new Array<Minion>();
+            for(let invocation of obj.invocations){
+                this.invocations.push(new Minion(invocation));
+            }
+        }
+    }
+}
+
 export interface IPlayer {
     uuid: string;
     userName: string;

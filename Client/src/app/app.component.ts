@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import $ from 'jquery';
-import { Player } from './app.models';
+import { Player, Game } from './app.models';
 
 @Component({
 	selector: 'app-root',
@@ -15,6 +15,7 @@ export class AppComponent {
 	private stompClient;
 
 	private player: Player;
+	private game: Game;
 
 	constructor() {
 		this.initializeWebSocketConnection();
@@ -26,18 +27,20 @@ export class AppComponent {
 		let that = this;
 		this.stompClient.connect({}, function (frame) {
 			that.stompClient.subscribe("/greeting", (message) => {
-				// if (message.body) {
-					// $(".topic").append("<div class='message'>" + message.body + "</div>")
-					this.player = new Player(JSON.parse(message.body))
-					console.log(this.player);
-				// }
+				console.log(JSON.parse(message.body));
+				this.player = new Player(JSON.parse(message.body));
+				console.log(this.player);
+			});
+			that.stompClient.subscribe("/game", (message) => {
+				console.log(JSON.parse(message.body));
+				this.game = new Game(JSON.parse(message.body));
+				console.log(this.game);
 			});
 		});
 	}
 
 	createPlayer(message) {
 		this.stompClient.send("/app/createPlayer");
-		// $('#input').val('');
 	}
 
 	createGame(){

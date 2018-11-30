@@ -135,7 +135,7 @@ public class Engine implements EngineBridge {
 	 */
     public Hero retrieveHero(int hero) {
     	if(this.heroRepository.findById(hero) != null ) {
-    		this.heroRepository.findById(hero);
+    		return this.heroRepository.findById(hero);
     	}
     	return this.heroRepository.findById(1);
 	}

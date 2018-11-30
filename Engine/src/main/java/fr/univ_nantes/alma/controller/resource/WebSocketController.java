@@ -23,16 +23,16 @@ public class WebSocketController {
 
     @MessageMapping("/createPlayer")
     public void createPlayer() {
-    	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
+    	this.template.convertAndSend("/greeting/player", Application.engine.createPlayer(3, "Bob"));
     }
     
     @MessageMapping("/createGame")
-    public void createGame(UUID uuidPlayer) {
-    	Game game = Application.engine.createGame(uuidPlayer);
+    public void createGame(String uuidPlayer) {
+    	Game game = Application.engine.createGame(UUID.fromString(uuidPlayer));
     	if(game == null) {
-        	this.template.convertAndSend("/game", "Wait for second Player");
+        	this.template.convertAndSend("/greeting/game", "Wait for second Player");
     	} else {
-        	this.template.convertAndSend("/game", Application.engine.createGame(uuidPlayer));
+        	this.template.convertAndSend("/greeting/game", game);
     	}
     }
     

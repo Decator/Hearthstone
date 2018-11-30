@@ -24,14 +24,12 @@ export class AppComponent {
 	initializeWebSocketConnection() {
 		let ws = new SockJS(this.serverUrl);
 		this.stompClient = Stomp.over(ws);
-		let that = this;
-		this.stompClient.connect({}, function (frame) {
-			that.stompClient.subscribe("/greeting", (message) => {
-				console.log(JSON.parse(message.body));
+		this.stompClient.connect({}, (frame) => {
+			this.stompClient.subscribe("/greeting/player", (message) => {
 				this.player = new Player(JSON.parse(message.body));
 				console.log(this.player);
 			});
-			that.stompClient.subscribe("/game", (message) => {
+			this.stompClient.subscribe("/greeting/game", (message) => {
 				console.log(JSON.parse(message.body));
 				this.game = new Game(JSON.parse(message.body));
 				console.log(this.game);

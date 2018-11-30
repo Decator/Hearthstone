@@ -2,14 +2,12 @@ export interface IGame {
     idGame: string;
 	players: Array<Player>;
 	idCurrentPlayer: number;
-	invocations: Array<Minion>;
 }
 
 export class Game {
     idGame: string;
 	players: Array<Player>;
 	idCurrentPlayer: number;
-    invocations: Array<Minion>;
     
     constructor(obj?: IGame){
         if(obj){
@@ -19,10 +17,6 @@ export class Game {
                 this.players.push(new Player(player));
             }
             this.idCurrentPlayer = obj.idCurrentPlayer;
-            this.invocations = new Array<Minion>();
-            for(let invocation of obj.invocations){
-                this.invocations.push(new Minion(invocation));
-            }
         }
     }
 }

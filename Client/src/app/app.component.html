@@ -25,8 +25,9 @@
 </div>
 <div class="footer">
 	<div class="send-button">
-		<button class="send" (click)="sendMessage(input.value)">Send</button>
 		<input id="input" type="text" #input>
+		<button class="send" (click)="createPlayer(input.value)">Create Player</button>
+		<button class="send" (click)="createGame()">Create Game</button>
 	</div>
 </div>
 <router-outlet></router-outlet>

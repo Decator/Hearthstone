@@ -50,53 +50,6 @@ export class Player implements IPlayer {
     }
 }
 
-export interface IHero {
-    id: number;
-    type: string;
-    name: string;
-    healthPoints: number;
-    armorPoints: number;
-    damage: number;
-    nbSummon: number;
-    idInvocation: number;
-    armorBuff: number;
-    target: string;
-    description: string;
-    heroPowerUsed: boolean;
-}
-
-export class Hero implements IHero {
-    id: number;
-    type: string;
-    name: string;
-    healthPoints: number;
-    armorPoints: number;
-    damage: number;
-    nbSummon: number;
-    idInvocation: number;
-    armorBuff: number;
-    target: string;
-    description: string;
-    heroPowerUsed: boolean;
-
-    constructor(obj?: IHero){
-        if(obj){
-            this.id = obj.id;
-            this.type = obj.type;
-            this.name = obj.name;
-            this.healthPoints = obj.healthPoints;
-            this.armorPoints = obj.armorPoints;
-            this.damage = obj.damage;
-            this.nbSummon = obj.nbSummon;
-            this.idInvocation = obj.idInvocation;
-            this.armorBuff = obj.armorBuff;
-            this.target = obj.target;
-            this.description = obj.description;
-            this.heroPowerUsed = obj.heroPowerUsed;
-        }
-    }
-}
-
 export interface ICard {
     id: number;
     type: string;
@@ -119,6 +72,56 @@ export interface IMinion extends ICard {
     charge: boolean;
     attackBuffAura: number;
     attacked: boolean;
+}
+
+export interface IHero extends ICard {
+    id: number;
+    type: string;
+    name: string;
+    manaCost: number;
+    damage: number;
+    description: string;
+    healthPoints: number;
+    armorPoints: number;
+    nbSummon: number;
+    idInvocation: number;
+    armorBuff: number;
+    target: string;
+    heroPowerUsed: boolean;
+}
+
+export class Hero implements IHero {
+    id: number;
+    type: string;
+    name: string;
+    manaCost: number;
+    damage: number;
+    description: string;
+    healthPoints: number;
+    armorPoints: number;
+    nbSummon: number;
+    idInvocation: number;
+    armorBuff: number;
+    target: string;
+    heroPowerUsed: boolean;
+
+    constructor(obj?: IHero){
+        if(obj){
+            this.id = obj.id;
+            this.type = obj.type;
+            this.name = obj.name;
+            this.manaCost = obj.manaCost;
+            this.damage = obj.damage;
+            this.description = obj.description;
+            this.healthPoints = obj.healthPoints;
+            this.armorPoints = obj.armorPoints;
+            this.nbSummon = obj.nbSummon;
+            this.idInvocation = obj.idInvocation;
+            this.armorBuff = obj.armorBuff;
+            this.target = obj.target;
+            this.heroPowerUsed = obj.heroPowerUsed;
+        }
+    }
 }
 
 export class Minion implements IMinion {

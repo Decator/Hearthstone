@@ -14,6 +14,8 @@ export class AppComponent {
 	private title = 'HearthStone';
 	private stompClient;
 
+	private player: Player;
+
 	constructor() {
 		this.initializeWebSocketConnection();
 	}
@@ -24,16 +26,21 @@ export class AppComponent {
 		let that = this;
 		this.stompClient.connect({}, function (frame) {
 			that.stompClient.subscribe("/greeting", (message) => {
-				if (message.body) {
+				// if (message.body) {
 					// $(".topic").append("<div class='message'>" + message.body + "</div>")
-					console.log(new Player(JSON.parse(message.body)));
-				}
+					this.player = new Player(JSON.parse(message.body))
+					console.log(this.player);
+				// }
 			});
 		});
 	}
 
-	sendMessage(message) {
+	createPlayer(message) {
 		this.stompClient.send("/app/createPlayer");
 		// $('#input').val('');
+	}
+
+	createGame(){
+		this.stompClient.send("/app/createGame", {}, this.player.uuid);
 	}
 }

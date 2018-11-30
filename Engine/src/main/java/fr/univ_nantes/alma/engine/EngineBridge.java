@@ -1,7 +1,6 @@
 package fr.univ_nantes.alma.engine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -44,16 +43,18 @@ public interface EngineBridge {
 	 * Play a card. Either put a minion card on the board or activate a spell card.
 	 * @param uuidGame the id of the game
 	 * @param idCard the id of the card
+	 * @param uuidPlayer the player choose (for some spells)
 	 * @param idTarget the id of the target
 	 */
-	public void playCard(UUID uuidGame, int idCard, Player targetPlayer, int idTarget);
+	public void playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget);
 	
 	/**
 	 * Activate the hero's power.
 	 * @param uuidGame the id of the game
+	 * @param uuidPlayer the player choose (for some power)
 	 * @param idTarget the id of the target, if the power doesn't need a target then set idTarget to -1
 	 */
-	public void heroPower(UUID uuidGame, Player player, int idTarget);
+	public void heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget);
 	
 	/**
 	 * Attack a card or a hero.

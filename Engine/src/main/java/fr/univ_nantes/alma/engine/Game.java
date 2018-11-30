@@ -1,9 +1,7 @@
 package fr.univ_nantes.alma.engine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import java.util.Vector;
@@ -64,7 +62,7 @@ public class Game {
 		String[] splitString = spellTarget.split("_");
 		Hero hero = player.getHero();
 		Hero heroEnemy = player.getHero();
-		LinkedHashMap<String, Card> targets = new LinkedHashMap();
+		LinkedHashMap<String, Card> targets = new LinkedHashMap<String, Card>();
 		switch (splitString[0]) {
 		case "minion" :
 			switch (splitString[1]) {
@@ -343,7 +341,6 @@ public class Game {
         Player player = this.players[this.idCurrentPlayer];
         Hero hero = this.players[this.idCurrentPlayer].getHero();
         Player playerEnemy = this.players[this.idCurrentPlayer ^ 1];
-        Hero heroEnemy = this.players[this.idCurrentPlayer ^ 1].getHero();
         String message = null;
         
         if(Rule.checkManaPool(player.getManaPool(), card.getManaCost())) { // If the player has enough mana, play the card

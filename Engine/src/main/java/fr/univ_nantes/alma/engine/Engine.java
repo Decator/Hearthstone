@@ -83,13 +83,23 @@ public class Engine implements EngineBridge {
 	}
 	
 	@Override
-	public void playCard(UUID uuidGame, int idCard, Player targetPlayer, int idTarget) {
-		games.get(uuidGame).playCard(idCard, targetPlayer, idTarget);
+	public void playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) {
+		Player[] player = games.get(uuidGame).getPlayers();
+		if(player[0].getUUID() == uuidPlayer) {
+			games.get(uuidGame).playCard(idCard, player[0], idTarget);
+		} else {
+			games.get(uuidGame).playCard(idCard, player[1], idTarget);
+		}
 	}
 	
 	@Override
-	public void heroPower(UUID uuidGame, Player player, int idTarget) {
-		games.get(uuidGame).heroPower(player, idTarget);
+	public void heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) {
+		Player[] player = games.get(uuidGame).getPlayers();
+		if(player[0].getUUID() == uuidPlayer) {
+			games.get(uuidGame).heroPower(player[0], idTarget);
+		} else {
+			games.get(uuidGame).heroPower(player[1], idTarget);
+		}
 	}
 	
 	@Override

@@ -52,12 +52,14 @@ public class WebSocketController {
     }
     
     @MessageMapping("/heroPower")
-    public void heroPower(String message) {
-    	this.template.convertAndSend("/game", Application.engine.createPlayer(1, "Bob"));
+    public void heroPower(String uuidGame, String uuidPlayer, int idTarget) {
+    	Application.engine.heroPower(UUID.fromString(uuidGame), UUID.fromString(uuidPlayer), idTarget);
+    	this.template.convertAndSend("/game/" + uuidGame + "/heroPower", "heroPower");
     }
     
     @MessageMapping("/attack")
-    public void attack(String message) {
-    	this.template.convertAndSend("/game", Application.engine.createPlayer(1, "Bob"));
+    public void attack(String uuidGame, int idAttack, int idTarget) {
+    	Application.engine.attack(UUID.fromString(uuidGame), idAttack, idTarget);
+    	this.template.convertAndSend("/game/" + uuidGame + "/attack", "attack");
     }
 }

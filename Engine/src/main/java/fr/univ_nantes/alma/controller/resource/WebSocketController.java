@@ -37,8 +37,9 @@ public class WebSocketController {
     }
     
     @MessageMapping("/endTurn")
-    public void endTurn(String message) {
-    	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
+    public void endTurn(String uuidGame) {
+    	Application.engine.endTurn(UUID.fromString(uuidGame));
+    	this.template.convertAndSend("/greeting/game", "endTurn");
     }
     
     @MessageMapping("/playCard")

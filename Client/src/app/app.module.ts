@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialAppModule } from './ngmaterial.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { StartComponent } from './components/start/start.component';
@@ -21,7 +23,10 @@ import { SocketService } from './service/socket.service';
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
-		BrowserAnimationsModule
+		BrowserAnimationsModule,
+		MaterialAppModule,
+		FormsModule, 
+		ReactiveFormsModule
 	],
 	providers: [
 		SocketService

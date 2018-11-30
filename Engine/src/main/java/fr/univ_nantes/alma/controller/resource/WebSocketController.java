@@ -18,13 +18,13 @@ public class WebSocketController {
 	private SimpMessagingTemplate template;
 	
 	@MessageMapping("/getHeros")
-    public void getHeros(String message) {
+    public void getHeros() {
     	this.template.convertAndSend("/heros", Application.engine.getHeros());
     }
 
     @MessageMapping("/createPlayer")
-    public void createPlayer(String username) {
-    	this.template.convertAndSend("/player/" + username, Application.engine.createPlayer(3, username));
+    public void createPlayer(String data) {
+    	this.template.convertAndSend("/player/" + data.split("_")[0], Application.engine.createPlayer(Integer.parseInt(data.split("_")[1]), data.split("_")[0]));
     }
     
     @MessageMapping("/createGame")

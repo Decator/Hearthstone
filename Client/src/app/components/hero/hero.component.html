@@ -1,11 +1,23 @@
-<div style="text-align:center">
-    <div class="chat-container">
-        <div class="chat">
-            <div class="message"></div>
-        </div>
-    </div>
-</div>
-<div class="send-button">
-    <input id="input" type="text" #input>
-    <button routerLink="/game" routerLinkActive="active" class="send" (click)="play(input.value)">Play</button>
-</div>
+<!-- <button routerLink="/game" routerLinkActive="active" class="send" (click)="play(input.value)">Play</button> -->
+
+<form [formGroup]="playerDetailsForm" (ngSubmit)="onFormSubmit(playerDetailsForm.value)">
+    <mat-form-field class="full-width">
+        <input matInput formControlName="username" placeholder="Nom d'utilisateur" required>
+    </mat-form-field>
+    <mat-radio-group formControlName="chosenHero">
+        <mat-grid-list gutterSize="5" cols="3" rowHeight="2:1">
+            <mat-grid-tile *ngFor="let hero of heros">
+                <mat-grid-tile-header>
+                    {{hero.name}}
+                </mat-grid-tile-header>
+                {{hero.description}}
+                <mat-grid-tile-footer>
+                    <mat-radio-button class="example-radio-button" [value]="hero.id" required>
+                    </mat-radio-button>
+                </mat-grid-tile-footer>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-radio-group>
+    <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!playerDetailsForm.valid">Submit</button>
+</form>
+<!-- </div> -->

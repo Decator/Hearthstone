@@ -109,7 +109,6 @@ export interface IHero extends ICard {
     nbSummon: number;
     idInvocation: number;
     armorBuff: number;
-    target: string;
     heroPowerUsed: boolean;
 }
 
@@ -125,7 +124,6 @@ export class Hero implements IHero {
     nbSummon: number;
     idInvocation: number;
     armorBuff: number;
-    target: string;
     heroPowerUsed: boolean;
 
     constructor(obj?: IHero){
@@ -141,7 +139,6 @@ export class Hero implements IHero {
             this.nbSummon = obj.nbSummon;
             this.idInvocation = obj.idInvocation;
             this.armorBuff = obj.armorBuff;
-            this.target = obj.target;
             this.heroPowerUsed = obj.heroPowerUsed;
         }
     }

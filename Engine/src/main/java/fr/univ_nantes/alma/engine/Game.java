@@ -164,7 +164,7 @@ public class Game {
 	String drawCard() {
 		Player player = this.players[this.idCurrentPlayer];
 		int random = (int)(player.getDeck().length * Math.random());
-		String message = null;
+		String message = "ok";
 		if(Rule.checkHandSize(player.getHand())) {
 			player.addCardToHand(player.getDeck()[random]);
 			return message;
@@ -286,7 +286,7 @@ public class Game {
 		Hero heroEnemy = this.players[this.idCurrentPlayer ^ 1].getHero();
 		Player playerEnemy = this.players[this.idCurrentPlayer ^ 1];
 		Player currentPlayer = this.players[this.idCurrentPlayer];
-		String message = null;
+		String message = "ok";
 		
 		//Checks if the minion already attacked or not
 		if(minion != null && !Rule.checkMinionAttacked(minion)) {
@@ -341,7 +341,7 @@ public class Game {
         Player player = this.players[this.idCurrentPlayer];
         Hero hero = this.players[this.idCurrentPlayer].getHero();
         Player playerEnemy = this.players[this.idCurrentPlayer ^ 1];
-        String message = null;
+        String message = "ok";
         
         if(Rule.checkManaPool(player.getManaPool(), card.getManaCost())) { // If the player has enough mana, play the card
         	if(card instanceof Minion) { // If it's a Minion
@@ -488,7 +488,7 @@ public class Game {
 	String heroPower(Player playerTarget, int idTarget) {
 		Player currentPlayer = this.players[this.idCurrentPlayer];
 		Hero heroCurrentPlayer = this.players[this.idCurrentPlayer].getHero();
-		String message = null;
+		String message = "ok";
 		
 		if (!heroCurrentPlayer.getHeroPowerUsed()) { // If the hero has already used his power
 			if (Rule.checkManaPool(currentPlayer.getManaPool(), Rule.MANA_COST_HERO_POWER)) {

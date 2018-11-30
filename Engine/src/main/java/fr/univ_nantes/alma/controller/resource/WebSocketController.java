@@ -42,24 +42,21 @@ public class WebSocketController {
     @MessageMapping("/endTurn")
     public void endTurn(String uuidGame) {
     	Application.engine.endTurn(UUID.fromString(uuidGame));
-    	this.template.convertAndSend("/game/" + uuidGame + "/endTurn", "endTurn");
+    	this.template.convertAndSend("/game/" + uuidGame + "/endTurn", "ok");
     }
     
     @MessageMapping("/playCard")
     public void playCard(String uuidGame, int idCard, String uuidPlayer, int idTarget) {
-	    Application.engine.playCard(UUID.fromString(uuidGame), idCard, UUID.fromString(uuidPlayer), idTarget);
-    	this.template.convertAndSend("/game/" + uuidGame + "/playCard", "endTurn");
+    	this.template.convertAndSend("/game/" + uuidGame + "/playCard", Application.engine.playCard(UUID.fromString(uuidGame), idCard, UUID.fromString(uuidPlayer), idTarget));
     }
     
     @MessageMapping("/heroPower")
     public void heroPower(String uuidGame, String uuidPlayer, int idTarget) {
-    	Application.engine.heroPower(UUID.fromString(uuidGame), UUID.fromString(uuidPlayer), idTarget);
-    	this.template.convertAndSend("/game/" + uuidGame + "/heroPower", "heroPower");
+    	this.template.convertAndSend("/game/" + uuidGame + "/heroPower", Application.engine.heroPower(UUID.fromString(uuidGame), UUID.fromString(uuidPlayer), idTarget));
     }
     
     @MessageMapping("/attack")
     public void attack(String uuidGame, int idAttack, int idTarget) {
-    	Application.engine.attack(UUID.fromString(uuidGame), idAttack, idTarget);
-    	this.template.convertAndSend("/game/" + uuidGame + "/attack", "attack");
+    	this.template.convertAndSend("/game/" + uuidGame + "/attack", Application.engine.attack(UUID.fromString(uuidGame), idAttack, idTarget));
     }
 }

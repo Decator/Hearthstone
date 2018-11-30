@@ -2,6 +2,7 @@ package fr.univ_nantes.alma.controller.resource;
 
 import java.util.UUID;
 
+import fr.univ_nantes.alma.engine.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -18,7 +19,7 @@ public class WebSocketController {
 	
 	@MessageMapping("/getHeros")
     public void getHeros(String message) {
-    	this.template.convertAndSend("/greeting", Application.engine.getHeros());
+    	this.template.convertAndSend("/greeting/heros", Application.engine.getHeros());
     }
 
     @MessageMapping("/createPlayer")
@@ -43,8 +44,10 @@ public class WebSocketController {
     }
     
     @MessageMapping("/playCard")
-    public void playCard(String message) {
-    	this.template.convertAndSend("/greeting", Application.engine.createPlayer(1, "Bob"));
+    public void playCard(String uuidGame, int idCard, String uuidPlayer, int idTarget) {
+	    //Player targetPlayer =
+	    //Application.engine.playCard(UUID.fromString(uuidGame), idCard, Player.fromString(targetPlayer), idTarget);
+    	this.template.convertAndSend("/greeting/game", "playCard");
     }
     
     @MessageMapping("/heroPower")

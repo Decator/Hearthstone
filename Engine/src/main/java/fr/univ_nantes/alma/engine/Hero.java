@@ -17,7 +17,6 @@ public class Hero extends Card {
 	private int nbSummon;
 	private int idInvocation;
 	private int armorBuff;
-	private String target;
     private boolean heroPowerUsed;
 
     /**
@@ -29,16 +28,14 @@ public class Hero extends Card {
 	 * @param nbSummon the amount of invocations that the hero can perform
 	 * @param idInvocation the id of the hero's invocation
 	 * @param armorBuff the amount of armor buff that the hero can give
-	 * @param target a simple text with the target of the hero
 	 * @param description the description of the hero
 	 * @param manaCost the manaCost of the hero, irrelevant
      */
-    public Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String target, String description) {
+    public Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String description) {
     	super(id, type, name, 0, damage, description);
 		this.nbSummon = nbSummon;
 		this.idInvocation = idInvocation;
 		this.armorBuff = armorBuff;
-		this.target = target;
         this.heroPowerUsed = false;
         this.armorPoints = 0;
         this.healthPoints = Rule.MAX_HERO_HEALTH_POINTS;
@@ -93,14 +90,6 @@ public class Hero extends Card {
     public int getArmorBuff() {
         return this.armorBuff;
     }
-    
-    /**
-     * Get the target of the hero. 
-     * @return the target of the hero
-     */
-    public String getTarget() {
-        return this.target;
-    }
 
     /**
      * Set the amout of healthPoints
@@ -143,7 +132,6 @@ public class Hero extends Card {
     			+ "NbSummon : " + this.nbSummon + "\n"
     			+ "IdInvocation : " + this.idInvocation + "\n"
     			+ "ArmorBuff : " + this.armorBuff + "\n"
-    			+ "Target : " + this.target + "\n"
     			+ "HealthPoints : " + this.healthPoints + "\n"
     			+ "ArmorPoints : " + this.armorPoints + "\n"
     			+ "HeroPowerUsed : " + this.heroPowerUsed + "\n";

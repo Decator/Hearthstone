@@ -2,8 +2,6 @@ package fr.univ_nantes.alma.engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Queue;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -83,28 +81,28 @@ public class Engine implements EngineBridge {
 	}
 	
 	@Override
-	public void playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) {
+	public String playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) {
 		Player[] player = games.get(uuidGame).getPlayers();
 		if(player[0].getUUID() == uuidPlayer) {
-			games.get(uuidGame).playCard(idCard, player[0], idTarget);
+			return games.get(uuidGame).playCard(idCard, player[0], idTarget);
 		} else {
-			games.get(uuidGame).playCard(idCard, player[1], idTarget);
+			return games.get(uuidGame).playCard(idCard, player[1], idTarget);
 		}
 	}
 	
 	@Override
-	public void heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) {
+	public String heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) {
 		Player[] player = games.get(uuidGame).getPlayers();
 		if(player[0].getUUID() == uuidPlayer) {
-			games.get(uuidGame).heroPower(player[0], idTarget);
+			return games.get(uuidGame).heroPower(player[0], idTarget);
 		} else {
-			games.get(uuidGame).heroPower(player[1], idTarget);
+			return games.get(uuidGame).heroPower(player[1], idTarget);
 		}
 	}
 	
 	@Override
-	public void attack(UUID uuidGame, int idAttack, int idTarget) {
-		games.get(uuidGame).attack(idAttack, idTarget);
+	public String attack(UUID uuidGame, int idAttack, int idTarget) {
+		return games.get(uuidGame).attack(idAttack, idTarget);
 	}
 	
 	/**

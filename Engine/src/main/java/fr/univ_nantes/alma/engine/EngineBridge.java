@@ -46,7 +46,7 @@ public interface EngineBridge {
 	 * @param uuidPlayer the player choose (for some spells)
 	 * @param idTarget the id of the target
 	 */
-	public void playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget);
+	public String playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget);
 	
 	/**
 	 * Activate the hero's power.
@@ -54,7 +54,7 @@ public interface EngineBridge {
 	 * @param uuidPlayer the player choose (for some power)
 	 * @param idTarget the id of the target, if the power doesn't need a target then set idTarget to -1
 	 */
-	public void heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget);
+	public String heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget);
 	
 	/**
 	 * Attack a card or a hero.
@@ -62,5 +62,5 @@ public interface EngineBridge {
 	 * @param idAttack the id of the attacker
 	 * @param idTarget the id of the target
 	 */
-	public void attack(UUID uuidGame, int idAttack, int idTarget);
+	public String attack(UUID uuidGame, int idAttack, int idTarget);
 }

@@ -24,7 +24,7 @@ public class WebSocketController {
 
     @MessageMapping("/createPlayer")
     public void createPlayer(String username) {
-    	this.template.convertAndSend("/greeting/player/" + username, Application.engine.createPlayer(3, "Bob"));
+    	this.template.convertAndSend("/greeting/player/" + username, Application.engine.createPlayer(3, username));
     }
     
     @MessageMapping("/createGame")

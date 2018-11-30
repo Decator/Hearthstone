@@ -9,6 +9,8 @@ import { GameComponent } from './components/game/game.component';
 
 import { AppRoutingModule } from './app.routing.module';
 
+import { SocketService } from './service/socket.service';
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -21,7 +23,9 @@ import { AppRoutingModule } from './app.routing.module';
 		AppRoutingModule,
 		BrowserAnimationsModule
 	],
-	providers: [],
+	providers: [
+		SocketService
+	],
 	bootstrap: [AppComponent]
 })
 export class AppModule { }

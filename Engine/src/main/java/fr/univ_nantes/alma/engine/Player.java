@@ -137,6 +137,14 @@ public class Player {
 	void addCardToBoard(Minion minion) {
 		this.getBoard().add(minion);
 	}
+	
+	/**
+	 * Add a minion at a specific index to the player's board
+	 * @param minion the minion to add
+	 */
+	void addCardToBoard(Minion minion, int id) {
+		this.getBoard().add(id, minion);
+	}
 
 	/**
 	 * Remove a card from the player's hand

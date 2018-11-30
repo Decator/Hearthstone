@@ -71,18 +71,18 @@ public class Game {
 			case "all" :
 				switch (splitString[2]) {
 				case "enemy" :
-					for (int i = 0; i < playerEnemy.getBoard().size(); i++) {
+					for (int i = playerEnemy.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("1_" + String.valueOf(i), playerEnemy.getBoard().get(i));
 					}
 				case "ally" :
-					for (int i = 0; i < player.getBoard().size(); i++) {
+					for (int i = player.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
 					}
 				case "all" :
-					for (int i = 0; i < playerEnemy.getBoard().size(); i++) {
+					for (int i = playerEnemy.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("1_" + String.valueOf(i),playerEnemy.getBoard().get(i));
 					}
-					for (int i = 0; i < player.getBoard().size(); i++) {
+					for (int i = player.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
 					}
 				}
@@ -106,24 +106,24 @@ public class Game {
 			case "all" :
 				switch (splitString[2]) {
 				case "enemy" :
-					targets.put("1",heroEnemy);
-					for (int i = 0; i < playerEnemy.getBoard().size(); i++) {
+					for (int i = playerEnemy.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("1_" + String.valueOf(i),playerEnemy.getBoard().get(i));
 					}
+					targets.put("1",heroEnemy);
 				case "ally" :
+					for (int i = player.getBoard().size() -1 ; i >= 0; i--) {
+						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
+					}
 					targets.put("0", hero);
-					for (int i = 0; i < player.getBoard().size(); i++) {
-						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
-					}
 				case "all" :
-					targets.put("0",hero);
-					targets.put("1", heroEnemy);
-					for (int i = 0; i < player.getBoard().size(); i++) {
+					for (int i = player.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
 					}
-					for (int i = 0; i < playerEnemy.getBoard().size(); i++) {
+					for (int i = playerEnemy.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("1_" + String.valueOf(i), playerEnemy.getBoard().get(i));
 					}
+					targets.put("0",hero);
+					targets.put("1", heroEnemy);
 				}
 			case "1" :
 				switch (splitString[2]) {
@@ -424,9 +424,9 @@ public class Game {
         							}
         						}
         						if (minion != null) {
-        							player.addCardToBoard(minion); 
-        							giveAttackAuraToOtherMinions(player.getBoard(), player.getBoard().lastElement());
-        							getAttackAuraFromOtherMinions(player.getBoard(), player.getBoard().lastElement()); //get attack aura buff from other minions if relevant
+        							player.addCardToBoard(minion, Integer.parseInt(keys[1])); 
+        							giveAttackAuraToOtherMinions(player.getBoard(), player.getBoard().get(Integer.parseInt(keys[1])));
+        							getAttackAuraFromOtherMinions(player.getBoard(), player.getBoard().get(Integer.parseInt(keys[1]))); //get attack aura buff from other minions if relevant
         						} else {
         							message = "Le minion n'a pas pu être invoqué";
         						}
@@ -442,9 +442,9 @@ public class Game {
         							}
         						}
         						if (minion != null) {
-        							playerEnemy.addCardToBoard(minion); 
-        							giveAttackAuraToOtherMinions(playerEnemy.getBoard(), playerEnemy.getBoard().lastElement());
-        							getAttackAuraFromOtherMinions(playerEnemy.getBoard(), playerEnemy.getBoard().lastElement()); //get attack aura buff from other minions if relevant
+        							playerEnemy.addCardToBoard(minion, Integer.parseInt(keys[1])); 
+        							giveAttackAuraToOtherMinions(playerEnemy.getBoard(), playerEnemy.getBoard().get(Integer.parseInt(keys[1])));
+        							getAttackAuraFromOtherMinions(playerEnemy.getBoard(), playerEnemy.getBoard().get(Integer.parseInt(keys[1]))); //get attack aura buff from other minions if relevant
         						} else {
         							message = "Le minion n'a pas pu être invoqué";
         						}

@@ -31,18 +31,18 @@ public class WebSocketController {
     public void createGame(String uuidPlayer) {
     	Game game = Application.engine.createGame(UUID.fromString(uuidPlayer));
     	if(game == null) {
-        	this.template.convertAndSend("/greeting/game/" + uuidPlayer, "Wait for second Player");
+        	this.template.convertAndSend("/greeting/game/" + uuidPlayer, "Waiting for another Player");
     	} else {
-    		Player[] p = game.getPlayers();
-        	this.template.convertAndSend("/greeting/game/" + p[0].getUUID(), game);
-        	this.template.convertAndSend("/greeting/game/" + p[1].getUUID(), game);
+    		Player[] player = game.getPlayers();
+        	this.template.convertAndSend("/greeting/game/" + player[0].getUUID(), game);
+        	this.template.convertAndSend("/greeting/game/" + player[1].getUUID(), game);
     	}
     }
     
     @MessageMapping("/endTurn")
     public void endTurn(String uuidGame) {
     	Application.engine.endTurn(UUID.fromString(uuidGame));
-    	this.template.convertAndSend("/greeting/game", "endTurn");
+    	this.template.convertAndSend("/greeting/game/" + uuidGame, "endTurn");
     }
     
     @MessageMapping("/playCard")

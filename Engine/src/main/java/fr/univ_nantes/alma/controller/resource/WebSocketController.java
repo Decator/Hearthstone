@@ -30,9 +30,9 @@ public class WebSocketController {
     public void createGame(UUID uuidPlayer) {
     	Game game = Application.engine.createGame(uuidPlayer);
     	if(game == null) {
-        	this.template.convertAndSend("/greeting", "Wait for second Player");
+        	this.template.convertAndSend("/game", "Wait for second Player");
     	} else {
-        	this.template.convertAndSend("/greeting", Application.engine.createGame(uuidPlayer));
+        	this.template.convertAndSend("/game", Application.engine.createGame(uuidPlayer));
     	}
     }
     

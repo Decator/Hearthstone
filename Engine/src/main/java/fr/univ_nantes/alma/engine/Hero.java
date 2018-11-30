@@ -1,7 +1,6 @@
 package fr.univ_nantes.alma.engine;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 /**
  *
@@ -48,30 +47,6 @@ public class Hero extends Card {
     public Hero() {}
 
     /**
-     * Get the id of the hero.
-     * @return the id of the hero
-     */
-    public int getId() {
-        return this.id;
-    }
-
-    /**
-     * Get the type (class) of the hero.
-     * @return the type of the hero
-     */
-    public String getType() {
-        return this.type;
-    }
-
-    /**
-     * Get the name of the hero.
-     * @return the name of the hero
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
      * Get the healthPoints of the hero.
      * @return the healthPoints of the hero
      */
@@ -93,14 +68,6 @@ public class Hero extends Card {
      */
     public boolean getHeroPowerUsed() {
         return this.heroPowerUsed;
-    }
-
-    /**
-     * Get the amount of damage that the hero can inflict. 
-     * @return the amount of damage
-     */
-    public int getDamage() {
-        return this.damage;
     }
     
     /**
@@ -133,14 +100,6 @@ public class Hero extends Card {
      */
     public String getTarget() {
         return this.target;
-    }
-    
-    /**
-     * Get the description of the hero. 
-     * @return the description of the hero
-     */
-    public String getDescription() {
-        return this.description;
     }
 
     /**

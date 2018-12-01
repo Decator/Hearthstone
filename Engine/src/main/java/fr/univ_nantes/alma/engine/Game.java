@@ -57,7 +57,15 @@ public class Game {
 	public int getIdCurrentPlayer() {
 		return this.idCurrentPlayer;
 	}
-	
+	/**
+	 * Returns a list of targets based on the String of a specific spell
+	 * @param player the player playing the spell
+	 * @param playerEnemy the enemy player that may be affected by the spell
+	 * @param targetPlayer the specific player impacted by the spell if specified
+	 * @param idTarget the specific target of the spell if specified
+	 * @param spellTarget the string detailing the potential targets of a given spell
+	 * @return LinkedHashMap<String, Card> containing the targets of the spell
+	 */
 	LinkedHashMap<String, Card> targetsFromTargetString(Player player, Player playerEnemy, Player targetPlayer, int idTarget, String spellTarget){
 		String[] splitString = spellTarget.split("_");
 		Hero hero = player.getHero();
@@ -158,7 +166,7 @@ public class Game {
 	}
 	
 	/**
-	 * Draw a card from the player's deck and place it into his hand.
+	 * Draws a card from the player's deck and place it into his hand.
 	 * @return message
 	 */
 	String drawCard() {
@@ -261,7 +269,7 @@ public class Game {
 		}
 	}
 	/**
-	 * Check if a minion in the board of interest has at least one minion with taunt
+	 * Checks if a minion in the board of interest has at least one minion with taunt
 	 * @param board the board that needs to be checked for taunt minions
 	 * @return true if a minion as taunt, else false
 	 */
@@ -272,6 +280,59 @@ public class Game {
 			}
 		}
 		return false;
+	}
+	/**
+	 * Summons a minion on the plaer's board based on idSummon
+	 * @param player the player getting the minion on his board
+	 * @param idSummon the id of the summoned minion
+	 * @return
+	 */
+	String summonMinion(Player player, int idSummon) {
+		String message = null;
+		if (Rule.checkBoardSize(player.getBoard())) { // if board is not full
+			Minion minion = null;
+			for(Minion invoc : this.invocations) { //get specific minion
+				if (invoc.getId() == idSummon) {
+					minion = invoc;
+				}
+			}
+			if (minion != null) {
+				player.addCardToBoard(minion); 
+				giveAttackAuraToOtherMinions(player.getBoard(), player.getBoard().lastElement());
+				getAttackAuraFromOtherMinions(player.getBoard(), player.getBoard().lastElement()); //get attack aura buff from other minions if relevant
+			} else {
+				message = "Le minion n'a pas pu être invoqué";
+			}
+			return message;
+		} else {
+			message = "Vous avez atteint le nombre maximum de serviteurs sur le plateau !";
+			return message;
+		}
+	}
+	
+	/**
+	 * Summons the minion replacing the polymorphed minion at a specified location on the board of the affected player 
+	 * @param player the player affected by the spell
+	 * @param idSummon the id of the minion replacing the polymorphed minion
+	 * @param indexBoard the board index where the minion needs to be summoned
+	 * @return message
+	 */
+	String polymorph(Player player, int idSummon, String indexBoard) {
+		String message = null;
+		Minion minion = null;
+		for(Minion invoc : this.invocations) { //get specific minion
+			if (invoc.getId() == idSummon) {
+				minion = invoc;
+			}
+		}
+		if (minion != null) {
+			player.addCardToBoard(minion, Integer.parseInt(indexBoard)); 
+			giveAttackAuraToOtherMinions(player.getBoard(), player.getBoard().get(Integer.parseInt(indexBoard)));
+			getAttackAuraFromOtherMinions(player.getBoard(), player.getBoard().get(Integer.parseInt(indexBoard))); //get attack aura buff from other minions if relevant
+		} else {
+			message = "Le minion n'a pas pu être invoqué";
+		}
+		return message;
 	}
 
 	/**
@@ -333,8 +394,9 @@ public class Game {
 	/**
      * Play the card with the specified id.
      * @param idCard the id of the card the player wants to play
+     * @param targetPlayer the player that might be the target of the played card
      * @param idTarget the id of the target
-     * @throws EngineException 
+     * @return message
      */
 	String playCard(int idCard, Player targetPlayer, int idTarget)  {
         Card card = this.players[this.idCurrentPlayer].getHand().get(idCard); // Create the card according to the id given on parameters
@@ -362,41 +424,26 @@ public class Game {
         		Spell spell = (Spell) card;
         		
         		//Drawing effect
-        		if (spell.getNbDraw() != 0) { // Add cards to hand if relevant
+        		if (spell.getNbDraw() > 0) { // Add cards to hand if relevant
         			for (int i =0; i < spell.getNbDraw(); i++) { // Draw as many cards as needed
         					message = drawCard();
         			}
         		}
         		
         		//Armor buff effect
-        		if (spell.getArmorBuff() != 0) { // Adds Armor points if relevant
+        		if (spell.getArmorBuff() > 0) { // Adds Armor points if relevant
         			hero.setArmorPoints(hero.getArmorPoints() + spell.getArmorBuff());
         		}
         		
         		//Summoning effect
-        		if (spell.getNbSummon() != 0) { // Summon specific minions on the board
+        		if (spell.getNbSummon() > 0) { // Summon specific minions on the board
         			for (int i = 0; i < spell.getNbSummon(); i++) { // Summon as many minions as needed
-	        			if (Rule.checkBoardSize(player.getBoard())) { // if board not full
-							Minion minion = null;
-							for(Minion invoc : this.invocations) { //get specific minion
-								if (invoc.getId() == spell.getIdInvocation()) {
-									minion = invoc;
-								}
-							}
-							if (minion != null) {
-								player.addCardToBoard(minion); 
-								giveAttackAuraToOtherMinions(player.getBoard(), player.getBoard().lastElement());
-								getAttackAuraFromOtherMinions(player.getBoard(), player.getBoard().lastElement()); //get attack aura buff from other minions if relevant
-							} else {
-								message = "Le minion n'a pas pu être invoqué";
-							}
-							return message;
-	        			}
+	        			message = summonMinion(player, spell.getIdInvocation());
         			}
         		}
         		
         		//Attack buff effect
-        		if (spell.getAttackBuff() !=0) { // Adds an attack buff to the target minions 
+        		if (spell.getAttackBuff() > 0) { // Adds an attack buff to the target minions 
         			LinkedHashMap<String, Card> targets = targetsFromTargetString(player, playerEnemy, targetPlayer, idTarget, spell.getTarget());
         			for (Map.Entry<String, Card> entry : targets.entrySet()) {
         				if(entry.getValue() instanceof Minion) {
@@ -414,37 +461,13 @@ public class Game {
         					if (keys[0] == "0") {
         						removeAttackAuraFromMinions(player.getBoard(), (Minion) entry.getValue());
         						player.removeCardFromBoard(Integer.parseInt(keys[1]));
-        						Minion minion = null;
-        						for(Minion invoc : this.invocations) { //get specific minion
-        							if (invoc.getId() == spell.getIdInvocation()) {
-        								minion = invoc;
-        							}
-        						}
-        						if (minion != null) {
-        							player.addCardToBoard(minion, Integer.parseInt(keys[1])); 
-        							giveAttackAuraToOtherMinions(player.getBoard(), player.getBoard().get(Integer.parseInt(keys[1])));
-        							getAttackAuraFromOtherMinions(player.getBoard(), player.getBoard().get(Integer.parseInt(keys[1]))); //get attack aura buff from other minions if relevant
-        						} else {
-        							message = "Le minion n'a pas pu être invoqué";
-        						}
+        						message = polymorph(player, spell.getIdInvocation(), keys[1]);
         						return message;
         						
         					} else if (keys[0] == "1") {
         						removeAttackAuraFromMinions(playerEnemy.getBoard(), (Minion) entry.getValue());
         						playerEnemy.removeCardFromBoard(Integer.parseInt(keys[1]));
-        						Minion minion = null;
-        						for(Minion invoc : this.invocations) { //get specific minion
-        							if (invoc.getId() == spell.getIdInvocation()) {
-        								minion = invoc;
-        							}
-        						}
-        						if (minion != null) {
-        							playerEnemy.addCardToBoard(minion, Integer.parseInt(keys[1])); 
-        							giveAttackAuraToOtherMinions(playerEnemy.getBoard(), playerEnemy.getBoard().get(Integer.parseInt(keys[1])));
-        							getAttackAuraFromOtherMinions(playerEnemy.getBoard(), playerEnemy.getBoard().get(Integer.parseInt(keys[1]))); //get attack aura buff from other minions if relevant
-        						} else {
-        							message = "Le minion n'a pas pu être invoqué";
-        						}
+        						message = polymorph(playerEnemy, spell.getIdInvocation(), keys[1]);
         						return message;
         					}
         				}
@@ -452,7 +475,7 @@ public class Game {
         		}
         		
         		//Damage effect
-                if (spell.getDamage() != 0) {
+                if (spell.getDamage() > 0) {
                 	LinkedHashMap<String, Card> targets = targetsFromTargetString(player, playerEnemy, targetPlayer, idTarget, spell.getTarget());
                 	for (Map.Entry<String, Card> entry : targets.entrySet()) {
                 		if (entry.getValue() instanceof Hero) {
@@ -485,6 +508,12 @@ public class Game {
         }
     }
 	
+	/**
+	 * Triggers the hero power of the current player based on its class
+	 * @param playerTarget the player that might be the target of the hero power
+	 * @param idTarget the specific target of the hero power
+	 * @return message
+	 */
 	String heroPower(Player playerTarget, int idTarget) {
 		Player currentPlayer = this.players[this.idCurrentPlayer];
 		Hero heroCurrentPlayer = this.players[this.idCurrentPlayer].getHero();
@@ -519,27 +548,10 @@ public class Game {
 						return message;
 					}
 				case "Paladin":
-					if (Rule.checkBoardSize(currentPlayer.getBoard())) { // if board is not full
-						Minion minion = null;
-						for(Minion invoc : this.invocations) { //get specific minion
-							if (invoc.getId() == heroCurrentPlayer.getIdInvocation()) {
-								minion = invoc;
-							}
-						}
-						if (minion != null) {
-							currentPlayer.addCardToBoard(minion); 
-							giveAttackAuraToOtherMinions(currentPlayer.getBoard(), currentPlayer.getBoard().lastElement());
-							getAttackAuraFromOtherMinions(currentPlayer.getBoard(), currentPlayer.getBoard().lastElement()); //get attack aura buff from other minions if relevant
-						} else {
-							message = "Le minion n'a pas pu être invoqué";
-						}
+						message = summonMinion(currentPlayer, heroCurrentPlayer.getIdInvocation());
 						heroCurrentPlayer.setHeroPowerUsed(true);
 						currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
 						return message;
-					} else {
-						message = "Vous avez atteint le nombre maximum de serviteurs sur le plateau !";
-						return message;
-					}
 				default :
 					message = "Impossible de récupérer la classe du héros !";
 					heroCurrentPlayer.setHeroPowerUsed(true);
@@ -557,7 +569,7 @@ public class Game {
 	}
 	
 	/**
-	 * End the turn and switch the current player.
+	 * End the turn of the current player and switches to the other player
 	 */
 	void endTurn() {
 		this.idCurrentPlayer ^= 1;

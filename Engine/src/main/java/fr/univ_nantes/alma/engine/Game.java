@@ -57,6 +57,7 @@ public class Game {
 	public int getIdCurrentPlayer() {
 		return this.idCurrentPlayer;
 	}
+	
 	/**
 	 * Returns a list of targets based on the String of a specific spell
 	 * @param player the player playing the spell

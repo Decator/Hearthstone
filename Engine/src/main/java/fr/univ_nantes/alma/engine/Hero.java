@@ -119,21 +119,14 @@ public class Hero extends Card {
 	 * @param damage the received damage
 	 */
 	void receiveDamage(int damage){
-		//check rules
 		this.healthPoints -= damage;
 	}
 	
+	/**
+	 *  Receive heal from an effect
+	 * @param healing the receive heal
+	 */
 	void receiveHealing(int healing) {
 		this.healthPoints += healing;
 	}
-    
-    public String toString() {
-    	return "Hero " + super.toString()
-    			+ "NbSummon : " + this.nbSummon + "\n"
-    			+ "IdInvocation : " + this.idInvocation + "\n"
-    			+ "ArmorBuff : " + this.armorBuff + "\n"
-    			+ "HealthPoints : " + this.healthPoints + "\n"
-    			+ "ArmorPoints : " + this.armorPoints + "\n"
-    			+ "HeroPowerUsed : " + this.heroPowerUsed + "\n";
-    }
 }

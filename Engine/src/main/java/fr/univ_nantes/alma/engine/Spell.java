@@ -104,15 +104,4 @@ public class Spell extends Card {
     public String getTarget() {
         return this.target;
     }
-    
-    public String toString() {
-    	return "Spell " + super.toString()
-    			+ "NbSummon : " + this.nbSummon + "\n"
-    			+ "IdInvocation : " + this.idInvocation + "\n"
-    			+ "AttackBuff : " + this.attackBuff + "\n"
-    			+ "ArmorBuff : " + this.armorBuff + "\n"
-    			+ "NbDraw : " + this.nbDraw + "\n"
-    			+ "Polymorph : " + this.polymorph + "\n"
-    			+ "Target : " + this.target + "\n";
-    }
 }

@@ -29,7 +29,7 @@ public abstract class Card {
      * @param damage the amount of damage that the card can inflict
      * @param description the description of the card
      */
-    Card(int id, String type, String name, int manaCost, int damage, String description ) {
+    Card(int id, String type, String name, int manaCost, int damage, String description) {
         this.id = id;
         this.type = type;
         this.name = name;

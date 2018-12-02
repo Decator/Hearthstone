@@ -23,7 +23,7 @@ export class Game {
 
 export interface IPlayer {
     uuid: string;
-    userName: string;
+    username: string;
     hero: Hero;
     manaPool: number;
     manaMaxTurn: number;
@@ -34,7 +34,7 @@ export interface IPlayer {
 
 export class Player implements IPlayer {
     uuid: string;
-    userName: string;
+    username: string;
     hero: Hero;
     manaPool: number;
     manaMaxTurn: number;
@@ -45,7 +45,7 @@ export class Player implements IPlayer {
     constructor(obj?: IPlayer){
         if(obj){
             this.uuid = obj.uuid;
-            this.userName = obj.userName;
+            this.username = obj.username;
             this.hero = new Hero(obj.hero);
             this.manaPool = obj.manaPool;
             this.manaMaxTurn = obj.manaMaxTurn;

@@ -1,22 +1,50 @@
 import { Injectable } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
-import { Subscription } from 'rxjs/Subscription';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Player, Game, Hero } from '../app.models';
 
 @Injectable()
 export class SocketService {
   private serverUrl = 'http://localhost:8080/hearthstone-websocket';
-  private stompClient: any;
+  private stompClient: Stomp.CompatClient;
 
   private playerSubscription: Subscription;
+  private gameSubscription: Subscription;
 
   private player: Player;
+  private playerSubject: Subject<Player>;
+  playerObservable: Observable<Player>;
+
   private game: Game;
+  private gameSubject: Subject<Game>;
+  gameObservable: Observable<Game>;
+
   private heros: Array<Hero>;
+  private herosSubject: Subject<Array<Hero>>;
+  herosObservable: Observable<Array<Hero>>;
+
+  private error: String;
+  private errorSubject: Subject<String>;
+  errorObservable: Observable<String>;
 
   constructor() {
+    this.player = null;
+    this.playerSubject = new Subject<Player>();
+    this.playerObservable = this.playerSubject.asObservable();
+
+    this.game = null;
+    this.gameSubject = new Subject<Game>();
+    this.gameObservable = this.gameSubject.asObservable();
+
     this.heros = new Array<Hero>();
+    this.herosSubject = new Subject<Array<Hero>>();
+    this.herosObservable = this.herosSubject.asObservable();
+
+    this.error = "";
+    this.errorSubject = new Subject<String>();
+    this.errorObservable = this.errorSubject.asObservable();
+
     this.initializeWebSocketConnection();
   }
 
@@ -25,30 +53,46 @@ export class SocketService {
     this.stompClient = Stomp.over(ws);
     this.stompClient.connect({}, (frame) => {
       let heroSubscription = this.stompClient.subscribe(`/heros`, (message) => {
-        for(let hero of JSON.parse(message.body)){
+        for (let hero of JSON.parse(message.body)) {
           this.heros.push(new Hero(hero));
         }
+        this.herosSubject.next(this.heros);
         heroSubscription.unsubscribe();
       });
       this.stompClient.send("/app/getHeros");
     });
   }
 
-  play(username: string, idHero: number){
-    this.playerSubscription = this.stompClient.subscribe(`/player/${username}`, (message) => {
-      this.player = new Player(JSON.parse(message.body));
+  play(username: string, idHero: number) {
+    if (this.playerSubscription) {
       this.playerSubscription.unsubscribe();
-      this.createGame();
+    }
+    this.playerSubscription = this.stompClient.subscribe(`/player/${username}`, (message) => {
+      try {
+        this.player = new Player(JSON.parse(message.body));
+        this.playerSubject.next(this.player);
+        // this.playerSubscription.unsubscribe();
+        this.createGame();
+      } catch (err) {
+        this.error = message.body;
+        this.errorSubject.next(this.error);
+      }
     });
     this.stompClient.send("/app/createPlayer", {}, `${username}_${idHero}`);
   }
 
   createGame() {
-    this.stompClient.subscribe(`/game/${this.player.uuid}`, (message) => {
-      try{
+    if (this.gameSubscription) {
+      this.gameSubscription.unsubscribe();
+    }
+    this.gameSubscription = this.stompClient.subscribe(`/game/${this.player.uuid}`, (message) => {
+      try {
         this.game = new Game(JSON.parse(message.body));
-      } catch(err){
-        console.log(message.body);
+        this.gameSubject.next(this.game);
+        this.errorSubject.next("");
+      } catch (err) {
+        this.error = message.body;
+        this.errorSubject.next(this.error);
       }
     });
     this.stompClient.send("/app/createGame", {}, this.player.uuid);
@@ -64,5 +108,9 @@ export class SocketService {
 
   getHeros(): Array<Hero> {
     return this.heros;
+  }
+
+  getError(): String {
+    return this.error;
   }
 }

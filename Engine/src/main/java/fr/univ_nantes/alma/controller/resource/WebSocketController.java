@@ -24,7 +24,8 @@ public class WebSocketController {
 
     @MessageMapping("/createPlayer")
     public void createPlayer(String data) {
-    	this.template.convertAndSend("/player/" + data.split("_")[0], Application.engine.createPlayer(Integer.parseInt(data.split("_")[1]), data.split("_")[0]));
+    	String[] dataSplit = data.split("_");
+    	this.template.convertAndSend("/player/" + dataSplit[0], Application.engine.createPlayer(Integer.parseInt(dataSplit[1]), dataSplit[0]));
     }
     
     @MessageMapping("/createGame")
@@ -46,17 +47,18 @@ public class WebSocketController {
     }
     
     @MessageMapping("/playCard")
-    public void playCard(String uuidGame, int idCard, String uuidPlayer, int idTarget) {
-    	this.template.convertAndSend("/game/" + uuidGame + "/playCard", Application.engine.playCard(UUID.fromString(uuidGame), idCard, UUID.fromString(uuidPlayer), idTarget));
+    public void playCard(String data) {
+    	String[] dataSplit = data.split("_");
+    	this.template.convertAndSend("/game/" + dataSplit[0], Application.engine.playCard(UUID.fromString(dataSplit[0]), Integer.parseInt(dataSplit[1]), UUID.fromString(dataSplit[2]), Integer.parseInt(dataSplit[3])));
     }
     
     @MessageMapping("/heroPower")
     public void heroPower(String uuidGame, String uuidPlayer, int idTarget) {
-    	this.template.convertAndSend("/game/" + uuidGame + "/heroPower", Application.engine.heroPower(UUID.fromString(uuidGame), UUID.fromString(uuidPlayer), idTarget));
+    	this.template.convertAndSend("/game/" + uuidGame, Application.engine.heroPower(UUID.fromString(uuidGame), UUID.fromString(uuidPlayer), idTarget));
     }
     
     @MessageMapping("/attack")
     public void attack(String uuidGame, int idAttack, int idTarget) {
-    	this.template.convertAndSend("/game/" + uuidGame + "/attack", Application.engine.attack(UUID.fromString(uuidGame), idAttack, idTarget));
+    	this.template.convertAndSend("/game/" + uuidGame, Application.engine.attack(UUID.fromString(uuidGame), idAttack, idTarget));
     }
 }

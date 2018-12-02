@@ -407,102 +407,108 @@ public class Game {
         String message = "ok";
         
         if(Rule.checkManaPool(player.getManaPool(), card.getManaCost())) { // If the player has enough mana, play the card
-        	if(card instanceof Minion) { // If it's a Minion
-            	if(Rule.checkBoardSize(player.getBoard())) {
-            		player.removeCardFromHand(idCard);
-            		player.addCardToBoard((Minion)player.getHand().get(idCard));
-            		Minion lastMinionPlayed = player.getBoard().lastElement();
-            		Charge(lastMinionPlayed);
-            		giveAttackAuraToOtherMinions(player.getBoard(), lastMinionPlayed); //give attack aura buff to other minions if it exists
-            		getAttackAuraFromOtherMinions(player.getBoard(), lastMinionPlayed); // get attack auras buffs from other minions if they exist
-            		return message;
-            	} else {
-            		message = "Vous avez atteint le nombre maximum de serviteurs sur le plateau !";
-            		return message;
-            	}
-        	} else if (card instanceof Spell) {
-        		player.removeCardFromHand(idCard);
-        		Spell spell = (Spell) card;
-        		
-        		//Drawing effect
-        		if (spell.getNbDraw() > 0) { // Add cards to hand if relevant
-        			for (int i =0; i < spell.getNbDraw(); i++) { // Draw as many cards as needed
-        					message = drawCard();
-        			}
-        		}
-        		
-        		//Armor buff effect
-        		if (spell.getArmorBuff() > 0) { // Adds Armor points if relevant
-        			hero.setArmorPoints(hero.getArmorPoints() + spell.getArmorBuff());
-        		}
-        		
-        		//Summoning effect
-        		if (spell.getNbSummon() > 0) { // Summon specific minions on the board
-        			for (int i = 0; i < spell.getNbSummon(); i++) { // Summon as many minions as needed
-	        			message = summonMinion(player, spell.getIdInvocation());
-        			}
-        		}
-        		
-        		//Attack buff effect
-        		if (spell.getAttackBuff() > 0) { // Adds an attack buff to the target minions 
-        			LinkedHashMap<String, Card> targets = targetsFromTargetString(player, playerEnemy, targetPlayer, idTarget, spell.getTarget());
-        			for (Map.Entry<String, Card> entry : targets.entrySet()) {
-        				if(entry.getValue() instanceof Minion) {
-        					((Minion)entry.getValue()).setDamage(((Minion)entry.getValue()).getDamage() + spell.getAttackBuff());
-        				}
-        			}
-        		}
-        		
-        		//Polymorph effect
-        		if(spell.getPolymorph()) {
-        			LinkedHashMap<String, Card> targets = targetsFromTargetString(player, playerEnemy, targetPlayer, idTarget, spell.getTarget());
-        			for (Map.Entry<String, Card> entry : targets.entrySet()) {
-        				if(entry.getValue() instanceof Minion) {
-        					String keys[] = entry.getKey().split("_");
-        					if (keys[0] == "0") {
-        						removeAttackAuraFromMinions(player.getBoard(), (Minion) entry.getValue());
-        						player.removeCardFromBoard(Integer.parseInt(keys[1]));
-        						message = polymorph(player, spell.getIdInvocation(), keys[1]);
-        						return message;
-        						
-        					} else if (keys[0] == "1") {
-        						removeAttackAuraFromMinions(playerEnemy.getBoard(), (Minion) entry.getValue());
-        						playerEnemy.removeCardFromBoard(Integer.parseInt(keys[1]));
-        						message = polymorph(playerEnemy, spell.getIdInvocation(), keys[1]);
-        						return message;
-        					}
-        				}
-        			}
-        		}
-        		
-        		//Damage effect
-                if (spell.getDamage() > 0) {
-                	LinkedHashMap<String, Card> targets = targetsFromTargetString(player, playerEnemy, targetPlayer, idTarget, spell.getTarget());
-                	for (Map.Entry<String, Card> entry : targets.entrySet()) {
-                		if (entry.getValue() instanceof Hero) {
-                			((Hero) entry.getValue()).receiveDamage(spell.getDamage());
-	                		if(!Rule.checkAlive(((Hero)entry.getValue()).getHealthPoints())){
-	    						message = endGame();
-	    						return message;
+        	if(idCard >= 0 && idCard < player.getHand().size()) { // A REVOIIIIR
+	        	if(card instanceof Minion) { // If it's a Minion
+	            	if(Rule.checkBoardSize(player.getBoard())) {
+	            		player.removeCardFromHand(idCard);
+	            		player.addCardToBoard((Minion)player.getHand().get(idCard));
+	            		Minion lastMinionPlayed = player.getBoard().lastElement();
+	            		Charge(lastMinionPlayed);
+	            		giveAttackAuraToOtherMinions(player.getBoard(), lastMinionPlayed); //give attack aura buff to other minions if it exists
+	            		getAttackAuraFromOtherMinions(player.getBoard(), lastMinionPlayed); // get attack auras buffs from other minions if they exist
+	            		return message;
+	            	} else {
+	            		message = "Vous avez atteint le nombre maximum de serviteurs sur le plateau !";
+	            		return message;
+	            	}
+	        	} else if (card instanceof Spell) {
+	        		player.removeCardFromHand(idCard);
+	        		Spell spell = (Spell) card;
+	        		
+	        		//Drawing effect
+	        		if (spell.getNbDraw() > 0) { // Add cards to hand if relevant
+	        			for (int i =0; i < spell.getNbDraw(); i++) { // Draw as many cards as needed
+	        					message = drawCard();
+	        			}
+	        		}
+	        		
+	        		//Armor buff effect
+	        		if (spell.getArmorBuff() > 0) { // Adds Armor points if relevant
+	        			hero.setArmorPoints(hero.getArmorPoints() + spell.getArmorBuff());
+	        		}
+	        		
+	        		//Summoning effect
+	        		if (spell.getNbSummon() > 0) { // Summon specific minions on the board
+	        			for (int i = 0; i < spell.getNbSummon(); i++) { // Summon as many minions as needed
+		        			message = summonMinion(player, spell.getIdInvocation());
+	        			}
+	        		}
+	        		
+	        		//Attack buff effect
+	        		if (spell.getAttackBuff() > 0) { // Adds an attack buff to the target minions 
+	        			LinkedHashMap<String, Card> targets = targetsFromTargetString(player, playerEnemy, targetPlayer, idTarget, spell.getTarget());
+	        			for (Map.Entry<String, Card> entry : targets.entrySet()) {
+	        				if(entry.getValue() instanceof Minion) {
+	        					((Minion)entry.getValue()).setDamage(((Minion)entry.getValue()).getDamage() + spell.getAttackBuff());
+	        				}
+	        			}
+	        		}
+	        		
+	        		//Polymorph effect
+	        		if(spell.getPolymorph()) {
+	        			LinkedHashMap<String, Card> targets = targetsFromTargetString(player, playerEnemy, targetPlayer, idTarget, spell.getTarget());
+	        			for (Map.Entry<String, Card> entry : targets.entrySet()) {
+	        				if(entry.getValue() instanceof Minion) {
+	        					String keys[] = entry.getKey().split("_");
+	        					if (keys[0] == "0") {
+	        						removeAttackAuraFromMinions(player.getBoard(), (Minion) entry.getValue());
+	        						player.removeCardFromBoard(Integer.parseInt(keys[1]));
+	        						message = polymorph(player, spell.getIdInvocation(), keys[1]);
+	        						return message;
+	        						
+	        					} else if (keys[0] == "1") {
+	        						removeAttackAuraFromMinions(playerEnemy.getBoard(), (Minion) entry.getValue());
+	        						playerEnemy.removeCardFromBoard(Integer.parseInt(keys[1]));
+	        						message = polymorph(playerEnemy, spell.getIdInvocation(), keys[1]);
+	        						return message;
+	        					}
+	        				}
+	        			}
+	        		}
+	        		
+	        		//Damage effect
+	                if (spell.getDamage() > 0) {
+	                	LinkedHashMap<String, Card> targets = targetsFromTargetString(player, playerEnemy, targetPlayer, idTarget, spell.getTarget());
+	                	for (Map.Entry<String, Card> entry : targets.entrySet()) {
+	                		if (entry.getValue() instanceof Hero) {
+	                			((Hero) entry.getValue()).receiveDamage(spell.getDamage());
+		                		if(!Rule.checkAlive(((Hero)entry.getValue()).getHealthPoints())){
+		    						message = endGame();
+		    						return message;
+		                		}
+	                		} else if (entry.getValue() instanceof Minion) {
+	                			((Minion) entry.getValue()).receiveDamage(spell.getDamage());
+	                			if(!Rule.checkAlive(((Minion) entry.getValue()).getHealthPoints())) {
+	                				String keys[] = entry.getKey().split("_");
+	                				if (keys[0] == "0") {
+		                				removeAttackAuraFromMinions(player.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
+		    							player.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
+	                				} else if (keys[1] == "1") {
+	                					removeAttackAuraFromMinions(playerEnemy.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
+		    							playerEnemy.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
+	                				}
+	                			}
 	                		}
-                		} else if (entry.getValue() instanceof Minion) {
-                			((Minion) entry.getValue()).receiveDamage(spell.getDamage());
-                			if(!Rule.checkAlive(((Minion) entry.getValue()).getHealthPoints())) {
-                				String keys[] = entry.getKey().split("_");
-                				if (keys[0] == "0") {
-	                				removeAttackAuraFromMinions(player.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
-	    							player.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
-                				} else if (keys[1] == "1") {
-                					removeAttackAuraFromMinions(playerEnemy.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
-	    							playerEnemy.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
-                				}
-                			}
-                		}
-                	}
-                }
-            }
-            player.setManaPoolAfterPlay(card.getManaCost()); // Decrements manaCost from player's manaPool
-            return message;
+	                	}
+	                }
+	            }
+	            player.setManaPoolAfterPlay(card.getManaCost()); // Decrements manaCost from player's manaPool
+	            return message;
+        	}
+        	else {
+        		message = "Votre carte est inexistante";
+            	return message;
+        	}
         } else {
         	message = "Vous n'avez pas assez de mana !";
         	return message;

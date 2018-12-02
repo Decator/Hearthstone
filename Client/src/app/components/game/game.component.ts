@@ -64,4 +64,8 @@ export class GameComponent {
 			this.showLoader = false;
 		}
 	}
+
+	playCard(){
+		this.socketService.playCard(this.game.idGame, 1, this.player.uuid, 1);
+	}
 }

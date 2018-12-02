@@ -90,12 +90,20 @@ export class SocketService {
         this.game = new Game(JSON.parse(message.body));
         this.gameSubject.next(this.game);
         this.errorSubject.next("");
+        this.stompClient.subscribe(`/game/${this.game.idGame}`, (message) => {
+          console.log(message.body);
+        });
       } catch (err) {
         this.error = message.body;
         this.errorSubject.next(this.error);
       }
+      //this.gameSubscription.unsubscribe();
     });
     this.stompClient.send("/app/createGame", {}, this.player.uuid);
+  }
+
+  playCard(uuidGame: String, idCard: number, uuidPlayer: string, idTarget: number){
+    this.stompClient.send("/app/playCard", {}, `${uuidGame}_${idCard}_${uuidPlayer}_${idTarget}`);
   }
 
   getPlayer(): Player {

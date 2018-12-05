@@ -18,6 +18,7 @@ public class Hero extends Card {
 	private int idInvocation;
 	private int armorBuff;
     private boolean heroPowerUsed;
+    private String target;
 
     /**
      * Initialize the attributes of this class.
@@ -29,9 +30,9 @@ public class Hero extends Card {
 	 * @param idInvocation the id of the hero's invocation
 	 * @param armorBuff the amount of armor buff that the hero can give
 	 * @param description the description of the hero
-	 * @param manaCost the manaCost of the hero, irrelevant
+	 * @param target the target of the hero power
      */
-    public Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String description) {
+    public Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String description, String target) {
     	super(id, type, name, 0, damage, description);
 		this.nbSummon = nbSummon;
 		this.idInvocation = idInvocation;
@@ -39,6 +40,7 @@ public class Hero extends Card {
         this.heroPowerUsed = false;
         this.armorPoints = 0;
         this.healthPoints = Rule.MAX_HERO_HEALTH_POINTS;
+        this.target = target;
     }
     
     public Hero() {}
@@ -113,6 +115,15 @@ public class Hero extends Card {
     void setHeroPowerUsed(boolean bool) {
         this.heroPowerUsed = bool;
     }
+    
+    /**
+     * Gets the target of the hero power
+     * @return target of the hero power
+     */
+    String getTarget() {
+    	return this.target;
+    }
+    
     
 	/**
 	 * Receive damage from an attack. 

@@ -25,27 +25,52 @@
       <!-- Affichage des boards des deux joueurs et de la main du joueur
            La nombre de cartes que l'adversaire a, est affiché mais les cartes sont cachées.
 
-      <div class="column">
+      <div class="container">
+        <a>
+          {{player.username}}
+        </a>
+      </div>
+
+      <div class="container">
+        <a>
+         Points de mana : {{player.manaPool}} / {{player.manaMaxTurn}}
+        </a>
+      </div>
+
+      <div class="container">
+        <a>
+          Points de vie héros : {{player.hero.healthPoints}}
+          Points de vie adversaire : {{otherPlayer.hero.healthPoints}}
+        </a>
+      </div>
+
+      <div class="container">
         <button *ngFor="let card of player.board">
           {{card.type}} {{card.name}} {{card.id}}
         </button>
       </div>
 
-      <div class="column">
+      <div class="container">
         <button *ngFor="let card of otherPlayer.board">
           {{card.type}} {{card.name}} {{card.id}}
         </button>
       </div>
 
-      <div class="column">
+      <div class="container">
         <button *ngFor="let card of player.hand">
             {{card.type}} {{card.name}} {{card.id}}
         </button>
       </div>
 
-      <div class="column">
+      <div class="container">
         <button *ngFor="let card of ohterPlayer.hand">
 
+        </button>
+      </div>
+
+      <div class="container">
+        <button onClick=...>
+            Fin du tour
         </button>
       </div>
 

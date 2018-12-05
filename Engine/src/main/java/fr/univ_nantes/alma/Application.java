@@ -23,9 +23,9 @@ public class Application {
 	
 	@Bean
 	public String engine(MinionRepository minionRepository, SpellRepository spellRepository, HeroRepository heroRepository) {
-		heroRepository.save(new Hero(1, "mage", "Jaina", 1, 0, 0, 0, "Boule de feu : Inflige 1 point de dégâts."));
-		heroRepository.save(new Hero(2, "paladin", "Uther", 0, 1, 12, 0, "Renfort : Invoque une recrue de la Main d'argent 1/1."));
-		heroRepository.save(new Hero(3, "warrior", "Garrosh", 0, 0, 0, 2, "Gain d'armure ! : Confère 2 points d'armure."));
+		heroRepository.save(new Hero(1, "mage", "Jaina", 1, 0, 0, 0, "Boule de feu : Inflige 1 point de dégâts.", "all_1_all"));
+		heroRepository.save(new Hero(2, "paladin", "Uther", 0, 1, 12, 0, "Renfort : Invoque une recrue de la Main d'argent 1/1.", null));
+		heroRepository.save(new Hero(3, "warrior", "Garrosh", 0, 0, 0, 2, "Gain d'armure ! : Confère 2 points d'armure.", null));
 		
 		minionRepository.save(new Minion(4, "common", "Sanglier brocheroc", 1, 1, null, 1, false, false, false, 0));
 		minionRepository.save(new Minion(5, "common", "Soldat du compté-de-l'or", 1, 1, "Provocation", 2, true, false, false, 0));

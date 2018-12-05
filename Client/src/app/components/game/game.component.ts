@@ -68,6 +68,6 @@ export class GameComponent {
 	}
 
 	playCard(){
-		this.socketService.playCard(this.game.idGame, 1, this.player.uuid, 1);
+		this.socketService.playCard(this.game.idGame, 0, this.player.uuid, 1);
 	}
 }

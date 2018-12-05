@@ -91,7 +91,14 @@ export class SocketService {
         this.gameSubject.next(this.game);
         this.errorSubject.next("");
         this.stompClient.subscribe(`/game/${this.game.idGame}`, (message) => {
-          console.log(message.body);
+          try {
+            this.game = new Game(JSON.parse(message.body));
+            this.gameSubject.next(this.game);
+            this.errorSubject.next("");
+          } catch(err) {
+            this.error = message.body;
+            this.errorSubject.next(this.error);
+          }
         });
       } catch (err) {
         this.error = message.body;

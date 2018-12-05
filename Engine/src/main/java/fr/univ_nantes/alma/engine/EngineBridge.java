@@ -36,8 +36,9 @@ public interface EngineBridge {
 	/**
 	 * End the turn.
 	 * @param uuidGame the id of the game 
+	 * @return the game
 	 */
-	public void endTurn(UUID uuidGame);
+	public Game endTurn(UUID uuidGame);
 	
 	/**
 	 * Play a card. Either put a minion card on the board or activate a spell card.
@@ -45,22 +46,28 @@ public interface EngineBridge {
 	 * @param idCard the id of the card
 	 * @param uuidPlayer the player choose (for some spells)
 	 * @param idTarget the id of the target
+	 * @return the game
+	 * @throws EngineException 
 	 */
-	public String playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget);
+	public Game playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) throws EngineException;
 	
 	/**
 	 * Activate the hero's power.
 	 * @param uuidGame the id of the game
 	 * @param uuidPlayer the player choose (for some power)
 	 * @param idTarget the id of the target, if the power doesn't need a target then set idTarget to -1
+	 * @return the game
+	 * @throws EngineException 
 	 */
-	public String heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget);
+	public Game heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException;
 	
 	/**
 	 * Attack a card or a hero.
 	 * @param uuidGame the id of the game
 	 * @param idAttack the id of the attacker
 	 * @param idTarget the id of the target
+	 * @return the game
+	 * @throws EngineException 
 	 */
-	public String attack(UUID uuidGame, int idAttack, int idTarget);
+	public Game attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException;
 }

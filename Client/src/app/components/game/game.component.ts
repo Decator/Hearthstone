@@ -23,6 +23,7 @@ export class GameComponent {
 	constructor(private socketService: SocketService, private router: Router) {
 		this.socketService.gameObservable.subscribe((value: Game) => {
 			this.game = value;
+			console.log(this.game);
 
 			if(this.game.players[0].uuid == this.socketService.getPlayer().uuid){
 				this.player = this.game.players[0];
@@ -43,6 +44,7 @@ export class GameComponent {
 
 		this.socketService.errorObservable.subscribe((value: String) => {
 			this.error = value;
+			console.log(this.error);
 		});
 
 		this.game = this.socketService.getGame();

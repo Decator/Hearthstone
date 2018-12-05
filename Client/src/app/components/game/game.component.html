@@ -1,7 +1,7 @@
 <h2 *ngIf="showLoader">Loader {{error}}</h2>
 <div *ngIf="!showLoader">
     <h2>Game</h2>
-    <div class="row">
+    <!-- <div class="row">
         <div class="column">
             <mat-list dense>
                 <mat-grid-tile-header> Joueur : {{player.username}} </mat-grid-tile-header>
@@ -20,10 +20,10 @@
                     {{card.type}} {{card.name}} {{card.id}}
                 </mat-list-item>
             </mat-list>
-        </div>
+        </div> -->
 
         <!-- Affichage des boards des deux joueurs et de la main du joueur
-           La nombre de cartes que l'adversaire a, est affiché mais les cartes sont cachées.
+           La nombre de cartes que l'adversaire a, est affiché mais les cartes sont cachées. -->
 
       <div class="container">
         <a>
@@ -63,20 +63,18 @@
       </div>
 
       <div class="container">
-        <button *ngFor="let card of ohterPlayer.hand">
+        <button *ngFor="let card of otherPlayer.hand">
 
         </button>
       </div>
 
       <div class="container">
-        <button onClick=...>
+        <button onClick="">
             Fin du tour
         </button>
       </div>
 
-      -->
-
-        <div class="column">
+        <!-- <div class="column">
             <mat-list dense>
                 <mat-grid-tile-header> Adversaire : {{otherPlayer.username}} </mat-grid-tile-header>
                 <mat-list-item> Joueur {{((playerNumber + 1) % 2) + 1}} </mat-list-item>
@@ -95,6 +93,6 @@
                 </mat-list-item>
             </mat-list>
         </div>
-    </div>
+    </div> -->
     <button mat-button (click)="playCard()">PlayCard</button>
 </div>

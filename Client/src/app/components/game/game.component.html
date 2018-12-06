@@ -10,13 +10,13 @@
     </div>
 
     <div class="container">
-            <button>
+            <button disabled="true">
                 <p>
                     {{otherPlayer.hero.name}}
                     {{otherPlayer.hero.healthPoints}}
                 </p>
             </button>
-            <button>
+            <button disabled="true">
                 <p>Pouvoir hero</p>
             </button>
         </div>
@@ -53,13 +53,13 @@
     </div>
 
     <div class="container">
-        <button>
+        <button [disabled]="!yourTurn">
             <p>
                 {{player.hero.name}}
                 {{player.hero.healthPoints}}
             </p>
         </button>
-        <button>
+        <button [disabled]="!yourTurn">
             <p>Pouvoir hero</p>
         </button>
     </div>

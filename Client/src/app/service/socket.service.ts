@@ -117,6 +117,10 @@ export class SocketService {
     this.stompClient.send("/app/endTurn", {}, `${uuidGame}`);
   }
 
+  heroPower(uuidGame: String, uuidPlayer: string, idTarget: number){
+    this.stompClient.send("/app/heroPower", {}, `${uuidGame}_${uuidPlayer}_${idTarget}`);
+  }
+
   getPlayer(): Player {
     return this.player;
   }

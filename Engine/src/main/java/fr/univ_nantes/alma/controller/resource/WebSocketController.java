@@ -3,6 +3,7 @@ package fr.univ_nantes.alma.controller.resource;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
@@ -54,10 +55,15 @@ public class WebSocketController {
     	}
     }
     
-//    @MessageMapping("/heroPower")
-//    public void heroPower(String uuidGame, String uuidPlayer, int idTarget) {
-//    	this.template.convertAndSend("/game/" + uuidGame, Application.engine.heroPower(UUID.fromString(uuidGame), UUID.fromString(uuidPlayer), idTarget));
-//    }
+    @MessageMapping("/heroPower")
+    public void heroPower(String data) {
+    	String[] dataSplit = data.split("_");
+    	try {
+			this.template.convertAndSend("/game/" + dataSplit[0], Application.engine.heroPower(UUID.fromString(dataSplit[0]), UUID.fromString(dataSplit[1]), Integer.parseInt(dataSplit[2])));
+		} catch (EngineException e) {
+			this.template.convertAndSend("/game/" + dataSplit[0], e.getMessage());
+		}
+    }
 //    
 //    @MessageMapping("/attack")
 //    public void attack(String uuidGame, int idAttack, int idTarget) {

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { SocketService } from '../../service/socket.service';
-import { Game, Player } from '../../app.models';
+import { Game, Player, Minion, Spell } from '../../app.models';
 import 'rxjs/add/operator/pairwise';
 import 'rxjs/add/operator/filter';
 
@@ -58,5 +58,21 @@ export class GameComponent {
 
 	endTurn() {
 		this.socketService.endTurn(this.game.idGame);
+	}
+
+	heroPower() {
+		if(this.player.hero.type=="mage") {
+			this.socketService.heroPower(this.game.idGame, this.otherPlayer.uuid, 1);
+		} else {
+			this.socketService.heroPower(this.game.idGame, this.otherPlayer.uuid, 1);
+		}
+	}
+
+	isMinion(card): boolean {
+		return (card as Minion).taunt != undefined;
+	}
+
+	isSpell(card): boolean {
+		return (card as Spell).polymorph != undefined;
 	}
 }

@@ -157,11 +157,12 @@ public class Game {
 		if (!heroCurrentPlayer.getHeroPowerUsed()) { // If the hero has already used his power
 			if (Rule.checkManaPool(this.currentPlayer.getManaPool(), Rule.MANA_COST_HERO_POWER)) {
 				switch (heroCurrentPlayer.getType()) {//check class of the hero
-				case "Warrior": //gives armor buff
+				case "warrior": //gives armor buff
 					heroCurrentPlayer.setArmorPoints(heroCurrentPlayer.getArmorPoints() + heroCurrentPlayer.getArmorBuff());
 					heroCurrentPlayer.setHeroPowerUsed(true);
 					this.currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
-				case "Mage":
+					break;
+				case "mage":
 					if (idTarget == -1){ //if target is a hero
 						playerTarget.getHero().receiveDamage(heroCurrentPlayer.getDamage());
 						heroCurrentPlayer.setHeroPowerUsed(true);
@@ -178,10 +179,12 @@ public class Game {
 							playerTarget.removeCardFromBoard(idTarget); //If minion healthPoints <= 0, remove minion from board
 						}
 					}
-				case "Paladin":
-						summonMinion(currentPlayer, heroCurrentPlayer.getIdInvocation());
-						heroCurrentPlayer.setHeroPowerUsed(true);
-						currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
+					break;
+				case "paladin":
+					summonMinion(currentPlayer, heroCurrentPlayer.getIdInvocation());
+					heroCurrentPlayer.setHeroPowerUsed(true);
+					currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
+					break;
 				default :
 					heroCurrentPlayer.setHeroPowerUsed(true);
 					currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);

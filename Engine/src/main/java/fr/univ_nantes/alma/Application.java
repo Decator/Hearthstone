@@ -42,9 +42,9 @@ public class Application {
 		spellRepository.save(new Spell(15, "mage", "Explosion des arcanes", 2, 1, "Inflige 1 point de dégâts à tous les serviteurs adverses.", 0, 0, 0, 0, 0, false, "minion_all_enemy"));
 		spellRepository.save(new Spell(16, "mage", "Métamorphose", 4, 0, "Transforme un serviteur en mouton 1/1.", 1, 13, 0, 0, 0, true, "minion_1_enemy"));
 		spellRepository.save(new Spell(17, "paladin", "Bénédiction de puissance", 1, 0, "Confère +3 ATQ à un serviteur.", 0, 0, 3, 0, 0, false, "minion_1_ally"));
-		spellRepository.save(new Spell(18, "paladin", "Consécration", 4, 2, "Inflige 2 points de dégâts à tous les adversaires.", 0, 0, 3, 0, 0, false, "all_all_enemy"));
-		spellRepository.save(new Spell(19, "warrior", "Tourbillon", 1, 1, "minion_all_all", 0, 0, 0, 0, 0, false, "Inflige 1 point de dégâts à TOUS les serviteurs."));
-		spellRepository.save(new Spell(20, "warrior", "Maîtrise du blocage", 3, 0, "minion_all_all", 0, 0, 0, 5, 1, false, "Vous gagnez 5 points d'armure et vous piochez une carte."));
+		spellRepository.save(new Spell(18, "paladin", "Consécration", 4, 2, "Inflige 2 points de dégâts à tous les adversaires.", 0, 0, 0, 0, 0, false, "all_all_enemy"));
+		spellRepository.save(new Spell(19, "warrior", "Tourbillon", 1, 1, "Inflige 1 point de dégâts à TOUS les serviteurs.", 0, 0, 0, 0, 0, false, "minion_all_all"));
+		spellRepository.save(new Spell(20, "warrior", "Maîtrise du blocage", 3, 0, "Vous gagnez 5 points d'armure et vous piochez une carte.", 0, 0, 0, 5, 1, false, "minion_all_all"));
 
 		Application.engine = new Engine(minionRepository, spellRepository, heroRepository);
 		return "engine has been created";

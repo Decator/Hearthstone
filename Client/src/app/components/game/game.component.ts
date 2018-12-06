@@ -15,6 +15,7 @@ export class GameComponent {
 	private game: Game;
 	private player: Player;
 	private otherPlayer: Player;
+	private yourTurn: boolean = false;
 	private error: String;
 
 	private showLoader: boolean = true;
@@ -26,9 +27,11 @@ export class GameComponent {
 			if(this.game.currentPlayer.uuid == this.socketService.getPlayer().uuid){
 				this.player = this.game.currentPlayer;
 				this.otherPlayer = this.game.otherPlayer;
+				this.yourTurn = true;
 			} else {
 				this.player = this.game.otherPlayer;
 				this.otherPlayer = this.game.currentPlayer;
+				this.yourTurn = false;
 			}
 
 			if(this.showLoader){

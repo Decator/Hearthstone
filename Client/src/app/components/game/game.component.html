@@ -10,45 +10,58 @@
     </div>
 
     <div class="container">
-        <p>
-            {{otherPlayer.hero.name}}
-            {{otherPlayer.hero.healthPoints}}
-        </p>
-    </div>
+            <button>
+                <p>
+                    {{otherPlayer.hero.name}}
+                    {{otherPlayer.hero.healthPoints}}
+                </p>
+            </button>
+            <button>
+                <p>Pouvoir hero</p>
+            </button>
+        </div>
 
     <p>La main adverse :</p>
     <div class="container">
-        <button *ngFor="let card of otherPlayer.hand" [disabled]="otherPlayer.uuid==player.uuid">
+        <button *ngFor="let card of otherPlayer.hand" [disabled]="!yourTurn">
             ?
         </button>
     </div>
 
     <p>Le plateau adverse :</p>
     <div class="container">
-        <button *ngFor="let card of otherPlayer.board" [disabled]="otherPlayer.uuid==player.uuid">
-            type:{{card.type}} name:{{card.name}} damage:{{card.damage}} mana:{{card.manaCost}}
+        <button *ngFor="let card of otherPlayer.board" [disabled]="!yourTurn">
+            <p>M:{{card.manaCost}} - N:{{card.name}}</p>
+            <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
         </button>
     </div>
 
     <p>Votre plateau :</p>
     <div class="container">
-    <button *ngFor="let card of player.board" [disabled]="otherPlayer.uuid==player.uuid">
-        type:{{card.type}} name:{{card.name}} damage:{{card.damage}} mana:{{card.manaCost}}
-    </button>
+        <button *ngFor="let card of player.board" [disabled]="!yourTurn">
+            <p>M:{{card.manaCost}} - N:{{card.name}}</p>
+            <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
+        </button>
     </div>
 
     <p>Votre main :</p>
     <div class="container">
-    <button mat-button *ngFor="let card of player.hand"  (click)="playCard(player.hand.indexOf(card))" [disabled]="otherPlayer.uuid==player.uuid">
-        type:{{card.type}} name:{{card.name}} damage:{{card.damage}} mana:{{card.manaCost}} test:{{player.hand.indexOf(card)}}
-    </button>
+        <button *ngFor="let card of player.hand"  (click)="playCard(player.hand.indexOf(card))" [disabled]="!yourTurn">
+            <p>M:{{card.manaCost}} - N:{{card.name}}</p>
+            <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
+        </button>
     </div>
 
     <div class="container">
-    <p>
-        {{player.hero.name}}
-        {{player.hero.healthPoints}}
-    </p>
+        <button>
+            <p>
+                {{player.hero.name}}
+                {{player.hero.healthPoints}}
+            </p>
+        </button>
+        <button>
+            <p>Pouvoir hero</p>
+        </button>
     </div>
 
     <div class="container">
@@ -59,9 +72,9 @@
     </div>
 
     <div class="container">
-    <button (click)="endTurn()" [disabled]="otherPlayer.uuid==player.uuid">
-        Fin du tour
-    </button>
+        <button (click)="endTurn()" [disabled]="!yourTurn">
+            Fin du tour
+        </button>
     </div>
 
 </div>

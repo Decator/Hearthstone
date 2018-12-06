@@ -1,98 +1,67 @@
 <h2 *ngIf="showLoader">Loader {{error}}</h2>
 <div *ngIf="!showLoader">
     <h2>Game</h2>
-    <!-- <div class="row">
-        <div class="column">
-            <mat-list dense>
-                <mat-grid-tile-header> Joueur : {{player.username}} </mat-grid-tile-header>
-                <mat-list-item> Joueur {{playerNumber + 1}} </mat-list-item>
-                <mat-list-item> Hero : {{player.hero.name}} </mat-list-item>
-                <mat-list-item> Deck : </mat-list-item>
-                <mat-list-item *ngFor="let card of player.deck">
-                    {{card.type}} {{card.name}} {{card.id}}
-                </mat-list-item>
-                <mat-list-item> Hand : </mat-list-item>
-                <mat-list-item *ngFor="let card of player.hand">
-                    {{card.type}} {{card.name}} {{card.id}}
-                </mat-list-item>
-                <mat-list-item> Board : </mat-list-item>
-                <mat-list-item *ngFor="let card of player.board">
-                    {{card.type}} {{card.name}} {{card.id}}
-                </mat-list-item>
-            </mat-list>
-        </div> -->
 
-        <!-- Affichage des boards des deux joueurs et de la main du joueur
-           La nombre de cartes que l'adversaire a, est affiché mais les cartes sont cachées. -->
+    <div class="container">
+        <p>
+            {{otherPlayer.username}}
+            Points de mana : {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
+        </p>
+    </div>
 
-      <div class="container">
-        <a>
-          {{player.username}}
-        </a>
-      </div>
+    <div class="container">
+        <p>
+            {{otherPlayer.hero.name}}
+            {{otherPlayer.hero.healthPoints}}
+        </p>
+    </div>
 
-      <div class="container">
-        <a>
-         Points de mana : {{player.manaPool}} / {{player.manaMaxTurn}}
-        </a>
-      </div>
-
-      <div class="container">
-        <a>
-          Points de vie héros : {{player.hero.healthPoints}}
-          Points de vie adversaire : {{otherPlayer.hero.healthPoints}}
-        </a>
-      </div>
-
-      <div class="container">
-        <button *ngFor="let card of player.board">
-          {{card.type}} {{card.name}} {{card.id}}
+    <p>La main adverse :</p>
+    <div class="container">
+        <button *ngFor="let card of otherPlayer.hand" [disabled]="otherPlayer.uuid==player.uuid">
+            ?
         </button>
-      </div>
+    </div>
 
-      <div class="container">
-        <button *ngFor="let card of otherPlayer.board">
-          {{card.type}} {{card.name}} {{card.id}}
+    <p>Le plateau adverse :</p>
+    <div class="container">
+        <button *ngFor="let card of otherPlayer.board" [disabled]="otherPlayer.uuid==player.uuid">
+            type:{{card.type}} name:{{card.name}} damage:{{card.damage}} mana:{{card.manaCost}}
         </button>
-      </div>
+    </div>
 
-      <div class="container">
-        <button *ngFor="let card of player.hand">
-            {{card.type}} {{card.name}} {{card.id}}
-        </button>
-      </div>
+    <p>Votre plateau :</p>
+    <div class="container">
+    <button *ngFor="let card of player.board" [disabled]="otherPlayer.uuid==player.uuid">
+        type:{{card.type}} name:{{card.name}} damage:{{card.damage}} mana:{{card.manaCost}}
+    </button>
+    </div>
 
-      <div class="container">
-        <button *ngFor="let card of otherPlayer.hand">
+    <p>Votre main :</p>
+    <div class="container">
+    <button mat-button *ngFor="let card of player.hand"  (click)="playCard(player.hand.indexOf(card))" [disabled]="otherPlayer.uuid==player.uuid">
+        type:{{card.type}} name:{{card.name}} damage:{{card.damage}} mana:{{card.manaCost}} test:{{player.hand.indexOf(card)}}
+    </button>
+    </div>
 
-        </button>
-      </div>
+    <div class="container">
+    <p>
+        {{player.hero.name}}
+        {{player.hero.healthPoints}}
+    </p>
+    </div>
 
-      <div class="container">
-        <button onClick="">
-            Fin du tour
-        </button>
-      </div>
+    <div class="container">
+    <p>
+        {{player.username}}
+        Points de mana : {{player.manaPool}} / {{player.manaMaxTurn}}
+    </p>
+    </div>
 
-        <!-- <div class="column">
-            <mat-list dense>
-                <mat-grid-tile-header> Adversaire : {{otherPlayer.username}} </mat-grid-tile-header>
-                <mat-list-item> Joueur {{((playerNumber + 1) % 2) + 1}} </mat-list-item>
-                <mat-list-item> Hero : {{otherPlayer.hero.name}} </mat-list-item>
-                <mat-list-item> Deck : </mat-list-item>
-                <mat-list-item *ngFor="let card of otherPlayer.deck">
-                    {{card.type}} {{card.name}} {{card.id}}
-                </mat-list-item>
-                <mat-list-item> Hand : </mat-list-item>
-                <mat-list-item *ngFor="let card of otherPlayer.hand">
-                    {{card.type}} {{card.name}} {{card.id}}
-                </mat-list-item>
-                <mat-list-item> Board : </mat-list-item>
-                <mat-list-item *ngFor="let card of otherPlayer.board">
-                    {{card.type}} {{card.name}} {{card.id}}
-                </mat-list-item>
-            </mat-list>
-        </div>
-    </div> -->
-    <button mat-button (click)="playCard()">PlayCard</button>
+    <div class="container">
+    <button (click)="endTurn()" [disabled]="otherPlayer.uuid==player.uuid">
+        Fin du tour
+    </button>
+    </div>
+
 </div>

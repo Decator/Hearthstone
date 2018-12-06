@@ -83,12 +83,11 @@ public class Engine implements EngineBridge {
 	
 	@Override
 	public Game playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) throws EngineException {
-		Player[] player = games.get(uuidGame).getPlayers();
 		try {
-			if(player[0].getUUID() == uuidPlayer) {
-				games.get(uuidGame).playCard(idCard, player[0], idTarget);
+			if(games.get(uuidGame).getOtherPlayer().getUUID() == uuidPlayer) {
+				games.get(uuidGame).playCard(idCard, games.get(uuidGame).getOtherPlayer(), idTarget);
 			} else {
-				games.get(uuidGame).playCard(idCard, player[1], idTarget);
+				games.get(uuidGame).playCard(idCard, games.get(uuidGame).getCurrentPlayer(), idTarget);
 			}
 		} catch(EngineException e) {
 			throw e;
@@ -98,12 +97,11 @@ public class Engine implements EngineBridge {
 	
 	@Override
 	public Game heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException {
-		Player[] player = games.get(uuidGame).getPlayers();
 		try {
-			if(player[0].getUUID() == uuidPlayer) {
-				games.get(uuidGame).heroPower(player[0], idTarget);
+			if(games.get(uuidGame).getCurrentPlayer().getUUID() == uuidPlayer) {
+				games.get(uuidGame).heroPower(games.get(uuidGame).getCurrentPlayer(), idTarget);
 			} else {
-				games.get(uuidGame).heroPower(player[1], idTarget);
+				games.get(uuidGame).heroPower(games.get(uuidGame).getOtherPlayer(), idTarget);
 			}
 		} catch(EngineException e) {
 			throw e;

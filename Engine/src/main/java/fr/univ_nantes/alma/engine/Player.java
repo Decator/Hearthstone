@@ -31,7 +31,7 @@ public class Player {
 		this.username = username;
 		this.hero = hero;
 		this.manaPool = 0;
-		this.manaMaxTurn = 1;
+		this.manaMaxTurn = 0;
 		this.deck = deck;
 		this.hand = hand;
 		this.board = new Vector<Minion>();

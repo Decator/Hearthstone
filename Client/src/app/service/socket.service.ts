@@ -113,6 +113,10 @@ export class SocketService {
     this.stompClient.send("/app/playCard", {}, `${uuidGame}_${idCard}_${uuidPlayer}_${idTarget}`);
   }
 
+  endTurn(uuidGame: String) {
+    this.stompClient.send("/app/endTurn", {}, `${uuidGame}`);
+  }
+
   getPlayer(): Player {
     return this.player;
   }

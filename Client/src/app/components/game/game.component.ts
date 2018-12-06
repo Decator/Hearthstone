@@ -15,7 +15,6 @@ export class GameComponent {
 	private game: Game;
 	private player: Player;
 	private otherPlayer: Player;
-	private playerNumber: number;
 	private error: String;
 
 	private showLoader: boolean = true;
@@ -23,19 +22,14 @@ export class GameComponent {
 	constructor(private socketService: SocketService, private router: Router) {
 		this.socketService.gameObservable.subscribe((value: Game) => {
 			this.game = value;
-			console.log(this.game);
 
-			if(this.game.players[0].uuid == this.socketService.getPlayer().uuid){
-				this.player = this.game.players[0];
-				this.otherPlayer = this.game.players[1];
-				this.playerNumber = 0;
+			if(this.game.currentPlayer.uuid == this.socketService.getPlayer().uuid){
+				this.player = this.game.currentPlayer;
+				this.otherPlayer = this.game.otherPlayer;
 			} else {
-				this.player = this.game.players[1];
-				this.otherPlayer = this.game.players[0];
-				this.playerNumber = 1;
+				this.player = this.game.otherPlayer;
+				this.otherPlayer = this.game.currentPlayer;
 			}
-
-			console.log(this.game);
 
 			if(this.showLoader){
 				this.showLoader = false;
@@ -50,24 +44,16 @@ export class GameComponent {
 		this.game = this.socketService.getGame();
 		this.error = this.socketService.getError();
 
-		if(this.game){
-			if(this.game.players[0].uuid == this.socketService.getPlayer().uuid){
-				this.player = this.game.players[0];
-				this.otherPlayer = this.game.players[1];
-				this.playerNumber = 0;
-			} else {
-				this.player = this.game.players[1];
-				this.otherPlayer = this.game.players[0];
-				this.playerNumber = 1;
-			}
-		}
-
 		if(this.game && this.showLoader){
 			this.showLoader = false;
 		}
 	}
 
-	playCard(){
-		this.socketService.playCard(this.game.idGame, 0, this.player.uuid, 1);
+	playCard(idCard: number){
+		this.socketService.playCard(this.game.idGame, idCard, this.player.uuid, 1);
+	}
+
+	endTurn() {
+		this.socketService.endTurn(this.game.idGame);
 	}
 }

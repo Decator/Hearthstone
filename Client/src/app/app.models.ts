@@ -1,22 +1,19 @@
 export interface IGame {
     idGame: string;
-	players: Array<Player>;
-	idCurrentPlayer: number;
+    currentPlayer: Player;
+    otherPlayer: Player;
 }
 
 export class Game {
     idGame: string;
-	players: Array<Player>;
-	idCurrentPlayer: number;
+    currentPlayer: Player;
+    otherPlayer: Player;
     
     constructor(obj?: IGame){
         if(obj){
             this.idGame = obj.idGame;
-            this.players = new Array<Player>();
-            for(let player of obj.players){
-                this.players.push(new Player(player));
-            }
-            this.idCurrentPlayer = obj.idCurrentPlayer;
+            this.currentPlayer = obj.currentPlayer;
+            this.otherPlayer = obj.otherPlayer;
         }
     }
 }

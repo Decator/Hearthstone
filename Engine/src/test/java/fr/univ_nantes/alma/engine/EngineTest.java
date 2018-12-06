@@ -2,7 +2,6 @@ package fr.univ_nantes.alma.engine;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -65,7 +64,7 @@ public class EngineTest {
 	
 	@Test
 	public void testHero() {
-		Hero hero = new Hero(1, "mage", "Jaina", 1, 0, 0, 0, "Boule de feu : Inflige 1 point de dégâts.");
+		Hero hero = new Hero(1, "mage", "Jaina", 1, 0, 0, 0, "Boule de feu : Inflige 1 point de dégâts.", "all_1_all");
 		
 		// Getters
 		assertEquals(hero.getId(), 1);
@@ -96,7 +95,7 @@ public class EngineTest {
 	@Test
 	public void testPlayer() {
 		// Create hero
-		Hero hero = new Hero(1, "mage", "Jaina", 1, 0, 0, 0, "Boule de feu : Inflige 1 point de dégâts.");
+		Hero hero = new Hero(1, "mage", "Jaina", 1, 0, 0, 0, "Boule de feu : Inflige 1 point de dégâts.", "all_1_all");
 		
 		// Create deck
 		Card[] deck = new Card[4];

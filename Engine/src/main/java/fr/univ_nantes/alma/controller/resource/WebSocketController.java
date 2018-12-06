@@ -2,7 +2,6 @@ package fr.univ_nantes.alma.controller.resource;
 
 import java.util.UUID;
 
-import fr.univ_nantes.alma.engine.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -35,16 +34,14 @@ public class WebSocketController {
     	if(game == null) {
         	this.template.convertAndSend("/game/" + uuidPlayer, "Waiting for another Player");
     	} else {
-    		Player[] player = game.getPlayers();
-        	this.template.convertAndSend("/game/" + player[0].getUUID(), game);
-        	this.template.convertAndSend("/game/" + player[1].getUUID(), game);
+        	this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUUID(), game);
+        	this.template.convertAndSend("/game/" + game.getOtherPlayer().getUUID(), game);
     	}
     }
     
     @MessageMapping("/endTurn")
     public void endTurn(String uuidGame) {
-    	Application.engine.endTurn(UUID.fromString(uuidGame));
-    	this.template.convertAndSend("/game/" + uuidGame + "/endTurn", "ok");
+    	this.template.convertAndSend("/game/" + uuidGame, Application.engine.endTurn(UUID.fromString(uuidGame)));
     }
     
     @MessageMapping("/playCard")

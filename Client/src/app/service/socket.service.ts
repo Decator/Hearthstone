@@ -9,6 +9,8 @@ export class SocketService {
   private serverUrl = 'http://localhost:8080/hearthstone-websocket';
   private stompClient: Stomp.CompatClient;
 
+  private isRedirect: boolean = false;
+
   private playerSubscription: Subscription;
   private gameSubscription: Subscription;
 
@@ -135,5 +137,13 @@ export class SocketService {
 
   getError(): String {
     return this.error;
+  }
+
+  getIsRedirect(): boolean {
+    return this.isRedirect;
+  }
+
+  setIsRedirect() {
+    this.isRedirect = true;
   }
 }

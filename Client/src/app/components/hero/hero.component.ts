@@ -43,6 +43,7 @@ export class HeroComponent {
 
 	play(username: string, heroId: number) {
 		this.socketService.play(username, heroId);
+		this.socketService.setIsRedirect();
 		this.router.navigate(['/game']);
 	}
 

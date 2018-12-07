@@ -21,34 +21,39 @@ export class GameComponent {
 	private showLoader: boolean = true;
 
 	constructor(private socketService: SocketService, private router: Router) {
-		this.socketService.gameObservable.subscribe((value: Game) => {
-			this.game = value;
 
-			if(this.game.currentPlayer.uuid == this.socketService.getPlayer().uuid){
-				this.player = this.game.currentPlayer;
-				this.otherPlayer = this.game.otherPlayer;
-				this.yourTurn = true;
-			} else {
-				this.player = this.game.otherPlayer;
-				this.otherPlayer = this.game.currentPlayer;
-				this.yourTurn = false;
-			}
-
-			if(this.showLoader){
+		if(this.socketService.getIsRedirect()){
+			this.socketService.gameObservable.subscribe((value: Game) => {
+				this.game = value;
+	
+				if(this.game.currentPlayer.uuid == this.socketService.getPlayer().uuid){
+					this.player = this.game.currentPlayer;
+					this.otherPlayer = this.game.otherPlayer;
+					this.yourTurn = true;
+				} else {
+					this.player = this.game.otherPlayer;
+					this.otherPlayer = this.game.currentPlayer;
+					this.yourTurn = false;
+				}
+	
+				if(this.showLoader){
+					this.showLoader = false;
+				}
+			});
+	
+			this.socketService.errorObservable.subscribe((value: String) => {
+				this.error = value;
+				console.log(this.error);
+			});
+	
+			this.game = this.socketService.getGame();
+			this.error = this.socketService.getError();
+	
+			if(this.game && this.showLoader){
 				this.showLoader = false;
 			}
-		});
-
-		this.socketService.errorObservable.subscribe((value: String) => {
-			this.error = value;
-			console.log(this.error);
-		});
-
-		this.game = this.socketService.getGame();
-		this.error = this.socketService.getError();
-
-		if(this.game && this.showLoader){
-			this.showLoader = false;
+		} else {
+			this.router.navigate(['/hero']);
 		}
 	}
 

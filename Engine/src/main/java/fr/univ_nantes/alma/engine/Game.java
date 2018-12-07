@@ -126,7 +126,7 @@ public class Game {
 	                				if (keys[0] == "0") {
 		                				removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
 		                				this.currentPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
-	                				} else if (keys[1] == "1") {
+	                				} else if (keys[0] == "1") {
 	                					removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
 	                					this.otherPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
 	                				}
@@ -163,22 +163,29 @@ public class Game {
 					this.currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
 					break;
 				case "mage":
-					if (idTarget == -1){ //if target is a hero
-						playerTarget.getHero().receiveDamage(heroCurrentPlayer.getDamage());
-						heroCurrentPlayer.setHeroPowerUsed(true);
-						this.currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
-						if(!Rule.checkAlive(playerTarget.getHero().getHealthPoints())){
-							endGame();
-						}
-					} else { // if target is a minion
-						playerTarget.getBoard().get(idTarget).receiveDamage(heroCurrentPlayer.getDamage()); //Inflicts damage to minion
-						heroCurrentPlayer.setHeroPowerUsed(true);
-						currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER); //Decrement manaCost from manaPool
-						if(!Rule.checkAlive(playerTarget.getBoard().get(idTarget).getHealthPoints())){
-							removeAttackAuraFromMinions(playerTarget.getBoard(), playerTarget.getBoard().get(idTarget)); //remove attack buff from other minions if relevant
-							playerTarget.removeCardFromBoard(idTarget); //If minion healthPoints <= 0, remove minion from board
-						}
-					}
+					LinkedHashMap<String, Card> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, playerTarget, idTarget, heroCurrentPlayer.getTarget());
+                	for (Map.Entry<String, Card> entry : targets.entrySet()) {
+                		if (entry.getValue() instanceof Hero) {
+                			((Hero) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
+	                		if(!Rule.checkAlive(((Hero)entry.getValue()).getHealthPoints())){
+	    						endGame();
+	                		}
+                		} else if (entry.getValue() instanceof Minion) {
+                			((Minion) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
+                			if(!Rule.checkAlive(((Minion) entry.getValue()).getHealthPoints())) {
+                				String keys[] = entry.getKey().split("_");
+                				if (keys[0] == "0") {
+	                				removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
+	                				this.currentPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
+                				} else if (keys[0] == "1") {
+                					removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
+                					this.otherPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
+                				}
+                			}
+                		}
+                	}
+					heroCurrentPlayer.setHeroPowerUsed(true);
+					this.currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER); //Decrement manaCost from manaPool
 					break;
 				case "paladin":
 					summonMinion(currentPlayer, heroCurrentPlayer.getIdInvocation());
@@ -324,10 +331,12 @@ public class Game {
 					for (int i = playerEnemy.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("1_" + String.valueOf(i), playerEnemy.getBoard().get(i));
 					}
+					break;
 				case "ally" :
 					for (int i = player.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
 					}
+					break;
 				case "all" :
 					for (int i = playerEnemy.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("1_" + String.valueOf(i),playerEnemy.getBoard().get(i));
@@ -335,22 +344,28 @@ public class Game {
 					for (int i = player.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
 					}
+					break;
 				}
+				break;
 			case "1" :
 				switch (splitString[2]) {
 				case "enemy" :
 					targets.put("1_" + String.valueOf(idTarget), playerEnemy.getBoard().get(idTarget));
+					break;
 				case "ally" :
 					targets.put("0_" + String.valueOf(idTarget), player.getBoard().get(idTarget));
+					break;
 				case "all" :
 					if (targetPlayer.equals(player)) {
 						targets.put("0_" + String.valueOf(idTarget), player.getBoard().get(idTarget));
 					} else {
 						targets.put("1_" + String.valueOf(idTarget), playerEnemy.getBoard().get(idTarget));
 					}
-					
+					break;
 				}
+				break;
 			}
+			break;
 		case "all" :
 			switch (splitString[1]) {
 			case "all" :
@@ -360,11 +375,13 @@ public class Game {
 						targets.put("1_" + String.valueOf(i),playerEnemy.getBoard().get(i));
 					}
 					targets.put("1",heroEnemy);
+					break;
 				case "ally" :
 					for (int i = player.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
 					}
 					targets.put("0", hero);
+					break;
 				case "all" :
 					for (int i = player.getBoard().size() -1 ; i >= 0; i--) {
 						targets.put("0_" + String.valueOf(i), player.getBoard().get(i));
@@ -374,7 +391,9 @@ public class Game {
 					}
 					targets.put("0",hero);
 					targets.put("1", heroEnemy);
+					break;
 				}
+				break;
 			case "1" :
 				switch (splitString[2]) {
 				case "enemy" :
@@ -383,12 +402,14 @@ public class Game {
 					} else {
 						targets.put("1_" + String.valueOf(idTarget), playerEnemy.getBoard().get(idTarget));
 					}
+					break;
 				case "ally" :
 					if(idTarget == -1) {
 						targets.put("0", hero);
 					} else {
 						targets.put("0_" + String.valueOf(idTarget), player.getBoard().get(idTarget));
 					}
+					break;
 				case "all" :
 					if (targetPlayer.equals(player)) {
 						if(idTarget == -1) {
@@ -403,8 +424,11 @@ public class Game {
 							targets.put("1_" + String.valueOf(idTarget), playerEnemy.getBoard().get(idTarget));
 						}
 					}
+					break;
 				}
+				break;
 			}
+			break;
 		}
 		return targets;
 	}

@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * @version 0.0.1
  */
 @Entity
-public abstract class Card {
+public abstract class Card implements Cloneable {
 	
 	@Id
     protected int id;
@@ -39,6 +39,10 @@ public abstract class Card {
     }
     
     Card() {}
+    
+    public Object clone() throws CloneNotSupportedException { 
+    	return super.clone(); 
+	} 
 
     /**
      * Get the id of the card. 

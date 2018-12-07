@@ -47,6 +47,10 @@ public class Minion extends Card {
 	
 	public Minion() {}
 	
+	public Object clone() throws CloneNotSupportedException { 
+    	return super.clone(); 
+	} 
+	
 	/**
      * Get the healthPoints of the minion
      * @return the healthPoints

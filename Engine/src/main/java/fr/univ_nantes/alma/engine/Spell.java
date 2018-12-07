@@ -48,6 +48,10 @@ public class Spell extends Card {
     }
     
     public Spell() {}
+    
+    public Object clone() throws CloneNotSupportedException { 
+    	return super.clone(); 
+	} 
 
     /**
      * Get the nbSummon of the card. 

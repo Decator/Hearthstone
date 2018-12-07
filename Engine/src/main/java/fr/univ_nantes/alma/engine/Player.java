@@ -127,7 +127,11 @@ public class Player {
 	 * @param card the card to add
 	 */
 	void addCardToHand(Card card) {
-		this.getHand().add(card);
+		try {
+			this.getHand().add((Card)card.clone());
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**

@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { StartComponent } from './components/start/start.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { GameComponent } from './components/game/game.component';
+import { EndComponent } from './components/end/end.component';
 
 import { AppRoutingModule } from './app.routing.module';
 
@@ -18,6 +19,7 @@ import { SocketService } from './service/socket.service';
 		AppComponent,
 		StartComponent,
 		HeroComponent,
+		EndComponent,
 		GameComponent
 	],
 	imports: [

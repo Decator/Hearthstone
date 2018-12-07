@@ -1,0 +1,16 @@
+a{ float:left;
+    width:100%;
+    text-align: center;
+    font-family: verdana;
+    font-size: 20px;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.button {
+
+    top: 200%;
+    margin : 200px;
+}

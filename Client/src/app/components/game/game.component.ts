@@ -19,9 +19,16 @@ export class GameComponent {
 	private error: String;
 
 	private showLoader: boolean = true;
+	private showHand: boolean = false;
+	private showAllyMinions: boolean = false;
+	private showEnemyMinions: boolean = false;
+	private showAllyHero: boolean = false;
+	private showEnemyHero: boolean = false;
+
+	private waitingForTarget: boolean = false;
+	private idWaitingCard: number;
 
 	constructor(private socketService: SocketService, private router: Router) {
-
 		if(this.socketService.getIsRedirect()){
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
@@ -29,11 +36,25 @@ export class GameComponent {
 				if(this.game.currentPlayer.uuid == this.socketService.getPlayer().uuid){
 					this.player = this.game.currentPlayer;
 					this.otherPlayer = this.game.otherPlayer;
+
 					this.yourTurn = true;
+					this.showHand = true;
+					this.showAllyMinions = true;
+					this.showEnemyMinions = false;
+					this.showAllyHero = true;
+					this.showEnemyHero = false;
+					this.waitingForTarget = false;
 				} else {
 					this.player = this.game.otherPlayer;
 					this.otherPlayer = this.game.currentPlayer;
+
 					this.yourTurn = false;
+					this.showHand = false;
+					this.showAllyMinions = false;
+					this.showEnemyMinions = false;
+					this.showAllyHero = false;
+					this.showEnemyHero = false;
+					this.waitingForTarget = false;
 				}
 	
 				if(this.showLoader){
@@ -57,8 +78,63 @@ export class GameComponent {
 		}
 	}
 
-	playCard(idCard: number){
-		this.socketService.playCard(this.game.idGame, idCard, this.player.uuid, 1);
+	playCard(idCard: number, uuidTarget: string, idTarget?: number){
+		console.log(uuidTarget);
+		if(idTarget){
+			this.socketService.playCard(this.game.idGame, idCard, uuidTarget, idTarget);
+		} else {
+			this.socketService.playCard(this.game.idGame, idCard, uuidTarget, 0);
+		}
+	}
+
+	onClickHand(idCard: number){
+		let card = this.player.hand[idCard];
+
+		if(this.isSpell(card) && (card as Spell).target != undefined && (card as Spell).target.includes("1")){
+			let spell = (card as Spell);
+			let splitTarget = spell.target.split('_');
+
+			if(splitTarget[0] == "minion"){
+				if(splitTarget[2] == "ally"){
+					this.showHand = false;
+					this.showAllyMinions = true;
+					this.showEnemyMinions = false;
+					this.showAllyHero = false;
+					this.showEnemyHero = false;
+					this.waitingForTarget = true;
+					this.idWaitingCard = idCard;
+				} else if(splitTarget[2] == "enemy"){
+					this.showHand = false;
+					this.showAllyMinions = false;
+					this.showEnemyMinions = true;
+					this.showAllyHero = false;
+					this.showEnemyHero = false;
+					this.waitingForTarget = true;
+					this.idWaitingCard = idCard;
+				}
+			} else {
+
+			}
+		} else {
+			console.log(this.player.uuid);
+			this.playCard(idCard, this.player.uuid);
+		}
+	}
+
+	onClickMinion(uuidTarget: string, idCard: number){
+		if(this.waitingForTarget){
+			console.log(uuidTarget);
+			console.log(idCard);
+			this.playCard(this.idWaitingCard, uuidTarget, idCard);
+		} else {
+			
+		}
+	}
+
+	onClickHero(){
+		if(this.waitingForTarget){
+
+		}
 	}
 
 	endTurn() {

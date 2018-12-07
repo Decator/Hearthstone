@@ -10,7 +10,7 @@
     </div>
 
     <div class="container">
-            <button [disabled]="!yourTurn">
+            <button [disabled]="!yourTurn || !showEnemyHero">
                 <p>
                     {{otherPlayer.hero.name}}
                     {{otherPlayer.hero.healthPoints}}
@@ -23,14 +23,14 @@
 
     <p>La main adverse :</p>
     <div class="container">
-        <button *ngFor="let card of otherPlayer.hand" [disabled]="!yourTurn">
+        <button *ngFor="let card of otherPlayer.hand" [disabled]="true">
             ?
         </button>
     </div>
 
     <p>Le plateau adverse :</p>
     <div class="container">
-        <button *ngFor="let card of otherPlayer.board" [disabled]="!yourTurn">
+        <button *ngFor="let card of otherPlayer.board" (click)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))" [disabled]="!yourTurn || !showEnemyMinions">
             <p>M:{{card.manaCost}} - N:{{card.name}}</p>
             <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
         </button>
@@ -38,7 +38,7 @@
 
     <p>Votre plateau :</p>
     <div class="container">
-        <button *ngFor="let card of player.board" [disabled]="!yourTurn">
+        <button *ngFor="let card of player.board" (click)="onClickMinion(player.uuid, player.board.indexOf(card))" [disabled]="!yourTurn || !showAllyMinions">
             <p>M:{{card.manaCost}} - N:{{card.name}}</p>
             <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
         </button>
@@ -46,7 +46,7 @@
 
     <p>Votre main :</p>
     <div class="container">
-        <button *ngFor="let card of player.hand"  (click)="playCard(player.hand.indexOf(card))" [disabled]="!yourTurn">
+        <button *ngFor="let card of player.hand"  (click)="onClickHand(player.hand.indexOf(card))" [disabled]="!yourTurn || !showHand">
             <div *ngIf="isMinion(card)">
                 <p>M:{{card.manaCost}} - N:{{card.name}}</p>
                 <p>{{card.description}}</p>
@@ -60,13 +60,13 @@
     </div>
 
     <div class="container">
-        <button [disabled]="!yourTurn">
+        <button [disabled]="true">
             <p>
                 {{player.hero.name}}
                 {{player.hero.healthPoints}}
             </p>
         </button>
-        <button (click)="heroPower()" [disabled]="!yourTurn">
+        <button (click)="heroPower()" [disabled]="!yourTurn || !showAllyHero">
             <p>Pouvoir hero</p>
         </button>
     </div>

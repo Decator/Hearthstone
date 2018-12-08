@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.UUID;
 import java.util.Vector;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 /**
  * 
  * 
@@ -16,8 +18,11 @@ public class Engine implements EngineBridge {
 	private HashMap<UUID, Player> players;
 	private Player waitingPlayer;
 	
+	@Autowired
 	private MinionRepository minionRepository;
+	@Autowired
 	private SpellRepository spellRepository;
+	@Autowired
 	private HeroRepository heroRepository;
 	
 	public Engine(MinionRepository minion, SpellRepository spell, HeroRepository hero) {

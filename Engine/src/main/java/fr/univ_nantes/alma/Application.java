@@ -1,7 +1,11 @@
 package fr.univ_nantes.alma;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import fr.univ_nantes.alma.engine.Engine;
@@ -13,9 +17,13 @@ import fr.univ_nantes.alma.engine.MinionRepository;
 import fr.univ_nantes.alma.engine.Spell;
 import fr.univ_nantes.alma.engine.SpellRepository;
 
+
 @SpringBootApplication
 public class Application {
 	public static EngineBridge engine;
+	
+	@Autowired
+	DataSource dataSource;
 	
 	public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -23,7 +31,7 @@ public class Application {
 	
 	@Bean
 	public String engine(MinionRepository minionRepository, SpellRepository spellRepository, HeroRepository heroRepository) {
-		heroRepository.save(new Hero(1, "mage", "Jaina", 1, 0, 0, 0, "Boule de feu : Inflige 1 point de dégâts.", "all_1_all"));
+		/*heroRepository.save(new Hero(1, "mage", "Jaina", 1, 0, 0, 0, "Boule de feu : Inflige 1 point de dégâts.", "all_1_all"));
 		heroRepository.save(new Hero(2, "paladin", "Uther", 0, 1, 12, 0, "Renfort : Invoque une recrue de la Main d'argent 1/1.", null));
 		heroRepository.save(new Hero(3, "warrior", "Garrosh", 0, 0, 0, 2, "Gain d'armure ! : Confère 2 points d'armure.", null));
 		
@@ -45,7 +53,7 @@ public class Application {
 		spellRepository.save(new Spell(18, "paladin", "Consécration", 4, 2, "Inflige 2 points de dégâts à tous les adversaires.", 0, 0, 0, 0, 0, false, "all_all_enemy"));
 		spellRepository.save(new Spell(19, "warrior", "Tourbillon", 1, 1, "Inflige 1 point de dégâts à TOUS les serviteurs.", 0, 0, 0, 0, 0, false, "minion_all_all"));
 		spellRepository.save(new Spell(20, "warrior", "Maîtrise du blocage", 3, 0, "Vous gagnez 5 points d'armure et vous piochez une carte.", 0, 0, 0, 5, 1, false, "minion_all_all"));
-
+*/
 		Application.engine = new Engine(minionRepository, spellRepository, heroRepository);
 		return "engine has been created";
 	}

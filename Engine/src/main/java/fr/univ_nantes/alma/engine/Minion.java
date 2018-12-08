@@ -1,6 +1,9 @@
 package fr.univ_nantes.alma.engine;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 
@@ -10,14 +13,15 @@ import javax.persistence.Entity;
  * @version 0.0.1
  */
 @Entity
+@Table(name="Minion")
 public class Minion extends Card {
 	
-	private int healthPoints;
-	private boolean taunt;
-	private boolean lifeSteal;
-	private boolean charge;
-	private int attackBuffAura;
-	private boolean attacked;
+	@Column(name = "health_points_minion") private int healthPoints;
+	@Column(name = "taunt_minion") private boolean taunt;
+	@Column(name = "lifesteal_minion") private boolean lifeSteal;
+	@Column(name = "charge_minion") private boolean charge;
+	@Column(name = "attack_buff_aura_minion") private int attackBuffAura;
+	@Column(name = "attacked_minion")private boolean attacked;
 	
 	/**
      * Initialize the attributes of this class. 
@@ -50,6 +54,7 @@ public class Minion extends Card {
 	public Object clone() throws CloneNotSupportedException { 
     	return super.clone(); 
 	} 
+	
 	
 	/**
      * Get the healthPoints of the minion
@@ -106,13 +111,6 @@ public class Minion extends Card {
 		this.attacked = bool;
 	}
 	
-	/**
-	 * Sets the damage attribute of a minion
-	 * @param damage
-	 */
-	void setDamage(int damage) {
-		this.damage = damage;
-	}
 	
 	/**
 	 * Receive damage from an attack. 

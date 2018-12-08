@@ -482,10 +482,10 @@ public class Game {
 	 */
 	void LifeSteal(Hero hero, Minion minion) {
 		if (minion.getLifesteal()) { //check for lifesteal
-			if (!Rule.checkHealthPoints(hero.getHealthPoints() + minion.damage)) {
+			if (!Rule.checkHealthPoints(hero.getHealthPoints() + minion.getDamage())) {
 				hero.setHealthPoints(Rule.MAX_HERO_HEALTH_POINTS); // if going over max HP, then HP = max
 			} else {
-				hero.receiveHealing(minion.damage); // if not, heal for the damage inflicted by the minion
+				hero.receiveHealing(minion.getDamage()); // if not, heal for the damage inflicted by the minion
 			}
 		}
 	}

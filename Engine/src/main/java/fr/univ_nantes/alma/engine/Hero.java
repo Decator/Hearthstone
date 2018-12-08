@@ -1,6 +1,9 @@
 package fr.univ_nantes.alma.engine;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
@@ -10,16 +13,16 @@ import javax.persistence.Entity;
  * @version 0.0.1
  */
 @Entity
+@Table(name="Hero")
 public class Hero extends Card {
 	
-    private int healthPoints; //
-    private int armorPoints; //
-	private int nbSummon;
-	private int idInvocation;
-	private int armorBuff;
-    private boolean heroPowerUsed;
-    private String target;
-
+	@Column(name = "nb_summon_hero") private int nbSummon;
+	@Column(name = "id_invocation_hero")private int idInvocation; 
+	@Column(name = "armor_buff_hero") private int armorBuff;
+    @Column(name = "target_hero") private String target;
+    @Column(name = "health_points_hero") private int healthPoints;
+    @Column(name = "armor_points_hero") private int armorPoints;
+    @Column(name = "hero_power_used") private boolean heroPowerUsed;
     /**
      * Initialize the attributes of this class.
      * @param id the id of the hero
@@ -44,6 +47,7 @@ public class Hero extends Card {
     }
     
     public Hero() {}
+    
 
     /**
      * Get the healthPoints of the hero.

@@ -1,6 +1,9 @@
 package fr.univ_nantes.alma.engine;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * The complete description of a Spell Card. 
@@ -9,16 +12,16 @@ import javax.persistence.Entity;
  * @version 0.0.1
  */
 @Entity
+@Table(name="Spell")
 public class Spell extends Card {
-	
-    private int nbSummon;
-    private int idInvocation;
-    private int attackBuff;
-    private int armorBuff;
-    private int nbDraw;
-    private boolean polymorph;
-    private String target;
 
+    @Column(name = "nb_summon_spell") private int nbSummon;
+    @Column(name = "id_invocation_spell") private int idInvocation;
+    @Column(name = "attack_buff_spell") private int attackBuff;
+    @Column(name = "armor_buff_spell") private int armorBuff;
+    @Column(name = "nb_draw_spell") private int nbDraw;
+    @Column(name = "polymorph_spell") private boolean polymorph;
+    @Column(name = "target_spell") private String target;
     /**
      * Initialize the attributes of this class. 
      * @param id the id of the card
@@ -52,6 +55,7 @@ public class Spell extends Card {
     public Object clone() throws CloneNotSupportedException { 
     	return super.clone(); 
 	} 
+    
 
     /**
      * Get the nbSummon of the card. 

@@ -1,7 +1,9 @@
 package fr.univ_nantes.alma.engine;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 
 /**
  * The complete description of a card wich can be either a Minion or a Spell. 
@@ -9,16 +11,15 @@ import javax.persistence.Id;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-@Entity
+@MappedSuperclass
 public abstract class Card implements Cloneable {
-	
 	@Id
-    protected int id;
-    protected String type;
-    protected String name;
-    protected int manaCost;
-    protected int damage;
-    protected String description;
+	@Column(name = "id") private int id;
+	@Column(name = "type") private String type;
+	@Column(name = "name") private String name;
+	@Column(name = "mana_cost") private int manaCost;
+	@Column(name = "damage") private int damage;
+	@Column(name = "description") private String description;
 
     /**
      * Initialize the attributes of this class. 
@@ -83,6 +84,16 @@ public abstract class Card implements Cloneable {
     public int getDamage() {
         return this.damage;
     }
+    
+	/**
+	 * Sets the damage attribute of a card
+	 * @param damage
+	 */
+	
+	
+	void setDamage(int damage) {
+		this.damage = damage;
+	}
 
     /**
      * Get the description of the card. 

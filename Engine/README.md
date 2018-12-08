@@ -10,4 +10,4 @@ $docker start HSDock </br>
 </br>
 This should build and start the container containing the MySQL server running the game's database. More information is available on this [website](https://runbook.readthedocs.io/en/latest/install_docker_compose/).
 The information required for the game engine to log into the database are already included in the Application.properties file.
-You can now start the engine your IDE.
+You can now start the engine in your IDE.

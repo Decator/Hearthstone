@@ -3,6 +3,7 @@ Go to the [Docker](https://www.docker.com/get-started) website and download the 
 Once it is set up, launch it and go to the root folder of the Hearthstone project in the terminal.
 There you can find a MySQL dump as well as a docker-compose file. </br>
 Once you are in the root folder, enter the following commands : </br>
+</br>
 $docker-compose build </br> 
 $docker-compose up -d </br>
 $docker start HSDock </br>

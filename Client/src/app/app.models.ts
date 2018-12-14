@@ -79,21 +79,6 @@ export interface ICard {
     description: string;
 }
 
-export interface IMinion extends ICard {
-    id: number;
-    type: string;
-    name: string;
-    manaCost: number;
-    damage: number;
-    description: string;
-    healthPoints: number;
-    taunt: boolean;
-    lifeSteal: boolean;
-    charge: boolean;
-    attackBuffAura: number;
-    attacked: boolean;
-}
-
 export interface IHero extends ICard {
     id: number;
     type: string;
@@ -107,6 +92,7 @@ export interface IHero extends ICard {
     idInvocation: number;
     armorBuff: number;
     heroPowerUsed: boolean;
+    target: string;
 }
 
 export class Hero implements IHero {
@@ -122,6 +108,7 @@ export class Hero implements IHero {
     idInvocation: number;
     armorBuff: number;
     heroPowerUsed: boolean;
+    target: string;
 
     constructor(obj?: IHero){
         if(obj){
@@ -137,8 +124,24 @@ export class Hero implements IHero {
             this.idInvocation = obj.idInvocation;
             this.armorBuff = obj.armorBuff;
             this.heroPowerUsed = obj.heroPowerUsed;
+            this.target = obj.target;
         }
     }
+}
+
+export interface IMinion extends ICard {
+    id: number;
+    type: string;
+    name: string;
+    manaCost: number;
+    damage: number;
+    description: string;
+    healthPoints: number;
+    taunt: boolean;
+    lifeSteal: boolean;
+    charge: boolean;
+    attackBuffAura: number;
+    attacked: boolean;
 }
 
 export class Minion implements IMinion {

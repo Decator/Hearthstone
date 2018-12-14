@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * @version 0.0.1
  */
 @Entity
-@Table(name="Hero")
+@Table(name="hero")
 public class Hero extends Card {
 	
 	@Column(name = "nb_summon_hero") private int nbSummon;

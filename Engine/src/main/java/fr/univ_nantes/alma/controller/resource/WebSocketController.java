@@ -64,9 +64,14 @@ public class WebSocketController {
 			this.template.convertAndSend("/game/" + dataSplit[0], e.getMessage());
 		}
     }
-//    
-//    @MessageMapping("/attack")
-//    public void attack(String uuidGame, int idAttack, int idTarget) {
-//    	this.template.convertAndSend("/game/" + uuidGame, Application.engine.attack(UUID.fromString(uuidGame), idAttack, idTarget));
-//    }
+    
+    @MessageMapping("/attack")
+    public void attack(String data) {
+    	String[] dataSplit = data.split("_");
+    	try {
+    		this.template.convertAndSend("/game/" + dataSplit[0], Application.engine.attack(UUID.fromString(dataSplit[0]), Integer.parseInt(dataSplit[1]), Integer.parseInt(dataSplit[2])));
+    	} catch (EngineException e) {
+			this.template.convertAndSend("/game/" + dataSplit[0], e.getMessage());
+		}
+    }
 }

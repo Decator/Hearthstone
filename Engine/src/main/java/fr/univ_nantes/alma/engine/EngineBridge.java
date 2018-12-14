@@ -54,8 +54,8 @@ public interface EngineBridge {
 	/**
 	 * Activate the hero's power.
 	 * @param uuidGame the id of the game
-	 * @param uuidPlayer the player choose (for some power)
-	 * @param idTarget the id of the target, if the power doesn't need a target then set idTarget to -1
+	 * @param uuidPlayer the chosen player (for some power)
+	 * @param idTarget the id of the target, if the power doesn't need a target then set idTarget to 1
 	 * @return the game
 	 * @throws EngineException 
 	 */

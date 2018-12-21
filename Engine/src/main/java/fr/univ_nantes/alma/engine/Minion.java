@@ -2,7 +2,6 @@ package fr.univ_nantes.alma.engine;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -39,7 +38,7 @@ public class Minion extends Card {
      * @param healthPoints the amount of health points the minion has
      */
 	
-	public Minion(int id, String type, String name, int manaCost, int damage, String description, int healthPoints, boolean taunt, boolean lifeSteal, boolean charge, int attackBuffAura) {
+	Minion(int id, String type, String name, int manaCost, int damage, String description, int healthPoints, boolean taunt, boolean lifeSteal, boolean charge, int attackBuffAura) {
 		super(id, type, name, manaCost, damage, description);
 		this.healthPoints = healthPoints;
 		this.taunt = taunt;

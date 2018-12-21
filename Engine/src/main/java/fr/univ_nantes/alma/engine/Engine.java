@@ -52,9 +52,16 @@ public class Engine implements EngineBridge {
 		
 		// Create hand
 		Vector<Card> hand = new Vector<Card>();
-		hand.add(deck[(int)(Math.random() * deck.length)]);
-		hand.add(deck[(int)(Math.random() * deck.length)]);
-		hand.add(deck[(int)(Math.random() * deck.length)]);
+		Card card1 = deck[(int)(Math.random() * deck.length)];
+		Card card2 = deck[(int)(Math.random() * deck.length)];
+		Card card3 = deck[(int)(Math.random() * deck.length)];
+		try {
+			hand.add((Card)card1.clone());
+			hand.add((Card)card2.clone());
+			hand.add((Card)card3.clone());
+	    } catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 		
 		Player player = new Player(UUID.randomUUID(), username, hero, deck, hand);
 		this.players.put(player.getUUID(), player); // Put in hashmap

@@ -2,7 +2,6 @@ package fr.univ_nantes.alma.engine;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -38,7 +37,7 @@ public class Spell extends Card {
      * @param polymorph a boolean to indicate if the card is polymorphic or not
      * @param target a simple text with the target of the card
      */
-    public Spell(int id, String type, String name, int manaCost, int damage, String description, int nbSummon, int idInvocation, int attackBuff, int armorBuff, int nbDraw, boolean polymorph, String target) {
+    Spell(int id, String type, String name, int manaCost, int damage, String description, int nbSummon, int idInvocation, int attackBuff, int armorBuff, int nbDraw, boolean polymorph, String target) {
         super(id, type, name, manaCost, damage, description);
         
         this.nbSummon = nbSummon;

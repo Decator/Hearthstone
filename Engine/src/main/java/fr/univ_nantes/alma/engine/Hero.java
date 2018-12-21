@@ -2,7 +2,6 @@ package fr.univ_nantes.alma.engine;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
@@ -35,7 +34,7 @@ public class Hero extends Card {
 	 * @param description the description of the hero
 	 * @param target the target of the hero power
      */
-    public Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String description, String target) {
+    Hero(int id, String type, String name, int damage, int nbSummon, int idInvocation, int armorBuff, String description, String target) {
     	super(id, type, name, 0, damage, description);
 		this.nbSummon = nbSummon;
 		this.idInvocation = idInvocation;
@@ -74,7 +73,7 @@ public class Hero extends Card {
     }
     
     /**
-     * Get the amount of invocations that the hero can perfom. 
+     * Get the amount of invocations that the hero can perform. 
      * @return the amount of invocations
      */
     public int getNbSummon() {
@@ -90,6 +89,14 @@ public class Hero extends Card {
     }
     
     /**
+     * Gets the target of the hero power
+     * @return target of the hero power
+     */
+    public String getTarget() {
+    	return this.target;
+    }
+    
+    /**
      * Get the amount of armor buff that the hero can give. 
      * @return the amount of armor buff
      */
@@ -98,16 +105,16 @@ public class Hero extends Card {
     }
 
     /**
-     * Set the amout of healthPoints
-     * @param healthPoints the amout of healthPoints
+     * Set the amount of healthPoints
+     * @param healthPoints the amount of healthPoints
      */
     void setHealthPoints(int healthPoints) {
         this.healthPoints = healthPoints;
     }
 
     /**
-     * Set the amout of armorPoints
-     * @param armorPoints the amout of armorPoints
+     * Set the amount of armorPoints
+     * @param armorPoints the amount of armorPoints
      */
     void setArmorPoints(int armorPoints) {
         this.armorPoints = armorPoints;
@@ -119,16 +126,7 @@ public class Hero extends Card {
     void setHeroPowerUsed(boolean bool) {
         this.heroPowerUsed = bool;
     }
-    
-    /**
-     * Gets the target of the hero power
-     * @return target of the hero power
-     */
-    String getTarget() {
-    	return this.target;
-    }
-    
-    
+   
 	/**
 	 * Receive damage from an attack. 
 	 * @param damage the received damage

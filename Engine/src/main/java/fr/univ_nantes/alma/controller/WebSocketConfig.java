@@ -1,4 +1,4 @@
-package fr.univ_nantes.alma.controller.config;
+package fr.univ_nantes.alma.controller;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

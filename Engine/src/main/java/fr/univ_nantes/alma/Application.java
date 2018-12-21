@@ -5,16 +5,12 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 
 import fr.univ_nantes.alma.engine.Engine;
 import fr.univ_nantes.alma.engine.EngineBridge;
-import fr.univ_nantes.alma.engine.Hero;
 import fr.univ_nantes.alma.engine.HeroRepository;
-import fr.univ_nantes.alma.engine.Minion;
 import fr.univ_nantes.alma.engine.MinionRepository;
-import fr.univ_nantes.alma.engine.Spell;
 import fr.univ_nantes.alma.engine.SpellRepository;
 
 

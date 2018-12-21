@@ -1,9 +1,8 @@
-package fr.univ_nantes.alma.controller.resource;
+package fr.univ_nantes.alma.controller;
 
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.MessagingException;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;

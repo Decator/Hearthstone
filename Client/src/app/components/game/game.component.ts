@@ -25,6 +25,7 @@ export class GameComponent {
 	private showAllyHero: boolean = false;
 	private showEnemyHero: boolean = false;
 	private showAllyHeroPower: boolean = false;
+	private showOnlyTaunt: boolean = false;
 
 	private waitingForPlayCardTarget: boolean = false;
 	private waitingForAttackTarget: boolean = false;
@@ -47,6 +48,8 @@ export class GameComponent {
 					this.showAllyHero = false;
 					this.showEnemyHero = false;
 					this.showAllyHeroPower = true;
+					this.showOnlyTaunt = false;
+
 					this.waitingForPlayCardTarget = false;
 					this.waitingForAttackTarget = false;
 					this.waitingForHeroPowerTarget = false;
@@ -61,6 +64,8 @@ export class GameComponent {
 					this.showAllyHero = false;
 					this.showEnemyHero = false;
 					this.showAllyHeroPower = false;
+					this.showOnlyTaunt = false;
+
 					this.waitingForPlayCardTarget = false;
 					this.waitingForAttackTarget = false;
 					this.waitingForHeroPowerTarget = false;
@@ -112,6 +117,8 @@ export class GameComponent {
 
 			this.showHand = true;
 			this.showAllyHeroPower = true;
+			this.showOnlyTaunt = false;
+			
 			this.waitingForPlayCardTarget = true;
 			this.waitingForAttackTarget = false;
 			this.waitingForHeroPowerTarget = false;
@@ -144,6 +151,14 @@ export class GameComponent {
 			this.showEnemyMinions = true;
 			this.showAllyHero = false;
 			this.showEnemyHero = true;
+
+			this.showOnlyTaunt = false;
+			for(let card of this.otherPlayer.board){
+				if (card.taunt) {
+					this.showOnlyTaunt = true;
+					break;
+				}
+			}
 		}
 	}
 
@@ -163,6 +178,8 @@ export class GameComponent {
 
 			this.showHand = true;
 			this.showAllyHeroPower = false;
+			this.showOnlyTaunt = false;
+			
 			this.waitingForPlayCardTarget = false;
 			this.waitingForAttackTarget = false;
 			this.waitingForHeroPowerTarget = true;

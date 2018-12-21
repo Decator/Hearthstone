@@ -10,7 +10,7 @@
     </div>
 
     <div class="container">
-        <button [disabled]="!yourTurn || !showEnemyHero" (click)="onClickHero(otherPlayer.uuid)">
+        <button [disabled]="!yourTurn || !showEnemyHero || showOnlyTaunt" (click)="onClickHero(otherPlayer.uuid)">
             <p>
                 {{otherPlayer.hero.name}}
                 {{otherPlayer.hero.healthPoints}}
@@ -31,7 +31,7 @@
     <p>Le plateau adverse :</p>
     <div class="container">
         <button *ngFor="let card of otherPlayer.board" (click)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"
-            [disabled]="!yourTurn || !showEnemyMinions">
+            [disabled]="!yourTurn || !showEnemyMinions || (showOnlyTaunt && !card.taunt)">
             <p>M:{{card.manaCost}} - N:{{card.name}}</p>
             <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
         </button>
@@ -40,7 +40,7 @@
     <p>Votre plateau :</p>
     <div class="container">
         <button *ngFor="let card of player.board" (click)="onClickMinion(player.uuid, player.board.indexOf(card))"
-            [disabled]="!yourTurn || !showAllyMinions">
+            [disabled]="!yourTurn || !showAllyMinions || card.attacked">
             <p>M:{{card.manaCost}} - N:{{card.name}}</p>
             <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
         </button>

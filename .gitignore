@@ -20,4 +20,5 @@
 *.project
 *.settings
 *.idea
-Application.properties
+
+/Engine/src/main/resources/Application.properties

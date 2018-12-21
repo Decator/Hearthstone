@@ -33,11 +33,11 @@ public class Application {
 		
 		minionRepository.save(new Minion(4, "common", "Sanglier brocheroc", 1, 1, null, 1, false, false, false, 0));
 		minionRepository.save(new Minion(5, "common", "Soldat du compté-de-l'or", 1, 1, "Provocation", 2, true, false, false, 0));
-		minionRepository.save(new Minion(6, "common", "Chevaucheur de loup", 3, 3, "Charge", 1, false, true, false, 0));
+		minionRepository.save(new Minion(6, "common", "Chevaucheur de loup", 3, 3, "Charge", 1, false, false, true, 0));
 		minionRepository.save(new Minion(7, "common", "Chef de raid", 3, 2, "Vos autres serviteurs ont +1 ATQ.", 2, false, false, false, 1));
 		minionRepository.save(new Minion(8, "common", "Yéti noroit", 4, 4, null, 5, false, false, false, 0));
 		minionRepository.save(new Minion(9, "paladin", "Champion frisselame", 4, 3, "Charge, Vol de vie", 2, false, true, true, 0));
-		minionRepository.save(new Minion(10, "warrior", "Avocat commis d'office", 2, 0, "Provocation", 7, true, true, true, 0));
+		minionRepository.save(new Minion(10, "warrior", "Avocat commis d'office", 2, 0, "Provocation", 7, true, false, false, 0));
 		minionRepository.save(new Minion(11, "invocation", "Image miroir", 0, 0, "Provocation", 2, true, false, false, 0));
 		minionRepository.save(new Minion(12, "invocation", "Recrue de la Main d'argent", 1, 1, null, 1, false, false, false, 0));
 		minionRepository.save(new Minion(13, "invocation", "Mouton", 1, 1, null, 1, false, false, false, 0));

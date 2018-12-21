@@ -528,7 +528,11 @@ public class Game {
 				}
 			}
 			if (minion != null) {
-				player.addCardToBoard(minion); 
+				try {
+					player.addCardToBoard((Minion)minion.clone());
+				} catch (CloneNotSupportedException e) {
+					e.printStackTrace();
+				} 
 				giveAttackAuraToOtherMinions(player.getBoard(), player.getBoard().lastElement());
 				getAttackAuraFromOtherMinions(player.getBoard(), player.getBoard().lastElement()); //get attack aura buff from other minions if relevant
 			} else {

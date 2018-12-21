@@ -1,3 +1,5 @@
 /target/
 
 /bin/
+
+/src/main/resources/Application.properties

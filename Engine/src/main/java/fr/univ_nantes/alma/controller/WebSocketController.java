@@ -1,6 +1,7 @@
 package fr.univ_nantes.alma.controller;
 
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -16,6 +17,9 @@ public class WebSocketController {
 	
 	@Autowired
 	private SimpMessagingTemplate template;
+	
+	private UUID uuid1 = null;
+	private UUID uuid2 = null;
 	
 	@MessageMapping("/getHeros")
     public void getHeros() {
@@ -72,5 +76,27 @@ public class WebSocketController {
     	} catch (EngineException e) {
 			this.template.convertAndSend("/game/" + dataSplit[0], e.getMessage());
 		}
+    }
+    
+    @MessageMapping("/connectionTest") 
+    public void connectionTest(String data) {
+		System.out.println(data);
+    	if(this.uuid1 == null && this.uuid2 != UUID.fromString(data)) {
+    		this.uuid1 = UUID.fromString(data);
+    	} else if(this.uuid2 == null && this.uuid1 != UUID.fromString(data)) {
+    		this.uuid2 = UUID.fromString(data);
+    	}
+    	//VOIR WebSocketSession
+    	/*if(this.uuid1 == UUID.fromString(data)) {
+    		try {
+				TimeUnit.SECONDS.sleep(6);
+				System.out.println("test");
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+    	} else if(this.uuid2 == UUID.fromString(data)) {
+    		
+    	}*/
+    	
     }
 }

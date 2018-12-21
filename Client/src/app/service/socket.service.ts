@@ -106,9 +106,13 @@ export class SocketService {
         this.error = message.body;
         this.errorSubject.next(this.error);
       }
-      //this.gameSubscription.unsubscribe();
     });
     this.stompClient.send("/app/createGame", {}, this.player.uuid);
+
+    // Connection Test
+    this.stompClient.subscribe("/connectionTest", (message) => {
+      this.stompClient.send("/app/connectionTest", {}, this.player.uuid);
+    });
   }
 
   playCard(uuidGame: String, idCard: number, uuidPlayer: string, idTarget: number){

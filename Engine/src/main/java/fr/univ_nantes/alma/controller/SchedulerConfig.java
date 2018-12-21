@@ -13,8 +13,7 @@ public class SchedulerConfig {
     @Autowired
     private SimpMessagingTemplate template;
 
-   /* @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 3000)
     public void sendAdhocMessages() {
-        template.convertAndSend("/greeting", "Fixed Delay Scheduler");
-    }*/
-}
+        template.convertAndSend("/connectionTest", "ok");
+    }}

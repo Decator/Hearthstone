@@ -8,10 +8,10 @@ $docker-compose build </br>
 $docker-compose up -d </br>
 $docker start HSDock </br>
 </br>
-To check if HSDock is running :
+To check if HSDock is running : </br>
 $docker ps
 </br>
-To kill HSDock :
+To kill HSDock : </br>
 $docker kill HSDock </br>
 </br>
 This should build and start the container containing the MySQL server running the game's database. More information is available on this [website](https://runbook.readthedocs.io/en/latest/install_docker_compose/).

@@ -8,6 +8,12 @@ $docker-compose build </br>
 $docker-compose up -d </br>
 $docker start HSDock </br>
 </br>
+To check if HSDock is running :
+$docker ps
+</br>
+To kill HSDock :
+$docker kill HSDock </br>
+</br>
 This should build and start the container containing the MySQL server running the game's database. More information is available on this [website](https://runbook.readthedocs.io/en/latest/install_docker_compose/).
 The information required for the game engine to log into the database are already included in the Application.properties file. </br>
 <strong>If you are using Docker toolbox on Windows 10, you may need to change the following information in the Application.properties : </strong> </br>

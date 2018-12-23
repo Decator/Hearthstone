@@ -9,7 +9,7 @@ $docker-compose up -d </br>
 $docker start HSDock </br>
 </br>
 To check if HSDock is running : </br>
-$docker ps
+$docker ps </br>
 </br>
 To kill HSDock : </br>
 $docker kill HSDock </br>

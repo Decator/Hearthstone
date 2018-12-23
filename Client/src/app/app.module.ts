@@ -9,6 +9,7 @@ import { StartComponent } from './components/start/start.component';
 import { HeroComponent } from './components/hero/hero.component';
 import { GameComponent } from './components/game/game.component';
 import { EndComponent } from './components/end/end.component';
+import { CardComponent } from './components/card/card.component';
 
 import { AppRoutingModule } from './app.routing.module';
 
@@ -20,7 +21,8 @@ import { SocketService } from './service/socket.service';
 		StartComponent,
 		HeroComponent,
 		EndComponent,
-		GameComponent
+		GameComponent,
+		CardComponent
 	],
 	imports: [
 		BrowserModule,

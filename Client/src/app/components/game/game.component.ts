@@ -37,39 +37,7 @@ export class GameComponent {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
 
-				if (this.game.currentPlayer.uuid == this.socketService.getPlayer().uuid) {
-					this.player = this.game.currentPlayer;
-					this.otherPlayer = this.game.otherPlayer;
-
-					this.yourTurn = true;
-					this.showHand = true;
-					this.showAllyMinions = true;
-					this.showEnemyMinions = false;
-					this.showAllyHero = false;
-					this.showEnemyHero = false;
-					this.showAllyHeroPower = true;
-					this.showOnlyTaunt = false;
-
-					this.waitingForPlayCardTarget = false;
-					this.waitingForAttackTarget = false;
-					this.waitingForHeroPowerTarget = false;
-				} else {
-					this.player = this.game.otherPlayer;
-					this.otherPlayer = this.game.currentPlayer;
-
-					this.yourTurn = false;
-					this.showHand = false;
-					this.showAllyMinions = false;
-					this.showEnemyMinions = false;
-					this.showAllyHero = false;
-					this.showEnemyHero = false;
-					this.showAllyHeroPower = false;
-					this.showOnlyTaunt = false;
-
-					this.waitingForPlayCardTarget = false;
-					this.waitingForAttackTarget = false;
-					this.waitingForHeroPowerTarget = false;
-				}
+				this.resetBooleans();
 
 				if (this.showLoader) {
 					this.showLoader = false;
@@ -79,6 +47,11 @@ export class GameComponent {
 			this.socketService.errorObservable.subscribe((value: String) => {
 				this.error = value;
 				console.log(this.error);
+
+				if(this.game){
+					console.log("error if");
+					this.resetBooleans();
+				}
 			});
 
 			this.game = this.socketService.getGame();
@@ -192,6 +165,42 @@ export class GameComponent {
 
 	endTurn() {
 		this.socketService.endTurn(this.game.idGame);
+	}
+
+	resetBooleans(){
+		if (this.game.currentPlayer.uuid == this.socketService.getPlayer().uuid) {
+			this.player = this.game.currentPlayer;
+			this.otherPlayer = this.game.otherPlayer;
+
+			this.yourTurn = true;
+			this.showHand = true;
+			this.showAllyMinions = true;
+			this.showEnemyMinions = false;
+			this.showAllyHero = false;
+			this.showEnemyHero = false;
+			this.showAllyHeroPower = true;
+			this.showOnlyTaunt = false;
+
+			this.waitingForPlayCardTarget = false;
+			this.waitingForAttackTarget = false;
+			this.waitingForHeroPowerTarget = false;
+		} else {
+			this.player = this.game.otherPlayer;
+			this.otherPlayer = this.game.currentPlayer;
+
+			this.yourTurn = false;
+			this.showHand = false;
+			this.showAllyMinions = false;
+			this.showEnemyMinions = false;
+			this.showAllyHero = false;
+			this.showEnemyHero = false;
+			this.showAllyHeroPower = false;
+			this.showOnlyTaunt = false;
+
+			this.waitingForPlayCardTarget = false;
+			this.waitingForAttackTarget = false;
+			this.waitingForHeroPowerTarget = false;
+		}
 	}
 
 	showTargets(splitTarget: Array<String>){

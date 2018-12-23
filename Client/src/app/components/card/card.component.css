@@ -1,0 +1,37 @@
+/* Container holding the image and the text */
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+    width: 100px;
+    /* float: left; */
+    display: inline-block;
+}
+
+.card-active {
+    background-image: radial-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
+}
+
+/* Top left text */
+.top-left {
+    position: absolute;
+    top: 5px;
+    left: 16px;
+    transform: translateX(-50%);
+}
+
+/* Bottom left text */
+.bottom-left {
+    position: absolute;
+    bottom: 9px;
+    left: 16px;
+    transform: translateX(-50%);
+}
+
+/* Bottom right text */
+.bottom-right {
+    position: absolute;
+    bottom: 8px;
+    right: 12px;
+    transform: translateX(+50%);
+}

@@ -9,3 +9,24 @@
     display: table;
     clear: both;
 }
+
+button{
+  font-family: ancient, sans-serif;
+  font-size: 24px;
+}
+
+h2 {
+  text-align: center;
+}
+
+p{
+  font-family: ancient, sans-serif;
+  font-size: 24px;
+}
+
+@font-face {
+  font-family: 'ancient';
+  src: url('assets/ancient_medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style:normal;
+}

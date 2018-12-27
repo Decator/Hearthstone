@@ -3,7 +3,7 @@
     <h2><img src="assets/img/hearthstone_logo.png"></h2>
 
     <div class="container">
-        <p>
+        <p text-align="right">
             {{otherPlayer.username}}
             Points de mana : {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
         </p>
@@ -40,8 +40,8 @@
     </div>
 
     <p>Votre plateau :</p>
-    <div class="container">
-        <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!yourTurn || !showAllyMinions || card.attacked"
+    <div class="container" align="center">
+        <card-component align="center" *ngFor="let card of player.board" [card]="card" [disabled]="!yourTurn || !showAllyMinions || card.attacked"
             (click)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
         <!-- <button *ngFor="let card of player.board" (click)="onClickMinion(player.uuid, player.board.indexOf(card))"
             [disabled]="!yourTurn || !showAllyMinions || card.attacked">

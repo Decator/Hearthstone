@@ -1,8 +1,8 @@
 <h2 *ngIf="showLoader">Loader {{error}}</h2>
-<div *ngIf="!showLoader">
+<div class="background" *ngIf="!showLoader">
 
     <div class="container">
-        <p text-align="right">
+        <p>
             {{otherPlayer.username}}
             Points de mana : {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
         </p>
@@ -39,8 +39,8 @@
     </div>
 
     <p>Votre plateau :</p>
-    <div class="container" align="center">
-        <card-component align="center" *ngFor="let card of player.board" [card]="card" [disabled]="!yourTurn || !showAllyMinions || card.attacked"
+    <div class="container">
+        <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!yourTurn || !showAllyMinions || card.attacked"
             (click)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
         <!-- <button *ngFor="let card of player.board" (click)="onClickMinion(player.uuid, player.board.indexOf(card))"
             [disabled]="!yourTurn || !showAllyMinions || card.attacked">

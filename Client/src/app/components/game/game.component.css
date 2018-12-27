@@ -1,29 +1,19 @@
-.column {
-    float: left;
-    width: 50%;
+.background { 
+  /* The image used */
+  background-image: url("/assets/img/board.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-button{
+p {
   font-family: ancient, sans-serif;
-  font-size: 24px;
-  align: center;
-  text-align: center;
-}
-
-h2 {
-  text-align: center;
-}
-
-p{
-  font-family: ancient, sans-serif;
-  font-size: 24px;
+  margin: 0;
 }
 
 @font-face {
@@ -32,3 +22,4 @@ p{
   font-weight: normal;
   font-style:normal;
 }
+

@@ -28,7 +28,7 @@ p{
 
 @font-face {
   font-family: 'ancient';
-  src: url('assets/ancient_medium-webfont.woff') format('woff');
+  src: url('/assets/ancient_medium-webfont.woff') format('woff');
   font-weight: normal;
   font-style:normal;
 }

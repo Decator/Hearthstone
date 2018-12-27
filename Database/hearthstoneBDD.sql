@@ -80,7 +80,7 @@ CREATE TABLE `minion` (
 
 LOCK TABLES `minion` WRITE;
 /*!40000 ALTER TABLE `minion` DISABLE KEYS */;
-INSERT INTO `minion` VALUES (4,'common','Sanglier brocheroc',1,1,NULL,1,0,0,0,0,1),(5,'common','Soldat du compté-de-l\'or',1,1,'Provocation',2,1,0,0,0,1),(6,'common','Chevaucheur de loup',3,3,'Charge',1,0,0,1,0,1),(7,'common','Chef de raid',3,2,'Vos autres serviteurs ont +1 ATQ.',2,0,0,0,1,1),(8,'common','Yéti noroit',4,4,NULL,5,0,0,0,0,1),(9,'paladin','Champion frisselame',4,3,'Charge, Vol de vie',2,0,1,1,0,1),(10,'warrior','Avocat commis d\'office',2,0,'Provocation',7,1,1,1,0,1),(11,'invocation','Image miroir',0,0,'Provocation',2,1,0,0,0,1),(12,'invocation','Recrue de la Main d\'argent',1,1,NULL,1,0,0,0,0,1),(13,'invocation','Mouton',1,1,NULL,1,0,0,0,0,1);
+INSERT INTO `minion` VALUES (4,'common','Sanglier brocheroc',1,1,NULL,1,0,0,0,0,1),(5,'common','Soldat du compté-de-l\'or',1,1,'Provocation',2,1,0,0,0,1),(6,'common','Chevaucheur de loup',3,3,'Charge',1,0,0,1,0,1),(7,'common','Chef de raid',3,2,'Vos autres serviteurs ont +1 ATQ.',2,0,0,0,1,1),(8,'common','Yéti noroit',4,4,NULL,5,0,0,0,0,1),(9,'paladin','Champion frisselame',4,3,'Charge, Vol de vie',2,0,1,1,0,1),(10,'warrior','Avocat commis d\'office',2,0,'Provocation',7,1,0,0,0,1),(11,'invocation','Image miroir',0,0,'Provocation',2,1,0,0,0,1),(12,'invocation','Recrue de la Main d\'argent',1,1,NULL,1,0,0,0,0,1),(13,'invocation','Mouton',1,1,NULL,1,0,0,0,0,1);
 /*!40000 ALTER TABLE `minion` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,9 +114,9 @@ CREATE TABLE `spell` (
 --
 
 LOCK TABLES `spell` WRITE;
-/*!40000 ALTER TABLE `Spell` DISABLE KEYS */;
+/*!40000 ALTER TABLE `spell` DISABLE KEYS */;
 INSERT INTO `spell` VALUES (14,'mage','Image miroir',1,0,'Invoque deux serviteurs 0/2 avec provocation.',2,11,0,0,0,0,NULL),(15,'mage','Explosion des arcanes',2,1,'Inflige 1 point de dégâts à tous les serviteurs adverses.',0,0,0,0,0,0,'minion_all_enemy'),(16,'mage','Métamorphose',4,0,'Transforme un serviteur en mouton 1/1.',1,13,0,0,0,1,'minion_1_enemy'),(17,'paladin','Bénédiction de puissance',1,0,'Confère +3 ATQ à un serviteur.',0,0,3,0,0,0,'minion_1_ally'),(18,'paladin','Consécration',4,2,'Inflige 2 points de dégâts à tous les adversaires.',0,0,0,0,0,0,'all_all_enemy'),(19,'warrior','Tourbillon',1,1,'Inflige 1 point de dégâts à TOUS les serviteurs.',0,0,0,0,0,0,'minion_all_all'),(20,'warrior','Maîtrise du blocage',3,0,'Vous gagnez 5 points d\'armure et vous piochez une carte.',0,0,0,5,1,0,'minion_all_all');
-/*!40000 ALTER TABLE `Spell` ENABLE KEYS */;
+/*!40000 ALTER TABLE `spell` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -128,4 +128,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-07 23:23:41
+-- Dump completed on 2018-12-27 14:42:21

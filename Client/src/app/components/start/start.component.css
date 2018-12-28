@@ -1,4 +1,5 @@
-.background { 
+.background {
+    font-family: optibelwe;
     /* The image used */
     background-image: url("/assets/img/start.png");
   
@@ -11,4 +12,15 @@
     background-size: cover;
 
     cursor: pointer;
+}
+p {
+  font-family: optibelwe, sans-serif;
+  margin: 0;
+}
+
+@font-face {
+  font-family: 'optibelwe';
+  src: url('/assets/optibelwe-medium-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style:normal;
 }

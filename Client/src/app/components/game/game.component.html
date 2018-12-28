@@ -80,8 +80,10 @@
 
     <div class="container">
         <p>
+
             {{player.username}}
             Points de mana : {{player.manaPool}} / {{player.manaMaxTurn}}
+          <progress id="mana" value="{{player.manaPool}}" max="{{player.manaMaxTurn}}" ></progress>
         </p>
     </div>
 

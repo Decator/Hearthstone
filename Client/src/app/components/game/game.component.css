@@ -12,14 +12,24 @@
 }
 
 p {
-  font-family: ancient, sans-serif;
+  font-family: optibelwe, sans-serif;
   margin: 0;
 }
 
 @font-face {
-  font-family: 'ancient';
-  src: url('/assets/ancient_medium-webfont.woff') format('woff');
+  font-family: 'optibelwe';
+  src: url('/assets/optibelwe-medium-webfont.woff') format('woff');
   font-weight: normal;
   font-style:normal;
 }
 
+progress::-webkit-progress-bar { background: #99d2e3; }
+
+progress
+{
+  text-align:center;
+}
+
+progress:before {
+  content:attr(value) '/' attr(max);
+}

@@ -216,40 +216,44 @@ public class Game {
 		Hero hero = this.currentPlayer.getHero();
 		Hero heroEnemy = this.otherPlayer.getHero();
 		
-		//Checks if the minion already attacked or not
-		if(minion != null && !Rule.checkMinionAttacked(minion)) {
-			if (!Taunt(this.otherPlayer.getBoard()) && idTarget == -1) { // If no enemy minion has taunt and enemy Hero is target, then attacking is possible
-				int damage = minion.getDamage();
-				heroEnemy.receiveDamage(damage); //attacks the enemy Hero
-				minion.setAttacked(true);
-				LifeSteal(hero, minion);
-				if(!Rule.checkAlive(heroEnemy.getHealthPoints())) {
-					endGame();
-				}
-			} else if (!Taunt(this.otherPlayer.getBoard()) || this.otherPlayer.getBoard().get(idTarget).getTaunt()) { // If no enemy minion has taunt, or target minion has taunt, attacking is possible
-				Minion victim = this.otherPlayer.getBoard().get(idTarget);
-				if(victim != null) {
-					minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
-					LifeSteal(hero, minion);
-					victim.receiveDamage(minion.getDamage()); //attacks the minion
-					LifeSteal(heroEnemy, victim);
+		if (minion.getDamage() > 0) {
+			//Checks if the minion already attacked or not
+			if(minion != null && !Rule.checkMinionAttacked(minion)) {
+				if (!Taunt(this.otherPlayer.getBoard()) && idTarget == -1) { // If no enemy minion has taunt and enemy Hero is target, then attacking is possible
+					int damage = minion.getDamage();
+					heroEnemy.receiveDamage(damage); //attacks the enemy Hero
 					minion.setAttacked(true);
-					if(!Rule.checkAlive(minion.getHealthPoints())) {
-						removeAttackAuraFromMinions(this.currentPlayer.getBoard(), minion); //removes attack buff from other minions if relevant
-						this.currentPlayer.removeCardFromBoard(idAttack);
+					LifeSteal(hero, minion);
+					if(!Rule.checkAlive(heroEnemy.getHealthPoints())) {
+						endGame();
 					}
-					if(!Rule.checkAlive(victim.getHealthPoints())) {
-						removeAttackAuraFromMinions(this.otherPlayer.getBoard(), victim); //removes attack buff from other minions if relevant
-						this.otherPlayer.removeCardFromBoard(idTarget);
+				} else if (!Taunt(this.otherPlayer.getBoard()) || this.otherPlayer.getBoard().get(idTarget).getTaunt()) { // If no enemy minion has taunt, or target minion has taunt, attacking is possible
+					Minion victim = this.otherPlayer.getBoard().get(idTarget);
+					if(victim != null) {
+						minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
+						LifeSteal(hero, minion);
+						victim.receiveDamage(minion.getDamage()); //attacks the minion
+						LifeSteal(heroEnemy, victim);
+						minion.setAttacked(true);
+						if(!Rule.checkAlive(minion.getHealthPoints())) {
+							removeAttackAuraFromMinions(this.currentPlayer.getBoard(), minion); //removes attack buff from other minions if relevant
+							this.currentPlayer.removeCardFromBoard(idAttack);
+						}
+						if(!Rule.checkAlive(victim.getHealthPoints())) {
+							removeAttackAuraFromMinions(this.otherPlayer.getBoard(), victim); //removes attack buff from other minions if relevant
+							this.otherPlayer.removeCardFromBoard(idTarget);
+						}
+					} else {
+						throw new EngineException("Le serviteur que vous cherchez à attaquer n'existe pas !");
 					}
 				} else {
-					throw new EngineException("Le serviteur que vous cherchez à attaquer n'existe pas !");
+					throw new EngineException("Cible incorrecte, un serviteur adverse a provocation !");
 				}
 			} else {
-				throw new EngineException("Cible incorrecte, un serviteur adverse a provocation !");
+				throw new EngineException("Ce serviteur a déjà attaqué durant ce tour !");
 			}
 		} else {
-			throw new EngineException("Ce serviteur a déjà attaqué durant ce tour !");
+			throw new EngineException("Ce serviteur ne peut pas attaquer !");
 		}
 	}
 	

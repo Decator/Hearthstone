@@ -132,7 +132,15 @@ public class Hero extends Card {
 	 * @param damage the received damage
 	 */
 	void receiveDamage(int damage){
+		if (this.armorPoints >= damage && this.armorPoints > 0) {
+			this.armorPoints -= damage;
+		} else if (this.armorPoints < damage && this.armorPoints > 0) {
+			this.armorPoints = 0;
+			int remainingDamage = damage - this.armorPoints;
+			this.healthPoints -= remainingDamage;
+		} else {
 		this.healthPoints -= damage;
+		}
 	}
 	
 	/**

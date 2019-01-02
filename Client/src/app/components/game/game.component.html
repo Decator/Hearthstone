@@ -1,33 +1,29 @@
 <h2 *ngIf="showLoader">Loader {{error}}</h2>
 <div class="background" *ngIf="!showLoader">
 
-    <div class="container">
+    <div class="manaAdv">
         <p>
-            {{otherPlayer.username}}
-            Points de mana : {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
+             {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
         </p>
     </div>
 
-    <div class="container">
+    <div class="advInf">
         <button [disabled]="!yourTurn || !showEnemyHero || showOnlyTaunt" (click)="onClickHero(otherPlayer.uuid)">
             <p>
                 {{otherPlayer.hero.name}}
                 {{otherPlayer.hero.healthPoints}}
             </p>
         </button>
-        <button disabled="true">
-            <p>Pouvoir hero</p>
-        </button>
+
     </div>
 
-    <p>La main adverse :</p>
-    <div class="container">
+    <div class="advCard">
         <img *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
         <!-- <button *ngFor="let card of otherPlayer.hand" [disabled]="true">?</button> -->
     </div>
 
-    <p>Le plateau adverse :</p>
-    <div class="container">
+
+    <div class="advBoard">
         <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!yourTurn || !showEnemyMinions || (showOnlyTaunt && !card.taunt)"
             (click)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
         <!-- <button *ngFor="let card of otherPlayer.board" (click)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"
@@ -38,8 +34,8 @@
         </button> -->
     </div>
 
-    <p>Votre plateau :</p>
-    <div class="container">
+
+    <div class="board">
         <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!yourTurn || !showAllyMinions || card.attacked"
             (click)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
         <!-- <button *ngFor="let card of player.board" (click)="onClickMinion(player.uuid, player.board.indexOf(card))"
@@ -50,8 +46,7 @@
         </button> -->
     </div>
 
-    <p>Votre main :</p>
-    <div class="container">
+    <div class="card">
         <card-component *ngFor="let card of player.hand" [card]="card" (click)="onClickHand(player.hand.indexOf(card))" [disabled]="!yourTurn || !showHand"></card-component>
         <!-- <button *ngFor="let card of player.hand" (click)="onClickHand(player.hand.indexOf(card))" [disabled]="!yourTurn || !showHand">
             <div *ngIf="isMinion(card)">
@@ -66,29 +61,30 @@
         </button> -->
     </div>
 
-    <div class="container">
+    <div class="inf">
         <button (click)="onClickHero(player.uuid)" [disabled]="!yourTurn || !showAllyHero">
             <p>
                 {{player.hero.name}}
                 {{player.hero.healthPoints}}
             </p>
         </button>
-        <button (click)="onClickHeroPower()" [disabled]="!yourTurn || !showAllyHeroPower">
-            <p>Pouvoir hero</p>
-        </button>
+
     </div>
+  <div class="inf2">
+    <button (click)="onClickHeroPower()" [disabled]="!yourTurn || !showAllyHeroPower">
+      <p>Pouvoir hero</p>
+    </button>
+  </div>
 
-    <div class="container">
+    <div class="mana">
         <p>
-
-            {{player.username}}
-            Points de mana : {{player.manaPool}} / {{player.manaMaxTurn}}
+            Mana  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           <progress id="mana" value="{{player.manaPool}}" max="{{player.manaMaxTurn}}" ></progress>
         </p>
     </div>
 
-    <div class="container">
-        <button (click)="endTurn()" [disabled]="!yourTurn">
+    <div class="ftour">
+        <button (click)="endTurn()" [disabled]="!yourTurn" style="width:110px; height:27px; background-color:#efc91c;">
             Fin du tour
         </button>
     </div>

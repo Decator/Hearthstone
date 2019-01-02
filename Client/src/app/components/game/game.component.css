@@ -16,6 +16,71 @@ p {
   margin: 0;
 }
 
+.mana {
+  position: absolute;
+  right: 22.5%;
+  bottom: 2.5%;
+}
+
+.manaAdv {
+  position: absolute;
+  right: 36%;
+  top: 2%;
+}
+
+.advInf {
+  position: absolute;
+  right: 49%;
+  top: 20%;
+}
+
+.advCard {
+  position: absolute;
+  top: 0%;
+  left: 30%
+}
+
+.advBoard {
+  position:absolute;
+  top:30%;
+  left:40%;
+}
+
+.board {
+  position:absolute;
+  bottom:33%;
+  right:40%;
+}
+
+.card {
+  position: absolute;
+  left:40%;
+  bottom:0%;
+}
+
+.inf {
+  position:absolute;
+  right:48%;
+  bottom:20%;
+}
+
+.inf2 {
+  position:absolute;
+  right:38%;
+  bottom:20%;
+}
+
+.ftour {
+  position:absolute;
+  right:17%;
+  top:44%;
+}
+
+button {
+  font-family: optibelwe, sans-serif;
+  margin: 0;
+}
+
 @font-face {
   font-family: 'optibelwe';
   src: url('/assets/optibelwe-medium-webfont.woff') format('woff');
@@ -27,8 +92,13 @@ progress::-webkit-progress-bar { background: #99d2e3; }
 
 progress
 {
+  position: relative;
+  right: 30px;
   text-align:center;
 }
+
+
+
 
 progress:before {
   content:attr(value) '/' attr(max);

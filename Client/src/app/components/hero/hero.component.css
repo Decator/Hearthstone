@@ -6,6 +6,14 @@
     width: 30%;
 }
 
+form {
+  font-family: optibelwe, sans-serif;
+}
+
+mat-form-field{
+  font-family: optibelwe, sans-serif;
+}
+
 p {
   font-family: optibelwe, sans-serif;
   margin: 0;

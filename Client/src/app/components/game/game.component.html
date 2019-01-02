@@ -3,12 +3,12 @@
 
     <div class="manaAdv">
         <p>
-             {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
+            {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
         </p>
     </div>
 
     <div class="advInf">
-        <button [disabled]="!yourTurn || !showEnemyHero || showOnlyTaunt" (click)="onClickHero(otherPlayer.uuid)">
+        <button [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)" (click)="onClickHero(otherPlayer.uuid)">
             <p>
                 {{otherPlayer.hero.name}}
                 {{otherPlayer.hero.healthPoints}}
@@ -22,10 +22,9 @@
         <!-- <button *ngFor="let card of otherPlayer.hand" [disabled]="true">?</button> -->
     </div>
 
-
     <div class="advBoard">
-        <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!yourTurn || !showEnemyMinions || (showOnlyTaunt && !card.taunt)"
-            (click)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
+        <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
+            (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
         <!-- <button *ngFor="let card of otherPlayer.board" (click)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"
             [disabled]="!yourTurn || !showEnemyMinions || (showOnlyTaunt && !card.taunt)">
             <p>M:{{card.manaCost}} - N:{{card.name}}</p>
@@ -34,10 +33,9 @@
         </button> -->
     </div>
 
-
     <div class="board">
-        <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!yourTurn || !showAllyMinions || card.attacked"
-            (click)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
+        <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && (!card.attacked || waitingForPlayCardTarget || waitingForAttackTarget || waitingForHeroPowerTarget))"
+            (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
         <!-- <button *ngFor="let card of player.board" (click)="onClickMinion(player.uuid, player.board.indexOf(card))"
             [disabled]="!yourTurn || !showAllyMinions || card.attacked">
             <p>M:{{card.manaCost}} - N:{{card.name}}</p>
@@ -47,7 +45,8 @@
     </div>
 
     <div class="card">
-        <card-component *ngFor="let card of player.hand" [card]="card" (click)="onClickHand(player.hand.indexOf(card))" [disabled]="!yourTurn || !showHand"></card-component>
+        <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))"
+            [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
         <!-- <button *ngFor="let card of player.hand" (click)="onClickHand(player.hand.indexOf(card))" [disabled]="!yourTurn || !showHand">
             <div *ngIf="isMinion(card)">
                 <p>M:{{card.manaCost}} - N:{{card.name}}</p>
@@ -62,7 +61,7 @@
     </div>
 
     <div class="inf">
-        <button (click)="onClickHero(player.uuid)" [disabled]="!yourTurn || !showAllyHero">
+        <button (click)="onClickHero(player.uuid)" [disabled]="!(yourTurn && showAllyHero)">
             <p>
                 {{player.hero.name}}
                 {{player.hero.healthPoints}}
@@ -70,16 +69,16 @@
         </button>
 
     </div>
-  <div class="inf2">
-    <button (click)="onClickHeroPower()" [disabled]="!yourTurn || !showAllyHeroPower">
-      <p>Pouvoir hero</p>
-    </button>
-  </div>
+    <div class="inf2">
+        <button (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
+            <p>Pouvoir hero</p>
+        </button>
+    </div>
 
     <div class="mana">
         <p>
-            Mana  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          <progress id="mana" value="{{player.manaPool}}" max="{{player.manaMaxTurn}}" ></progress>
+            Mana &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+            <progress id="mana" value="{{player.manaPool}}" max="{{player.manaMaxTurn}}"></progress>
         </p>
     </div>
 

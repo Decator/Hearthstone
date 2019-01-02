@@ -97,9 +97,6 @@ progress
   text-align:center;
 }
 
-
-
-
 progress:before {
   content:attr(value) '/' attr(max);
 }

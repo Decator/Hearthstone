@@ -1,15 +1,4 @@
-.background { 
-  /* The image used */
-  background-image: url("/assets/img/board.jpg");
 
-  /* Full height */
-  height: 100%; 
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 p {
   font-family: optibelwe, sans-serif;
@@ -37,31 +26,35 @@ p {
 .advCard {
   position: absolute;
   top: 0%;
-  left: 30%
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .advBoard {
-  position:absolute;
-  top:30%;
-  left:40%;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .board {
-  position:absolute;
-  bottom:33%;
-  right:40%;
+  position: absolute;
+  bottom: 33%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .card {
   position: absolute;
-  left:40%;
-  bottom:0%;
+  bottom: 0%;
+  left:50%;
+  transform: translateX(-50%);
 }
 
 .inf {
-  position:absolute;
-  right:48%;
-  bottom:20%;
+  position: absolute;
+  right: 48%;
+  bottom: 20%;
 }
 
 .inf2 {

@@ -15,6 +15,7 @@ export class GameComponent {
 	private game: Game;
 	private player: Player;
 	private otherPlayer: Player;
+	private gameOver: boolean;
 	private yourTurn: boolean = false;
 	private error: String;
 
@@ -142,6 +143,9 @@ export class GameComponent {
 			this.attack(this.idWaitingCard, -1);
 		} else if(this.waitingForHeroPowerTarget){
 			this.heroPower(uuidTarget, -1);
+		}
+		if (this.gameOver) {
+		  this.router.navigate(['/end']);
 		}
 	}
 

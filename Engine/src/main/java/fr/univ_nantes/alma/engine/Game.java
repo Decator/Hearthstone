@@ -17,6 +17,7 @@ public class Game {
 	private UUID idGame;
 	private Player currentPlayer;
 	private Player otherPlayer;
+	private boolean gameOver;
 	private ArrayList<Minion> invocations;
 
 	/**
@@ -30,6 +31,7 @@ public class Game {
 		this.currentPlayer = player1;
 		this.otherPlayer = player2;
 		this.invocations = invocations;
+		this.gameOver = false;
 		initTurn();
 	}
 	
@@ -117,7 +119,8 @@ public class Game {
 	                		if (entry.getValue() instanceof Hero) {
 	                			((Hero) entry.getValue()).receiveDamage(spell.getDamage());
 		                		if(!Rule.checkAlive(((Hero)entry.getValue()).getHealthPoints())){
-		    						endGame();
+		                			this.gameOver = true;
+		    						//endGame();
 		                		}
 	                		} else if (entry.getValue() instanceof Minion) {
 	                			((Minion) entry.getValue()).receiveDamage(spell.getDamage());
@@ -168,7 +171,8 @@ public class Game {
                 		if (entry.getValue() instanceof Hero) {
                 			((Hero) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
 	                		if(!Rule.checkAlive(((Hero)entry.getValue()).getHealthPoints())){
-	    						endGame();
+	                			this.gameOver = true;
+	    						//endGame();
 	                		}
                 		} else if (entry.getValue() instanceof Minion) {
                 			((Minion) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
@@ -225,7 +229,8 @@ public class Game {
 					minion.setAttacked(true);
 					LifeSteal(hero, minion);
 					if(!Rule.checkAlive(heroEnemy.getHealthPoints())) {
-						endGame();
+						this.gameOver = true;
+						//endGame();
 					}
 				} else if (!Taunt(this.otherPlayer.getBoard()) || this.otherPlayer.getBoard().get(idTarget).getTaunt()) { // If no enemy minion has taunt, or target minion has taunt, attacking is possible
 					Minion victim = this.otherPlayer.getBoard().get(idTarget);

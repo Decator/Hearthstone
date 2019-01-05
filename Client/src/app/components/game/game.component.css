@@ -6,15 +6,17 @@ p {
 }
 
 .mana {
+  color:3b619b;
   position: absolute;
-  right: 22.5%;
-  bottom: 2.5%;
+  right: 18.5%;
+  bottom: 20%;
 }
 
 .manaAdv {
+  color:3b619b;
   position: absolute;
-  right: 36%;
-  top: 2%;
+  right: 26%;
+  top: 20%;
 }
 
 .advInf {

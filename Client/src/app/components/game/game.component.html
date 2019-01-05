@@ -2,8 +2,8 @@
 <div class="background" *ngIf="!showLoader">
 
     <div class="manaAdv">
-        <p>
-            {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
+        <p style="color:3b619b">
+           Mana &nbsp; &nbsp; &nbsp; &nbsp; {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
         </p>
     </div>
 
@@ -76,7 +76,7 @@
     </div>
 
     <div class="mana">
-        <p>
+        <p style="color:3b619b">
             Mana &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
             <progress id="mana" value="{{player.manaPool}}" max="{{player.manaMaxTurn}}"></progress>
         </p>

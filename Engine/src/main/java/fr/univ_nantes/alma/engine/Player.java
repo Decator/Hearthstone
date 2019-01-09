@@ -147,7 +147,7 @@ public class Player {
 	 * @param minion the minion to add
 	 */
 	void addCardToBoard(Minion minion, int id) {
-		this.getBoard().add(id, minion);
+		this.getBoard().set(id, minion);
 	}
 
 	/**

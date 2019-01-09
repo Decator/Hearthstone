@@ -1,0 +1,1676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_XLf9kBNkEemjXMhSJ2PSkA" name="Engine">
+  <elementImport xmi:id="_XSrjoBNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsKsBNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#byte"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsKsRNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#char"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsKshNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#double"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsKsxNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#float"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsKtBNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsxwBNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#long"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsxwRNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#short"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsxwhNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsxwxNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsxxBNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+  </elementImport>
+  <elementImport xmi:id="_XSsxxRNkEemjXMhSJ2PSkA">
+    <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+  </elementImport>
+  <packageImport xmi:id="_XSldABNkEemjXMhSJ2PSkA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packageImport xmi:id="_XSogUBNkEemjXMhSJ2PSkA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Package" xmi:id="_XTy98BNkEemjXMhSJ2PSkA" name="fr">
+    <packagedElement xmi:type="uml:Package" xmi:id="_XTzlABNkEemjXMhSJ2PSkA" name="univ_nantes">
+      <packagedElement xmi:type="uml:Package" xmi:id="_XT0MEBNkEemjXMhSJ2PSkA" name="alma">
+        <packagedElement xmi:type="uml:Package" xmi:id="_XUBncBNkEemjXMhSJ2PSkA" name="controller">
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUDcoBNkEemjXMhSJ2PSkA" name="SchedulerConfig" visibility="public">
+            <elementImport xmi:id="_XX2-kBNkEemjXMhSJ2PSkA" importedElement="_XVUA4hNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XX3loRNkEemjXMhSJ2PSkA" importedElement="_XX3loBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XX4MsxNkEemjXMhSJ2PSkA" importedElement="_XX4MshNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XX4zwxNkEemjXMhSJ2PSkA" importedElement="_XX4zwhNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XX5a0RNkEemjXMhSJ2PSkA" importedElement="_XX5a0BNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedAttribute xmi:id="_XX73EBNkEemjXMhSJ2PSkA" name="template" visibility="private" type="_XX4MshNkEemjXMhSJ2PSkA"/>
+            <ownedOperation xmi:id="_XYBWoBNkEemjXMhSJ2PSkA" name="sendAdhocMessages" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUGf8BNkEemjXMhSJ2PSkA" name="WebSocketController" visibility="public">
+            <elementImport xmi:id="_XYJScBNkEemjXMhSJ2PSkA" importedElement="_XYIrYhNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XYKgkhNkEemjXMhSJ2PSkA" importedElement="_XYKgkRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XYKgkxNkEemjXMhSJ2PSkA" importedElement="_XVUA4hNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XYLHoxNkEemjXMhSJ2PSkA" importedElement="_XYLHohNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XYLusBNkEemjXMhSJ2PSkA" importedElement="_XX4MshNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XYMVwBNkEemjXMhSJ2PSkA" importedElement="_XYLushNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XYMVwRNkEemjXMhSJ2PSkA" importedElement="_XUAZUBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XYMVwhNkEemjXMhSJ2PSkA" importedElement="_XUhWsBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XYMVwxNkEemjXMhSJ2PSkA" importedElement="_XUceMBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedAttribute xmi:id="_XYQAIBNkEemjXMhSJ2PSkA" name="template" visibility="private" type="_XX4MshNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XYTqgBNkEemjXMhSJ2PSkA" name="uuid1" visibility="private" type="_XYIrYhNkEemjXMhSJ2PSkA">
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XYWGwBNkEemjXMhSJ2PSkA" name="" type="_XYIrYhNkEemjXMhSJ2PSkA" value="null"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XYZxIBNkEemjXMhSJ2PSkA" name="uuid2" visibility="private" type="_XYIrYhNkEemjXMhSJ2PSkA">
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XYaYMBNkEemjXMhSJ2PSkA" name="" type="_XYIrYhNkEemjXMhSJ2PSkA" value="null"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_XYpBsBNkEemjXMhSJ2PSkA" name="getHeros" visibility="public"/>
+            <ownedOperation xmi:id="_XZA1IBNkEemjXMhSJ2PSkA" name="createPlayer" visibility="public">
+              <ownedParameter xmi:id="_XZA1IRNkEemjXMhSJ2PSkA" name="data">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XaMg4BNkEemjXMhSJ2PSkA" name="createGame" visibility="public">
+              <ownedParameter xmi:id="_XaMg4RNkEemjXMhSJ2PSkA" name="uuidPlayer">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XajGMBNkEemjXMhSJ2PSkA" name="endTurn" visibility="public">
+              <ownedParameter xmi:id="_XajGMRNkEemjXMhSJ2PSkA" name="uuidGame">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xa988BNkEemjXMhSJ2PSkA" name="playCard" visibility="public">
+              <ownedParameter xmi:id="_Xa988RNkEemjXMhSJ2PSkA" name="data">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XbT7MBNkEemjXMhSJ2PSkA" name="heroPower" visibility="public">
+              <ownedParameter xmi:id="_XbT7MRNkEemjXMhSJ2PSkA" name="data">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XbloABNkEemjXMhSJ2PSkA" name="attack" visibility="public">
+              <ownedParameter xmi:id="_XbloARNkEemjXMhSJ2PSkA" name="data">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xb4i8BNkEemjXMhSJ2PSkA" name="connectionTest" visibility="public">
+              <ownedParameter xmi:id="_Xb4i8RNkEemjXMhSJ2PSkA" name="data">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XULYcBNkEemjXMhSJ2PSkA" name="WebSocketConfig" visibility="public">
+            <elementImport xmi:id="_XcF-UBNkEemjXMhSJ2PSkA" importedElement="_XX3loBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XcF-UxNkEemjXMhSJ2PSkA" importedElement="_XcF-UhNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XcGlYBNkEemjXMhSJ2PSkA" importedElement="_XcFXRBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XcGlYhNkEemjXMhSJ2PSkA" importedElement="_XcGlYRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XcHMcRNkEemjXMhSJ2PSkA" importedElement="_XcHMcBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedOperation xmi:id="_XcXrIBNkEemjXMhSJ2PSkA" name="configureMessageBroker" visibility="public">
+              <eAnnotations xmi:id="_XcXrIRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XcXrIhNkEemjXMhSJ2PSkA" key="documentation" value=" Configure message broker options.&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XcXrIxNkEemjXMhSJ2PSkA" name="config" type="_XcF-UhNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XciDMBNkEemjXMhSJ2PSkA" name="registerStompEndpoints" visibility="public">
+              <eAnnotations xmi:id="_XciDMRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XciDMhNkEemjXMhSJ2PSkA" key="documentation" value=" Register STOMP endpoints mapping each to a specific URL and (optionally)&#xA; enabling and configuring SockJS fallback options.&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XciDMxNkEemjXMhSJ2PSkA" name="registry" type="_XcHMcBNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpKxABNkEemjXMhSJ2PSkA" name="controller_annotation" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XVUA4RNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpLYEBNkEemjXMhSJ2PSkA" name="controller_annotation" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XVV2ERNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpLYERNkEemjXMhSJ2PSkA" name="controller_simp" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XX4MsRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_IBNkEemjXMhSJ2PSkA" name="controller_annotation" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XX4zwRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_IRNkEemjXMhSJ2PSkA" name="controller_util" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XYIrYRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_IhNkEemjXMhSJ2PSkA" name="controller_concurrent" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XYKgkBNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_IxNkEemjXMhSJ2PSkA" name="controller_annotation" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XYLHoRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_JBNkEemjXMhSJ2PSkA" name="controller_stereotype" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XYLusRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_JRNkEemjXMhSJ2PSkA" name="controller_alma" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XT0MEBNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_JhNkEemjXMhSJ2PSkA" name="controller_engine" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XUL_gBNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_JxNkEemjXMhSJ2PSkA" name="controller_config" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XcF-URNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpL_KBNkEemjXMhSJ2PSkA" name="controller_annotation" client="_XUBncBNkEemjXMhSJ2PSkA" supplier="_XcFXQxNkEemjXMhSJ2PSkA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_XUAZUBNkEemjXMhSJ2PSkA" name="Application" visibility="public">
+          <elementImport xmi:id="_XVSywhNkEemjXMhSJ2PSkA" importedElement="_XVSywRNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVUA4xNkEemjXMhSJ2PSkA" importedElement="_XVUA4hNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVUn8hNkEemjXMhSJ2PSkA" importedElement="_XVUn8RNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVVPAhNkEemjXMhSJ2PSkA" importedElement="_XVVPARNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVWdIBNkEemjXMhSJ2PSkA" importedElement="_XVV2EhNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVWdIRNkEemjXMhSJ2PSkA" importedElement="_XUStMBNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVWdIhNkEemjXMhSJ2PSkA" importedElement="_XUYMwBNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVWdIxNkEemjXMhSJ2PSkA" importedElement="_XUjL4BNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVWdJBNkEemjXMhSJ2PSkA" importedElement="_XUgvoBNkEemjXMhSJ2PSkA" visibility="private"/>
+          <elementImport xmi:id="_XVWdJRNkEemjXMhSJ2PSkA" importedElement="_XUbQEBNkEemjXMhSJ2PSkA" visibility="private"/>
+          <ownedAttribute xmi:id="_XVj4gBNkEemjXMhSJ2PSkA" name="engine" visibility="public" isStatic="true" type="_XUYMwBNkEemjXMhSJ2PSkA" association="_XpKJ9BNkEemjXMhSJ2PSkA"/>
+          <ownedAttribute xmi:id="_XVws0BNkEemjXMhSJ2PSkA" name="dataSource" type="_XVSywRNkEemjXMhSJ2PSkA"/>
+          <ownedOperation xmi:id="_XWdQYBNkEemjXMhSJ2PSkA" name="main" visibility="public" isStatic="true">
+            <ownedParameter xmi:id="_XWdQYRNkEemjXMhSJ2PSkA" name="args">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XWdQYhNkEemjXMhSJ2PSkA" value="*"/>
+            </ownedParameter>
+          </ownedOperation>
+          <ownedOperation xmi:id="_XXo8IBNkEemjXMhSJ2PSkA" name="engine" visibility="public">
+            <ownedParameter xmi:id="_XXpjMBNkEemjXMhSJ2PSkA" name="minionRepository" type="_XUgvoBNkEemjXMhSJ2PSkA"/>
+            <ownedParameter xmi:id="_XXpjMRNkEemjXMhSJ2PSkA" name="spellRepository" type="_XUbQEBNkEemjXMhSJ2PSkA"/>
+            <ownedParameter xmi:id="_XXpjMhNkEemjXMhSJ2PSkA" name="heroRepository" type="_XUjL4BNkEemjXMhSJ2PSkA"/>
+            <ownedParameter xmi:id="_XXpjMxNkEemjXMhSJ2PSkA" direction="return">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedParameter>
+          </ownedOperation>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_XUL_gBNkEemjXMhSJ2PSkA" name="engine">
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUObwBNkEemjXMhSJ2PSkA" name="Player" visibility="public">
+            <eAnnotations xmi:id="_XUObwRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUObwhNkEemjXMhSJ2PSkA" key="documentation" value=" The complete description of a player.&#xA; @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <elementImport xmi:id="_XcmUoBNkEemjXMhSJ2PSkA" importedElement="_XYIrYhNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XcniwRNkEemjXMhSJ2PSkA" importedElement="_XcniwBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedAttribute xmi:id="_XcpX8BNkEemjXMhSJ2PSkA" name="uuid" visibility="private" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_Xcp_ABNkEemjXMhSJ2PSkA" name="username" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XcsbQBNkEemjXMhSJ2PSkA" name="hero" visibility="private" type="_XUdFQBNkEemjXMhSJ2PSkA" association="_XpNNQBNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XctpYBNkEemjXMhSJ2PSkA" name="manaPool" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XcuQcBNkEemjXMhSJ2PSkA" name="manaMaxTurn" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XcwFoBNkEemjXMhSJ2PSkA" name="deck" visibility="private" type="_XUb3IBNkEemjXMhSJ2PSkA" association="_XpNNQhNkEemjXMhSJ2PSkA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XcwssBNkEemjXMhSJ2PSkA" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_Xc0XEBNkEemjXMhSJ2PSkA" name="hand" visibility="private" type="_XUb3IBNkEemjXMhSJ2PSkA" isOrdered="true" isUnique="false" association="_XpNNRBNkEemjXMhSJ2PSkA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Xc0XERNkEemjXMhSJ2PSkA" value="*"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_Xc4ogBNkEemjXMhSJ2PSkA" name="board" visibility="private" type="_XUZa4BNkEemjXMhSJ2PSkA" isOrdered="true" isUnique="false" association="_XpN0UBNkEemjXMhSJ2PSkA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Xc5PkBNkEemjXMhSJ2PSkA" value="*"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_XdE1wBNkEemjXMhSJ2PSkA" name="Player">
+              <eAnnotations xmi:id="_XdE1wRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdE1whNkEemjXMhSJ2PSkA" key="documentation" value=" Initialize the attributes of this class.&#xA; @param uuid the id of the game&#xA; @param username the username of the user&#xA; @param hero the hero of the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdE1wxNkEemjXMhSJ2PSkA" name="uuid" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XdE1xBNkEemjXMhSJ2PSkA" name="username">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XdE1xRNkEemjXMhSJ2PSkA" name="hero" type="_XUdFQBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XdE1xhNkEemjXMhSJ2PSkA" name="deck" type="_XUb3IBNkEemjXMhSJ2PSkA">
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XdE1xxNkEemjXMhSJ2PSkA" value="*"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XdE1yBNkEemjXMhSJ2PSkA" name="hand" type="_XcniwBNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdGD4BNkEemjXMhSJ2PSkA" name="getUUID" visibility="public">
+              <eAnnotations xmi:id="_XdGD4RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdGD4hNkEemjXMhSJ2PSkA" key="documentation" value=" Return the id of the game.&#xA; @return the id of the game&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdGD4xNkEemjXMhSJ2PSkA" type="_XYIrYhNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdHSABNkEemjXMhSJ2PSkA" name="getUsername" visibility="public">
+              <eAnnotations xmi:id="_XdHSARNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdHSAhNkEemjXMhSJ2PSkA" key="documentation" value=" Return the username.&#xA; @return the username&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdHSAxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdJuQBNkEemjXMhSJ2PSkA" name="getHero" visibility="public">
+              <eAnnotations xmi:id="_XdJuQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdJuQhNkEemjXMhSJ2PSkA" key="documentation" value=" Return the Hero the user has chosen.&#xA; @return the hero&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdJuQxNkEemjXMhSJ2PSkA" type="_XUdFQBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdK8YBNkEemjXMhSJ2PSkA" name="getManaPool" visibility="public">
+              <eAnnotations xmi:id="_XdK8YRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdK8YhNkEemjXMhSJ2PSkA" key="documentation" value=" Return the manaPool of the player.&#xA; @return the manaPool of the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdK8YxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdLjcBNkEemjXMhSJ2PSkA" name="getManaMaxTurn" visibility="public">
+              <eAnnotations xmi:id="_XdLjcRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdLjchNkEemjXMhSJ2PSkA" key="documentation" value=" Return the ManaMaxTurn of the player.&#xA; @return the ManaMaxTurn of the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdLjcxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdN_sBNkEemjXMhSJ2PSkA" name="getDeck" visibility="public">
+              <eAnnotations xmi:id="_XdN_sRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdN_shNkEemjXMhSJ2PSkA" key="documentation" value=" Return the deck of the player.&#xA; @return the deck of the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdN_sxNkEemjXMhSJ2PSkA" type="_XUb3IBNkEemjXMhSJ2PSkA" direction="return">
+                <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XdN_tBNkEemjXMhSJ2PSkA" value="*"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdP04BNkEemjXMhSJ2PSkA" name="getHand" visibility="public">
+              <eAnnotations xmi:id="_XdP04RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdP04hNkEemjXMhSJ2PSkA" key="documentation" value=" Return the hand of the player.&#xA; @return he hand of the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdP04xNkEemjXMhSJ2PSkA" type="_XcniwBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdRqEBNkEemjXMhSJ2PSkA" name="getBoard" visibility="public">
+              <eAnnotations xmi:id="_XdRqERNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdRqEhNkEemjXMhSJ2PSkA" key="documentation" value=" Return the board of the player.&#xA; @return the board of the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdRqExNkEemjXMhSJ2PSkA" type="_XcniwBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdTfQBNkEemjXMhSJ2PSkA" name="setManaPoolForNewTurn">
+              <eAnnotations xmi:id="_XdTfQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdTfQhNkEemjXMhSJ2PSkA" key="documentation" value=" Set the mana pool at manaMaxTurn.&#xA; "/>
+              </eAnnotations>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdVUcBNkEemjXMhSJ2PSkA" name="setManaPoolAfterPlay">
+              <eAnnotations xmi:id="_XdV7gBNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdV7gRNkEemjXMhSJ2PSkA" key="documentation" value=" Set the mana pool at manaMaxTurn.&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdV7ghNkEemjXMhSJ2PSkA" name="mana">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdY-0BNkEemjXMhSJ2PSkA" name="setManaMaxTurn">
+              <eAnnotations xmi:id="_XdY-0RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdY-0hNkEemjXMhSJ2PSkA" key="documentation" value=" Increase the mana pool each turn until it reaches 10&#xA;&#x9;"/>
+              </eAnnotations>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdeeYBNkEemjXMhSJ2PSkA" name="addCardToHand">
+              <eAnnotations xmi:id="_XdeeYRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdeeYhNkEemjXMhSJ2PSkA" key="documentation" value=" Add a card to the player's hand&#xA; @param card the card to add&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdeeYxNkEemjXMhSJ2PSkA" name="card" type="_XUb3IBNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdjW4BNkEemjXMhSJ2PSkA" name="addCardToBoard">
+              <eAnnotations xmi:id="_XdjW4RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdjW4hNkEemjXMhSJ2PSkA" key="documentation" value=" Add a minion to the player's board&#xA; @param minion the minion to add&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdjW4xNkEemjXMhSJ2PSkA" name="minion" type="_XUZa4BNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdqEkBNkEemjXMhSJ2PSkA" name="addCardToBoard">
+              <eAnnotations xmi:id="_XdqEkRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdqEkhNkEemjXMhSJ2PSkA" key="documentation" value=" Add a minion at a specific index to the player's board&#xA; @param minion the minion to add&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdqEkxNkEemjXMhSJ2PSkA" name="minion" type="_XUZa4BNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XdqElBNkEemjXMhSJ2PSkA" name="id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xdsg0BNkEemjXMhSJ2PSkA" name="removeCardFromHand">
+              <eAnnotations xmi:id="_Xdsg0RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xdsg0hNkEemjXMhSJ2PSkA" key="documentation" value=" Remove a card from the player's hand&#xA; @param idCard the id of the card to remove&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xdsg0xNkEemjXMhSJ2PSkA" name="idCard">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XdwLMBNkEemjXMhSJ2PSkA" name="removeCardFromBoard">
+              <eAnnotations xmi:id="_XdwLMRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XdwLMhNkEemjXMhSJ2PSkA" key="documentation" value=" Remove a minion from the player's board&#xA; @param idCard the id of the minion to remove&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XdwLMxNkEemjXMhSJ2PSkA" name="idCard">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUStMBNkEemjXMhSJ2PSkA" name="Engine" visibility="public">
+            <eAnnotations xmi:id="_XUStMRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUStMhNkEemjXMhSJ2PSkA" key="documentation" value=" &#xA; &#xA; @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <elementImport xmi:id="_Xd5VIRNkEemjXMhSJ2PSkA" importedElement="_Xd5VIBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xd58MRNkEemjXMhSJ2PSkA" importedElement="_Xd58MBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xd58MhNkEemjXMhSJ2PSkA" importedElement="_XYIrYhNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xd58MxNkEemjXMhSJ2PSkA" importedElement="_XcniwBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xd58NBNkEemjXMhSJ2PSkA" importedElement="_XVUA4hNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedAttribute xmi:id="_Xd9mkBNkEemjXMhSJ2PSkA" name="games" visibility="private" type="_Xd58MBNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XeAp4BNkEemjXMhSJ2PSkA" name="players" visibility="private" type="_Xd58MBNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XeDGIBNkEemjXMhSJ2PSkA" name="waitingPlayer" visibility="private" type="_XUObwBNkEemjXMhSJ2PSkA" association="_XpN0UhNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XeGJcBNkEemjXMhSJ2PSkA" name="minionRepository" visibility="private" type="_XUgvoBNkEemjXMhSJ2PSkA" association="_XpN0VBNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XeJMwBNkEemjXMhSJ2PSkA" name="spellRepository" visibility="private" type="_XUbQEBNkEemjXMhSJ2PSkA" association="_XpN0VhNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XeOsUBNkEemjXMhSJ2PSkA" name="heroRepository" visibility="private" type="_XUjL4BNkEemjXMhSJ2PSkA" association="_XpN0WBNkEemjXMhSJ2PSkA"/>
+            <interfaceRealization xmi:id="_Xd4uEBNkEemjXMhSJ2PSkA" name="fr.univ_nantes.alma.engine.EngineBridge" client="_XUStMBNkEemjXMhSJ2PSkA" supplier="_XUYMwBNkEemjXMhSJ2PSkA" contract="_XUYMwBNkEemjXMhSJ2PSkA"/>
+            <ownedOperation xmi:id="_XfAvcBNkEemjXMhSJ2PSkA" name="Engine" visibility="public">
+              <ownedParameter xmi:id="_XfAvcRNkEemjXMhSJ2PSkA" name="minion" type="_XUgvoBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XfAvchNkEemjXMhSJ2PSkA" name="spell" type="_XUbQEBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XfAvcxNkEemjXMhSJ2PSkA" name="hero" type="_XUjL4BNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xfa_IBNkEemjXMhSJ2PSkA" name="getHeros" visibility="public">
+              <eAnnotations xmi:id="_Xfa_IRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xfa_IhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the list of available heros.&#xA; @return the list of available heros&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xfa_IxNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xf1O0BNkEemjXMhSJ2PSkA" name="createPlayer" visibility="public">
+              <eAnnotations xmi:id="_Xf1O0RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xf1O0hNkEemjXMhSJ2PSkA" key="documentation" value=" Create a player with a hero id and a username. &#xA; @param idHero the id of the hero&#xA; @param username the username of the player&#xA; @return the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xf1O0xNkEemjXMhSJ2PSkA" name="idHero">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xf1O1BNkEemjXMhSJ2PSkA" name="username">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xf1O1RNkEemjXMhSJ2PSkA" type="_XUObwBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XgSh0BNkEemjXMhSJ2PSkA" name="createGame" visibility="public">
+              <eAnnotations xmi:id="_XgSh0RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XgSh0hNkEemjXMhSJ2PSkA" key="documentation" value=" Create a game with an uuid and two players. &#xA; @param uuidPlyaer the uuid of the player&#xA; @return the game&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XgSh0xNkEemjXMhSJ2PSkA" name="uuidPlayer" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XgSh1BNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XgumsBNkEemjXMhSJ2PSkA" name="endTurn" visibility="public">
+              <eAnnotations xmi:id="_XgumsRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XgumshNkEemjXMhSJ2PSkA" key="documentation" value=" End the turn.&#xA; @param uuidGame the id of the game &#xA; @return the game&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XgumsxNkEemjXMhSJ2PSkA" name="uuidGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XgumtBNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XhT1gBNkEemjXMhSJ2PSkA" name="playCard" visibility="public">
+              <eAnnotations xmi:id="_XhT1gRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XhT1ghNkEemjXMhSJ2PSkA" key="documentation" value=" Play a card. Either put a minion card on the board or activate a spell card.&#xA; @param uuidGame the id of the game&#xA; @param idCard the id of the card&#xA; @param uuidPlayer the player choose (for some spells)&#xA; @param idTarget the id of the target&#xA; @return the game&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XhT1gxNkEemjXMhSJ2PSkA" name="uuidGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XhT1hBNkEemjXMhSJ2PSkA" name="idCard">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XhT1hRNkEemjXMhSJ2PSkA" name="uuidPlayer" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XhT1hhNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XhT1hxNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xh2oEBNkEemjXMhSJ2PSkA" name="heroPower" visibility="public">
+              <eAnnotations xmi:id="_Xh2oERNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xh2oEhNkEemjXMhSJ2PSkA" key="documentation" value=" Activate the hero's power.&#xA; @param uuidGame the id of the game&#xA; @param uuidPlayer the chosen player (for some power)&#xA; @param idTarget the id of the target, if the power doesn't need a target then set idTarget to 1&#xA; @return the game&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xh2oExNkEemjXMhSJ2PSkA" name="uuidGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_Xh2oFBNkEemjXMhSJ2PSkA" name="uuidPlayer" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_Xh2oFRNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xh2oFhNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XiSs8BNkEemjXMhSJ2PSkA" name="attack" visibility="public">
+              <eAnnotations xmi:id="_XiSs8RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XiSs8hNkEemjXMhSJ2PSkA" key="documentation" value=" Attack a card or a hero.&#xA; @param uuidGame the id of the game&#xA; @param idAttack the id of the attacker&#xA; @param idTarget the id of the target&#xA; @return the game&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XiSs8xNkEemjXMhSJ2PSkA" name="uuidGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XiSs9BNkEemjXMhSJ2PSkA" name="idAttack">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XiSs9RNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XiSs9hNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XigvYBNkEemjXMhSJ2PSkA" name="retrieveMinions" visibility="public">
+              <eAnnotations xmi:id="_XigvYRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XigvYhNkEemjXMhSJ2PSkA" key="documentation" value=" Get all the Minions a Hero can use. &#xA; @param heroType the type of Hero&#xA; @return the list of Minions&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XigvYxNkEemjXMhSJ2PSkA" name="heroType">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XigvZBNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XijysBNkEemjXMhSJ2PSkA" name="retrieveSpells" visibility="public">
+              <eAnnotations xmi:id="_XijysRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XijyshNkEemjXMhSJ2PSkA" key="documentation" value=" Get all Spells a Hero can use. &#xA; @param heroType the type of Hero&#xA; @return the list of Spells&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XijysxNkEemjXMhSJ2PSkA" name="heroType">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XijytBNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XioEIBNkEemjXMhSJ2PSkA" name="retrieveInvocations" visibility="public">
+              <eAnnotations xmi:id="_XioEIRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XioEIhNkEemjXMhSJ2PSkA" key="documentation" value=" Get all the invocations. &#xA; @return the list of invocations&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XioEIxNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XitjsBNkEemjXMhSJ2PSkA" name="retrieveHero" visibility="public">
+              <eAnnotations xmi:id="_XitjsRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XitjshNkEemjXMhSJ2PSkA" key="documentation" value=" Get the hero. &#xA; @return the hero&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XitjsxNkEemjXMhSJ2PSkA" name="hero">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XitjtBNkEemjXMhSJ2PSkA" type="_XUdFQBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_XUYMwBNkEemjXMhSJ2PSkA" name="EngineBridge" visibility="public">
+            <eAnnotations xmi:id="_XUYz0BNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUYz0RNkEemjXMhSJ2PSkA" key="documentation" value=" The interface of the package engine. &#xA; The Client component can use it to run the game. &#xA; @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <ownedOperation xmi:id="_Xiv_8BNkEemjXMhSJ2PSkA" name="getHeros" visibility="public">
+              <eAnnotations xmi:id="_Xiv_8RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xiv_8hNkEemjXMhSJ2PSkA" key="documentation" value=" Get the list of available heros.&#xA; @return the list of available heros&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xiv_8xNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xix1IBNkEemjXMhSJ2PSkA" name="createPlayer" visibility="public">
+              <eAnnotations xmi:id="_XiycMBNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XiycMRNkEemjXMhSJ2PSkA" key="documentation" value=" Create a player with a hero id and a username. &#xA; @param idHero the id of the hero&#xA; @param username the username of the player&#xA; @return the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XiycMhNkEemjXMhSJ2PSkA" name="idHero">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XiycMxNkEemjXMhSJ2PSkA" name="username">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XiycNBNkEemjXMhSJ2PSkA" type="_XUObwBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xi04cBNkEemjXMhSJ2PSkA" name="createGame" visibility="public">
+              <eAnnotations xmi:id="_Xi04cRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xi04chNkEemjXMhSJ2PSkA" key="documentation" value=" Create a game with an uuid and two players. &#xA; @param uuidPlyaer the uuid of the player&#xA; @return the game&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xi04cxNkEemjXMhSJ2PSkA" name="uuidPlayer" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_Xi04dBNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xi37wBNkEemjXMhSJ2PSkA" name="endTurn" visibility="public">
+              <eAnnotations xmi:id="_Xi37wRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xi37whNkEemjXMhSJ2PSkA" key="documentation" value=" End the turn.&#xA; @param uuidGame the id of the game &#xA; @return the game&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xi37wxNkEemjXMhSJ2PSkA" name="uuidGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_Xi37xBNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xi-CYBNkEemjXMhSJ2PSkA" name="playCard" visibility="public">
+              <eAnnotations xmi:id="_Xi-CYRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xi-CYhNkEemjXMhSJ2PSkA" key="documentation" value=" Play a card. Either put a minion card on the board or activate a spell card.&#xA; @param uuidGame the id of the game&#xA; @param idCard the id of the card&#xA; @param uuidPlayer the player choose (for some spells)&#xA; @param idTarget the id of the target&#xA; @return the game&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xi-CYxNkEemjXMhSJ2PSkA" name="uuidGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_Xi-CZBNkEemjXMhSJ2PSkA" name="idCard">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xi-CZRNkEemjXMhSJ2PSkA" name="uuidPlayer" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_Xi-CZhNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xi-CZxNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XjDh8BNkEemjXMhSJ2PSkA" name="heroPower" visibility="public">
+              <eAnnotations xmi:id="_XjDh8RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjDh8hNkEemjXMhSJ2PSkA" key="documentation" value=" Activate the hero's power.&#xA; @param uuidGame the id of the game&#xA; @param uuidPlayer the chosen player (for some power)&#xA; @param idTarget the id of the target, if the power doesn't need a target then set idTarget to 1&#xA; @return the game&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjDh8xNkEemjXMhSJ2PSkA" name="uuidGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XjDh9BNkEemjXMhSJ2PSkA" name="uuidPlayer" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XjDh9RNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjDh9hNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XjHzYBNkEemjXMhSJ2PSkA" name="attack" visibility="public">
+              <eAnnotations xmi:id="_XjHzYRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjHzYhNkEemjXMhSJ2PSkA" key="documentation" value=" Attack a card or a hero.&#xA; @param uuidGame the id of the game&#xA; @param idAttack the id of the attacker&#xA; @param idTarget the id of the target&#xA; @return the game&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjHzYxNkEemjXMhSJ2PSkA" name="uuidGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XjHzZBNkEemjXMhSJ2PSkA" name="idAttack">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjHzZRNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjHzZhNkEemjXMhSJ2PSkA" type="_XUceMBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUZa4BNkEemjXMhSJ2PSkA" name="Minion" visibility="public">
+            <eAnnotations xmi:id="_XUZa4RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUZa4hNkEemjXMhSJ2PSkA" key="documentation" value=" &#xA; The complete description of a Minion Card. &#xA; &#xA; @author Martin Ars, Alexis Claveau, Alexis Loret, Maud Van Dorssen&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <elementImport xmi:id="_XjPIIhNkEemjXMhSJ2PSkA" importedElement="_XjPIIRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XjPvMBNkEemjXMhSJ2PSkA" importedElement="_XjPIIxNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XjPvMhNkEemjXMhSJ2PSkA" importedElement="_XjPvMRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <generalization xmi:id="_XjOhEBNkEemjXMhSJ2PSkA" general="_XUb3IBNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XjQWQBNkEemjXMhSJ2PSkA" name="healthPoints" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XjQWQRNkEemjXMhSJ2PSkA" name="" value="&quot;health_points_minion&quot;) private int healthPoints">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XjQ9UBNkEemjXMhSJ2PSkA" name="taunt" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XjQ9URNkEemjXMhSJ2PSkA" name="" value="&quot;taunt_minion&quot;) private boolean taunt">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XjRkYBNkEemjXMhSJ2PSkA" name="lifeSteal" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XjRkYRNkEemjXMhSJ2PSkA" name="" value="&quot;lifesteal_minion&quot;) private boolean lifeSteal">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XjRkYhNkEemjXMhSJ2PSkA" name="charge" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XjSLcBNkEemjXMhSJ2PSkA" name="" value="&quot;charge_minion&quot;) private boolean charge">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XjSLcRNkEemjXMhSJ2PSkA" name="attackBuffAura" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XjSLchNkEemjXMhSJ2PSkA" name="" value="&quot;attack_buff_aura_minion&quot;) private int attackBuffAura">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XjSygBNkEemjXMhSJ2PSkA" name="attacked" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XjSygRNkEemjXMhSJ2PSkA" name="" value="&quot;attacked_minion&quot;)private boolean attacked">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_XjV10BNkEemjXMhSJ2PSkA" name="Minion">
+              <eAnnotations xmi:id="_XjV10RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjV10hNkEemjXMhSJ2PSkA" key="documentation" value=" Initialize the attributes of this class. &#xA; @param id the id of the card&#xA; @param type There are five types : common, mage, paladin, warrior and invocation &#xA; @param name the name of the card&#xA; @param manaCost the amount of mana that the card costs&#xA; @param damage the amount of damage that the card can inflict&#xA; @param target a simple text with the target of the card&#xA; @param description the description of the card&#xA; @param attackBuff the amount of the attack buff that the card can give&#xA; @param taunt if the card is taunting or not&#xA; @param lifeSteal if the can can steal life or not&#xA; @param charge if the card can charge or not&#xA; @param healthPoints the amount of health points the minion has&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjV10xNkEemjXMhSJ2PSkA" name="id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV11BNkEemjXMhSJ2PSkA" name="type">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV11RNkEemjXMhSJ2PSkA" name="name">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV11hNkEemjXMhSJ2PSkA" name="manaCost">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV11xNkEemjXMhSJ2PSkA" name="damage">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV12BNkEemjXMhSJ2PSkA" name="description">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV12RNkEemjXMhSJ2PSkA" name="healthPoints">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV12hNkEemjXMhSJ2PSkA" name="taunt">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV12xNkEemjXMhSJ2PSkA" name="lifeSteal">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV13BNkEemjXMhSJ2PSkA" name="charge">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XjV13RNkEemjXMhSJ2PSkA" name="attackBuffAura">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XjYSEBNkEemjXMhSJ2PSkA" name="Minion" visibility="public"/>
+            <ownedOperation xmi:id="_XjpX0hNkEemjXMhSJ2PSkA" name="clone" visibility="public">
+              <eAnnotations xmi:id="_XjpX0xNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjpX1BNkEemjXMhSJ2PSkA" key="documentation" value=" Creates and returns a copy of this object.  The precise meaning&#xA; of &quot;copy&quot; may depend on the class of the object. The general&#xA; intent is that, for any object {@code x}, the expression:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone() != x&lt;/pre>&lt;/blockquote>&#xA; will be true, and that the expression:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone().getClass() == x.getClass()&lt;/pre>&lt;/blockquote>&#xA; will be {@code true}, but these are not absolute requirements.&#xA; While it is typically the case that:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone().equals(x)&lt;/pre>&lt;/blockquote>&#xA; will be {@code true}, this is not an absolute requirement.&#xA; &lt;p>&#xA; By convention, the returned object should be obtained by calling&#xA; {@code super.clone}.  If a class and all of its superclasses (except&#xA; {@code Object}) obey this convention, it will be the case that&#xA; {@code x.clone().getClass() == x.getClass()}.&#xA; &lt;p>&#xA; By convention, the object returned by this method should be independent&#xA; of this object (which is being cloned).  To achieve this independence,&#xA; it may be necessary to modify one or more fields of the object returned&#xA; by {@code super.clone} before returning it.  Typically, this means&#xA; copying any mutable objects that comprise the internal &quot;deep structure&quot;&#xA; of the object being cloned and replacing the references to these&#xA; objects with references to the copies.  If a class contains only&#xA; primitive fields or references to immutable objects, then it is usually&#xA; the case that no fields in the object returned by {@code super.clone}&#xA; need to be modified.&#xA; &lt;p>&#xA; The method {@code clone} for class {@code Object} performs a&#xA; specific cloning operation. First, if the class of this object does&#xA; not implement the interface {@code Cloneable}, then a&#xA; {@code CloneNotSupportedException} is thrown. Note that all arrays&#xA; are considered to implement the interface {@code Cloneable} and that&#xA; the return type of the {@code clone} method of an array type {@code T[]}&#xA; is {@code T[]} where T is any reference or primitive type.&#xA; Otherwise, this method creates a new instance of the class of this&#xA; object and initializes all its fields with exactly the contents of&#xA; the corresponding fields of this object, as if by assignment; the&#xA; contents of the fields are not themselves cloned. Thus, this method&#xA; performs a &quot;shallow copy&quot; of this object, not a &quot;deep copy&quot; operation.&#xA; &lt;p>&#xA; The class {@code Object} does not itself implement the interface&#xA; {@code Cloneable}, so calling the {@code clone} method on an object&#xA; whose class is {@code Object} will result in throwing an&#xA; exception at run time.&#xA; @return     a clone of this instance.&#xA; @throws  CloneNotSupportedException  if the object's class does not&#xA;               support the {@code Cloneable} interface. Subclasses&#xA;               that override the {@code clone} method can also&#xA;               throw this exception to indicate that an instance cannot&#xA;               be cloned.&#xA; @see java.lang.Cloneable&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjpX1RNkEemjXMhSJ2PSkA" type="_XjpX0RNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XjtpQBNkEemjXMhSJ2PSkA" name="getHealthPoints" visibility="public">
+              <eAnnotations xmi:id="_XjtpQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjtpQhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the healthPoints of the minion&#xA; @return the healthPoints&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjtpQxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XjuQUBNkEemjXMhSJ2PSkA" name="getTaunt" visibility="public">
+              <eAnnotations xmi:id="_XjuQURNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjuQUhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the taunt of the minion &#xA; @return the taunt&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjuQUxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xju3YBNkEemjXMhSJ2PSkA" name="getLifesteal" visibility="public">
+              <eAnnotations xmi:id="_Xju3YRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xju3YhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the lifeSteal of the minion. &#xA; @return the lifeSteal&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xju3YxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XjvecBNkEemjXMhSJ2PSkA" name="getCharge" visibility="public">
+              <eAnnotations xmi:id="_XjvecRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjvechNkEemjXMhSJ2PSkA" key="documentation" value=" Get the charge of the minion. &#xA; @return the charge&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjvecxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XjwFgBNkEemjXMhSJ2PSkA" name="getAttackBuffAura" visibility="public">
+              <eAnnotations xmi:id="_XjwFgRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjwFghNkEemjXMhSJ2PSkA" key="documentation" value=" Get the attackBuffAura of the card. &#xA; @return the attackBuffAura&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjwFgxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XjxToBNkEemjXMhSJ2PSkA" name="getAttacked" visibility="public">
+              <eAnnotations xmi:id="_XjxToRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XjxTohNkEemjXMhSJ2PSkA" key="documentation" value=" Get the attacked of the card. &#xA; @return the attacked&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XjxToxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xjzv4BNkEemjXMhSJ2PSkA" name="setAttacked">
+              <eAnnotations xmi:id="_Xjzv4RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xjzv4hNkEemjXMhSJ2PSkA" key="documentation" value=" Replaces the attacked variable by (true, false).&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xjzv4xNkEemjXMhSJ2PSkA" name="bool">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xj2MIBNkEemjXMhSJ2PSkA" name="receiveDamage">
+              <eAnnotations xmi:id="_Xj2zMBNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xj2zMRNkEemjXMhSJ2PSkA" key="documentation" value=" Receive damage from an attack. &#xA; @param damage the received damage&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xj2zMhNkEemjXMhSJ2PSkA" name="damage">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_XUbQEBNkEemjXMhSJ2PSkA" name="SpellRepository" visibility="public">
+            <generalization xmi:id="_Xj7EoxNkEemjXMhSJ2PSkA" general="_Xj7EohNkEemjXMhSJ2PSkA"/>
+            <ownedOperation xmi:id="_XkByUBNkEemjXMhSJ2PSkA" name="findByType">
+              <ownedParameter xmi:id="_XkByURNkEemjXMhSJ2PSkA" name="type">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XkByUhNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XkHR4BNkEemjXMhSJ2PSkA" name="findById">
+              <ownedParameter xmi:id="_XkHR4RNkEemjXMhSJ2PSkA" name="id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XkHR4hNkEemjXMhSJ2PSkA" type="_XUdsUBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUb3IBNkEemjXMhSJ2PSkA" name="Card" visibility="public" isAbstract="true">
+            <eAnnotations xmi:id="_XUb3IRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUb3IhNkEemjXMhSJ2PSkA" key="documentation" value=" The complete description of a card wich can be either a Minion or a Spell. &#xA; @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <elementImport xmi:id="_XkKVMRNkEemjXMhSJ2PSkA" importedElement="_XjPIIRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XkKVMxNkEemjXMhSJ2PSkA" importedElement="_XkKVMhNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XkK8QRNkEemjXMhSJ2PSkA" importedElement="_XkK8QBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedAttribute xmi:id="_XkK8QhNkEemjXMhSJ2PSkA" name="id" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XkLjUBNkEemjXMhSJ2PSkA" name="" value="&quot;id&quot;) private int id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XkLjURNkEemjXMhSJ2PSkA" name="type" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XkLjUhNkEemjXMhSJ2PSkA" name="" value="&quot;type&quot;) private String type">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XkMKYBNkEemjXMhSJ2PSkA" name="name" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XkMKYRNkEemjXMhSJ2PSkA" name="" value="&quot;name&quot;) private String name">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XkMKYhNkEemjXMhSJ2PSkA" name="manaCost" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XkMKYxNkEemjXMhSJ2PSkA" name="" value="&quot;mana_cost&quot;) private int manaCost">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XkMxcBNkEemjXMhSJ2PSkA" name="damage" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XkMxcRNkEemjXMhSJ2PSkA" name="" value="&quot;damage&quot;) private int damage">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XkNYgBNkEemjXMhSJ2PSkA" name="description" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XkNYgRNkEemjXMhSJ2PSkA" name="" value="&quot;description&quot;) private String description">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_XkPNsBNkEemjXMhSJ2PSkA" name="Card">
+              <eAnnotations xmi:id="_XkPNsRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XkPNshNkEemjXMhSJ2PSkA" key="documentation" value=" Initialize the attributes of this class. &#xA; @param id the id of the card&#xA; @param type There are five types : common, mage, paladin, warrior and invocation &#xA; @param name the name of the card&#xA; @param manaCost the amount of mana the card costs&#xA; @param damage the amount of damage that the card can inflict&#xA; @param description the description of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XkPNsxNkEemjXMhSJ2PSkA" name="id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XkPNtBNkEemjXMhSJ2PSkA" name="type">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XkPNtRNkEemjXMhSJ2PSkA" name="name">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XkPNthNkEemjXMhSJ2PSkA" name="manaCost">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XkPNtxNkEemjXMhSJ2PSkA" name="damage">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XkPNuBNkEemjXMhSJ2PSkA" name="description">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XkS4EBNkEemjXMhSJ2PSkA" name="Card"/>
+            <ownedOperation xmi:id="_Xkaz4BNkEemjXMhSJ2PSkA" name="clone" visibility="public">
+              <eAnnotations xmi:id="_Xkaz4RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xkaz4hNkEemjXMhSJ2PSkA" key="documentation" value=" Creates and returns a copy of this object.  The precise meaning&#xA; of &quot;copy&quot; may depend on the class of the object. The general&#xA; intent is that, for any object {@code x}, the expression:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone() != x&lt;/pre>&lt;/blockquote>&#xA; will be true, and that the expression:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone().getClass() == x.getClass()&lt;/pre>&lt;/blockquote>&#xA; will be {@code true}, but these are not absolute requirements.&#xA; While it is typically the case that:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone().equals(x)&lt;/pre>&lt;/blockquote>&#xA; will be {@code true}, this is not an absolute requirement.&#xA; &lt;p>&#xA; By convention, the returned object should be obtained by calling&#xA; {@code super.clone}.  If a class and all of its superclasses (except&#xA; {@code Object}) obey this convention, it will be the case that&#xA; {@code x.clone().getClass() == x.getClass()}.&#xA; &lt;p>&#xA; By convention, the object returned by this method should be independent&#xA; of this object (which is being cloned).  To achieve this independence,&#xA; it may be necessary to modify one or more fields of the object returned&#xA; by {@code super.clone} before returning it.  Typically, this means&#xA; copying any mutable objects that comprise the internal &quot;deep structure&quot;&#xA; of the object being cloned and replacing the references to these&#xA; objects with references to the copies.  If a class contains only&#xA; primitive fields or references to immutable objects, then it is usually&#xA; the case that no fields in the object returned by {@code super.clone}&#xA; need to be modified.&#xA; &lt;p>&#xA; The method {@code clone} for class {@code Object} performs a&#xA; specific cloning operation. First, if the class of this object does&#xA; not implement the interface {@code Cloneable}, then a&#xA; {@code CloneNotSupportedException} is thrown. Note that all arrays&#xA; are considered to implement the interface {@code Cloneable} and that&#xA; the return type of the {@code clone} method of an array type {@code T[]}&#xA; is {@code T[]} where T is any reference or primitive type.&#xA; Otherwise, this method creates a new instance of the class of this&#xA; object and initializes all its fields with exactly the contents of&#xA; the corresponding fields of this object, as if by assignment; the&#xA; contents of the fields are not themselves cloned. Thus, this method&#xA; performs a &quot;shallow copy&quot; of this object, not a &quot;deep copy&quot; operation.&#xA; &lt;p>&#xA; The class {@code Object} does not itself implement the interface&#xA; {@code Cloneable}, so calling the {@code clone} method on an object&#xA; whose class is {@code Object} will result in throwing an&#xA; exception at run time.&#xA; @return     a clone of this instance.&#xA; @throws  CloneNotSupportedException  if the object's class does not&#xA;               support the {@code Cloneable} interface. Subclasses&#xA;               that override the {@code clone} method can also&#xA;               throw this exception to indicate that an instance cannot&#xA;               be cloned.&#xA; @see java.lang.Cloneable&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xkaz4xNkEemjXMhSJ2PSkA" type="_XjpX0RNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xkd3MBNkEemjXMhSJ2PSkA" name="getId" visibility="public">
+              <eAnnotations xmi:id="_Xkd3MRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xkd3MhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the id of the card. &#xA; @return the id of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xkd3MxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XkeeQBNkEemjXMhSJ2PSkA" name="getType" visibility="public">
+              <eAnnotations xmi:id="_XkeeQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XkeeQhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the type of the card. &#xA; @return the type of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XkeeQxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XkfFUBNkEemjXMhSJ2PSkA" name="getName" visibility="public">
+              <eAnnotations xmi:id="_XkfFURNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XkfFUhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the name of the card. &#xA; @return the name of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XkfFUxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XkfsYBNkEemjXMhSJ2PSkA" name="getManaCost" visibility="public">
+              <eAnnotations xmi:id="_XkfsYRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XkfsYhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the manaCost of the card. &#xA; @return the manaCost of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XkfsYxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XkgTcBNkEemjXMhSJ2PSkA" name="getDamage" visibility="public">
+              <eAnnotations xmi:id="_XkgTcRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XkgTchNkEemjXMhSJ2PSkA" key="documentation" value=" Get the damage of the card. &#xA; @return the damage of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XkgTcxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XkiIoBNkEemjXMhSJ2PSkA" name="setDamage">
+              <eAnnotations xmi:id="_XkiIoRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XkiIohNkEemjXMhSJ2PSkA" key="documentation" value=" Sets the damage attribute of a card&#xA; @param damage&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XkiIoxNkEemjXMhSJ2PSkA" name="damage">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XkivsBNkEemjXMhSJ2PSkA" name="getDescription" visibility="public">
+              <eAnnotations xmi:id="_XkivsRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XkivshNkEemjXMhSJ2PSkA" key="documentation" value=" Get the description of the card. &#xA; @return the description of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XkivsxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XklzABNkEemjXMhSJ2PSkA" name="toString" visibility="public">
+              <eAnnotations xmi:id="_XklzARNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XklzAhNkEemjXMhSJ2PSkA" key="documentation" value=" Returns a string representation of the object. In general, the&#xA; {@code toString} method returns a string that&#xA; &quot;textually represents&quot; this object. The result should&#xA; be a concise but informative representation that is easy for a&#xA; person to read.&#xA; It is recommended that all subclasses override this method.&#xA; &lt;p>&#xA; The {@code toString} method for class {@code Object}&#xA; returns a string consisting of the name of the class of which the&#xA; object is an instance, the at-sign character `{@code @}', and&#xA; the unsigned hexadecimal representation of the hash code of the&#xA; object. In other words, this method returns a string equal to the&#xA; value of:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; getClass().getName() + '@' + Integer.toHexString(hashCode())&#xA; &lt;/pre>&lt;/blockquote>&#xA; @return  a string representation of the object.&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XklzAxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUceMBNkEemjXMhSJ2PSkA" name="Game" visibility="public">
+            <eAnnotations xmi:id="_XUceMRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUceMhNkEemjXMhSJ2PSkA" key="documentation" value=" Manage all the actions that can happen in the game.&#xA; @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <elementImport xmi:id="_XkrSkBNkEemjXMhSJ2PSkA" importedElement="_Xd5VIBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xkr5oRNkEemjXMhSJ2PSkA" importedElement="_Xkr5oBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XksgsRNkEemjXMhSJ2PSkA" importedElement="_XksgsBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XksgshNkEemjXMhSJ2PSkA" importedElement="_XYIrYhNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XksgsxNkEemjXMhSJ2PSkA" importedElement="_XcniwBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedAttribute xmi:id="_XkuV4BNkEemjXMhSJ2PSkA" name="idGame" visibility="private" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_Xk58EBNkEemjXMhSJ2PSkA" name="currentPlayer" visibility="private" type="_XUObwBNkEemjXMhSJ2PSkA" association="_XpObYBNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_Xk8YUBNkEemjXMhSJ2PSkA" name="otherPlayer" visibility="private" type="_XUObwBNkEemjXMhSJ2PSkA" association="_XpObYhNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_Xk8_YBNkEemjXMhSJ2PSkA" name="gameOver" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XlACsBNkEemjXMhSJ2PSkA" name="invocations" visibility="private" type="_XUZa4BNkEemjXMhSJ2PSkA" isOrdered="true" isUnique="false" association="_XpObZBNkEemjXMhSJ2PSkA">
+              <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XlApwBNkEemjXMhSJ2PSkA" value="*"/>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_XlKawBNkEemjXMhSJ2PSkA" name="Game">
+              <eAnnotations xmi:id="_XlKawRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XlKawhNkEemjXMhSJ2PSkA" key="documentation" value=" Initialize the attributes of this class.&#xA; @param idGame the id of the game&#xA; @param player1 the first player of the game&#xA; @param player2 the second player of the game&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XlKawxNkEemjXMhSJ2PSkA" name="idGame" type="_XYIrYhNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlKaxBNkEemjXMhSJ2PSkA" name="player1" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlKaxRNkEemjXMhSJ2PSkA" name="player2" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlKaxhNkEemjXMhSJ2PSkA" name="invocations" type="_Xd5VIBNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XlQhYBNkEemjXMhSJ2PSkA" name="playCard">
+              <eAnnotations xmi:id="_XlQhYRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XlQhYhNkEemjXMhSJ2PSkA" key="documentation" value=" Play the card with the specified id.&#xA; @param idCard the id of the card the player wants to play&#xA; @param targetPlayer the player that might be the target of the played card&#xA; @param idTarget the id of the target&#xA; @throws EngineException &#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XlQhYxNkEemjXMhSJ2PSkA" name="idCard">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XlQhZBNkEemjXMhSJ2PSkA" name="targetPlayer" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlQhZRNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XlVZ4BNkEemjXMhSJ2PSkA" name="heroPower">
+              <eAnnotations xmi:id="_XlVZ4RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XlVZ4hNkEemjXMhSJ2PSkA" key="documentation" value=" Triggers the hero power of the current player based on its class&#xA; @param playerTarget the player that might be the target of the hero power&#xA; @param idTarget the specific target of the hero power&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XlVZ4xNkEemjXMhSJ2PSkA" name="playerTarget" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlWA8BNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XlYdMBNkEemjXMhSJ2PSkA" name="attack">
+              <eAnnotations xmi:id="_XlYdMRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XlYdMhNkEemjXMhSJ2PSkA" key="documentation" value=" Attacks a target with an attacker given in parameter&#xA; @param idAttack the id of the attacker&#xA; @param idTarget the id of the target&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XlYdMxNkEemjXMhSJ2PSkA" name="idAttack">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XlYdNBNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XlaSYBNkEemjXMhSJ2PSkA" name="initTurn">
+              <eAnnotations xmi:id="_XlaSYRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XlaSYhNkEemjXMhSJ2PSkA" key="documentation" value=" Initializes manaMaxTurn, manaPool, heroPowerUsed and minionAttacked for the beginning of the turn&#xA;&#x9;"/>
+              </eAnnotations>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XlcHkBNkEemjXMhSJ2PSkA" name="endTurn">
+              <eAnnotations xmi:id="_XlcHkRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XlcHkhNkEemjXMhSJ2PSkA" key="documentation" value=" End the turn of the current player and switches to the other player&#xA;&#x9;"/>
+              </eAnnotations>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xld8wBNkEemjXMhSJ2PSkA" name="endGame">
+              <eAnnotations xmi:id="_Xld8wRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xld8whNkEemjXMhSJ2PSkA" key="documentation" value=" Ends the game&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xlfx8BNkEemjXMhSJ2PSkA" name="drawCard">
+              <eAnnotations xmi:id="_Xlfx8RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xlfx8hNkEemjXMhSJ2PSkA" key="documentation" value=" Draws a card from the player's deck and place it into his hand.&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XlqxEBNkEemjXMhSJ2PSkA" name="targetsFromTargetString">
+              <eAnnotations xmi:id="_XlqxERNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XlqxEhNkEemjXMhSJ2PSkA" key="documentation" value=" Returns a list of targets based on the String of a specific spell&#xA; @param player the player playing the spell&#xA; @param playerEnemy the enemy player that may be affected by the spell&#xA; @param targetPlayer the specific player impacted by the spell if specified&#xA; @param idTarget the specific target of the spell if specified&#xA; @param spellTarget the string detailing the potential targets of a given spell&#xA; @return LinkedHashMap&lt;String, Card> containing the targets of the spell&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XlqxExNkEemjXMhSJ2PSkA" name="player" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlqxFBNkEemjXMhSJ2PSkA" name="playerEnemy" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlqxFRNkEemjXMhSJ2PSkA" name="targetPlayer" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlqxFhNkEemjXMhSJ2PSkA" name="idTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XlqxFxNkEemjXMhSJ2PSkA" name="spellTarget">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XlqxGBNkEemjXMhSJ2PSkA" type="_Xkr5oBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XlzT8BNkEemjXMhSJ2PSkA" name="giveAttackAuraToOtherMinions">
+              <eAnnotations xmi:id="_XlzT8RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XlzT8hNkEemjXMhSJ2PSkA" key="documentation" value=" Gives attack aura buff from played minion to other minions on the board&#xA; @param board&#xA; @param lastMinionPlayed&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XlzT8xNkEemjXMhSJ2PSkA" name="board" type="_XcniwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XlzT9BNkEemjXMhSJ2PSkA" name="lastMinionPlayed" type="_XUZa4BNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xl8d4BNkEemjXMhSJ2PSkA" name="getAttackAuraFromOtherMinions">
+              <eAnnotations xmi:id="_Xl8d4RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xl8d4hNkEemjXMhSJ2PSkA" key="documentation" value=" Gets the cumulated attack aura buffs of other minions and add them to the played minion&#xA; @param board the board of the player playing the minion&#xA; @param lastMinionPlayed&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xl8d4xNkEemjXMhSJ2PSkA" name="board" type="_XcniwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_Xl8d5BNkEemjXMhSJ2PSkA" name="lastMinionPlayed" type="_XUZa4BNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmFAwBNkEemjXMhSJ2PSkA" name="removeAttackAuraFromMinions">
+              <eAnnotations xmi:id="_XmFAwRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmFAwhNkEemjXMhSJ2PSkA" key="documentation" value=" Removes the attack aura buff from all minions of the board upon the death of the minion generating the buff&#xA; @param board the board containing the dying minion&#xA; @param dyingMinion&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmFAwxNkEemjXMhSJ2PSkA" name="board" type="_XcniwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XmFAxBNkEemjXMhSJ2PSkA" name="dyingMinion" type="_XUZa4BNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmOxwBNkEemjXMhSJ2PSkA" name="LifeSteal">
+              <eAnnotations xmi:id="_XmOxwRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmOxwhNkEemjXMhSJ2PSkA" key="documentation" value=" Heals the hero for the damage inflicted by its lifestealing minion&#xA; @param hero the hero healed by lifesteal&#xA; @param minion the minion having lifesteal&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmOxwxNkEemjXMhSJ2PSkA" name="hero" type="_XUdFQBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XmOxxBNkEemjXMhSJ2PSkA" name="minion" type="_XUZa4BNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmVfcBNkEemjXMhSJ2PSkA" name="Charge">
+              <eAnnotations xmi:id="_XmVfcRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmVfchNkEemjXMhSJ2PSkA" key="documentation" value=" If played minion has charge, it can attack right away&#xA; @param lastMinionPlayed&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmVfcxNkEemjXMhSJ2PSkA" name="lastMinionPlayed" type="_XUZa4BNkEemjXMhSJ2PSkA"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmZJ0BNkEemjXMhSJ2PSkA" name="Taunt">
+              <eAnnotations xmi:id="_XmZJ0RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmZJ0hNkEemjXMhSJ2PSkA" key="documentation" value=" Checks if a minion in the board of interest has at least one minion with taunt&#xA; @param board the board that needs to be checked for taunt minions&#xA; @return true if a minion as taunt, else false&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmZJ0xNkEemjXMhSJ2PSkA" name="board" type="_XcniwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XmZJ1BNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmfQcBNkEemjXMhSJ2PSkA" name="summonMinion">
+              <eAnnotations xmi:id="_XmfQcRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmfQchNkEemjXMhSJ2PSkA" key="documentation" value=" Summons a minion on the plaer's board based on idSummon&#xA; @param player the player getting the minion on his board&#xA; @param idSummon the id of the summoned minion&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmfQcxNkEemjXMhSJ2PSkA" name="player" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XmfQdBNkEemjXMhSJ2PSkA" name="idSummon">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmkI8BNkEemjXMhSJ2PSkA" name="polymorph">
+              <eAnnotations xmi:id="_XmkI8RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmkI8hNkEemjXMhSJ2PSkA" key="documentation" value=" Summons the minion replacing the polymorphed minion at a specified location on the board of the affected player &#xA; @param player the player affected by the spell&#xA; @param idSummon the id of the minion replacing the polymorphed minion&#xA; @param indexBoard the board index where the minion needs to be summoned&#xA; @throws EngineException &#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmkI8xNkEemjXMhSJ2PSkA" name="player" type="_XUObwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XmkI9BNkEemjXMhSJ2PSkA" name="idSummon">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XmkI9RNkEemjXMhSJ2PSkA" name="indexBoard">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmlXEBNkEemjXMhSJ2PSkA" name="getIdGame" visibility="public">
+              <eAnnotations xmi:id="_XmlXERNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmlXEhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the id of the game&#xA; @return the id of the game&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmlXExNkEemjXMhSJ2PSkA" type="_XYIrYhNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmnMQBNkEemjXMhSJ2PSkA" name="getCurrentPlayer" visibility="public">
+              <eAnnotations xmi:id="_XmnMQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmnMQhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the current player&#xA; @return the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmnMQxNkEemjXMhSJ2PSkA" type="_XUObwBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XmpBcBNkEemjXMhSJ2PSkA" name="getOtherPlayer" visibility="public">
+              <eAnnotations xmi:id="_XmpBcRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XmpBchNkEemjXMhSJ2PSkA" key="documentation" value=" Get the other player&#xA; @return the player&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XmpBcxNkEemjXMhSJ2PSkA" type="_XUObwBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUdFQBNkEemjXMhSJ2PSkA" name="Hero" visibility="public">
+            <eAnnotations xmi:id="_XUdFQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUdFQhNkEemjXMhSJ2PSkA" key="documentation" value="&#xA; The complete description of a Hero.&#xA; @author Martin Ars Alexis Claveau Alexis Loret Maud Van Dorssen&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <elementImport xmi:id="_Xmsr0RNkEemjXMhSJ2PSkA" importedElement="_XjPIIRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xmsr0hNkEemjXMhSJ2PSkA" importedElement="_XjPIIxNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xmsr0xNkEemjXMhSJ2PSkA" importedElement="_XjPvMRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <generalization xmi:id="_Xmsr0BNkEemjXMhSJ2PSkA" general="_XUb3IBNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_Xmt58BNkEemjXMhSJ2PSkA" name="nbSummon" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_Xmt58RNkEemjXMhSJ2PSkA" name="" value="&quot;nb_summon_hero&quot;) private int nbSummon">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XmuhABNkEemjXMhSJ2PSkA" name="idInvocation" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XmuhARNkEemjXMhSJ2PSkA" name="" value="&quot;id_invocation_hero&quot;)private int idInvocation">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XmvIEBNkEemjXMhSJ2PSkA" name="armorBuff" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XmvIERNkEemjXMhSJ2PSkA" name="" value="&quot;armor_buff_hero&quot;) private int armorBuff">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XmvvIBNkEemjXMhSJ2PSkA" name="target" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XmvvIRNkEemjXMhSJ2PSkA" name="" value="&quot;target_hero&quot;) private String target">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XmvvIhNkEemjXMhSJ2PSkA" name="healthPoints" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XmwWMBNkEemjXMhSJ2PSkA" name="" value="&quot;health_points_hero&quot;) private int healthPoints">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_Xmw9QBNkEemjXMhSJ2PSkA" name="armorPoints" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_Xmw9QRNkEemjXMhSJ2PSkA" name="" value="&quot;armor_points_hero&quot;) private int armorPoints">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XmxkUBNkEemjXMhSJ2PSkA" name="heroPowerUsed" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XmyLYBNkEemjXMhSJ2PSkA" name="" value="&quot;hero_power_used&quot;) private boolean heroPowerUsed">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_Xm0noBNkEemjXMhSJ2PSkA" name="Hero">
+              <eAnnotations xmi:id="_Xm0noRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm0nohNkEemjXMhSJ2PSkA" key="documentation" value=" Initialize the attributes of this class.&#xA; @param id the id of the hero&#xA; @param type There are three types : mage, paladin, warrior&#xA; @param name the name of the hero&#xA; @param damage the amount of damage that the hero can inflict&#xA; @param nbSummon the amount of invocations that the hero can perform&#xA; @param idInvocation the id of the hero's invocation&#xA; @param armorBuff the amount of armor buff that the hero can give&#xA; @param description the description of the hero&#xA; @param target the target of the hero power&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm0noxNkEemjXMhSJ2PSkA" name="id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xm0npBNkEemjXMhSJ2PSkA" name="type">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xm0npRNkEemjXMhSJ2PSkA" name="name">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xm0nphNkEemjXMhSJ2PSkA" name="damage">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xm0npxNkEemjXMhSJ2PSkA" name="nbSummon">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xm0nqBNkEemjXMhSJ2PSkA" name="idInvocation">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xm0nqRNkEemjXMhSJ2PSkA" name="armorBuff">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xm0nqhNkEemjXMhSJ2PSkA" name="description">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_Xm0nqxNkEemjXMhSJ2PSkA" name="target">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xm3D4BNkEemjXMhSJ2PSkA" name="Hero" visibility="public"/>
+            <ownedOperation xmi:id="_Xm45EBNkEemjXMhSJ2PSkA" name="getHealthPoints" visibility="public">
+              <eAnnotations xmi:id="_Xm45ERNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm45EhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the healthPoints of the hero.&#xA; @return the healthPoints of the hero&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm45ExNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xm5gIBNkEemjXMhSJ2PSkA" name="getArmorPoints" visibility="public">
+              <eAnnotations xmi:id="_Xm5gIRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm5gIhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the armorPoints of the hero.&#xA; @return the armorPoints of the hero&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm5gIxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xm6HMBNkEemjXMhSJ2PSkA" name="getHeroPowerUsed" visibility="public">
+              <eAnnotations xmi:id="_Xm6HMRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm6HMhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the boolean which checks if the hero has already used his power.&#xA; @return the boolean which checks if the hero has already used his power&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm6HMxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xm6uQBNkEemjXMhSJ2PSkA" name="getNbSummon" visibility="public">
+              <eAnnotations xmi:id="_Xm6uQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm6uQhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the amount of invocations that the hero can perform. &#xA; @return the amount of invocations&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm6uQxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xm7VUBNkEemjXMhSJ2PSkA" name="getIdInvocation" visibility="public">
+              <eAnnotations xmi:id="_Xm7VURNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm7VUhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the id of the hero's invocation. &#xA; @return the id&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm7VUxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xm7VVBNkEemjXMhSJ2PSkA" name="getTarget" visibility="public">
+              <eAnnotations xmi:id="_Xm7VVRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm7VVhNkEemjXMhSJ2PSkA" key="documentation" value=" Gets the target of the hero power&#xA; @return target of the hero power&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm7VVxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xm8jcBNkEemjXMhSJ2PSkA" name="getArmorBuff" visibility="public">
+              <eAnnotations xmi:id="_Xm8jcRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm8jchNkEemjXMhSJ2PSkA" key="documentation" value=" Get the amount of armor buff that the hero can give. &#xA; @return the amount of armor buff&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm8jcxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_Xm-_sBNkEemjXMhSJ2PSkA" name="setHealthPoints">
+              <eAnnotations xmi:id="_Xm-_sRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xm-_shNkEemjXMhSJ2PSkA" key="documentation" value=" Set the amount of healthPoints&#xA; @param healthPoints the amount of healthPoints&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xm-_sxNkEemjXMhSJ2PSkA" name="healthPoints">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnBb8BNkEemjXMhSJ2PSkA" name="setArmorPoints">
+              <eAnnotations xmi:id="_XnBb8RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnBb8hNkEemjXMhSJ2PSkA" key="documentation" value=" Set the amount of armorPoints&#xA; @param armorPoints the amount of armorPoints&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnBb8xNkEemjXMhSJ2PSkA" name="armorPoints">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnD4MBNkEemjXMhSJ2PSkA" name="setHeroPowerUsed">
+              <eAnnotations xmi:id="_XnD4MRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnD4MhNkEemjXMhSJ2PSkA" key="documentation" value=" Replaces the heroPowerUsed variable by its reverse (true, false).&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnD4MxNkEemjXMhSJ2PSkA" name="bool">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnGUcBNkEemjXMhSJ2PSkA" name="receiveDamage">
+              <eAnnotations xmi:id="_XnGUcRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnGUchNkEemjXMhSJ2PSkA" key="documentation" value=" Receive damage from an attack. &#xA; @param damage the received damage&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnGUcxNkEemjXMhSJ2PSkA" name="damage">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnIwsBNkEemjXMhSJ2PSkA" name="receiveHealing">
+              <eAnnotations xmi:id="_XnIwsRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnIwshNkEemjXMhSJ2PSkA" key="documentation" value="  Receive heal from an effect&#xA; @param healing the receive heal&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnIwsxNkEemjXMhSJ2PSkA" name="healing">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUdsUBNkEemjXMhSJ2PSkA" name="Spell" visibility="public">
+            <eAnnotations xmi:id="_XUdsURNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUdsUhNkEemjXMhSJ2PSkA" key="documentation" value=" The complete description of a Spell Card. &#xA; @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <elementImport xmi:id="_XnL0ARNkEemjXMhSJ2PSkA" importedElement="_XjPIIRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XnL0AhNkEemjXMhSJ2PSkA" importedElement="_XjPIIxNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XnL0AxNkEemjXMhSJ2PSkA" importedElement="_XjPvMRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <generalization xmi:id="_XnL0ABNkEemjXMhSJ2PSkA" general="_XUb3IBNkEemjXMhSJ2PSkA"/>
+            <ownedAttribute xmi:id="_XnMbEBNkEemjXMhSJ2PSkA" name="nbSummon" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XnMbERNkEemjXMhSJ2PSkA" name="" value="&quot;nb_summon_spell&quot;) private int nbSummon">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XnNCIBNkEemjXMhSJ2PSkA" name="idInvocation" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XnNCIRNkEemjXMhSJ2PSkA" name="" value="&quot;id_invocation_spell&quot;) private int idInvocation">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XnNpMBNkEemjXMhSJ2PSkA" name="attackBuff" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XnNpMRNkEemjXMhSJ2PSkA" name="" value="&quot;attack_buff_spell&quot;) private int attackBuff">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XnOQQBNkEemjXMhSJ2PSkA" name="armorBuff" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XnOQQRNkEemjXMhSJ2PSkA" name="" value="&quot;armor_buff_spell&quot;) private int armorBuff">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XnO3UBNkEemjXMhSJ2PSkA" name="nbDraw" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XnO3URNkEemjXMhSJ2PSkA" name="" value="&quot;nb_draw_spell&quot;) private int nbDraw">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XnPeYBNkEemjXMhSJ2PSkA" name="polymorph" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XnPeYRNkEemjXMhSJ2PSkA" name="" value="&quot;polymorph_spell&quot;) private boolean polymorph">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XnQFcBNkEemjXMhSJ2PSkA" name="target" visibility="private">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              <defaultValue xmi:type="uml:LiteralString" xmi:id="_XnQFcRNkEemjXMhSJ2PSkA" name="" value="&quot;target_spell&quot;) private String target">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_XnUW4BNkEemjXMhSJ2PSkA" name="Spell">
+              <eAnnotations xmi:id="_XnUW4RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnUW4hNkEemjXMhSJ2PSkA" key="documentation" value=" Initialize the attributes of this class. &#xA; @param id the id of the card&#xA; @param type There are five types : common, mage, paladin, warrior and invocation &#xA; @param name the name of the card&#xA; @param manaCost the amount of mana that the card costs&#xA; @param damage the amount of damage that the card can inflict&#xA; @param description the description of the card&#xA; @param nbSummon the amount of invocations that the card can perfom&#xA; @param idInvocation the card's id of the invocation&#xA; @param attackBuff the amount of the attack buff that the card can give&#xA; @param armorBuff the amount of the armor buff that the card can give&#xA; @param nbDraw the amount of cards that the player can draw&#xA; @param polymorph a boolean to indicate if the card is polymorphic or not&#xA; @param target a simple text with the target of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnUW4xNkEemjXMhSJ2PSkA" name="id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW5BNkEemjXMhSJ2PSkA" name="type">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW5RNkEemjXMhSJ2PSkA" name="name">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW5hNkEemjXMhSJ2PSkA" name="manaCost">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW5xNkEemjXMhSJ2PSkA" name="damage">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW6BNkEemjXMhSJ2PSkA" name="description">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW6RNkEemjXMhSJ2PSkA" name="nbSummon">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW6hNkEemjXMhSJ2PSkA" name="idInvocation">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW6xNkEemjXMhSJ2PSkA" name="attackBuff">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW7BNkEemjXMhSJ2PSkA" name="armorBuff">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW7RNkEemjXMhSJ2PSkA" name="nbDraw">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW7hNkEemjXMhSJ2PSkA" name="polymorph">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnUW7xNkEemjXMhSJ2PSkA" name="target">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnWMEBNkEemjXMhSJ2PSkA" name="Spell" visibility="public"/>
+            <ownedOperation xmi:id="_Xndg0BNkEemjXMhSJ2PSkA" name="clone" visibility="public">
+              <eAnnotations xmi:id="_Xndg0RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_Xndg0hNkEemjXMhSJ2PSkA" key="documentation" value=" Creates and returns a copy of this object.  The precise meaning&#xA; of &quot;copy&quot; may depend on the class of the object. The general&#xA; intent is that, for any object {@code x}, the expression:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone() != x&lt;/pre>&lt;/blockquote>&#xA; will be true, and that the expression:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone().getClass() == x.getClass()&lt;/pre>&lt;/blockquote>&#xA; will be {@code true}, but these are not absolute requirements.&#xA; While it is typically the case that:&#xA; &lt;blockquote>&#xA; &lt;pre>&#xA; x.clone().equals(x)&lt;/pre>&lt;/blockquote>&#xA; will be {@code true}, this is not an absolute requirement.&#xA; &lt;p>&#xA; By convention, the returned object should be obtained by calling&#xA; {@code super.clone}.  If a class and all of its superclasses (except&#xA; {@code Object}) obey this convention, it will be the case that&#xA; {@code x.clone().getClass() == x.getClass()}.&#xA; &lt;p>&#xA; By convention, the object returned by this method should be independent&#xA; of this object (which is being cloned).  To achieve this independence,&#xA; it may be necessary to modify one or more fields of the object returned&#xA; by {@code super.clone} before returning it.  Typically, this means&#xA; copying any mutable objects that comprise the internal &quot;deep structure&quot;&#xA; of the object being cloned and replacing the references to these&#xA; objects with references to the copies.  If a class contains only&#xA; primitive fields or references to immutable objects, then it is usually&#xA; the case that no fields in the object returned by {@code super.clone}&#xA; need to be modified.&#xA; &lt;p>&#xA; The method {@code clone} for class {@code Object} performs a&#xA; specific cloning operation. First, if the class of this object does&#xA; not implement the interface {@code Cloneable}, then a&#xA; {@code CloneNotSupportedException} is thrown. Note that all arrays&#xA; are considered to implement the interface {@code Cloneable} and that&#xA; the return type of the {@code clone} method of an array type {@code T[]}&#xA; is {@code T[]} where T is any reference or primitive type.&#xA; Otherwise, this method creates a new instance of the class of this&#xA; object and initializes all its fields with exactly the contents of&#xA; the corresponding fields of this object, as if by assignment; the&#xA; contents of the fields are not themselves cloned. Thus, this method&#xA; performs a &quot;shallow copy&quot; of this object, not a &quot;deep copy&quot; operation.&#xA; &lt;p>&#xA; The class {@code Object} does not itself implement the interface&#xA; {@code Cloneable}, so calling the {@code clone} method on an object&#xA; whose class is {@code Object} will result in throwing an&#xA; exception at run time.&#xA; @return     a clone of this instance.&#xA; @throws  CloneNotSupportedException  if the object's class does not&#xA;               support the {@code Cloneable} interface. Subclasses&#xA;               that override the {@code clone} method can also&#xA;               throw this exception to indicate that an instance cannot&#xA;               be cloned.&#xA; @see java.lang.Cloneable&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_Xndg0xNkEemjXMhSJ2PSkA" type="_XjpX0RNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnhLMBNkEemjXMhSJ2PSkA" name="getNbSummon" visibility="public">
+              <eAnnotations xmi:id="_XnhLMRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnhLMhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the nbSummon of the card. &#xA; @return the nbSummon&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnhLMxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnhyQBNkEemjXMhSJ2PSkA" name="getIdInvocation" visibility="public">
+              <eAnnotations xmi:id="_XnhyQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnhyQhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the idInvocation of the card.&#xA; @return the idInvocation&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnhyQxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XniZUBNkEemjXMhSJ2PSkA" name="getAttackBuff" visibility="public">
+              <eAnnotations xmi:id="_XniZURNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XniZUhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the attackBuff of the card. &#xA; @return the attackBuff&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XniZUxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnjAYBNkEemjXMhSJ2PSkA" name="getArmorBuff" visibility="public">
+              <eAnnotations xmi:id="_XnjAYRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnjAYhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the armorBuff of the card. &#xA; @return the armorBuff&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnjAYxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnjncBNkEemjXMhSJ2PSkA" name="getNbDraw" visibility="public">
+              <eAnnotations xmi:id="_XnjncRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnjnchNkEemjXMhSJ2PSkA" key="documentation" value=" Get the nbDraw of the card. &#xA; @return the nbDraw&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnjncxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnkOgBNkEemjXMhSJ2PSkA" name="getPolymorph" visibility="public">
+              <eAnnotations xmi:id="_XnkOgRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnkOghNkEemjXMhSJ2PSkA" key="documentation" value=" Get the polymorph attribute of the card. &#xA; @return the polymorph attribute&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnkOgxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnkOhBNkEemjXMhSJ2PSkA" name="getTarget" visibility="public">
+              <eAnnotations xmi:id="_XnkOhRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XnkOhhNkEemjXMhSJ2PSkA" key="documentation" value=" Get the target of the card. &#xA; @return the target of the card&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XnkOhxNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_XUgvoBNkEemjXMhSJ2PSkA" name="MinionRepository" visibility="public">
+            <generalization xmi:id="_XnnR0BNkEemjXMhSJ2PSkA" general="_Xj7EohNkEemjXMhSJ2PSkA"/>
+            <ownedOperation xmi:id="_XnrjQBNkEemjXMhSJ2PSkA" name="findByType">
+              <ownedParameter xmi:id="_XnrjQRNkEemjXMhSJ2PSkA" name="type">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnrjQhNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XnwbwBNkEemjXMhSJ2PSkA" name="findById">
+              <ownedParameter xmi:id="_XnwbwRNkEemjXMhSJ2PSkA" name="id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XnwbwhNkEemjXMhSJ2PSkA" type="_XUZa4BNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUhWsBNkEemjXMhSJ2PSkA" name="EngineException" visibility="public">
+            <eAnnotations xmi:id="_XUhWsRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUhWshNkEemjXMhSJ2PSkA" key="documentation" value=" @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <generalization xmi:id="_XnxC0RNkEemjXMhSJ2PSkA" general="_XnxC0BNkEemjXMhSJ2PSkA"/>
+            <ownedOperation xmi:id="_Xn0tMBNkEemjXMhSJ2PSkA" name="EngineException" visibility="public">
+              <ownedParameter xmi:id="_Xn0tMRNkEemjXMhSJ2PSkA" name="message">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Interface" xmi:id="_XUjL4BNkEemjXMhSJ2PSkA" name="HeroRepository" visibility="public">
+            <generalization xmi:id="_Xn4-oBNkEemjXMhSJ2PSkA" general="_Xj7EohNkEemjXMhSJ2PSkA"/>
+            <ownedOperation xmi:id="_XoBhgBNkEemjXMhSJ2PSkA" name="findAll">
+              <eAnnotations xmi:id="_XoBhgRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XoBhghNkEemjXMhSJ2PSkA" key="documentation" value=" Returns all instances of the type.&#xA; &#xA; @return all entities&#xA;&#x9;"/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XoBhgxNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XoGaABNkEemjXMhSJ2PSkA" name="findById">
+              <ownedParameter xmi:id="_XoGaARNkEemjXMhSJ2PSkA" name="id">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XoGaAhNkEemjXMhSJ2PSkA" type="_XUdFQBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XoKrcBNkEemjXMhSJ2PSkA" name="findByType">
+              <ownedParameter xmi:id="_XoKrcRNkEemjXMhSJ2PSkA" name="type">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XoKrchNkEemjXMhSJ2PSkA" type="_Xd5VIBNkEemjXMhSJ2PSkA" direction="return"/>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUjy8BNkEemjXMhSJ2PSkA" name="Rule" visibility="public">
+            <eAnnotations xmi:id="_XUjy8RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+              <details xmi:id="_XUjy8hNkEemjXMhSJ2PSkA" key="documentation" value=" Manage all the game's rule.&#xA; @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret&#xA; @version 0.0.1&#xA;"/>
+            </eAnnotations>
+            <elementImport xmi:id="_XoLSgBNkEemjXMhSJ2PSkA" importedElement="_XcniwBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedAttribute xmi:id="_XoL5kBNkEemjXMhSJ2PSkA" name="MANA_MAX" isLeaf="true" isStatic="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_XoL5kRNkEemjXMhSJ2PSkA" name="" value="10">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XoMgoBNkEemjXMhSJ2PSkA" name="MANA_COST_HERO_POWER" isLeaf="true" isStatic="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_XoMgoRNkEemjXMhSJ2PSkA" name="" value="2">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XoMgohNkEemjXMhSJ2PSkA" name="MAX_HAND_SIZE" isLeaf="true" isStatic="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_XoNHsBNkEemjXMhSJ2PSkA" name="" value="10">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XoNHsRNkEemjXMhSJ2PSkA" name="MAX_BOARD_SIZE" isLeaf="true" isStatic="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_XoNHshNkEemjXMhSJ2PSkA" name="" value="7">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedAttribute xmi:id="_XoNuwBNkEemjXMhSJ2PSkA" name="MAX_HERO_HEALTH_POINTS" isLeaf="true" isStatic="true">
+              <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_XoNuwRNkEemjXMhSJ2PSkA" name="" value="30">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </defaultValue>
+            </ownedAttribute>
+            <ownedOperation xmi:id="_XoOV0BNkEemjXMhSJ2PSkA" name="checkManaTurn" isStatic="true">
+              <eAnnotations xmi:id="_XoOV0RNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XoOV0hNkEemjXMhSJ2PSkA" key="documentation" value=" Check if the player has reached the maximum mana.&#xA; @param manaMaxTurn the mana of the player&#xA; @return true of false&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XoOV0xNkEemjXMhSJ2PSkA" name="manaMaxTurn">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XoOV1BNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XoQyEBNkEemjXMhSJ2PSkA" name="checkHandSize" isStatic="true">
+              <eAnnotations xmi:id="_XoQyERNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XoQyEhNkEemjXMhSJ2PSkA" key="documentation" value=" Check if the player has reached the maximum hand size.&#xA; @param handSize the hand's size&#xA; @return true of false&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XoQyExNkEemjXMhSJ2PSkA" name="hand" type="_XcniwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XoQyFBNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XoSnQBNkEemjXMhSJ2PSkA" name="checkBoardSize" isStatic="true">
+              <eAnnotations xmi:id="_XoSnQRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XoSnQhNkEemjXMhSJ2PSkA" key="documentation" value=" Check if the player has reached the maximum board size.&#xA; @param boardSize the board's size&#xA; @return true of false&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XoSnQxNkEemjXMhSJ2PSkA" name="board" type="_XcniwBNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XoSnRBNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XoT1YBNkEemjXMhSJ2PSkA" name="checkHealthPoints" isStatic="true">
+              <eAnnotations xmi:id="_XoT1YRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XoT1YhNkEemjXMhSJ2PSkA" key="documentation" value=" Check if the player has reached the maximum health points.&#xA; @param healthPoints the player's healthPoints&#xA; @return true of false&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XoT1YxNkEemjXMhSJ2PSkA" name="healthPoints">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XoT1ZBNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XoVDgBNkEemjXMhSJ2PSkA" name="checkManaPool" isStatic="true">
+              <eAnnotations xmi:id="_XoVDgRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XoVDghNkEemjXMhSJ2PSkA" key="documentation" value=" Check if the player has enough manaPoints to cast his spell&#xA; @param manaCost the spell's cost&#xA; @param manaPool the player's manaPool&#xA; @return true of false&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XoVDgxNkEemjXMhSJ2PSkA" name="manaPool">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XoVDhBNkEemjXMhSJ2PSkA" name="manaCost">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XoVDhRNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XoWRoBNkEemjXMhSJ2PSkA" name="checkAlive" isStatic="true">
+              <eAnnotations xmi:id="_XoWRoRNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XoWRohNkEemjXMhSJ2PSkA" key="documentation" value=" Check if the minion or Hero is alive&#xA; @param healthPoints minion's/hero's health points&#xA; @return true or false&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XoWRoxNkEemjXMhSJ2PSkA" name="healthPoints">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+              </ownedParameter>
+              <ownedParameter xmi:id="_XoWRpBNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+            <ownedOperation xmi:id="_XoZ8ABNkEemjXMhSJ2PSkA" name="checkMinionAttacked" isStatic="true">
+              <eAnnotations xmi:id="_XoZ8ARNkEemjXMhSJ2PSkA" source="http://www.eclipse.org/umlgen/reverse/java/doc">
+                <details xmi:id="_XoZ8AhNkEemjXMhSJ2PSkA" key="documentation" value=" Check if the minion has already attacked. &#xA; @param minion the minion to check&#xA; @return true or false&#xA; "/>
+              </eAnnotations>
+              <ownedParameter xmi:id="_XoZ8AxNkEemjXMhSJ2PSkA" name="minion" type="_XUZa4BNkEemjXMhSJ2PSkA"/>
+              <ownedParameter xmi:id="_XoZ8BBNkEemjXMhSJ2PSkA" direction="return">
+                <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#boolean"/>
+              </ownedParameter>
+            </ownedOperation>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Class" xmi:id="_XUorcBNkEemjXMhSJ2PSkA" name="EngineTest" visibility="public">
+            <elementImport xmi:id="_XoeNcBNkEemjXMhSJ2PSkA" importedElement="_XYIrYhNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XoeNcRNkEemjXMhSJ2PSkA" importedElement="_XcniwBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XoeNcxNkEemjXMhSJ2PSkA" importedElement="_XoeNchNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XoeNdBNkEemjXMhSJ2PSkA" importedElement="_XUceMBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_XoeNdRNkEemjXMhSJ2PSkA" importedElement="_XUdFQBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xoe0gBNkEemjXMhSJ2PSkA" importedElement="_XUZa4BNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xoe0gRNkEemjXMhSJ2PSkA" importedElement="_XUObwBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <elementImport xmi:id="_Xoe0ghNkEemjXMhSJ2PSkA" importedElement="_XUdsUBNkEemjXMhSJ2PSkA" visibility="private"/>
+            <packageImport xmi:id="_XodmYhNkEemjXMhSJ2PSkA" importedPackage="_XodmYRNkEemjXMhSJ2PSkA" visibility="private"/>
+            <ownedOperation xmi:id="_XojtABNkEemjXMhSJ2PSkA" name="testMinion" visibility="public"/>
+            <ownedOperation xmi:id="_Xoro0BNkEemjXMhSJ2PSkA" name="testSpell" visibility="public"/>
+            <ownedOperation xmi:id="_Xoy9kBNkEemjXMhSJ2PSkA" name="testHero" visibility="public"/>
+            <ownedOperation xmi:id="_Xo5rQBNkEemjXMhSJ2PSkA" name="testPlayer" visibility="public"/>
+            <ownedOperation xmi:id="_XpCOIBNkEemjXMhSJ2PSkA" name="testGame" visibility="public"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpMmMBNkEemjXMhSJ2PSkA" name="engine_util" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XYIrYRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpMmMRNkEemjXMhSJ2PSkA" name="engine_annotation" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XVUA4RNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpMmMhNkEemjXMhSJ2PSkA" name="engine_persistence" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XjPIIBNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpMmMxNkEemjXMhSJ2PSkA" name="engine_repository" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_Xj7EoRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpMmNBNkEemjXMhSJ2PSkA" name="engine_stereotype" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XYLusRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpMmNRNkEemjXMhSJ2PSkA" name="engine_Assert" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XodmYRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpMmNhNkEemjXMhSJ2PSkA" name="engine_junit" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XodmYBNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpMmNxNkEemjXMhSJ2PSkA" name="engine_engine" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XUL_gBNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpNNQBNkEemjXMhSJ2PSkA" name="hero_target" memberEnd="_XcsbQBNkEemjXMhSJ2PSkA _XpNNQRNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpNNQRNkEemjXMhSJ2PSkA" name="target" type="_XUObwBNkEemjXMhSJ2PSkA" association="_XpNNQBNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpNNQhNkEemjXMhSJ2PSkA" name="deck_target" memberEnd="_XcwFoBNkEemjXMhSJ2PSkA _XpNNQxNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpNNQxNkEemjXMhSJ2PSkA" name="target" type="_XUObwBNkEemjXMhSJ2PSkA" association="_XpNNQhNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpNNRBNkEemjXMhSJ2PSkA" name="hand_target" memberEnd="_Xc0XEBNkEemjXMhSJ2PSkA _XpNNRRNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpNNRRNkEemjXMhSJ2PSkA" name="target" type="_XUObwBNkEemjXMhSJ2PSkA" association="_XpNNRBNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpN0UBNkEemjXMhSJ2PSkA" name="board_target" memberEnd="_Xc4ogBNkEemjXMhSJ2PSkA _XpN0URNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpN0URNkEemjXMhSJ2PSkA" name="target" type="_XUObwBNkEemjXMhSJ2PSkA" association="_XpN0UBNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpN0UhNkEemjXMhSJ2PSkA" name="waitingPlayer_target" memberEnd="_XeDGIBNkEemjXMhSJ2PSkA _XpN0UxNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpN0UxNkEemjXMhSJ2PSkA" name="target" type="_XUStMBNkEemjXMhSJ2PSkA" association="_XpN0UhNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpN0VBNkEemjXMhSJ2PSkA" name="minionRepository_target" memberEnd="_XeGJcBNkEemjXMhSJ2PSkA _XpN0VRNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpN0VRNkEemjXMhSJ2PSkA" name="target" type="_XUStMBNkEemjXMhSJ2PSkA" association="_XpN0VBNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpN0VhNkEemjXMhSJ2PSkA" name="spellRepository_target" memberEnd="_XeJMwBNkEemjXMhSJ2PSkA _XpN0VxNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpN0VxNkEemjXMhSJ2PSkA" name="target" type="_XUStMBNkEemjXMhSJ2PSkA" association="_XpN0VhNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpN0WBNkEemjXMhSJ2PSkA" name="heroRepository_target" memberEnd="_XeOsUBNkEemjXMhSJ2PSkA _XpN0WRNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpN0WRNkEemjXMhSJ2PSkA" name="target" type="_XUStMBNkEemjXMhSJ2PSkA" association="_XpN0WBNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpObYBNkEemjXMhSJ2PSkA" name="currentPlayer_target" memberEnd="_Xk58EBNkEemjXMhSJ2PSkA _XpObYRNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpObYRNkEemjXMhSJ2PSkA" name="target" type="_XUceMBNkEemjXMhSJ2PSkA" association="_XpObYBNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpObYhNkEemjXMhSJ2PSkA" name="otherPlayer_target" memberEnd="_Xk8YUBNkEemjXMhSJ2PSkA _XpObYxNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpObYxNkEemjXMhSJ2PSkA" name="target" type="_XUceMBNkEemjXMhSJ2PSkA" association="_XpObYhNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Association" xmi:id="_XpObZBNkEemjXMhSJ2PSkA" name="invocations_target" memberEnd="_XlACsBNkEemjXMhSJ2PSkA _XpObZRNkEemjXMhSJ2PSkA">
+            <ownedEnd xmi:id="_XpObZRNkEemjXMhSJ2PSkA" name="target" type="_XUceMBNkEemjXMhSJ2PSkA" association="_XpObZBNkEemjXMhSJ2PSkA"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpObZhNkEemjXMhSJ2PSkA" name="engine_util" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XYIrYRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpPCcBNkEemjXMhSJ2PSkA" name="engine_annotation" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XVUA4RNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpPCcRNkEemjXMhSJ2PSkA" name="engine_persistence" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XjPIIBNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpPCchNkEemjXMhSJ2PSkA" name="engine_Assert" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XodmYRNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpPCcxNkEemjXMhSJ2PSkA" name="engine_junit" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XodmYBNkEemjXMhSJ2PSkA"/>
+          <packagedElement xmi:type="uml:Usage" xmi:id="_XpPCdBNkEemjXMhSJ2PSkA" name="engine_engine" client="_XUL_gBNkEemjXMhSJ2PSkA" supplier="_XUL_gBNkEemjXMhSJ2PSkA"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_XpJi4BNkEemjXMhSJ2PSkA" name="alma_sql" client="_XT0MEBNkEemjXMhSJ2PSkA" supplier="_XVSywBNkEemjXMhSJ2PSkA"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_XpJi4RNkEemjXMhSJ2PSkA" name="alma_annotation" client="_XT0MEBNkEemjXMhSJ2PSkA" supplier="_XVUA4RNkEemjXMhSJ2PSkA"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_XpKJ8BNkEemjXMhSJ2PSkA" name="alma_boot" client="_XT0MEBNkEemjXMhSJ2PSkA" supplier="_XVUn8BNkEemjXMhSJ2PSkA"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_XpKJ8RNkEemjXMhSJ2PSkA" name="alma_autoconfigure" client="_XT0MEBNkEemjXMhSJ2PSkA" supplier="_XVVPABNkEemjXMhSJ2PSkA"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_XpKJ8hNkEemjXMhSJ2PSkA" name="alma_annotation" client="_XT0MEBNkEemjXMhSJ2PSkA" supplier="_XVV2ERNkEemjXMhSJ2PSkA"/>
+        <packagedElement xmi:type="uml:Usage" xmi:id="_XpKJ8xNkEemjXMhSJ2PSkA" name="alma_engine" client="_XT0MEBNkEemjXMhSJ2PSkA" supplier="_XUL_gBNkEemjXMhSJ2PSkA"/>
+        <packagedElement xmi:type="uml:Association" xmi:id="_XpKJ9BNkEemjXMhSJ2PSkA" name="engine_target" memberEnd="_XVj4gBNkEemjXMhSJ2PSkA _XpKJ9RNkEemjXMhSJ2PSkA">
+          <ownedEnd xmi:id="_XpKJ9RNkEemjXMhSJ2PSkA" name="target" type="_XUAZUBNkEemjXMhSJ2PSkA" association="_XpKJ9BNkEemjXMhSJ2PSkA"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_XVSLsBNkEemjXMhSJ2PSkA" name="javax">
+    <packagedElement xmi:type="uml:Package" xmi:id="_XVSywBNkEemjXMhSJ2PSkA" name="sql">
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XVSywRNkEemjXMhSJ2PSkA" name="DataSource"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_XjPIIBNkEemjXMhSJ2PSkA" name="persistence">
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XjPIIRNkEemjXMhSJ2PSkA" name="Column"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XjPIIxNkEemjXMhSJ2PSkA" name="Entity"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XjPvMRNkEemjXMhSJ2PSkA" name="Table"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XkKVMhNkEemjXMhSJ2PSkA" name="Id"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XkK8QBNkEemjXMhSJ2PSkA" name="MappedSuperclass"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_XVTZ0BNkEemjXMhSJ2PSkA" name="org">
+    <packagedElement xmi:type="uml:Package" xmi:id="_XVTZ0RNkEemjXMhSJ2PSkA" name="springframework">
+      <packagedElement xmi:type="uml:Package" xmi:id="_XVTZ0hNkEemjXMhSJ2PSkA" name="beans">
+        <packagedElement xmi:type="uml:Package" xmi:id="_XVUA4BNkEemjXMhSJ2PSkA" name="factory">
+          <packagedElement xmi:type="uml:Package" xmi:id="_XVUA4RNkEemjXMhSJ2PSkA" name="annotation">
+            <packagedElement xmi:type="uml:DataType" xmi:id="_XVUA4hNkEemjXMhSJ2PSkA" name="Autowired"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_XVUn8BNkEemjXMhSJ2PSkA" name="boot">
+        <packagedElement xmi:type="uml:Package" xmi:id="_XVVPABNkEemjXMhSJ2PSkA" name="autoconfigure">
+          <packagedElement xmi:type="uml:DataType" xmi:id="_XVVPARNkEemjXMhSJ2PSkA" name="SpringBootApplication"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_XVUn8RNkEemjXMhSJ2PSkA" name="SpringApplication"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_XVV2EBNkEemjXMhSJ2PSkA" name="context">
+        <packagedElement xmi:type="uml:Package" xmi:id="_XVV2ERNkEemjXMhSJ2PSkA" name="annotation">
+          <packagedElement xmi:type="uml:DataType" xmi:id="_XVV2EhNkEemjXMhSJ2PSkA" name="Bean"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_XX3loBNkEemjXMhSJ2PSkA" name="Configuration"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_XX4MsBNkEemjXMhSJ2PSkA" name="messaging">
+        <packagedElement xmi:type="uml:Package" xmi:id="_XX4MsRNkEemjXMhSJ2PSkA" name="simp">
+          <packagedElement xmi:type="uml:Package" xmi:id="_XcF-URNkEemjXMhSJ2PSkA" name="config">
+            <packagedElement xmi:type="uml:DataType" xmi:id="_XcF-UhNkEemjXMhSJ2PSkA" name="MessageBrokerRegistry"/>
+          </packagedElement>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_XX4MshNkEemjXMhSJ2PSkA" name="SimpMessagingTemplate"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Package" xmi:id="_XYLHoBNkEemjXMhSJ2PSkA" name="handler">
+          <packagedElement xmi:type="uml:Package" xmi:id="_XYLHoRNkEemjXMhSJ2PSkA" name="annotation">
+            <packagedElement xmi:type="uml:DataType" xmi:id="_XYLHohNkEemjXMhSJ2PSkA" name="MessageMapping"/>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_XX4zwBNkEemjXMhSJ2PSkA" name="scheduling">
+        <packagedElement xmi:type="uml:Package" xmi:id="_XX4zwRNkEemjXMhSJ2PSkA" name="annotation">
+          <packagedElement xmi:type="uml:DataType" xmi:id="_XX4zwhNkEemjXMhSJ2PSkA" name="EnableScheduling"/>
+          <packagedElement xmi:type="uml:DataType" xmi:id="_XX5a0BNkEemjXMhSJ2PSkA" name="Scheduled"/>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_XYLusRNkEemjXMhSJ2PSkA" name="stereotype">
+        <packagedElement xmi:type="uml:DataType" xmi:id="_XYLushNkEemjXMhSJ2PSkA" name="Controller"/>
+        <packagedElement xmi:type="uml:DataType" xmi:id="_Xj8SwBNkEemjXMhSJ2PSkA" name="Repository"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_XcFXQBNkEemjXMhSJ2PSkA" name="web">
+        <packagedElement xmi:type="uml:Package" xmi:id="_XcFXQRNkEemjXMhSJ2PSkA" name="socket">
+          <packagedElement xmi:type="uml:Package" xmi:id="_XcFXQhNkEemjXMhSJ2PSkA" name="config">
+            <packagedElement xmi:type="uml:Package" xmi:id="_XcFXQxNkEemjXMhSJ2PSkA" name="annotation">
+              <packagedElement xmi:type="uml:DataType" xmi:id="_XcFXRBNkEemjXMhSJ2PSkA" name="WebSocketMessageBrokerConfigurer"/>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_XcGlYRNkEemjXMhSJ2PSkA" name="EnableWebSocketMessageBroker"/>
+              <packagedElement xmi:type="uml:DataType" xmi:id="_XcHMcBNkEemjXMhSJ2PSkA" name="StompEndpointRegistry"/>
+            </packagedElement>
+          </packagedElement>
+        </packagedElement>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Package" xmi:id="_Xj7EoBNkEemjXMhSJ2PSkA" name="data">
+        <packagedElement xmi:type="uml:Package" xmi:id="_Xj7EoRNkEemjXMhSJ2PSkA" name="repository">
+          <packagedElement xmi:type="uml:DataType" xmi:id="_Xj7EohNkEemjXMhSJ2PSkA" name="CrudRepository"/>
+        </packagedElement>
+      </packagedElement>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_XodmYBNkEemjXMhSJ2PSkA" name="junit">
+      <packagedElement xmi:type="uml:Package" xmi:id="_XodmYRNkEemjXMhSJ2PSkA" name="Assert"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XoeNchNkEemjXMhSJ2PSkA" name="Test"/>
+    </packagedElement>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Package" xmi:id="_XYIrYBNkEemjXMhSJ2PSkA" name="java">
+    <packagedElement xmi:type="uml:Package" xmi:id="_XYIrYRNkEemjXMhSJ2PSkA" name="util">
+      <packagedElement xmi:type="uml:Package" xmi:id="_XYKgkBNkEemjXMhSJ2PSkA" name="concurrent">
+        <packagedElement xmi:type="uml:DataType" xmi:id="_XYKgkRNkEemjXMhSJ2PSkA" name="TimeUnit"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XYIrYhNkEemjXMhSJ2PSkA" name="UUID"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XcniwBNkEemjXMhSJ2PSkA" name="Vector"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_Xd5VIBNkEemjXMhSJ2PSkA" name="ArrayList"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_Xd58MBNkEemjXMhSJ2PSkA" name="HashMap"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_Xkr5oBNkEemjXMhSJ2PSkA" name="LinkedHashMap"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XksgsBNkEemjXMhSJ2PSkA" name="Map"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Package" xmi:id="_XjpX0BNkEemjXMhSJ2PSkA" name="lang">
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XjpX0RNkEemjXMhSJ2PSkA" name="Object"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XkKVMBNkEemjXMhSJ2PSkA" name="Cloneable"/>
+      <packagedElement xmi:type="uml:DataType" xmi:id="_XnxC0BNkEemjXMhSJ2PSkA" name="Exception"/>
+    </packagedElement>
+  </packagedElement>
+</uml:Model>

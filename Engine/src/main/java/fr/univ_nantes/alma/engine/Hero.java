@@ -128,15 +128,15 @@ public class Hero extends Card {
     }
    
 	/**
-	 * Receive damage from an attack. 
+	 * Receive damage from an attack. If the hero has armor, then armor is reduced before health points.
 	 * @param damage the received damage
 	 */
 	void receiveDamage(int damage){
 		if (this.armorPoints >= damage && this.armorPoints > 0) {
 			this.armorPoints -= damage;
 		} else if (this.armorPoints < damage && this.armorPoints > 0) {
-			this.armorPoints = 0;
 			int remainingDamage = damage - this.armorPoints;
+			this.armorPoints = 0;
 			this.healthPoints -= remainingDamage;
 		} else {
 		this.healthPoints -= damage;

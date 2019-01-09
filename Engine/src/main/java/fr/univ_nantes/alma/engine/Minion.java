@@ -118,4 +118,26 @@ public class Minion extends Card {
 	void receiveDamage(int damage){
 		this.healthPoints -= damage;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		
+		if (!(obj instanceof Minion)) {
+			return false;
+		}
+		
+		Minion m = (Minion) obj;
+		
+		return ((m.getId() == this.getId()) && (m.getType().equals(this.getType()))
+				&& (m.getAttacked() == this.getAttacked()) && (m.getCharge() == this.getCharge())
+				&& (m.getLifesteal() == this.getLifesteal()) && (m.getTaunt() == this.getTaunt())
+				&& (m.getAttackBuffAura() == this.getAttackBuffAura()) && m.getDamage() == this.getDamage()
+				&& (m.getDescription().equals(this.getDescription())) && m.getHealthPoints() == this.getHealthPoints()
+				&& (m.getManaCost() == this.getManaCost()) && (m.getName().equals(this.getName())));
+		
+	}
+	
 }

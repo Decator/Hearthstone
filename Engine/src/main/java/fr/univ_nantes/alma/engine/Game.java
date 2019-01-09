@@ -100,12 +100,10 @@ public class Game {
 	        					String keys[] = entry.getKey().split("_");
 	        					if (keys[0] == "0") {
 	        						removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (Minion) entry.getValue());
-	        						this.currentPlayer.removeCardFromBoard(Integer.parseInt(keys[1]));
 	        						polymorph(this.currentPlayer, spell.getIdInvocation(), keys[1]);
 	        						
 	        					} else if (keys[0] == "1") {
 	        						removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (Minion) entry.getValue());
-	        						this.otherPlayer.removeCardFromBoard(Integer.parseInt(keys[1]));
 	        						polymorph(this.otherPlayer, spell.getIdInvocation(), keys[1]);
 	        					}
 	        				}

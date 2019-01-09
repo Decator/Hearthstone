@@ -4,11 +4,8 @@
     <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
 </button> -->
 <div class="container" width="100px" (click)="onClick()">
-    <img [ngClass]="{ 'card-active': !disabled }" src="assets/img/card-template.png" width="100px">
+    <img [ngClass]="{ 'card-active': !disabled }" src="assets/img/{{card.id}}.png" width="100px">
     <div class="top-left">{{card.manaCost}}</div>
     <div class="bottom-left">{{card.damage}}</div>
     <div class="bottom-right">{{card.healthPoints}}</div>
-    <div class="name">{{card.name}}</div>
-    <div class="desc">{{card.description}}</div>
-  <div class="img"></div>
 </div>

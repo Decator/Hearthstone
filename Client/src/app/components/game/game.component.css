@@ -1,4 +1,10 @@
-
+a{
+  font-family: optibelwe, sans-serif;
+  font-size:12px;
+  color:white;
+  margin: 0;
+  z-index:1;
+}
 
 p {
   font-family: optibelwe, sans-serif;
@@ -19,11 +25,7 @@ p {
   top: 20%;
 }
 
-.advInf {
-  position: absolute;
-  right: 49%;
-  top: 20%;
-}
+
 
 .advCard {
   position: absolute;
@@ -53,10 +55,30 @@ p {
   transform: translateX(-50%);
 }
 
-.inf {
+.imghero {
   position: absolute;
   right: 48%;
-  bottom: 20%;
+  bottom: 17%;
+}
+
+.inf {
+  position: absolute;
+  right: 48.4%;
+  bottom: 21%;
+}
+
+.imgadvhero{
+   position: absolute;
+   right: 48%;
+   top: 15%;
+   z-index:10;
+}
+
+.advInf {
+  position:absolute;
+    right:48.4%;
+    top:20%;
+    z-index:1;
 }
 
 .inf2 {

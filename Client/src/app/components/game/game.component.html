@@ -1,4 +1,9 @@
+<title>Mini-Hearthstone</title>
+
+<body>
+
 <h2 *ngIf="showLoader">Loader {{error}}</h2>
+
 <div class="background" *ngIf="!showLoader">
 
     <div class="manaAdv">
@@ -8,12 +13,11 @@
     </div>
 
     <div class="imgadvhero">
-      <img src="assets/img/{{otherPlayer.hero.id}}.png" width="100px">
+      <input type="image" src="assets/img/{{otherPlayer.hero.id}}.png" width="100px"/>
+      <!--<img src="assets/img/{{otherPlayer.hero.id}}.png" width="100px"> -->
     </div>
 
-    <div class="advInf">
-            <a>{{otherPlayer.hero.healthPoints}}</a>
-    </div>
+
 
 
 
@@ -68,6 +72,10 @@
       <a>{{player.hero.healthPoints}}</a>
     </div>
 
+    <div class="advInf">
+    <a>{{otherPlayer.hero.healthPoints}}</a>
+     </div>
+
     <div class="inf2">
         <button (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
             <p>Pouvoir hero</p>
@@ -88,3 +96,4 @@
     </div>
 
 </div>
+</body>

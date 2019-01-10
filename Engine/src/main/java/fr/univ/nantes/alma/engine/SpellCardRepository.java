@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SpellCardRepository extends CrudRepository<SpellCard, Integer> {
-	ArrayList<SpellCard> findByType(String typeSpell);
-	SpellCard findById(int idSpell);
+  ArrayList<SpellCard> findByType(String typeSpell);
+  
+  SpellCard findById(int idSpell);
 }

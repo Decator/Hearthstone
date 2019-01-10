@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MinionCardRepository extends CrudRepository<MinionCard, Integer> {
-	ArrayList<MinionCard> findByType(String typeMinion);
-	MinionCard findById(int idMinion);
+  ArrayList<MinionCard> findByType(String typeMinion);
+
+  MinionCard findById(int idMinion);
 }

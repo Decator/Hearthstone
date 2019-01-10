@@ -12,7 +12,7 @@ import javax.persistence.Table;
  * @version 0.0.1
  */
 @Entity
-@Table(name="Minion")
+@Table(name = "minion")
 public class MinionCard extends AbstractCard {
 	
 	@Column(name = "health_points_minion") private int healthPoints;

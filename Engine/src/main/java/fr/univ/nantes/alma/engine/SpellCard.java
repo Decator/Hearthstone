@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * @version 0.0.1
  */
 @Entity
-@Table(name="Spell")
+@Table(name = "spell")
 public class SpellCard extends AbstractCard {
 
     @Column(name = "nb_summon_spell") private int nbSummon;

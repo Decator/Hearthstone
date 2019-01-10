@@ -1,15 +1,15 @@
 package fr.univ.nantes.alma.controller;
 
-import fr.univ.nantes.alma.Application;
-import fr.univ.nantes.alma.engine.EngineException;
-import fr.univ.nantes.alma.engine.GameMethods;
-
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
+
+import fr.univ.nantes.alma.Application;
+import fr.univ.nantes.alma.engine.EngineException;
+import fr.univ.nantes.alma.engine.GameMethods;
 
 @Controller
 public class WebSocketController {

@@ -47,9 +47,10 @@ public interface EngineBridge {
    * @param uuidPlayer the player choose (for some spells)
    * @param idTarget the id of the target
    * @return the game
-   * @throws EngineException 
+   * @throws EngineException a custom exception
    */
-  public GameMethods playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) throws EngineException;
+  public GameMethods playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) 
+      throws EngineException;
 
   /**
    * Activate the hero's power.
@@ -57,7 +58,7 @@ public interface EngineBridge {
    * @param uuidPlayer the chosen player (for some power)
    * @param idTarget the id of the target, if the power doesn't need a target then set idTarget to 1
    * @return the game
-   * @throws EngineException 
+   * @throws EngineException a custom exception
    */
   public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException;
 
@@ -67,7 +68,7 @@ public interface EngineBridge {
    * @param idAttack the id of the attacker
    * @param idTarget the id of the target
    * @return the game
-   * @throws EngineException 
+   * @throws EngineException a custom exception
    */
   public GameMethods attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException;
 }

@@ -38,8 +38,8 @@ public class WebSocketController {
     if (game == null) {
       this.template.convertAndSend("/game/" + uuidPlayer, "Waiting for another Player");
     } else {
-      this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUUID(), game);
-      this.template.convertAndSend("/game/" + game.getOtherPlayer().getUUID(), game);
+      this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), game);
+      this.template.convertAndSend("/game/" + game.getOtherPlayer().getUuid(), game);
     }
   }
     

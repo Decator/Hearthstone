@@ -11,159 +11,159 @@ import java.util.Vector;
  * @version 0.0.1
  */
 public class Player {
-	private UUID uuid;
-	private String username;
-	private HeroCard hero;
-	private int manaPool;
-	private int manaMaxTurn;
-	private AbstractCard[] deck;
-	private Vector<AbstractCard> hand;
-	private Vector<MinionCard> board;
+  private UUID uuid;
+  private String username;
+  private HeroCard hero;
+  private int manaPool;
+  private int manaMaxTurn;
+  private AbstractCard[] deck;
+  private Vector<AbstractCard> hand;
+  private Vector<MinionCard> board;
 
-	/**
-	 * Initialize the attributes of this class.
-	 * @param uuid the id of the game
-	 * @param username the username of the user
-	 * @param hero the hero of the player
-	 */
-	
-	Player(UUID uuid, String username, HeroCard hero, AbstractCard[] deck, Vector<AbstractCard> hand) {
-		this.uuid = uuid;
-		this.username = username;
-		this.hero = hero;
-		this.manaPool = 0;
-		this.manaMaxTurn = 0;
-		this.deck = Arrays.copyOf(deck, deck.length);
-		this.hand = hand;
-		this.board = new Vector<MinionCard>();
-	}
+  /**
+   * Initialize the attributes of this class.
+   * @param uuid the id of the game
+   * @param username the username of the user
+   * @param hero the hero of the player
+   */
 
-	/**
-	 * Return the id of the game.
-	 * @return the id of the game
-	 */
-	public UUID getUUID() {
-		return this.uuid;
-	}
+  Player(UUID uuid, String username, HeroCard hero, AbstractCard[] deck, Vector<AbstractCard> hand) {
+    this.uuid = uuid;
+    this.username = username;
+    this.hero = hero;
+    this.manaPool = 0;
+    this.manaMaxTurn = 0;
+    this.deck = Arrays.copyOf(deck, deck.length);
+    this.hand = hand;
+    this.board = new Vector<MinionCard>();
+  }
 
-	/**
-	 * Return the username.
-	 * @return the username
-	 */
-	public String getUsername() {
-		return this.username;
-	}
+  /**
+   * Return the id of the game.
+   * @return the id of the game
+   */
+  public UUID getUuid() {
+    return this.uuid;
+  }
 
-	/**
-	 * Return the Hero the user has chosen.
-	 * @return the hero
-	 */
-	public HeroCard getHero() {
-		return this.hero;
-	}
+  /**
+   * Return the username.
+   * @return the username
+   */
+  public String getUsername() {
+    return this.username;
+  }
 
-	/**
-	 * Return the manaPool of the player.
-	 * @return the manaPool of the player
-	 */
-	public int getManaPool() {
-		return this.manaPool;
-	}
+  /**
+   * Return the Hero the user has chosen.
+   * @return the hero
+   */
+  public HeroCard getHero() {
+    return this.hero;
+  }
 
-	/**
-	 * Return the ManaMaxTurn of the player.
-	 * @return the ManaMaxTurn of the player
-	 */
-	public int getManaMaxTurn() {
-		return this.manaMaxTurn;
-	}
+  /**
+   * Return the manaPool of the player.
+   * @return the manaPool of the player
+   */
+  public int getManaPool() {
+    return this.manaPool;
+  }
 
-	/**
-	 * Return the deck of the player.
-	 * @return the deck of the player
-	 */
-	public AbstractCard[] getDeck() {
-		return Arrays.copyOf(this.deck, this.deck.length);
-	}
+  /**
+   * Return the ManaMaxTurn of the player.
+   * @return the ManaMaxTurn of the player
+   */
+  public int getManaMaxTurn() {
+    return this.manaMaxTurn;
+  }
 
-	/**
-	 * Return the hand of the player.
-	 * @return he hand of the player
-	 */
-	public Vector<AbstractCard> getHand() {
-		return this.hand;
-	}
+  /**
+   * Return the deck of the player.
+   * @return the deck of the player
+   */
+  public AbstractCard[] getDeck() {
+    return Arrays.copyOf(this.deck, this.deck.length);
+  }
 
-	/**
-	 * Return the board of the player.
-	 * @return the board of the player
-	 */
-	public Vector<MinionCard> getBoard() {
-		return this.board;
-	}
+  /**
+   * Return the hand of the player.
+   * @return he hand of the player
+   */
+  public Vector<AbstractCard> getHand() {
+    return this.hand;
+  }
 
-	/**
-     * Set the mana pool at manaMaxTurn.
-     */
-    void setManaPoolForNewTurn() {
-        this.manaPool = manaMaxTurn;
-    }
+  /**
+   * Return the board of the player.
+   * @return the board of the player
+   */
+  public Vector<MinionCard> getBoard() {
+    return this.board;
+  }
+
+  /**
+   * Set the mana pool at manaMaxTurn.
+   */
+  void setManaPoolForNewTurn() {
+    this.manaPool = manaMaxTurn;
+  }
     
-    /**
-     * Set the mana pool at manaMaxTurn.
-     */
-    void setManaPoolAfterPlay(int mana) {
-    	this.manaPool -= mana;
-    }
+  /**
+   * Set the mana pool at manaMaxTurn.
+   */
+  void setManaPoolAfterPlay(int mana) {
+    this.manaPool -= mana;
+  }
 
-	/**
-	 * Increase the mana pool each turn until it reaches 10.
-	 */
-	void setManaMaxTurn() {
-		this.manaMaxTurn++;
-	}
+  /**
+   * Increase the mana pool each turn until it reaches 10.
+   */
+  void setManaMaxTurn() {
+    this.manaMaxTurn++;
+  }
 
-	/**
-	 * Add a card to the player's hand.
-	 * @param card the card to add
-	 */
-	void addCardToHand(AbstractCard card) {
-		try {
-			this.getHand().add((AbstractCard)card.clone());
-		} catch (CloneNotSupportedException e) {
-			e.printStackTrace();
-		}
-	}
+  /**
+   * Add a card to the player's hand.
+   * @param card the card to add
+   */
+  void addCardToHand(AbstractCard card) {
+    try {
+      this.getHand().add((AbstractCard)card.clone());
+    } catch (CloneNotSupportedException e) {
+      e.printStackTrace();
+    } 
+  }
 
-	/**
-	 * Add a minion to the player's board.
-	 * @param minion the minion to add
-	 */
-	void addCardToBoard(MinionCard minion) {
-		this.getBoard().add(minion);
-	}
-	
-	/**
-	 * Add a minion at a specific index to the player's board.
-	 * @param minion the minion to add
-	 */
-	void addCardToBoard(MinionCard minion, int handCardIndex) {
-		this.getBoard().set(handCardIndex, minion);
-	}
+  /**
+   * Add a minion to the player's board.
+   * @param minion the minion to add
+   */
+  void addCardToBoard(MinionCard minion) {
+    this.getBoard().add(minion);
+  }
 
-	/**
-	 * Remove a card from the player's hand.
-	 * @param handCardIndex the id of the card to remove
-	 */
-	void removeCardFromHand(int handCardIndex) {
-		this.getHand().remove(handCardIndex);
-	}
+  /**
+   * Add a minion at a specific index to the player's board.
+   * @param minion the minion to add
+   */
+  void addCardToBoard(MinionCard minion, int handCardIndex) {
+    this.getBoard().set(handCardIndex, minion);
+  }
 
-	/**
-	 * Remove a minion from the player's board.
-	 * @param boardCardIndex the id of the minion to remove
-	 */
-	void removeCardFromBoard(int boardCardIndex) {
-		this.getBoard().remove(boardCardIndex);
-	}
+  /**
+   * Remove a card from the player's hand.
+   * @param handCardIndex the id of the card to remove
+   */
+  void removeCardFromHand(int handCardIndex) {
+    this.getHand().remove(handCardIndex);
+  }
+
+  /**
+   * Remove a minion from the player's board.
+   * @param boardCardIndex the id of the minion to remove
+   */
+  void removeCardFromBoard(int boardCardIndex) {
+    this.getBoard().remove(boardCardIndex);
+  }
 }

@@ -1,6 +1,5 @@
 package fr.univ.nantes.alma;
 
-
 import fr.univ.nantes.alma.engine.Engine;
 import fr.univ.nantes.alma.engine.EngineBridge;
 import fr.univ.nantes.alma.engine.HeroCardRepository;

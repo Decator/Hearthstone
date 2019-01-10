@@ -149,7 +149,8 @@ public class HeroCard extends AbstractCard {
   }
 
   /**
-   * Receives damage from an attack. If the hero has armor, then armor is reduced before health points.
+   * Receives damage from an attack. If the hero has armor, 
+   * then armor is reduced before health points.
    * @param damage the received damage.
    */
   void receiveDamage(int damage) {
@@ -182,8 +183,8 @@ public class HeroCard extends AbstractCard {
 
   @Override
   public String toString() {
-    return "Hero [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation + ", armorBuff=" + armorBuff
-        + ", target=" + target + ", healthPoints=" + healthPoints + ", armorPoints=" + armorPoints
-        + ", heroPowerUsed=" + heroPowerUsed + "]";
+    return "Hero [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation 
+        + ", armorBuff=" + armorBuff + ", target=" + target + ", healthPoints=" 
+        + healthPoints + ", armorPoints=" + armorPoints + ", heroPowerUsed=" + heroPowerUsed + "]";
   }
 }

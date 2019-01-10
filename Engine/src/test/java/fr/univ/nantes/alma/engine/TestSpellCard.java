@@ -1,25 +1,26 @@
 package fr.univ.nantes.alma.engine;
 
-
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
-import static pl.pojo.tester.api.assertion.Method.*;
-
-import org.junit.Test;
+import static pl.pojo.tester.api.assertion.Method.CONSTRUCTOR;
+import static pl.pojo.tester.api.assertion.Method.GETTER;
+import static pl.pojo.tester.api.assertion.Method.SETTER;
+import static pl.pojo.tester.api.assertion.Method.TO_STRING;
 
 import fr.univ.nantes.alma.engine.SpellCard;
 
+import org.junit.Test;
+
 public class TestSpellCard {
 
-	@Test
-	public void testPojoSpellCard() {
-		final Class<?> classUnderTest = SpellCard.class;
-		
-		assertPojoMethodsFor(classUnderTest)
-		.testing(GETTER)
-		.testing(SETTER)
-		.testing(CONSTRUCTOR)
-		.testing(TO_STRING)
-		.areWellImplemented();	
-	}
+  @Test
+  public void testPojoSpellCard() {
+    final Class<?> classUnderTest = SpellCard.class;
 
+    assertPojoMethodsFor(classUnderTest)
+    .testing(GETTER)
+    .testing(SETTER)
+    .testing(CONSTRUCTOR)
+    .testing(TO_STRING)
+      .areWellImplemented();
+  }
 }

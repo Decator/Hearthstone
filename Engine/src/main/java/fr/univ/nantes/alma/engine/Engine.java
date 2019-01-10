@@ -64,7 +64,7 @@ public class Engine implements EngineBridge {
     }
 
     Player player = new Player(UUID.randomUUID(), username, hero, deck, hand);
-    this.players.put(player.getUUID(), player); // Put in hashmap
+    this.players.put(player.getUuid(), player); // Put in hashmap
     return player;
   }
 
@@ -80,7 +80,7 @@ public class Engine implements EngineBridge {
         game = new GameMethods(UUID.randomUUID(), this.waitingPlayer, 
             this.players.get(uuidPlayer), retrieveInvocations());
         this.players.remove(uuidPlayer);
-        this.players.remove(this.waitingPlayer.getUUID());
+        this.players.remove(this.waitingPlayer.getUuid());
         this.waitingPlayer = null;
         this.games.put(game.getIdGame(), game);
       }
@@ -97,7 +97,7 @@ public class Engine implements EngineBridge {
   @Override
   public GameMethods playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) throws EngineException {
     try {
-      if (games.get(uuidGame).getOtherPlayer().getUUID() == uuidPlayer) {
+      if (games.get(uuidGame).getOtherPlayer().getUuid() == uuidPlayer) {
         games.get(uuidGame).playCard(idCard, games.get(uuidGame).getOtherPlayer(), idTarget);
       } else {
         games.get(uuidGame).playCard(idCard, games.get(uuidGame).getCurrentPlayer(), idTarget);
@@ -111,7 +111,7 @@ public class Engine implements EngineBridge {
   @Override
   public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException {
     try {
-      if (games.get(uuidGame).getCurrentPlayer().getUUID() == uuidPlayer) {
+      if (games.get(uuidGame).getCurrentPlayer().getUuid() == uuidPlayer) {
         games.get(uuidGame).heroPower(games.get(uuidGame).getCurrentPlayer(), idTarget);
       } else {
         games.get(uuidGame).heroPower(games.get(uuidGame).getOtherPlayer(), idTarget);

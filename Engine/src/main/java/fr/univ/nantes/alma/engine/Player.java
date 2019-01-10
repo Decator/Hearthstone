@@ -1,5 +1,6 @@
-package fr.univ_nantes.alma.engine;
+package fr.univ.nantes.alma.engine;
 
+import java.util.Arrays;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -12,12 +13,12 @@ import java.util.Vector;
 public class Player {
 	private UUID uuid;
 	private String username;
-	private Hero hero;
+	private HeroCard hero;
 	private int manaPool;
 	private int manaMaxTurn;
-	private Card[] deck;
-	private Vector<Card> hand;
-	private Vector<Minion> board;
+	private AbstractCard[] deck;
+	private Vector<AbstractCard> hand;
+	private Vector<MinionCard> board;
 
 	/**
 	 * Initialize the attributes of this class.
@@ -26,15 +27,15 @@ public class Player {
 	 * @param hero the hero of the player
 	 */
 	
-	Player(UUID uuid, String username, Hero hero, Card[] deck, Vector<Card> hand) {
+	Player(UUID uuid, String username, HeroCard hero, AbstractCard[] deck, Vector<AbstractCard> hand) {
 		this.uuid = uuid;
 		this.username = username;
 		this.hero = hero;
 		this.manaPool = 0;
 		this.manaMaxTurn = 0;
-		this.deck = deck;
+		this.deck = Arrays.copyOf(deck, deck.length);
 		this.hand = hand;
-		this.board = new Vector<Minion>();
+		this.board = new Vector<MinionCard>();
 	}
 
 	/**
@@ -57,7 +58,7 @@ public class Player {
 	 * Return the Hero the user has chosen.
 	 * @return the hero
 	 */
-	public Hero getHero() {
+	public HeroCard getHero() {
 		return this.hero;
 	}
 
@@ -81,15 +82,15 @@ public class Player {
 	 * Return the deck of the player.
 	 * @return the deck of the player
 	 */
-	public Card[] getDeck() {
-		return this.deck;
+	public AbstractCard[] getDeck() {
+		return Arrays.copyOf(this.deck, this.deck.length);
 	}
 
 	/**
 	 * Return the hand of the player.
 	 * @return he hand of the player
 	 */
-	public Vector<Card> getHand() {
+	public Vector<AbstractCard> getHand() {
 		return this.hand;
 	}
 
@@ -97,7 +98,7 @@ public class Player {
 	 * Return the board of the player.
 	 * @return the board of the player
 	 */
-	public Vector<Minion> getBoard() {
+	public Vector<MinionCard> getBoard() {
 		return this.board;
 	}
 
@@ -116,53 +117,53 @@ public class Player {
     }
 
 	/**
-	 * Increase the mana pool each turn until it reaches 10
+	 * Increase the mana pool each turn until it reaches 10.
 	 */
 	void setManaMaxTurn() {
 		this.manaMaxTurn++;
 	}
 
 	/**
-	 * Add a card to the player's hand
+	 * Add a card to the player's hand.
 	 * @param card the card to add
 	 */
-	void addCardToHand(Card card) {
+	void addCardToHand(AbstractCard card) {
 		try {
-			this.getHand().add((Card)card.clone());
+			this.getHand().add((AbstractCard)card.clone());
 		} catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Add a minion to the player's board
+	 * Add a minion to the player's board.
 	 * @param minion the minion to add
 	 */
-	void addCardToBoard(Minion minion) {
+	void addCardToBoard(MinionCard minion) {
 		this.getBoard().add(minion);
 	}
 	
 	/**
-	 * Add a minion at a specific index to the player's board
+	 * Add a minion at a specific index to the player's board.
 	 * @param minion the minion to add
 	 */
-	void addCardToBoard(Minion minion, int id) {
-		this.getBoard().set(id, minion);
+	void addCardToBoard(MinionCard minion, int handCardIndex) {
+		this.getBoard().set(handCardIndex, minion);
 	}
 
 	/**
-	 * Remove a card from the player's hand
-	 * @param idCard the id of the card to remove
+	 * Remove a card from the player's hand.
+	 * @param handCardIndex the id of the card to remove
 	 */
-	void removeCardFromHand(int idCard) {
-		this.getHand().remove(idCard);
+	void removeCardFromHand(int handCardIndex) {
+		this.getHand().remove(handCardIndex);
 	}
 
 	/**
-	 * Remove a minion from the player's board
-	 * @param idCard the id of the minion to remove
+	 * Remove a minion from the player's board.
+	 * @param boardCardIndex the id of the minion to remove
 	 */
-	void removeCardFromBoard(int idCard) {
-		this.getBoard().remove(idCard);
+	void removeCardFromBoard(int boardCardIndex) {
+		this.getBoard().remove(boardCardIndex);
 	}
 }

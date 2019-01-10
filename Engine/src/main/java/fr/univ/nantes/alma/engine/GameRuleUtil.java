@@ -1,4 +1,4 @@
-package fr.univ_nantes.alma.engine;
+package fr.univ.nantes.alma.engine;
 
 import java.util.Vector;
 
@@ -8,13 +8,13 @@ import java.util.Vector;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-public class Rule {
+public class GameRuleUtil {
 
     static final int MANA_MAX = 10;
-    static final int MANA_COST_HERO_POWER = 2;
+    static final int MANA_HERO_POWER = 2;
     static final int MAX_HAND_SIZE = 10;
     static final int MAX_BOARD_SIZE = 7;
-    static final int MAX_HERO_HEALTH_POINTS = 30;
+    static final int MAX_HERO_HP = 30;
 
     /**
      * Check if the player has reached the maximum mana.
@@ -30,7 +30,7 @@ public class Rule {
      * @param handSize the hand's size
      * @return true of false
      */
-	static boolean checkHandSize(Vector<Card> hand) {
+	static boolean checkHandSize(Vector<AbstractCard> hand) {
         return hand.size() < MAX_HAND_SIZE;
     }
 
@@ -39,7 +39,7 @@ public class Rule {
      * @param boardSize the board's size
      * @return true of false
      */
-    static boolean checkBoardSize(Vector<Minion> board) {
+    static boolean checkBoardSize(Vector<MinionCard> board) {
         return board.size() < MAX_BOARD_SIZE;
     }
 
@@ -49,7 +49,7 @@ public class Rule {
      * @return true of false
      */
     static boolean checkHealthPoints(int healthPoints) {
-        return healthPoints < MAX_HERO_HEALTH_POINTS;
+        return healthPoints < MAX_HERO_HP;
     }
 
     /**
@@ -76,7 +76,7 @@ public class Rule {
      * @param minion the minion to check
      * @return true or false
      */
-    static boolean checkMinionAttacked(Minion minion) {
-    	return minion.getAttacked();
+    static boolean checkMinionAttacked(MinionCard minion) {
+    	return minion.isAttacked();
     }
 }

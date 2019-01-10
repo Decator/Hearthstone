@@ -1,4 +1,4 @@
-package fr.univ_nantes.alma.engine;
+package fr.univ.nantes.alma.engine;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -16,7 +16,7 @@ public interface EngineBridge {
 	 * Get the list of available heros.
 	 * @return the list of available heros
 	 */
-	public ArrayList<Hero> getHeros();
+	public ArrayList<HeroCard> getHeros();
 	
 	/**
 	 * Create a player with a hero id and a username. 
@@ -31,14 +31,14 @@ public interface EngineBridge {
 	 * @param uuidPlyaer the uuid of the player
 	 * @return the game
 	 */
-	public Game createGame(UUID uuidPlayer);
+	public GameMethods createGame(UUID uuidPlayer);
 	
 	/**
 	 * End the turn.
 	 * @param uuidGame the id of the game 
 	 * @return the game
 	 */
-	public Game endTurn(UUID uuidGame);
+	public GameMethods endTurn(UUID uuidGame);
 	
 	/**
 	 * Play a card. Either put a minion card on the board or activate a spell card.
@@ -49,7 +49,7 @@ public interface EngineBridge {
 	 * @return the game
 	 * @throws EngineException 
 	 */
-	public Game playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) throws EngineException;
+	public GameMethods playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) throws EngineException;
 	
 	/**
 	 * Activate the hero's power.
@@ -59,7 +59,7 @@ public interface EngineBridge {
 	 * @return the game
 	 * @throws EngineException 
 	 */
-	public Game heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException;
+	public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException;
 	
 	/**
 	 * Attack a card or a hero.
@@ -69,5 +69,5 @@ public interface EngineBridge {
 	 * @return the game
 	 * @throws EngineException 
 	 */
-	public Game attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException;
+	public GameMethods attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException;
 }

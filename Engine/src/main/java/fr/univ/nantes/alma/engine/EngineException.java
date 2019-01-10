@@ -1,4 +1,4 @@
-package fr.univ_nantes.alma.engine;
+package fr.univ.nantes.alma.engine;
 
 /**
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret

@@ -1,4 +1,4 @@
-package fr.univ_nantes.alma.engine;
+package fr.univ.nantes.alma.engine;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -13,12 +13,12 @@ import java.util.Vector;
  * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
  * @version 0.0.1
  */
-public class Game {
+public class GameMethods {
 	private UUID idGame;
 	private Player currentPlayer;
 	private Player otherPlayer;
 	private boolean gameOver;
-	private ArrayList<Minion> invocations;
+	private ArrayList<MinionCard> invocations;
 
 	/**
 	 * Initialize the attributes of this class.
@@ -26,7 +26,7 @@ public class Game {
 	 * @param player1 the first player of the game
 	 * @param player2 the second player of the game
 	 */
-	Game(UUID idGame, Player player1, Player player2, ArrayList<Minion> invocations) {
+	GameMethods(UUID idGame, Player player1, Player player2, ArrayList<MinionCard> invocations) {
 		this.idGame = idGame;
 		this.currentPlayer = player1;
 		this.otherPlayer = player2;
@@ -43,25 +43,25 @@ public class Game {
 	 * @throws EngineException 
      */
 	void playCard(int idCard, Player targetPlayer, int idTarget) throws EngineException  {
-        Card card = this.currentPlayer.getHand().get(idCard); // Create the card according to the id given on parameters
-        Hero hero = this.currentPlayer.getHero();
+        AbstractCard card = this.currentPlayer.getHand().get(idCard); // Create the card according to the id given on parameters
+        HeroCard hero = this.currentPlayer.getHero();
         
-        if(Rule.checkManaPool(this.currentPlayer.getManaPool(), card.getManaCost())) { // If the player has enough mana, play the card
+        if(GameRuleUtil.checkManaPool(this.currentPlayer.getManaPool(), card.getManaCost())) { // If the player has enough mana, play the card
         	if(idCard >= 0 && idCard < this.currentPlayer.getHand().size()) { // A REVOIIIIR
-	        	if(card instanceof Minion) { // If it's a Minion
-	            	if(Rule.checkBoardSize(this.currentPlayer.getBoard())) {
-	            		this.currentPlayer.addCardToBoard((Minion)this.currentPlayer.getHand().get(idCard));
+	        	if(card instanceof MinionCard) { // If it's a Minion
+	            	if(GameRuleUtil.checkBoardSize(this.currentPlayer.getBoard())) {
+	            		this.currentPlayer.addCardToBoard((MinionCard)this.currentPlayer.getHand().get(idCard));
 	            		this.currentPlayer.removeCardFromHand(idCard);
-	            		Minion lastMinionPlayed = this.currentPlayer.getBoard().lastElement();
-	            		Charge(lastMinionPlayed);
+	            		MinionCard lastMinionPlayed = this.currentPlayer.getBoard().lastElement();
+	            		charge(lastMinionPlayed);
 	            		giveAttackAuraToOtherMinions(this.currentPlayer.getBoard(), lastMinionPlayed); //give attack aura buff to other minions if it exists
 	            		getAttackAuraFromOtherMinions(this.currentPlayer.getBoard(), lastMinionPlayed); // get attack auras buffs from other minions if they exist
 	            	} else {
 	            		throw new EngineException("Vous avez atteint le nombre maximum de serviteurs sur le plateau !");
 	            	}
-	        	} else if (card instanceof Spell) {
+	        	} else if (card instanceof SpellCard) {
 	        		this.currentPlayer.removeCardFromHand(idCard);
-	        		Spell spell = (Spell) card;
+	        		SpellCard spell = (SpellCard) card;
 	        		
 	        		//Drawing effect
 	        		if (spell.getNbDraw() > 0) { // Add cards to hand if relevant
@@ -84,26 +84,26 @@ public class Game {
 	        		
 	        		//Attack buff effect
 	        		if (spell.getAttackBuff() > 0) { // Adds an attack buff to the target minions 
-	        			LinkedHashMap<String, Card> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
-	        			for (Map.Entry<String, Card> entry : targets.entrySet()) {
-	        				if(entry.getValue() instanceof Minion) {
-	        					((Minion)entry.getValue()).setDamage(((Minion)entry.getValue()).getDamage() + spell.getAttackBuff());
+	        			LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
+	        			for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
+	        				if(entry.getValue() instanceof MinionCard) {
+	        					((MinionCard)entry.getValue()).setDamage(((MinionCard)entry.getValue()).getDamage() + spell.getAttackBuff());
 	        				}
 	        			}
 	        		}
 	        		
 	        		//Polymorph effect
-	        		if(spell.getPolymorph()) {
-	        			LinkedHashMap<String, Card> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
-	        			for (Map.Entry<String, Card> entry : targets.entrySet()) {
-	        				if(entry.getValue() instanceof Minion) {
+	        		if(spell.isPolymorph()) {
+	        			LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
+	        			for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
+	        				if(entry.getValue() instanceof MinionCard) {
 	        					String keys[] = entry.getKey().split("_");
 	        					if (keys[0] == "0") {
-	        						removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (Minion) entry.getValue());
+	        						removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (MinionCard) entry.getValue());
 	        						polymorph(this.currentPlayer, spell.getIdInvocation(), keys[1]);
 	        						
 	        					} else if (keys[0] == "1") {
-	        						removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (Minion) entry.getValue());
+	        						removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (MinionCard) entry.getValue());
 	        						polymorph(this.otherPlayer, spell.getIdInvocation(), keys[1]);
 	        					}
 	        				}
@@ -112,23 +112,23 @@ public class Game {
 	        		
 	        		//Damage effect
 	                if (spell.getDamage() > 0) {
-	                	LinkedHashMap<String, Card> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
-	                	for (Map.Entry<String, Card> entry : targets.entrySet()) {
-	                		if (entry.getValue() instanceof Hero) {
-	                			((Hero) entry.getValue()).receiveDamage(spell.getDamage());
-		                		if(!Rule.checkAlive(((Hero)entry.getValue()).getHealthPoints())){
+	                	LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
+	                	for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
+	                		if (entry.getValue() instanceof HeroCard) {
+	                			((HeroCard) entry.getValue()).receiveDamage(spell.getDamage());
+		                		if(!GameRuleUtil.checkAlive(((HeroCard)entry.getValue()).getHealthPoints())){
 		                			this.gameOver = true;
 		    						//endGame();
 		                		}
-	                		} else if (entry.getValue() instanceof Minion) {
-	                			((Minion) entry.getValue()).receiveDamage(spell.getDamage());
-	                			if(!Rule.checkAlive(((Minion) entry.getValue()).getHealthPoints())) {
+	                		} else if (entry.getValue() instanceof MinionCard) {
+	                			((MinionCard) entry.getValue()).receiveDamage(spell.getDamage());
+	                			if(!GameRuleUtil.checkAlive(((MinionCard) entry.getValue()).getHealthPoints())) {
 	                				String keys[] = entry.getKey().split("_");
 	                				if (keys[0] == "0") {
-		                				removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
+		                				removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (MinionCard) entry.getValue()); //remove attack buff from other minions if relevant
 		                				this.currentPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
 	                				} else if (keys[0] == "1") {
-	                					removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
+	                					removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (MinionCard) entry.getValue()); //remove attack buff from other minions if relevant
 	                					this.otherPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
 	                				}
 	                			}
@@ -153,50 +153,50 @@ public class Game {
 	 * @throws EngineException 
 	 */
 	void heroPower(Player playerTarget, int idTarget) throws EngineException {
-		Hero heroCurrentPlayer = this.currentPlayer.getHero();
+		HeroCard heroCurrentPlayer = this.currentPlayer.getHero();
 		
-		if (!heroCurrentPlayer.getHeroPowerUsed()) { // If the hero has already used his power
-			if (Rule.checkManaPool(this.currentPlayer.getManaPool(), Rule.MANA_COST_HERO_POWER)) {
+		if (!heroCurrentPlayer.isHeroPowerUsed()) { // If the hero has already used his power
+			if (GameRuleUtil.checkManaPool(this.currentPlayer.getManaPool(), GameRuleUtil.MANA_HERO_POWER)) {
 				switch (heroCurrentPlayer.getType()) {//check class of the hero
 				case "warrior": //gives armor buff
 					heroCurrentPlayer.setArmorPoints(heroCurrentPlayer.getArmorPoints() + heroCurrentPlayer.getArmorBuff());
 					heroCurrentPlayer.setHeroPowerUsed(true);
-					this.currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
+					this.currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
 					break;
 				case "mage":
-					LinkedHashMap<String, Card> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, playerTarget, idTarget, heroCurrentPlayer.getTarget());
-                	for (Map.Entry<String, Card> entry : targets.entrySet()) {
-                		if (entry.getValue() instanceof Hero) {
-                			((Hero) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
-	                		if(!Rule.checkAlive(((Hero)entry.getValue()).getHealthPoints())){
+					LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, playerTarget, idTarget, heroCurrentPlayer.getTarget());
+                	for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
+                		if (entry.getValue() instanceof HeroCard) {
+                			((HeroCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
+	                		if(!GameRuleUtil.checkAlive(((HeroCard)entry.getValue()).getHealthPoints())){
 	                			this.gameOver = true;
 	    						//endGame();
 	                		}
-                		} else if (entry.getValue() instanceof Minion) {
-                			((Minion) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
-                			if(!Rule.checkAlive(((Minion) entry.getValue()).getHealthPoints())) {
+                		} else if (entry.getValue() instanceof MinionCard) {
+                			((MinionCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
+                			if(!GameRuleUtil.checkAlive(((MinionCard) entry.getValue()).getHealthPoints())) {
                 				String keys[] = entry.getKey().split("_");
                 				if (keys[0] == "0") {
-	                				removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
+	                				removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (MinionCard) entry.getValue()); //remove attack buff from other minions if relevant
 	                				this.currentPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
                 				} else if (keys[0] == "1") {
-                					removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (Minion) entry.getValue()); //remove attack buff from other minions if relevant
+                					removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (MinionCard) entry.getValue()); //remove attack buff from other minions if relevant
                 					this.otherPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
                 				}
                 			}
                 		}
                 	}
 					heroCurrentPlayer.setHeroPowerUsed(true);
-					this.currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER); //Decrement manaCost from manaPool
+					this.currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER); //Decrement manaCost from manaPool
 					break;
 				case "paladin":
 					summonMinion(currentPlayer, heroCurrentPlayer.getIdInvocation());
 					heroCurrentPlayer.setHeroPowerUsed(true);
-					currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
+					currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
 					break;
 				default :
 					heroCurrentPlayer.setHeroPowerUsed(true);
-					currentPlayer.setManaPoolAfterPlay(Rule.MANA_COST_HERO_POWER);
+					currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
 					throw new EngineException("Impossible de récupérer la classe du héros !");
 				}
 			} else {
@@ -214,35 +214,35 @@ public class Game {
 	 * @throws EngineException 
 	 */
 	void attack(int idAttack, int idTarget) throws EngineException {
-		Minion minion = this.currentPlayer.getBoard().get(idAttack);
-		Hero hero = this.currentPlayer.getHero();
-		Hero heroEnemy = this.otherPlayer.getHero();
+		MinionCard minion = this.currentPlayer.getBoard().get(idAttack);
+		HeroCard hero = this.currentPlayer.getHero();
+		HeroCard heroEnemy = this.otherPlayer.getHero();
 		
 		if (minion.getDamage() > 0) {
 			//Checks if the minion already attacked or not
-			if(minion != null && !Rule.checkMinionAttacked(minion)) {
-				if (!Taunt(this.otherPlayer.getBoard()) && idTarget == -1) { // If no enemy minion has taunt and enemy Hero is target, then attacking is possible
+			if(minion != null && !GameRuleUtil.checkMinionAttacked(minion)) {
+				if (!taunt(this.otherPlayer.getBoard()) && idTarget == -1) { // If no enemy minion has taunt and enemy Hero is target, then attacking is possible
 					int damage = minion.getDamage();
 					heroEnemy.receiveDamage(damage); //attacks the enemy Hero
 					minion.setAttacked(true);
-					LifeSteal(hero, minion);
-					if(!Rule.checkAlive(heroEnemy.getHealthPoints())) {
+					lifesteal(hero, minion);
+					if(!GameRuleUtil.checkAlive(heroEnemy.getHealthPoints())) {
 						this.gameOver = true;
 						//endGame();
 					}
-				} else if (!Taunt(this.otherPlayer.getBoard()) || this.otherPlayer.getBoard().get(idTarget).getTaunt()) { // If no enemy minion has taunt, or target minion has taunt, attacking is possible
-					Minion victim = this.otherPlayer.getBoard().get(idTarget);
+				} else if (!taunt(this.otherPlayer.getBoard()) || this.otherPlayer.getBoard().get(idTarget).isTaunt()) { // If no enemy minion has taunt, or target minion has taunt, attacking is possible
+					MinionCard victim = this.otherPlayer.getBoard().get(idTarget);
 					if(victim != null) {
 						minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
-						LifeSteal(hero, minion);
+						lifesteal(hero, minion);
 						victim.receiveDamage(minion.getDamage()); //attacks the minion
-						LifeSteal(heroEnemy, victim);
+						lifesteal(heroEnemy, victim);
 						minion.setAttacked(true);
-						if(!Rule.checkAlive(minion.getHealthPoints())) {
+						if(!GameRuleUtil.checkAlive(minion.getHealthPoints())) {
 							removeAttackAuraFromMinions(this.currentPlayer.getBoard(), minion); //removes attack buff from other minions if relevant
 							this.currentPlayer.removeCardFromBoard(idAttack);
 						}
-						if(!Rule.checkAlive(victim.getHealthPoints())) {
+						if(!GameRuleUtil.checkAlive(victim.getHealthPoints())) {
 							removeAttackAuraFromMinions(this.otherPlayer.getBoard(), victim); //removes attack buff from other minions if relevant
 							this.otherPlayer.removeCardFromBoard(idTarget);
 						}
@@ -265,18 +265,18 @@ public class Game {
 	 */
 	void initTurn() {
 		Player player = this.currentPlayer;
-		Hero hero = this.currentPlayer.getHero();
+		HeroCard hero = this.currentPlayer.getHero();
 		try {
 			drawCard();
 		} catch (EngineException e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(Rule.checkManaTurn(player.getManaMaxTurn())) {
+			if(GameRuleUtil.checkManaTurn(player.getManaMaxTurn())) {
 				player.setManaMaxTurn();
 			}
 			player.setManaPoolForNewTurn();
 			hero.setHeroPowerUsed(false);
-			for (Minion minion : player.getBoard()) {
+			for (MinionCard minion : player.getBoard()) {
 				minion.setAttacked(false);
 			}
 		}
@@ -308,7 +308,7 @@ public class Game {
 		Player player = this.currentPlayer;
 		int random = (int)(player.getDeck().length * Math.random());
 		
-		if(Rule.checkHandSize(player.getHand())) {
+		if(GameRuleUtil.checkHandSize(player.getHand())) {
 			player.addCardToHand(player.getDeck()[random]);
 		} else {
 			throw new EngineException("Votre main est pleine !");
@@ -324,11 +324,11 @@ public class Game {
 	 * @param spellTarget the string detailing the potential targets of a given spell
 	 * @return LinkedHashMap<String, Card> containing the targets of the spell
 	 */
-	LinkedHashMap<String, Card> targetsFromTargetString(Player player, Player playerEnemy, Player targetPlayer, int idTarget, String spellTarget){
+	LinkedHashMap<String, AbstractCard> targetsFromTargetString(Player player, Player playerEnemy, Player targetPlayer, int idTarget, String spellTarget){
 		String[] splitString = spellTarget.split("_");
-		Hero hero = player.getHero();
-		Hero heroEnemy = playerEnemy.getHero();
-		LinkedHashMap<String, Card> targets = new LinkedHashMap<String, Card>();
+		HeroCard hero = player.getHero();
+		HeroCard heroEnemy = playerEnemy.getHero();
+		LinkedHashMap<String, AbstractCard> targets = new LinkedHashMap<String, AbstractCard>();
 		switch (splitString[0]) {
 		case "minion" :
 			switch (splitString[1]) {
@@ -445,11 +445,11 @@ public class Game {
 	 * @param board
 	 * @param lastMinionPlayed
 	 */
-	void giveAttackAuraToOtherMinions(Vector<Minion> board, Minion lastMinionPlayed) {
+	void giveAttackAuraToOtherMinions(Vector<MinionCard> board, MinionCard lastMinionPlayed) {
 		if (lastMinionPlayed.getAttackBuffAura() != 0) { //if minion has attack aura
 			int attackBuffAura = lastMinionPlayed.getAttackBuffAura();
 			for (int i = 0; i < board.size() - 1; i++) { // gives attack aura to all allies minions but itself
-				Minion minion = board.get(i);
+				MinionCard minion = board.get(i);
 				minion.setDamage(minion.getDamage() + attackBuffAura);
 			}
 		}
@@ -460,10 +460,10 @@ public class Game {
 	 * @param board the board of the player playing the minion
 	 * @param lastMinionPlayed
 	 */
-	void getAttackAuraFromOtherMinions(Vector<Minion> board, Minion lastMinionPlayed) {
+	void getAttackAuraFromOtherMinions(Vector<MinionCard> board, MinionCard lastMinionPlayed) {
 		int attackBuffAura = 0;
 		for (int i = 0; i < board.size() - 1; i++) { //if there are minions with attack auras on the board
-			Minion minion = board.get(i);
+			MinionCard minion = board.get(i);
 			if (minion.getAttackBuffAura()!= 0) {
 				attackBuffAura += minion.getAttackBuffAura(); //add auras up except aura generated by played minion
 			}
@@ -475,7 +475,7 @@ public class Game {
 	 * @param board the board containing the dying minion
 	 * @param dyingMinion
 	 */
-	void removeAttackAuraFromMinions(Vector<Minion> board, Minion dyingMinion) {
+	void removeAttackAuraFromMinions(Vector<MinionCard> board, MinionCard dyingMinion) {
 		if (dyingMinion.getAttackBuffAura() != 0) { //if minion has attack aura
 			for (int i = 0; i < board.size(); i++) {
 				board.get(i).setDamage(board.get(i).getDamage() - dyingMinion.getAttackBuffAura());
@@ -487,21 +487,17 @@ public class Game {
 	 * @param hero the hero healed by lifesteal
 	 * @param minion the minion having lifesteal
 	 */
-	void LifeSteal(Hero hero, Minion minion) {
-		if (minion.getLifesteal()) { //check for lifesteal
-			if (!Rule.checkHealthPoints(hero.getHealthPoints() + minion.getDamage())) {
-				hero.setHealthPoints(Rule.MAX_HERO_HEALTH_POINTS); // if going over max HP, then HP = max
-			} else {
+	void lifesteal(HeroCard hero, MinionCard minion) {
+		if (minion.isLifesteal()) { //check for lifesteal
 				hero.receiveHealing(minion.getDamage()); // if not, heal for the damage inflicted by the minion
-			}
 		}
 	}
 	/**
 	 * If played minion has charge, it can attack right away
 	 * @param lastMinionPlayed
 	 */
-	void Charge(Minion lastMinionPlayed){
-		if (lastMinionPlayed.getCharge()) { // If played minion has charge
+	void charge(MinionCard lastMinionPlayed){
+		if (lastMinionPlayed.isCharge()) { // If played minion has charge
 			lastMinionPlayed.setAttacked(false); //can attack right away
 		} else  {
 			lastMinionPlayed.setAttacked(true); // else has to wait a turn
@@ -512,9 +508,9 @@ public class Game {
 	 * @param board the board that needs to be checked for taunt minions
 	 * @return true if a minion as taunt, else false
 	 */
-	boolean Taunt(Vector<Minion> board) {
-		for (Minion minionEnemy : board) { // Check if an enemy minion has taunt
-			if (minionEnemy.getTaunt()) {
+	boolean taunt(Vector<MinionCard> board) {
+		for (MinionCard minionEnemy : board) { // Check if an enemy minion has taunt
+			if (minionEnemy.isTaunt()) {
 				return true;
 			}
 		}
@@ -527,16 +523,16 @@ public class Game {
 	 * @throws EngineException 
 	 */
 	void summonMinion(Player player, int idSummon) throws EngineException {
-		if (Rule.checkBoardSize(player.getBoard())) { // if board is not full
-			Minion minion = null;
-			for(Minion invoc : this.invocations) { //get specific minion
+		if (GameRuleUtil.checkBoardSize(player.getBoard())) { // if board is not full
+			MinionCard minion = null;
+			for(MinionCard invoc : this.invocations) { //get specific minion
 				if (invoc.getId() == idSummon) {
 					minion = invoc;
 				}
 			}
 			if (minion != null) {
 				try {
-					player.addCardToBoard((Minion)minion.clone());
+					player.addCardToBoard((MinionCard)minion.clone());
 				} catch (CloneNotSupportedException e) {
 					e.printStackTrace();
 				} 
@@ -558,8 +554,8 @@ public class Game {
 	 * @throws EngineException 
 	 */
 	void polymorph(Player player, int idSummon, String indexBoard) throws EngineException {
-		Minion minion = null;
-		for(Minion invoc : this.invocations) { //get specific minion
+		MinionCard minion = null;
+		for(MinionCard invoc : this.invocations) { //get specific minion
 			if (invoc.getId() == idSummon) {
 				minion = invoc;
 			}

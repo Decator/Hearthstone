@@ -1,4 +1,4 @@
-package fr.univ_nantes.alma.engine;
+package fr.univ.nantes.alma.engine;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,51 +14,51 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 0.0.1
  */
 public class Engine implements EngineBridge {
-	private HashMap<UUID, Game> games;
-	private HashMap<UUID, Player> players;
-	private Player waitingPlayer;
-	
-	@Autowired
-	private MinionRepository minionRepository;
-	@Autowired
-	private SpellRepository spellRepository;
-	@Autowired
-	private HeroRepository heroRepository;
-	
-	public Engine(MinionRepository minion, SpellRepository spell, HeroRepository hero) {
-		this.minionRepository = minion;
-		this.spellRepository = spell;
-		this.heroRepository = hero;
-		this.games = new HashMap<UUID, Game>();
-		this.players = new HashMap<UUID, Player>();
-	}
+  private HashMap<UUID, GameMethods> games;
+  private HashMap<UUID, Player> players;
+  private Player waitingPlayer;
+
+  @Autowired
+  private MinionCardRepository minionRepository;
+  @Autowired
+  private SpellCardRepository spellRepository;
+  @Autowired
+  private HeroCardRepository heroRepository;
+  
+  public Engine(MinionCardRepository minion, SpellCardRepository spell, HeroCardRepository hero) {
+    this.minionRepository = minion;
+    this.spellRepository = spell;
+    this.heroRepository = hero;
+    this.games = new HashMap<UUID, GameMethods>();
+    this.players = new HashMap<UUID, Player>();
+  }
     
-    @Override
-	public ArrayList<Hero> getHeros() {
-    	return this.heroRepository.findAll();
-	}
-    
-    @Override
-    public Player createPlayer(int idHero, String username) {
-    	Hero hero = this.retrieveHero(idHero);
-    	ArrayList<Minion> minion = retrieveMinions(hero.getType());
-    	ArrayList<Spell> spell = retrieveSpells(hero.getType());
+  @Override
+  public ArrayList<HeroCard> getHeros() {
+    return this.heroRepository.findAll();
+  }
+
+  @Override
+  public Player createPlayer(int idHero, String username) {
+    	HeroCard hero = this.retrieveHero(idHero);
+    	ArrayList<MinionCard> minion = retrieveMinions(hero.getType());
+    	ArrayList<SpellCard> spell = retrieveSpells(hero.getType());
     	
     	// Create deck
-    	ArrayList<Card> card = new ArrayList<Card>();
+    	ArrayList<AbstractCard> card = new ArrayList<AbstractCard>();
     	card.addAll(minion);
     	card.addAll(spell);
-		Card[] deck = card.toArray(new Card[card.size()]);
+		AbstractCard[] deck = card.toArray(new AbstractCard[card.size()]);
 		
 		// Create hand
-		Vector<Card> hand = new Vector<Card>();
-		Card card1 = deck[(int)(Math.random() * deck.length)];
-		Card card2 = deck[(int)(Math.random() * deck.length)];
-		Card card3 = deck[(int)(Math.random() * deck.length)];
+		Vector<AbstractCard> hand = new Vector<AbstractCard>();
+		AbstractCard card1 = deck[(int)(Math.random() * deck.length)];
+		AbstractCard card2 = deck[(int)(Math.random() * deck.length)];
+		AbstractCard card3 = deck[(int)(Math.random() * deck.length)];
 		try {
-			hand.add((Card)card1.clone());
-			hand.add((Card)card2.clone());
-			hand.add((Card)card3.clone());
+			hand.add((AbstractCard)card1.clone());
+			hand.add((AbstractCard)card2.clone());
+			hand.add((AbstractCard)card3.clone());
 	    } catch (CloneNotSupportedException e) {
 			e.printStackTrace();
 		}
@@ -69,15 +69,15 @@ public class Engine implements EngineBridge {
 	}
 	
     @Override
-    public Game createGame(UUID uuidPlayer) {
-    	Game game = null;
+    public GameMethods createGame(UUID uuidPlayer) {
+    	GameMethods game = null;
     	if(this.waitingPlayer == null) {
     		if(this.players.containsKey(uuidPlayer)) {
     			this.waitingPlayer = this.players.get(uuidPlayer);
     		}
     	} else {
     		if(this.players.containsKey(uuidPlayer)) {
-    			game = new Game(UUID.randomUUID(), this.waitingPlayer, this.players.get(uuidPlayer), retrieveInvocations());
+    			game = new GameMethods(UUID.randomUUID(), this.waitingPlayer, this.players.get(uuidPlayer), retrieveInvocations());
     			this.players.remove(uuidPlayer);
     			this.players.remove(this.waitingPlayer.getUUID());
     			this.waitingPlayer = null;
@@ -88,13 +88,13 @@ public class Engine implements EngineBridge {
 	}
     
     @Override
-	public Game endTurn(UUID uuidGame) {
+	public GameMethods endTurn(UUID uuidGame) {
 		games.get(uuidGame).endTurn();
 		return games.get(uuidGame);
 	}
 	
 	@Override
-	public Game playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) throws EngineException {
+	public GameMethods playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) throws EngineException {
 		try {
 			if(games.get(uuidGame).getOtherPlayer().getUUID() == uuidPlayer) {
 				games.get(uuidGame).playCard(idCard, games.get(uuidGame).getOtherPlayer(), idTarget);
@@ -108,7 +108,7 @@ public class Engine implements EngineBridge {
 	}
 	
 	@Override
-	public Game heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException {
+	public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException {
 		try {
 			if(games.get(uuidGame).getCurrentPlayer().getUUID() == uuidPlayer) {
 				games.get(uuidGame).heroPower(games.get(uuidGame).getCurrentPlayer(), idTarget);
@@ -122,7 +122,7 @@ public class Engine implements EngineBridge {
 	}
 	
 	@Override
-	public Game attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException {
+	public GameMethods attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException {
 		try {
 			games.get(uuidGame).attack(idAttack, idTarget);
 		} catch(EngineException e) {
@@ -136,9 +136,9 @@ public class Engine implements EngineBridge {
 	 * @param heroType the type of Hero
 	 * @return the list of Minions
 	 */
-	public ArrayList<Minion> retrieveMinions(String heroType){
-		ArrayList<Minion> commonList = this.minionRepository.findByType("common");
-		ArrayList<Minion> heroList = this.minionRepository.findByType(heroType);
+	public ArrayList<MinionCard> retrieveMinions(String heroType){
+		ArrayList<MinionCard> commonList = this.minionRepository.findByType("common");
+		ArrayList<MinionCard> heroList = this.minionRepository.findByType(heroType);
 		heroList.addAll(commonList);
 		return heroList;
 	}
@@ -148,9 +148,9 @@ public class Engine implements EngineBridge {
 	 * @param heroType the type of Hero
 	 * @return the list of Spells
 	 */
-	public ArrayList<Spell> retrieveSpells(String heroType){
-		ArrayList<Spell> commonList = this.spellRepository.findByType("common");
-		ArrayList<Spell> heroList = this.spellRepository.findByType(heroType);
+	public ArrayList<SpellCard> retrieveSpells(String heroType){
+		ArrayList<SpellCard> commonList = this.spellRepository.findByType("common");
+		ArrayList<SpellCard> heroList = this.spellRepository.findByType(heroType);
 		heroList.addAll(commonList);
 		return heroList;
 	}
@@ -159,7 +159,7 @@ public class Engine implements EngineBridge {
 	 * Get all the invocations. 
 	 * @return the list of invocations
 	 */
-	public ArrayList<Minion> retrieveInvocations(){
+	public ArrayList<MinionCard> retrieveInvocations(){
 		return this.minionRepository.findByType("invocation");
 	}
 	
@@ -167,7 +167,7 @@ public class Engine implements EngineBridge {
 	 * Get the hero. 
 	 * @return the hero
 	 */
-    public Hero retrieveHero(int hero) {
+    public HeroCard retrieveHero(int hero) {
     	if(this.heroRepository.findById(hero) != null ) {
     		return this.heroRepository.findById(hero);
     	}

@@ -1,5 +1,6 @@
 body {
   background-image: url("/assets/img/background.png");
+  height: 100%;
 }
 
 a{
@@ -18,83 +19,101 @@ p {
 .mana {
   color:3b619b;
   position: absolute;
-  right: 18.5%;
-  bottom: 20%;
+  right: 15vw;
+  bottom: 20VH;
+  height: 15VH;
+  width: 20vw;
 }
 
 .manaAdv {
   color:3b619b;
   position: absolute;
-  right: 26%;
-  top: 20%;
+  right: 20vw;
+  top: 20VH;
+  height: 20VH;
+  width: 20vw;
 }
 
 
 
 .advCard {
   position: absolute;
-  top: 0%;
-  left: 50%;
+  top: 0VH;
+  left: 80vw;
   transform: translateX(-50%);
+  height:16VH;
+  width: 80vw;
 }
 
 .advBoard {
   position: absolute;
-  top: 30%;
-  left: 50%;
+  top: 30VH;
+  left: 80vw;
   transform: translateX(-50%);
+  height: 20VH;
+  width:80vw;
 }
 
 .board {
   position: absolute;
-  bottom: 33%;
-  left: 50%;
+  bottom: 33VH;
+  left: 80vw;
   transform: translateX(-50%);
+  height: 20VH;
+  width:80vw;
 }
 
 .card {
   position: absolute;
-  bottom: 0%;
-  left:50%;
+  bottom: 2VH;
+  left:80vw;
+  height:16VH;
+  width: 80vw;
   transform: translateX(-50%);
 }
 
 .imghero {
   position: absolute;
-  right: 48%;
-  bottom: 17%;
+  right: 45vw;
+  bottom: 28VH;
+  height: 10VH;
+  width:10vw;
 }
 
 .inf {
   position: absolute;
-  right: 48.4%;
-  bottom: 21%;
+  right: 48.4vw;
+  bottom: 21VH;
 }
 
 .imgadvhero{
    position: absolute;
-   right: 48%;
-   top: 15%;
+   right: 45vw;
+   top: 15VH;
    z-index:0;
+   height: 10VH;
+   width:10vw;
 }
 
 .advInf {
   position:absolute;
-    right:48.4%;
-    top:23.7%;
+    right:48.4vw;
+    top:23.7VH;
     z-index:1;
 }
 
 .inf2 {
   position:absolute;
-  right:38%;
-  bottom:20%;
+  right:38vw;
+  bottom:20VH;
 }
 
 .ftour {
   position:absolute;
-  right:17%;
-  top:44%;
+  right:17vw;
+  top:44VH;
+  height:5VH;
+  width: 10vw;
 }
 
 button {

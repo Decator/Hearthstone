@@ -4,7 +4,7 @@
     position: relative;
     text-align: center;
     color: white;
-    width: 100px;
+    width: 10vw;
     display: inline-block;
 }
 
@@ -16,8 +16,8 @@
 .bottom-right {
      font-family: optibelwe, sans-serif;
      position: absolute;
-     bottom: 40px;
-     right: 14px;
+     bottom: 4VH;
+     right: 2.4vw;
      transform: translateX(+50%);
 }
 

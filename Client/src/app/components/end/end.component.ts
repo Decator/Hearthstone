@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SocketService } from '../../service/socket.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 	selector: 'end-component',
@@ -8,5 +8,20 @@ import { SocketService } from '../../service/socket.service';
 })
 export class EndComponent {
 
-	constructor(private socketService: SocketService) {}
+	private result = "other";
+	private sub: any;
+
+	constructor(private route: ActivatedRoute) {
+
+	}
+
+	ngOnInit() {
+		this.sub = this.route.params.subscribe(params => {
+			this.result = params['result'];
+		});
+	}
+
+	ngOnDestroy() {
+		this.sub.unsubscribe();
+	}
 }

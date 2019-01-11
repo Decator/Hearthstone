@@ -9,7 +9,7 @@ const AppRoutes: Routes = [
     { path: 'start', component: StartComponent },
     { path: 'hero', component: HeroComponent },
     { path: 'game', component: GameComponent },
-    { path: 'end', component: EndComponent },
+    { path: 'end/:result', component: EndComponent },
     { path: '', redirectTo: '/start', pathMatch: 'full'},
     { path: '**', redirectTo: '/start', pathMatch: 'full'}
 ];

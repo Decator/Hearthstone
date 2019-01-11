@@ -1,6 +1,14 @@
 <title>Mini-Hearthstone</title>
 <body>
-    <h2 *ngIf="showLoader">Loader {{error}}</h2>
+    <div *ngIf="showLoader">
+        <figure>
+            <div></div><div></div>
+            <div></div><div></div>
+            <div></div><div></div>
+            <div></div><div></div>
+        </figure>
+    </div>
+    <p *ngIf="showLoader" class="waitingText">{{error}}</p>
     <div class="background" *ngIf="!showLoader">
         <div class="manaAdv">
             <p style="color:3b619b">Mana &nbsp; &nbsp; &nbsp; &nbsp; {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}</p>
@@ -8,11 +16,10 @@
 
         <div class="imgadvhero">
             <hero-card-component [card]="otherPlayer.hero" (clicked)="onClickHero(otherPlayer.uuid)" [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)"></hero-card-component>
-            <!-- <input type="image" src="assets/img/{{otherPlayer.hero.id}}.png" [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)" (click)="onClickHero(otherPlayer.uuid)" width="100px"/> -->
         </div>
 
-        <div class="advCard">
-            <img *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
+        <div class="advHand">
+            <img style="width: 8vw;" *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
         </div>
 
         <div class="advBoard">
@@ -21,18 +28,17 @@
         </div>
 
         <div class="board">
-            <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && (!card.attacked || waitingForPlayCardTarget || waitingForAttackTarget || waitingForHeroPowerTarget))"
+            <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && ((!card.attacked && card.damage != 0) || waitingForPlayCardTarget || waitingForAttackTarget || waitingForHeroPowerTarget))"
                 (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
         </div>
 
-        <div class="card">
+        <div class="hand">
             <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))"
                 [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
         </div>
 
         <div class="imghero">
             <hero-card-component [card]="player.hero" (clicked)="onClickHero(player.uuid)" [disabled]="!(yourTurn && showAllyHero)"></hero-card-component>
-            <!-- <img src="assets/img/{{player.hero.id}}.png"  width="100px"> -->
         </div>
 
         <!-- <div class="inf">
@@ -43,7 +49,7 @@
             <a>{{otherPlayer.hero.healthPoints}}</a>
         </div> -->
 
-        <div class="inf2">
+        <div class="power">
             <button (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
                 <p>Pouvoir hero</p>
             </button>

@@ -8,6 +8,7 @@
     </mat-form-field>
 
     <h3>Choisissez votre Héros</h3>
+    <br/>
     <div style="width: 100%">
         <div *ngFor="let hero of heros" style="width: 25%; display: inline-block" (click)="chooseHero(hero.id)">
             <div style="width: 100%">
@@ -16,5 +17,6 @@
             </div>
         </div>
     </div>
+    <br/>
     <button color="primary" mat-raised-button [disabled]="username == ''" (click)="submit()">Jouer</button>
 </div>

@@ -32,48 +32,40 @@ p {
   width: 20vw;
 }
 
-.advCard {
+.advHand {
   position: absolute;
-  top: 0VH;
-  left: 80vw;
-  transform: translateX(-50%);
-  height:16VH;
-  width: 80vw;
+  top: 2VH;
+  width: 100%;
+  text-align: center;
 }
 
 .advBoard {
   position: absolute;
-  top: 30VH;
-  left: 80vw;
-  transform: translateX(-50%);
-  height: 20VH;
-  width:80vw;
+  top: 26VH;
+  width: 100%;
+  text-align: center;
 }
 
 .board {
   position: absolute;
-  bottom: 33VH;
-  left: 80vw;
-  transform: translateX(-50%);
-  height: 20VH;
-  width:80vw;
+  bottom: 26VH;
+  width: 100%;
+  text-align: center;
 }
 
-.card {
+.hand {
   position: absolute;
   bottom: 2VH;
-  left:80vw;
-  height:16VH;
-  width: 80vw;
-  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
 }
 
 .imghero {
   position: absolute;
-  right: 45vw;
-  bottom: 28VH;
-  height: 10VH;
-  width:10vw;
+  bottom: 26VH;
+  left: 2VH;
+  width: 8vw;
+  z-index: 10;
 }
 
 .inf {
@@ -83,32 +75,32 @@ p {
 }
 
 .imgadvhero{
-   position: absolute;
-   right: 45vw;
-   top: 15VH;
-   z-index:0;
-   height: 10VH;
-   width:10vw;
+  position: absolute;
+  top: 26VH;
+  left: 2VH;
+  width: 8vw;
+  z-index: 10;
 }
 
 .advInf {
-  position:absolute;
-    right:48.4vw;
-    top:23.7VH;
-    z-index:1;
+  position: absolute;
+    right: 48.4vw;
+    top: 23.7VH;
+    z-index: 1;
 }
 
-.inf2 {
-  position:absolute;
-  right:38vw;
-  bottom:20VH;
+.power {
+  position: absolute;
+  bottom: 1VH;
+  left: 1VH;
+  width: 8vw;
 }
 
 .ftour {
-  position:absolute;
-  right:17vw;
-  top:44VH;
-  height:5VH;
+  position: absolute;
+  right: 1vw;
+  top: 44VH;
+  height: 5VH;
   width: 10vw;
 }
 
@@ -126,4 +118,59 @@ progress {
 
 progress:before {
   content:attr(value) '/' attr(max);
+}
+
+/* -------------------------------------LOADER -------------------------------------- */
+figure{
+  margin:0;
+  transform:translate(-50%,-50%) rotate(0deg) scale(1.4,1.4);
+  position:absolute;
+  left:50%;
+  top:50%;
+  border-radius:150px;
+  box-sizing:border-box;
+  animation:rotation 20s infinite linear;
+}
+
+figure div:after{
+  content:"";
+  width:40px;
+  height:40px;
+  border:2px solid #000;
+  box-sizing:border-box;
+  position:absolute;
+  left:30px;
+  top:30px;
+  animation:shuffle 2s infinite;
+}
+
+figure div:nth-child(1){transform:rotate(0deg)}
+figure div:nth-child(1):after{animation-delay:-0.5s;}
+figure div:nth-child(2){transform:rotate(45deg)}
+figure div:nth-child(2):after{animation-delay:-1s;}
+figure div:nth-child(3){transform:rotate(90deg)}
+figure div:nth-child(3):after{animation-delay:-1.5s;}
+figure div:nth-child(4){transform:rotate(135deg)}
+figure div:nth-child(4):after{animation-delay:-2s;}
+figure div:nth-child(5){transform:rotate(180deg)}
+figure div:nth-child(5):after{animation-delay:-2.5s;}
+figure div:nth-child(6){transform:rotate(225deg)}
+figure div:nth-child(6):after{animation-delay:-3s;}
+figure div:nth-child(7){transform:rotate(270deg)}
+figure div:nth-child(7):after{animation-delay:-3.5s;}
+figure div:nth-child(8){transform:rotate(315deg)}
+figure div:nth-child(8):after{animation-delay:-4;}
+
+@keyframes rotation{
+  100%{transform:translate(-50%,-50%) rotate(-360deg) scale(1.4,1.4);}
+}
+@keyframes shuffle{
+  50%{transform:scale(0.4,0.4) rotate(-90deg);border-radius:50%;}
+}
+
+.waitingText {
+  text-align: center;
+  position: relative;
+  top: 20%;
+  font-size: 2em;
 }

@@ -1,17 +1,20 @@
 export interface IGame {
     idGame: string;
+    gameOver: boolean;
     currentPlayer: Player;
     otherPlayer: Player;
 }
 
 export class Game {
     idGame: string;
+    gameOver: boolean;
     currentPlayer: Player;
     otherPlayer: Player;
     
     constructor(obj?: IGame){
         if(obj){
             this.idGame = obj.idGame;
+            this.gameOver = obj.gameOver;
             this.currentPlayer = obj.currentPlayer;
             this.otherPlayer = obj.otherPlayer;
         }

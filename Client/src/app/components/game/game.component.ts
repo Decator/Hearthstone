@@ -37,6 +37,17 @@ export class GameComponent {
 		if (this.socketService.getIsRedirect()) {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
+				console.log(this.game);
+
+				if(this.game.gameOver){
+					if(this.game.currentPlayer.hero.healthPoints == 0){
+						this.router.navigate(['/end', "lose"]);
+					} else if(this.game.otherPlayer.hero.healthPoints == 0) {
+						this.router.navigate(['/end', "win"]);
+					} else {
+						this.router.navigate(['/end', "other"]);
+					}
+				}
 
 				this.resetBooleans();
 
@@ -112,6 +123,7 @@ export class GameComponent {
 		} else if (this.waitingForHeroPowerTarget) {
 			this.heroPower(uuidTarget, idCard);
 		} else {
+			console.log("else");
 			this.showHand = true;
 			this.showAllyHeroPower = true;
 
@@ -125,6 +137,8 @@ export class GameComponent {
 			this.showEnemyMinions = true;
 			this.showAllyHero = false;
 			this.showEnemyHero = true;
+
+			console.log(this.showEnemyHero);
 
 			this.showOnlyTaunt = false;
 			for (const card of this.otherPlayer.board) {

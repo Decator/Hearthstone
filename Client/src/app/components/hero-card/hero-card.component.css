@@ -1,10 +1,14 @@
 /* Container holding the image and the text */
 .container {
     position: relative;
-    text-align: center;
+    /* text-align: center; */
     color: white;
-    width: 10vw;
+    width: 8vw;
     display: inline-block;
+}
+
+img {
+    width: 8vw;
 }
 
 .card-active {
@@ -17,8 +21,4 @@
      bottom: 4VH;
      right: 2.4vw;
      transform: translateX(+50%);
-}
-
-p {
-  margin: 0;
 }

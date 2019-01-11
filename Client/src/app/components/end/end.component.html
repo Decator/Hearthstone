@@ -1,16 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Game over !</title>
-</head>
-
-<body>
-<div class="wrapper">
-  <img src="assets/img/gameover.jpg">
-  <button align="center" mat-raised-button routerLink="/hero" routerLinkActive="active">Rejouer ?</button>
-
+<div class="gameOver">
+  <h3 *ngIf="result == 'win'">Vous avez gagné !</h3>
+  <h3 *ngIf="result == 'lose'">Vous avez perdu...</h3>
+  <button color="primary" mat-raised-button routerLink="/hero" routerLinkActive="active">Rejouer ?</button>
 </div>
-
-</body>
-</html>

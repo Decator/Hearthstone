@@ -1,6 +1,5 @@
 /* Container holding the image and the text */
 .container {
-    font-family: optibelwe, sans-serif;
     position: relative;
     color: white;
     width: 8vw;
@@ -18,23 +17,89 @@ img {
 /* Top left text */
 .top-left {
     position: absolute;
-    top: 4%;
-    left: 15%;
-    transform: translateX(-50%);
+    top: 0.6vw;
+    left: 1.1vw;
 }
 
 /* Bottom left text */
 .bottom-left {
     position: absolute;
-    bottom: 7%;
-    left: 16%;
-    transform: translateX(-50%);
+    bottom: 0.9vw;
+    left: 1vw;
 }
 
 /* Bottom right text */
 .bottom-right {
-     position: absolute;
-     bottom: 7%;
-     right: 12%;
-     transform: translateX(+50%);
+    position: absolute;
+    bottom: 0.9vw;
+    right: 0.8vw;
+}
+
+@media only screen and (max-width: 1600px) {
+    /* Top left text */
+    .top-left {
+        position: absolute;
+        top: 0.5vw;
+        left: 0.9vw;
+    }
+
+    /* Bottom left text */
+    .bottom-left {
+        position: absolute;
+        bottom: 0.8vw;
+        left: 0.9vw;
+    }
+
+    /* Bottom right text */
+    .bottom-right {
+        position: absolute;
+        bottom: 0.8vw;
+        right: 0.7vw;
+    }
+}
+
+@media only screen and (max-width: 1300px) {
+    /* Top left text */
+    .top-left {
+        position: absolute;
+        top: 0.3vw;
+        left: 0.8vw;
+    }
+
+    /* Bottom left text */
+    .bottom-left {
+        position: absolute;
+        bottom: 0.7vw;
+        left: 0.8vw;
+    }
+
+    /* Bottom right text */
+    .bottom-right {
+        position: absolute;
+        bottom: 0.7vw;
+        right: 0.6vw;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    /* Top left text */
+    .top-left {
+        position: absolute;
+        top: 0.2vw;
+        left: 0.6vw;
+    }
+
+    /* Bottom left text */
+    .bottom-left {
+        position: absolute;
+        bottom: 0.6vw;
+        left: 0.7vw;
+    }
+
+    /* Bottom right text */
+    .bottom-right {
+        position: absolute;
+        bottom: 0.6vw;
+        right: 0.5vw;
+    }
 }

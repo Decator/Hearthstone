@@ -2,12 +2,14 @@
 
 <div style="text-align: center">
     <img class="logo" src="assets/img/hearthstone_logo.png">
-
-    <input [(ngModel)]="username" placeholder="Nom d'utilisateur" required>
+    
+    <mat-form-field>
+        <input matInput [(ngModel)]="username" placeholder="Nom d'utilisateur" required>
+    </mat-form-field>
 
     <h3>Choisissez votre Héros</h3>
     <div style="width: 100%">
-        <div *ngFor="let hero of heros" style="width: 33%; display: inline-block" (click)="chooseHero(hero.id)">
+        <div *ngFor="let hero of heros" style="width: 25%; display: inline-block" (click)="chooseHero(hero.id)">
             <div style="width: 100%">
                 <img [ngClass]="{ 'chosen': chosenHero == hero.id }" src="assets/img/{{hero.id}}_PV.png" width="45%">
                 <img [ngClass]="{ 'chosen': chosenHero == hero.id }" src="assets/img/{{hero.id}}_PH.png" width="45%">

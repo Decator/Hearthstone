@@ -80,7 +80,9 @@ public class Engine implements EngineBridge {
         game = new GameMethods(UUID.randomUUID(), this.waitingPlayer, 
             this.players.get(uuidPlayer), retrieveInvocations());
         this.players.remove(uuidPlayer);
-        this.players.remove(this.waitingPlayer.getUuid());
+        if(this.players.containsKey(this.waitingPlayer.getUuid())) {
+            this.players.remove(this.waitingPlayer.getUuid());
+        }
         this.waitingPlayer = null;
         this.games.put(game.getIdGame(), game);
       }

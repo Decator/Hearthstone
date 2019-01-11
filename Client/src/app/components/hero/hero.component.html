@@ -1,26 +1,18 @@
 <title>Mini-Hearthstone</title>
 
+<div style="text-align: center">
+    <img class="logo" src="assets/img/hearthstone_logo.png">
 
-<img class="logo" src="assets/img/hearthstone_logo.png">
+    <input [(ngModel)]="username" placeholder="Nom d'utilisateur" required>
 
-<form [formGroup]="playerDetailsForm" (ngSubmit)="onFormSubmit(playerDetailsForm.value)">
-    <mat-form-field class="full-width">
-        <input matInput formControlName="username" placeholder="Nom d'utilisateur" required>
-    </mat-form-field>
-    <mat-radio-group formControlName="chosenHero">
-        <mat-grid-list gutterSize="5" cols="3" rowHeight="2:1">
-            <mat-grid-tile *ngFor="let hero of heros">
-                <mat-grid-tile-header>
-                    {{hero.name}}
-                </mat-grid-tile-header>
-                {{hero.description}}
-                <mat-grid-tile-footer>
-                    <mat-radio-button class="example-radio-button" [value]="hero.id" required>
-                    </mat-radio-button>
-                </mat-grid-tile-footer>
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-radio-group>
-    <button class="submit-btn" color="primary" mat-raised-button type="submit" [disabled]="!playerDetailsForm.valid">Submit</button>
-</form>
-<!-- </div> -->
+    <h3>Choisissez votre Héros</h3>
+    <div style="width: 100%">
+        <div *ngFor="let hero of heros" style="width: 33%; display: inline-block" (click)="chooseHero(hero.id)">
+            <div style="width: 100%">
+                <img [ngClass]="{ 'chosen': chosenHero == hero.id }" src="assets/img/{{hero.id}}_PV.png" width="45%">
+                <img [ngClass]="{ 'chosen': chosenHero == hero.id }" src="assets/img/{{hero.id}}_PH.png" width="45%">
+            </div>
+        </div>
+    </div>
+    <button color="primary" mat-raised-button [disabled]="username == ''" (click)="submit()">Jouer</button>
+</div>

@@ -4,7 +4,6 @@ body {
 }
 
 a{
-  font-family: optibelwe, sans-serif;
   font-size:12px;
   color:white;
   margin: 0;
@@ -12,7 +11,6 @@ a{
 }
 
 p {
-  font-family: optibelwe, sans-serif;
   margin: 0;
 }
 
@@ -33,8 +31,6 @@ p {
   height: 20VH;
   width: 20vw;
 }
-
-
 
 .advCard {
   position: absolute;
@@ -117,21 +113,12 @@ p {
 }
 
 button {
-  font-family: optibelwe, sans-serif;
   margin: 0;
-}
-
-@font-face {
-  font-family: 'optibelwe';
-  src: url('/assets/optibelwe-medium-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style:normal;
 }
 
 progress::-webkit-progress-bar { background: #99d2e3; }
 
-progress
-{
+progress {
   position: relative;
   right: 30px;
   text-align:center;

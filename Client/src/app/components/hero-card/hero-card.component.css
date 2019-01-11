@@ -1,6 +1,5 @@
 /* Container holding the image and the text */
 .container {
-    font-family: optibelwe, sans-serif;
     position: relative;
     text-align: center;
     color: white;
@@ -14,39 +13,12 @@
 
 /* Bottom right text */
 .bottom-right {
-     font-family: optibelwe, sans-serif;
      position: absolute;
      bottom: 4VH;
      right: 2.4vw;
      transform: translateX(+50%);
 }
 
-.name {
-    font-family: optibelwe, sans-serif;
-    font-size: 7px;
-    align: center;
-    position: absolute;
-    top: 67px;
-    left: 12px;
-}
-
-.desc {
-    font-family: optibelwe, sans-serif;
-    font-size: 5px;
-    align: center;
-    position: absolute;
-    top: 90px;
-    left: 15px;
-}
-
 p {
-  font-family: optibelwe, sans-serif;
   margin: 0;
-}
-
-@font-face {
-  font-family: 'optibelwe';
-  src: url('/assets/optibelwe-medium-webfont.woff') format('woff');
-  font-weight: normal;
-  font-style:normal;
 }

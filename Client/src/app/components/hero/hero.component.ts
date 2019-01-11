@@ -13,6 +13,8 @@ export class HeroComponent {
 
 	private heros: Array<Hero>;
 	private playerDetailsForm: FormGroup;
+	private username = "";
+	private chosenHero = 1;
 
 	constructor(private socketService: SocketService, private formBuilder: FormBuilder, private router: Router) {
 		this.socketService.herosObservable.subscribe((value: Array<Hero>) => {
@@ -21,23 +23,26 @@ export class HeroComponent {
 
 		this.heros = this.socketService.getHeros();
 		if(this.heros.length != 0){
-			this.playerDetailsForm = this.formBuilder.group({
-				username: ['', Validators.required],
-				chosenHero: [this.heros[0].id, Validators.required]
-			});
+			// this.playerDetailsForm = this.formBuilder.group({
+			// 	username: ['', Validators.required],
+			// 	chosenHero: [this.heros[0].id, Validators.required]
+			// });
+			this.chosenHero = this.heros[0].id;
 		} else {
 			this.heros = new Array<Hero>();
-			this.playerDetailsForm = this.formBuilder.group({
-				username: ['', Validators.required],
-				chosenHero: [1, Validators.required]
-			});
+			// this.playerDetailsForm = this.formBuilder.group({
+			// 	username: ['', Validators.required],
+			// 	chosenHero: [1, Validators.required]
+			// });
+			this.chosenHero = 1;
 			this.socketService.herosObservable.subscribe((value: Array<Hero>) => {
 				this.heros = value;
 
-				this.playerDetailsForm = this.formBuilder.group({
-					username: ['', Validators.required],
-					chosenHero: [this.heros[0].id, Validators.required]
-				});
+				// this.playerDetailsForm = this.formBuilder.group({
+				// 	username: ['', Validators.required],
+				// 	chosenHero: [this.heros[0].id, Validators.required]
+				// });
+				this.chosenHero = this.heros[0].id;
 			});
 		}
 	}
@@ -50,5 +55,14 @@ export class HeroComponent {
 
 	onFormSubmit(value: any){
 		this.play(value.username, value.chosenHero);
+	}
+
+	submit(){
+		this.play(this.username, this.chosenHero);
+	}
+
+	chooseHero(id){
+		console.log(id);
+		this.chosenHero = id;
 	}
 }

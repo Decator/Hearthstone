@@ -90,5 +90,5 @@ public abstract class AbstractCard implements Cloneable {
 
   public void setDescription(String description) {
     this.description = description;
-  }   
+  }
 }

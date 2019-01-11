@@ -197,7 +197,7 @@ public class GameMethods {
                       ((MinionCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
                       if(!GameRuleUtil.checkAlive(((MinionCard) entry.getValue()).getHealthPoints())) {
                         String[] keys = entry.getKey().split("_");
-                        if (keys[0].equals("0")) {
+                        if (keys[0].equals("0")) { 
                           removeAttackAuraFromMinions(this.currentPlayer.getBoard(), (MinionCard) entry.getValue()); //remove attack buff from other minions if relevant
                           this.currentPlayer.removeCardFromBoard(Integer.parseInt(keys[1])); //If minion healthPoints <= 0, remove minion from board
                         } else if (keys[0].equals("1")) {
@@ -304,7 +304,7 @@ public class GameMethods {
   }
   
   /**
-   * End the turn of the current player and switches to the other player
+   * End the turn of the current player and switches to the other player.
    */
   void endTurn() {
     Player tmp = this.currentPlayer;
@@ -315,7 +315,7 @@ public class GameMethods {
   
   /**
    * Ends the game
-   * @throws EngineException custom exception
+   * @throws EngineException custom exception.
    */
   void endGame() throws EngineException {
     throw new EngineException("Game Over");
@@ -323,7 +323,7 @@ public class GameMethods {
   
   /**
    * Draws a card from the player's deck and place it into his hand.
-   * @throws EngineException 
+   * @throws EngineException custom exception
    */
   void drawCard() throws EngineException {
     Player player = this.currentPlayer;
@@ -386,9 +386,9 @@ public class GameMethods {
           targets.put("0_" + String.valueOf(idTarget), player.getBoard().get(idTarget));
           break;
         case "all" :
-          if (targetPlayer.equals(player)) {
+          if (targetPlayer.getUuid().equals(player.getUuid())) {
             targets.put("0_" + String.valueOf(idTarget), player.getBoard().get(idTarget));
-          } else {
+          } else if (targetPlayer.getUuid().equals(playerEnemy.getUuid())) {
             targets.put("1_" + String.valueOf(idTarget), playerEnemy.getBoard().get(idTarget));
           }
           break;
@@ -447,13 +447,13 @@ public class GameMethods {
           }
           break;
         case "all" :
-          if (targetPlayer.equals(player)) {
+          if (targetPlayer.getUuid().equals(player.getUuid())) {
             if(idTarget == -1) {
               targets.put("0", hero);
             } else {
               targets.put("0_" + String.valueOf(idTarget), player.getBoard().get(idTarget));
             }
-          } else {
+          } else if (targetPlayer.getUuid().equals(playerEnemy.getUuid())) {
             if(idTarget == -1) {
               targets.put("1", heroEnemy);
             } else {

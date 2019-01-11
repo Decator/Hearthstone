@@ -170,11 +170,4 @@ public class SpellCard extends AbstractCard {
   public void setTarget(String target) {
     this.target = target;
   }
-
-  @Override
-  public String toString() {
-    return "Spell [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation 
-        + ", attackBuff=" + attackBuff + ", armorBuff=" + armorBuff 
-        + ", nbDraw=" + nbDraw + ", polymorph=" + polymorph + ", target=" + target + "]";
-  }
 }

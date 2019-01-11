@@ -80,7 +80,7 @@ CREATE TABLE `minion` (
 
 LOCK TABLES `minion` WRITE;
 /*!40000 ALTER TABLE `minion` DISABLE KEYS */;
-INSERT INTO `minion` VALUES (4,'common','Sanglier brocheroc',1,1,NULL,1,0,0,0,0,1),(5,'common','Soldat du compté-de-l\'or',1,1,'Provocation',2,1,0,0,0,1),(6,'common','Chevaucheur de loup',3,3,'Charge',1,0,0,1,0,1),(7,'common','Chef de raid',3,2,'Vos autres serviteurs ont +1 ATQ.',2,0,0,0,1,1),(8,'common','Yéti noroit',4,4,NULL,5,0,0,0,0,1),(9,'paladin','Champion frisselame',4,3,'Charge, Vol de vie',2,0,1,1,0,1),(10,'warrior','Avocat commis d\'office',2,0,'Provocation',7,1,0,0,0,1),(11,'invocation','Image miroir',0,0,'Provocation',2,1,0,0,0,1),(12,'invocation','Recrue de la Main d\'argent',1,1,NULL,1,0,0,0,0,1),(13,'invocation','Mouton',1,1,NULL,1,0,0,0,0,1);
+INSERT INTO `minion` VALUES (4,'common','Sanglier brocheroc',1,1,NULL,1,0,0,1,0,0),(5,'common','Soldat du compté-de-l\'or',1,1,'Provocation',2,1,0,0,0,1),(6,'common','Chevaucheur de loup',3,3,'Charge',1,0,0,1,0,1),(7,'common','Chef de raid',3,2,'Vos autres serviteurs ont +1 ATQ.',2,0,0,0,1,1),(8,'common','Yéti noroit',4,4,NULL,5,0,0,0,0,1),(9,'paladin','Champion frisselame',4,3,'Charge, Vol de vie',2,0,1,1,0,1),(10,'warrior','Avocat commis d\'office',2,0,'Provocation',7,1,0,0,0,1),(11,'invocation','Image miroir',0,0,'Provocation',2,1,0,0,0,1),(12,'invocation','Recrue de la Main d\'argent',1,1,NULL,1,0,0,0,0,1),(13,'invocation','Mouton',1,1,NULL,1,0,0,0,0,1);
 /*!40000 ALTER TABLE `minion` ENABLE KEYS */;
 UNLOCK TABLES;
 

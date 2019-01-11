@@ -86,7 +86,7 @@ public class Engine implements EngineBridge {
       }
     }
     return game;
-}
+  }
     
   @Override
   public GameMethods endTurn(UUID uuidGame) {

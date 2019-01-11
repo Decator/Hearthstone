@@ -1,99 +1,65 @@
 <title>Mini-Hearthstone</title>
-
 <body>
+    <h2 *ngIf="showLoader">Loader {{error}}</h2>
+    <div class="background" *ngIf="!showLoader">
+        <div class="manaAdv">
+            <p style="color:3b619b">Mana &nbsp; &nbsp; &nbsp; &nbsp; {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}</p>
+        </div>
 
-<h2 *ngIf="showLoader">Loader {{error}}</h2>
+        <div class="imgadvhero">
+            <hero-card-component [card]="otherPlayer.hero" (clicked)="onClickHero(otherPlayer.uuid)" [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)"></hero-card-component>
+            <!-- <input type="image" src="assets/img/{{otherPlayer.hero.id}}.png" [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)" (click)="onClickHero(otherPlayer.uuid)" width="100px"/> -->
+        </div>
 
-<div class="background" *ngIf="!showLoader">
+        <div class="advCard">
+            <img *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
+        </div>
 
-    <div class="manaAdv">
-        <p style="color:3b619b">
-           Mana &nbsp; &nbsp; &nbsp; &nbsp; {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}
-        </p>
+        <div class="advBoard">
+            <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
+                (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
+        </div>
+
+        <div class="board">
+            <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && (!card.attacked || waitingForPlayCardTarget || waitingForAttackTarget || waitingForHeroPowerTarget))"
+                (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
+        </div>
+
+        <div class="card">
+            <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))"
+                [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
+        </div>
+
+        <div class="imghero">
+            <hero-card-component [card]="player.hero" (clicked)="onClickHero(player.uuid)" [disabled]="!(yourTurn && showAllyHero)"></hero-card-component>
+            <!-- <img src="assets/img/{{player.hero.id}}.png"  width="100px"> -->
+        </div>
+
+        <!-- <div class="inf">
+            <a>{{player.hero.healthPoints}}</a>
+        </div>
+
+        <div class="advInf">
+            <a>{{otherPlayer.hero.healthPoints}}</a>
+        </div> -->
+
+        <div class="inf2">
+            <button (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
+                <p>Pouvoir hero</p>
+            </button>
+        </div>
+
+        <div class="mana">
+            <p style="color:3b619b">
+                Mana &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <progress id="mana" value="{{player.manaPool}}" max="{{player.manaMaxTurn}}"></progress>
+            </p>
+        </div>
+
+        <div class="ftour">
+            <button (click)="endTurn()" [disabled]="!yourTurn" style="width:110px; height:27px; background-color:#efc91c;">
+                Fin du tour
+            </button>
+        </div>
     </div>
-
-    <div class="imgadvhero">
-      <input type="image" src="assets/img/{{otherPlayer.hero.id}}.png" width="100px"/>
-      <!--<img src="assets/img/{{otherPlayer.hero.id}}.png" width="100px"> -->
-    </div>
-
-
-
-
-
-    <div class="advCard">
-        <img *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
-        <!-- <button *ngFor="let card of otherPlayer.hand" [disabled]="true">?</button> -->
-    </div>
-
-    <div class="advBoard">
-        <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
-            (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
-        <!-- <button *ngFor="let card of otherPlayer.board" (click)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"
-            [disabled]="!yourTurn || !showEnemyMinions || (showOnlyTaunt && !card.taunt)">
-            <p>M:{{card.manaCost}} - N:{{card.name}}</p>
-            <p>{{card.description}}</p>
-            <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
-        </button> -->
-    </div>
-
-    <div class="board">
-        <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && (!card.attacked || waitingForPlayCardTarget || waitingForAttackTarget || waitingForHeroPowerTarget))"
-            (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
-        <!-- <button *ngFor="let card of player.board" (click)="onClickMinion(player.uuid, player.board.indexOf(card))"
-            [disabled]="!yourTurn || !showAllyMinions || card.attacked">
-            <p>M:{{card.manaCost}} - N:{{card.name}}</p>
-            <p>{{card.description}}</p>
-            <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
-        </button> -->
-    </div>
-
-    <div class="card">
-        <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))"
-            [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
-        <!-- <button *ngFor="let card of player.hand" (click)="onClickHand(player.hand.indexOf(card))" [disabled]="!yourTurn || !showHand">
-            <div *ngIf="isMinion(card)">
-                <p>M:{{card.manaCost}} - N:{{card.name}}</p>
-                <p>{{card.description}}</p>
-                <p>D:{{card.damage}} - HP:{{card.healthPoints}}</p>
-            </div>
-            <div *ngIf="isSpell(card)">
-                <p>M:{{card.manaCost}} - N:{{card.name}}</p>
-                <p>{{card.description}}</p>
-            </div>
-        </button> -->
-    </div>
-
-    <div class="imghero">
-      <img src="assets/img/{{player.hero.id}}.png" width="100px">
-    </div>
-
-    <div class="inf">
-      <a>{{player.hero.healthPoints}}</a>
-    </div>
-
-    <div class="advInf">
-    <a>{{otherPlayer.hero.healthPoints}}</a>
-     </div>
-
-    <div class="inf2">
-        <button (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
-            <p>Pouvoir hero</p>
-        </button>
-    </div>
-
-    <div class="mana">
-        <p style="color:3b619b">
-            Mana &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-            <progress id="mana" value="{{player.manaPool}}" max="{{player.manaMaxTurn}}"></progress>
-        </p>
-    </div>
-
-    <div class="ftour">
-        <button (click)="endTurn()" [disabled]="!yourTurn" style="width:110px; height:27px; background-color:#efc91c;">
-            Fin du tour
-        </button>
-    </div>
-
-</div>
 </body>

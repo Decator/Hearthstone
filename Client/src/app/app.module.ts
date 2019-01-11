@@ -10,6 +10,7 @@ import { HeroComponent } from './components/hero/hero.component';
 import { GameComponent } from './components/game/game.component';
 import { EndComponent } from './components/end/end.component';
 import { CardComponent } from './components/card/card.component';
+import { HeroCardComponent } from './components/hero-card/hero-card.component';
 
 import { AppRoutingModule } from './app.routing.module';
 
@@ -22,14 +23,15 @@ import { SocketService } from './service/socket.service';
 		HeroComponent,
 		EndComponent,
 		GameComponent,
-		CardComponent
+		CardComponent,
+		HeroCardComponent
 	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		BrowserAnimationsModule,
 		MaterialAppModule,
-		FormsModule, 
+		FormsModule,
 		ReactiveFormsModule
 	],
 	providers: [

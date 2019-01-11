@@ -85,7 +85,7 @@ export class GameComponent {
 	onClickHand(idCard: number) {
 		const card = this.player.hand[idCard];
 
-		if (this.isSpell(card) && (card as Spell).target !== undefined && (card as Spell).target.includes('1')) {
+		if (this.isSpell(card) && (card as Spell).target != undefined && (card as Spell).target.includes('1')) {
 			const spell = (card as Spell);
 			const splitTarget = spell.target.split('_');
 

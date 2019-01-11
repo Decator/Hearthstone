@@ -180,4 +180,12 @@ public class HeroCard extends AbstractCard {
       }
     }
   }
+
+  @Override
+  public String toString() {
+    return "HeroCard [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation + ", armorBuff=" + armorBuff
+        + ", target=" + target + ", healthPoints=" + healthPoints + ", armorPoints=" + armorPoints + ", heroPowerUsed="
+        + heroPowerUsed + "]";
+  }
+
 }

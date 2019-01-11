@@ -149,4 +149,10 @@ public class MinionCard extends AbstractCard {
       this.healthPoints -= damage;
     }
   }
+
+  @Override
+  public String toString() {
+    return "MinionCard [healthPoints=" + healthPoints + ", taunt=" + taunt + ", lifesteal=" + lifesteal + ", charge="
+        + charge + ", attackBuffAura=" + attackBuffAura + ", attacked=" + attacked + "]";
+  }
 }

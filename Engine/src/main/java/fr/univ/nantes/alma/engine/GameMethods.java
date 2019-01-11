@@ -60,6 +60,14 @@ public class GameMethods {
   }
   
   /**
+   * Get the game over status of the game.
+   * @return true if the game is over, else false
+   */
+  public boolean isGameOver() {
+    return this.gameOver;
+  }
+  
+  /**
    * Play the card with the specified id.
    * @param idCard the id of the card the player wants to play
    * @param targetPlayer the player that might be the target of the played card
@@ -249,7 +257,6 @@ public class GameMethods {
           lifesteal(hero, minion);
           if(!GameRuleUtil.checkAlive(heroEnemy.getHealthPoints())) {
             this.gameOver = true;
-            //endGame();
           }
         } else if (!taunt(this.otherPlayer.getBoard()) || this.otherPlayer.getBoard().get(idTarget).isTaunt()) { // If no enemy minion has taunt, or target minion has taunt, attacking is possible
           MinionCard victim = this.otherPlayer.getBoard().get(idTarget);

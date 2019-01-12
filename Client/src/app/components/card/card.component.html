@@ -1,5 +1,8 @@
 <div class="container" (click)="onClick()">
-    <img [ngClass]="{ 'card-active': !disabled }" src="assets/img/{{card.id}}.png">
+    <div class="wrapper">
+        <img class="action" src="assets/img/{{card.id}}.png">
+        <img class="hover" [ngClass]="{ 'card-active': !disabled }" src="assets/img/{{card.id}}.png">
+    </div>
     <div class="top-left">{{card.manaCost}}</div>
     <div *ngIf="card.healthPoints !=  null" class="bottom-left">{{card.damage}}</div>
     <div *ngIf="card.healthPoints !=  null" class="bottom-right">{{card.healthPoints}}</div>

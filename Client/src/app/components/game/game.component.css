@@ -94,9 +94,16 @@ p {
 
 .power {
   position: absolute;
-  bottom: 1vh;
-  left: 1vh;
-  width: 8vw;
+  bottom: 1.5vh;
+  left: 2vw;
+}
+
+.power input{
+  width: 28%;
+}
+
+.hero-active {
+  background-image: radial-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
 }
 
 .ftour {
@@ -111,7 +118,26 @@ button {
   margin: 0;
 }
 
-/* -------------------------------------LOADER -------------------------------------- */
+/* ------------------------------------- END TURN BUTTON -------------------------------------- */
+.endTurn {
+  padding: 10%;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.4em;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border: 1px solid rgb(58, 139, 61);
+  background-color: #4CAF50;
+  color: white;
+}
+
+.endTurn:hover {
+  background-color: white; 
+  color: black;
+}
+
+/* ------------------------------------- LOADER -------------------------------------- */
 figure{
   margin:0;
   transform:translate(-50%,-50%) rotate(0deg) scale(1.4,1.4);

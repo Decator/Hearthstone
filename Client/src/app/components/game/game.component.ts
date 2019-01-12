@@ -39,8 +39,6 @@ export class GameComponent {
 		if (this.socketService.getIsRedirect()) {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
-				console.log(this.game);
-
 				if(this.game.gameOver){
 					if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
 						if(this.game.currentPlayer.hero.healthPoints <= 0){
@@ -60,7 +58,7 @@ export class GameComponent {
 						}
 					}
 				}
-
+				
 				this.resetBooleans();
 
 				if (this.showLoader) {

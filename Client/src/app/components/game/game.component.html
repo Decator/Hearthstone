@@ -37,14 +37,12 @@
             <hero-card-component [card]="player.hero" (clicked)="onClickHero(player.uuid)" [disabled]="!(yourTurn && showAllyHero)"></hero-card-component>
         </div>
 
-        <div class="power">
-            <button (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
-                <p>Pouvoir hero</p>
-            </button>
+        <div class="power"> 
+            <input type="image" src="assets/img/{{player.hero.id}}_PH.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': !disabled }" (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
         </div>
 
         <div class="ftour">
-            <button (click)="endTurn()" [disabled]="!yourTurn" style="width:110px; height:27px; background-color:#efc91c;">
+            <button class="endTurn" (click)="endTurn()" [disabled]="!yourTurn">
                 Fin du tour
             </button>
         </div>

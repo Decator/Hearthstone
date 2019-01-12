@@ -23,25 +23,12 @@ export class HeroComponent {
 
 		this.heros = this.socketService.getHeros();
 		if(this.heros.length != 0){
-			// this.playerDetailsForm = this.formBuilder.group({
-			// 	username: ['', Validators.required],
-			// 	chosenHero: [this.heros[0].id, Validators.required]
-			// });
 			this.chosenHero = this.heros[0].id;
 		} else {
 			this.heros = new Array<Hero>();
-			// this.playerDetailsForm = this.formBuilder.group({
-			// 	username: ['', Validators.required],
-			// 	chosenHero: [1, Validators.required]
-			// });
 			this.chosenHero = 1;
 			this.socketService.herosObservable.subscribe((value: Array<Hero>) => {
 				this.heros = value;
-
-				// this.playerDetailsForm = this.formBuilder.group({
-				// 	username: ['', Validators.required],
-				// 	chosenHero: [this.heros[0].id, Validators.required]
-				// });
 				this.chosenHero = this.heros[0].id;
 			});
 		}

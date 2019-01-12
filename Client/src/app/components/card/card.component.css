@@ -17,89 +17,23 @@ img {
 /* Top left text */
 .top-left {
     position: absolute;
-    top: 0.6vw;
-    left: 1.1vw;
+    top: 9.5%;
+    left: 15%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
 /* Bottom left text */
 .bottom-left {
     position: absolute;
-    bottom: 0.9vw;
-    left: 1vw;
+    bottom: 13.5%;
+    left: 16%;
+    transform: translateX(-50%) translateY(+50%);
 }
 
 /* Bottom right text */
 .bottom-right {
     position: absolute;
-    bottom: 0.9vw;
-    right: 0.8vw;
-}
-
-@media only screen and (max-width: 1600px) {
-    /* Top left text */
-    .top-left {
-        position: absolute;
-        top: 0.5vw;
-        left: 0.9vw;
-    }
-
-    /* Bottom left text */
-    .bottom-left {
-        position: absolute;
-        bottom: 0.8vw;
-        left: 0.9vw;
-    }
-
-    /* Bottom right text */
-    .bottom-right {
-        position: absolute;
-        bottom: 0.8vw;
-        right: 0.7vw;
-    }
-}
-
-@media only screen and (max-width: 1300px) {
-    /* Top left text */
-    .top-left {
-        position: absolute;
-        top: 0.3vw;
-        left: 0.8vw;
-    }
-
-    /* Bottom left text */
-    .bottom-left {
-        position: absolute;
-        bottom: 0.7vw;
-        left: 0.8vw;
-    }
-
-    /* Bottom right text */
-    .bottom-right {
-        position: absolute;
-        bottom: 0.7vw;
-        right: 0.6vw;
-    }
-}
-
-@media only screen and (max-width: 1000px) {
-    /* Top left text */
-    .top-left {
-        position: absolute;
-        top: 0.2vw;
-        left: 0.6vw;
-    }
-
-    /* Bottom left text */
-    .bottom-left {
-        position: absolute;
-        bottom: 0.6vw;
-        left: 0.7vw;
-    }
-
-    /* Bottom right text */
-    .bottom-right {
-        position: absolute;
-        bottom: 0.6vw;
-        right: 0.5vw;
-    }
+    bottom: 13.5%;
+    right: 12.5%;
+    transform: translateX(+50%) translateY(+50%);
 }

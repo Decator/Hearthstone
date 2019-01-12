@@ -40,12 +40,22 @@ export class GameComponent {
 				console.log(this.game);
 
 				if(this.game.gameOver){
-					if(this.game.currentPlayer.hero.healthPoints == 0){
-						this.router.navigate(['/end', "lose"]);
-					} else if(this.game.otherPlayer.hero.healthPoints == 0) {
-						this.router.navigate(['/end', "win"]);
+					if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
+						if(this.game.currentPlayer.hero.healthPoints <= 0){
+							this.router.navigate(['/end', "lose"]);
+						} else if(this.game.otherPlayer.hero.healthPoints <= 0) {
+							this.router.navigate(['/end', "win"]);
+						} else {
+							this.router.navigate(['/end', "other"]);
+						}
 					} else {
-						this.router.navigate(['/end', "other"]);
+						if(this.game.currentPlayer.hero.healthPoints <= 0){
+							this.router.navigate(['/end', "win"]);
+						} else if(this.game.otherPlayer.hero.healthPoints <= 0) {
+							this.router.navigate(['/end', "lose"]);
+						} else {
+							this.router.navigate(['/end', "other"]);
+						}
 					}
 				}
 

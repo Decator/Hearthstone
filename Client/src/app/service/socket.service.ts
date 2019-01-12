@@ -95,6 +95,7 @@ export class SocketService {
         this.stompClient.subscribe(`/game/${this.game.idGame}`, (message) => {
           try {
             this.game = new Game(JSON.parse(message.body));
+            console.log(JSON.parse(message.body));
             this.gameSubject.next(this.game);
             this.errorSubject.next("");
           } catch(err) {

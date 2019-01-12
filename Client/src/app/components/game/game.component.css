@@ -62,9 +62,9 @@ p {
 
 .imghero {
   position: absolute;
-  bottom: 26VH;
+  bottom: 20VH;
   left: 2VH;
-  width: 8vw;
+  width: 10vw;
   z-index: 10;
 }
 
@@ -76,9 +76,9 @@ p {
 
 .imgadvhero{
   position: absolute;
-  top: 26VH;
+  top: 20VH;
   left: 2VH;
-  width: 8vw;
+  width: 10vw;
   z-index: 10;
 }
 

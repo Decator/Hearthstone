@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SocketService } from '../../service/socket.service';
 
 @Component({
 	selector: 'end-component',
@@ -11,17 +12,15 @@ export class EndComponent {
 	private result = "other";
 	private sub: any;
 
-	constructor(private route: ActivatedRoute) {
-
+	constructor(private route: ActivatedRoute, private socketService: SocketService, private router: Router) {
+		if (!this.socketService.getIsRedirect()) {
+			this.router.navigate(['/hero']);
+		}
 	}
 
 	ngOnInit() {
-		this.sub = this.route.params.subscribe(params => {
+		this.route.params.subscribe(params => {
 			this.result = params['result'];
 		});
-	}
-
-	ngOnDestroy() {
-		this.sub.unsubscribe();
 	}
 }

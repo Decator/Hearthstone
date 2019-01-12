@@ -3,12 +3,12 @@
     position: relative;
     /* text-align: center; */
     color: white;
-    width: 8vw;
+    width: 1Ovw;
     display: inline-block;
 }
 
 img {
-    width: 8vw;
+    width: 10vw;
 }
 
 .card-active {
@@ -17,8 +17,22 @@ img {
 
 /* Bottom right text */
 .bottom-right {
-     position: absolute;
-     bottom: 4VH;
-     right: 2.4vw;
-     transform: translateX(+50%);
+    position: absolute;
+    bottom: 34%;
+    right: 14.5%;
+    transform: translateX(+50%) translateY(+50%);
+}
+
+.armor {
+    position: absolute;
+    bottom: 45%;
+    right: 2%;
+    width: 25%;
+}
+
+.armor-text {
+    position: absolute;
+    bottom: 56%;
+    right: 14.5%;
+    transform: translateX(+50%) translateY(+50%);
 }

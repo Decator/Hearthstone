@@ -16,10 +16,23 @@ p {
 
 .mana {
   position: absolute;
+  display: block;
+  bottom: 0vh;
   right: 0vw;
-  bottom: 20vh;
-  height: 15vh;
-  width: 40vw;
+}
+
+.manaImages {
+  width: 25vw;
+}
+
+.manaImg {
+  width: 2vw;
+}
+
+.manaText {
+  position: relative;
+  right: 1vw;
+  float: left;
 }
 
 .advHand {
@@ -31,21 +44,21 @@ p {
 
 .advBoard {
   position: absolute;
-  top: 26vh;
+  top: 25vh;
   width: 100%;
   text-align: center;
 }
 
 .board {
   position: absolute;
-  bottom: 26vh;
+  bottom: 27vh;
   width: 100%;
   text-align: center;
 }
 
 .hand {
   position: absolute;
-  bottom: 2vh;
+  bottom: 5vh;
   width: 100%;
   text-align: center;
 }

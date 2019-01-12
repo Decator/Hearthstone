@@ -43,14 +43,18 @@
             </button>
         </div>
 
-        <div class="mana">
-            <p>
-              <img *ngFor="let a of manaArray" src="/assets/img/mana.png" class="manaAdv">
-            </p>
+        <div class="ftour">
+            <button (click)="endTurn()" [disabled]="!yourTurn" style="width:110px; height:27px; background-color:#efc91c;">
+                Fin du tour
+            </button>
         </div>
 
-        <div class="ftour">
-            <input type="image" src="/assets/img/end_turn.png" alt="Fin de tour" (click)="endTurn()" [disabled]="!yourTurn" width="150" height="150" >
+        <div class="mana">
+            <p *ngIf="player.manaMaxTurn != 0" class="manaText">{{player.manaPool}}/{{player.manaMaxTurn}}</p>
+            <div class="manaImages">
+                <img *ngFor="let a of manaPoolArray" src="/assets/img/mana.png" class="manaImg">
+                <img *ngFor="let a of manaMaxTurnArray" src="/assets/img/manaUsed.png" class="manaImg">
+            </div>
         </div>
     </div>
 </body>

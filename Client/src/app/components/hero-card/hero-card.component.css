@@ -36,4 +36,5 @@ img {
     bottom: 56%;
     right: 14.5%;
     transform: translateX(+50%) translateY(+50%);
+    color:white;
 }

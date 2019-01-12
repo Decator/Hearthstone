@@ -18,6 +18,8 @@ export class GameComponent {
 	private gameOver: boolean;
 	private yourTurn: boolean = false;
 	private error: String;
+	private manaPoolArray = new Array(0);
+	private manaMaxTurnArray = new Array(0);
 
 	private showLoader: boolean = true;
 	private showHand: boolean = false;
@@ -32,7 +34,6 @@ export class GameComponent {
 	private waitingForAttackTarget = false;
 	private waitingForHeroPowerTarget = false;
 	private idWaitingCard: number;
-	private manaArray = null;
 
 	constructor(private socketService: SocketService, private router: Router) {
 		if (this.socketService.getIsRedirect()) {
@@ -58,13 +59,6 @@ export class GameComponent {
 							this.router.navigate(['/end', "other"]);
 						}
 					}
-					this.socketService.endGame(this.game.idGame, this.game.currentPlayer.uuid, this.game.otherPlayer.uuid);
-					this.game = null;
-					this.player = null;
-					this.otherPlayer = null;
-					this.gameOver = null;
-					this.yourTurn = false;
-					this.showLoader = true;
 				}
 
 				this.resetBooleans();
@@ -207,7 +201,10 @@ export class GameComponent {
 		if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
 			this.player = this.game.currentPlayer;
 			this.otherPlayer = this.game.otherPlayer;
-      this.manaArray = new Array(this.player.manaPool);
+
+			this.manaPoolArray = new Array(this.player.manaPool);
+			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
+
 			this.yourTurn = true;
 			this.showHand = true;
 			this.showAllyMinions = true;
@@ -223,7 +220,10 @@ export class GameComponent {
 		} else {
 			this.player = this.game.otherPlayer;
 			this.otherPlayer = this.game.currentPlayer;
-      this.manaArray = new Array(this.player.manaPool);
+
+			this.manaPoolArray = new Array(this.player.manaPool);
+			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
+
 			this.yourTurn = false;
 			this.showHand = false;
 			this.showAllyMinions = false;

@@ -78,4 +78,10 @@ public class WebSocketController {
 			this.template.convertAndSend("/game/" + dataSplit[0], e.getMessage());
 		}
 	}
+	
+	@MessageMapping("/endGame")
+	public void endGame(String data) {
+		String[] dataSplit = data.split("_");
+		Application.engineBridge.endGame(UUID.fromString(dataSplit[0]), UUID.fromString(dataSplit[1]), UUID.fromString(dataSplit[2]));
+	}
 }

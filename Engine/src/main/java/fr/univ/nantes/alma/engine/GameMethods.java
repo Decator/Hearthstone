@@ -148,7 +148,6 @@ public class GameMethods {
                 ((HeroCard) entry.getValue()).receiveDamage(spell.getDamage());
                 if (!GameRuleUtil.checkAlive(((HeroCard)entry.getValue()).getHealthPoints())) {
                   this.gameOver = true;
-                  //endGame();
                 }
               } else if (entry.getValue() instanceof MinionCard) {
                 ((MinionCard) entry.getValue()).receiveDamage(spell.getDamage());
@@ -199,7 +198,6 @@ public class GameMethods {
                       ((HeroCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
                       if(!GameRuleUtil.checkAlive(((HeroCard)entry.getValue()).getHealthPoints())){
                         this.gameOver = true;
-                  //endGame();
                       }
                     } else if (entry.getValue() instanceof MinionCard) {
                       ((MinionCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
@@ -318,14 +316,6 @@ public class GameMethods {
     this.currentPlayer = this.otherPlayer;
     this.otherPlayer = tmp;
     initTurn();
-  }
-  
-  /**
-   * Ends the game
-   * @throws EngineException custom exception.
-   */
-  void endGame() throws EngineException {
-    throw new EngineException("Game Over");
   }
   
   /**

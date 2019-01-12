@@ -57,6 +57,13 @@ export class GameComponent {
 							this.router.navigate(['/end', "other"]);
 						}
 					}
+					this.socketService.endGame(this.game.idGame, this.game.currentPlayer.uuid, this.game.otherPlayer.uuid);
+					this.game = null;
+					this.player = null;
+					this.otherPlayer = null;
+					this.gameOver = null;
+					this.yourTurn = false;
+					this.showLoader = true;
 				}
 
 				this.resetBooleans();

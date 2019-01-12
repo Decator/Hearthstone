@@ -71,4 +71,12 @@ public interface EngineBridge {
    * @throws EngineException a custom exception
    */
   public GameMethods attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException;
+  
+  /**
+   * Remove the game when it is finish.
+   * @param uuidGame the uuid of the game
+   * @param uuidPlayer1 the uuid of the first player
+   * @param uuidPlayer2 the uuid of the second player
+   */
+  public void endGame(UUID uuidGame, UUID uuidPlayer1, UUID uuidPlayer2);
 }

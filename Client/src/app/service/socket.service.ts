@@ -73,8 +73,8 @@ export class SocketService {
       try {
         this.player = new Player(JSON.parse(message.body));
         this.playerSubject.next(this.player);
-        // this.playerSubscription.unsubscribe();
         this.createGame();
+        this.playerSubscription.unsubscribe();
       } catch (err) {
         this.error = message.body;
         this.errorSubject.next(this.error);
@@ -125,6 +125,10 @@ export class SocketService {
 
   heroPower(uuidGame: String, uuidPlayer: string, idTarget: number){
     this.stompClient.send("/app/heroPower", {}, `${uuidGame}_${uuidPlayer}_${idTarget}`);
+  }
+
+  endGame(uuidGame: string, uuidPlayer1: string, uuidPlayer2: string) {
+    this.stompClient.send("/app/endGame", {}, `${uuidGame}_${uuidPlayer1}_${uuidPlayer2}`);
   }
 
   getPlayer(): Player {

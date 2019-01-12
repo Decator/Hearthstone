@@ -8,3 +8,30 @@
 .chosen {
   background-image: radial-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
 }
+
+.background {
+  /* The image background */
+  background-image: url("/assets/img/background.jpg");
+
+  /* Full height */
+  height: 100%; 
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.centerDiv {
+  text-align: center;
+}
+
+.herosDiv {
+  width: 100%;
+}
+
+.heros {
+  width: 25%;
+  display: inline-block;
+}
+

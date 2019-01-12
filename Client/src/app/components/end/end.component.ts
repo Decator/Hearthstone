@@ -13,9 +13,9 @@ export class EndComponent {
 	private sub: any;
 
 	constructor(private route: ActivatedRoute, private socketService: SocketService, private router: Router) {
-		if (!this.socketService.getIsRedirect()) {
+		/*if (!this.socketService.getIsRedirect()) {
 			this.router.navigate(['/hero']);
-		}
+		}*/
 	}
 
 	ngOnInit() {

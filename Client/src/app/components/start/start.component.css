@@ -1,6 +1,6 @@
 .background {
     /* The image used */
-    background-image: url("/assets/img/start.png");
+    background-image: url("/assets/img/start.jpg");
   
     /* Full height */
     height: 100%; 
@@ -12,6 +12,7 @@
 
     cursor: pointer;
 }
+
 p {
   margin: 0;
 }

@@ -15,55 +15,45 @@ p {
 }
 
 .mana {
-  color:3b619b;
   position: absolute;
   right: 0vw;
-  bottom: 20VH;
-  height: 15VH;
+  bottom: 20vh;
+  height: 15vh;
   width: 40vw;
-}
-
-.manaAdv {
-  color:3b619b;
-  position: absolute;
-  right: 20vw;
-  top: 20VH;
-  height: 20VH;
-  width: 20vw;
 }
 
 .advHand {
   position: absolute;
-  top: 2VH;
+  top: 2vh;
   width: 100%;
   text-align: center;
 }
 
 .advBoard {
   position: absolute;
-  top: 26VH;
+  top: 26vh;
   width: 100%;
   text-align: center;
 }
 
 .board {
   position: absolute;
-  bottom: 26VH;
+  bottom: 26vh;
   width: 100%;
   text-align: center;
 }
 
 .hand {
   position: absolute;
-  bottom: 2VH;
+  bottom: 2vh;
   width: 100%;
   text-align: center;
 }
 
 .imghero {
   position: absolute;
-  bottom: 20VH;
-  left: 2VH;
+  bottom: 20vh;
+  left: 2vh;
   width: 10vw;
   z-index: 10;
 }
@@ -71,53 +61,41 @@ p {
 .inf {
   position: absolute;
   right: 48.4vw;
-  bottom: 21VH;
+  bottom: 21vh;
 }
 
 .imgadvhero{
   position: absolute;
-  top: 20VH;
-  left: 2VH;
+  top: 20vh;
+  left: 2vh;
   width: 10vw;
   z-index: 10;
 }
 
 .advInf {
   position: absolute;
-    right: 48.4vw;
-    top: 23.7VH;
-    z-index: 1;
+  right: 48.4vw;
+  top: 23.7vh;
+  z-index: 1;
 }
 
 .power {
   position: absolute;
-  bottom: 1VH;
-  left: 1VH;
+  bottom: 1vh;
+  left: 1vh;
   width: 8vw;
 }
 
 .ftour {
   position: absolute;
   right: 1vw;
-  top: 44VH;
-  height: 5VH;
+  top: 44vh;
+  height: 5vh;
   width: 10vw;
 }
 
 button {
   margin: 0;
-}
-
-progress::-webkit-progress-bar { background: #99d2e3; }
-
-progress {
-  position: relative;
-  right: 30px;
-  text-align:center;
-}
-
-progress:before {
-  content:attr(value) '/' attr(max);
 }
 
 /* -------------------------------------LOADER -------------------------------------- */

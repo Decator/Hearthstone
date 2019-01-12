@@ -10,10 +10,6 @@
     </div>
     <p *ngIf="showLoader" class="waitingText">{{error}}</p>
     <div class="background" *ngIf="!showLoader">
-        <div class="manaAdv">
-            <p style="color:3b619b">Mana &nbsp; &nbsp; &nbsp; &nbsp; {{otherPlayer.manaPool}} / {{otherPlayer.manaMaxTurn}}</p>
-        </div>
-
         <div class="imgadvhero">
             <hero-card-component [card]="otherPlayer.hero" (clicked)="onClickHero(otherPlayer.uuid)" [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)"></hero-card-component>
         </div>
@@ -41,14 +37,6 @@
             <hero-card-component [card]="player.hero" (clicked)="onClickHero(player.uuid)" [disabled]="!(yourTurn && showAllyHero)"></hero-card-component>
         </div>
 
-        <!-- <div class="inf">
-            <a>{{player.hero.healthPoints}}</a>
-        </div>
-
-        <div class="advInf">
-            <a>{{otherPlayer.hero.healthPoints}}</a>
-        </div> -->
-
         <div class="power">
             <button (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
                 <p>Pouvoir hero</p>
@@ -56,15 +44,13 @@
         </div>
 
         <div class="mana">
-            <p style="color:3b619b">
-              <img *ngFor="let a of manaArray" src="/assets/img/mana.png" style="height:5VH; width:2.5vw">
+            <p>
+              <img *ngFor="let a of manaArray" src="/assets/img/mana.png" class="manaAdv">
             </p>
         </div>
 
         <div class="ftour">
-            <button (click)="endTurn()" [disabled]="!yourTurn" style="width:110px; height:27px; background-color:#efc91c;">
-                Fin du tour
-            </button>
+            <input type="image" src="/assets/img/end_turn.png" alt="Fin de tour" (click)="endTurn()" [disabled]="!yourTurn" width="150" height="150" >
         </div>
     </div>
 </body>

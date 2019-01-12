@@ -57,8 +57,7 @@
 
         <div class="mana">
             <p style="color:3b619b">
-                Mana &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                <progress id="mana" value="{{player.manaPool}}" max="{{player.manaMaxTurn}}"></progress>
+              <img *ngFor="let a of manaArray" src="/assets/img/mana.png" style="height:5VH; width:2.5vw">
             </p>
         </div>
 

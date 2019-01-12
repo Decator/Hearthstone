@@ -32,6 +32,7 @@ export class GameComponent {
 	private waitingForAttackTarget = false;
 	private waitingForHeroPowerTarget = false;
 	private idWaitingCard: number;
+	private manaArray = null;
 
 	constructor(private socketService: SocketService, private router: Router) {
 		if (this.socketService.getIsRedirect()) {
@@ -206,7 +207,7 @@ export class GameComponent {
 		if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
 			this.player = this.game.currentPlayer;
 			this.otherPlayer = this.game.otherPlayer;
-
+      this.manaArray = new Array(this.player.manaPool);
 			this.yourTurn = true;
 			this.showHand = true;
 			this.showAllyMinions = true;
@@ -222,7 +223,7 @@ export class GameComponent {
 		} else {
 			this.player = this.game.otherPlayer;
 			this.otherPlayer = this.game.currentPlayer;
-
+      this.manaArray = new Array(this.player.manaPool);
 			this.yourTurn = false;
 			this.showHand = false;
 			this.showAllyMinions = false;

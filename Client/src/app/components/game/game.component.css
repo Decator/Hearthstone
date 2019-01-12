@@ -17,10 +17,10 @@ p {
 .mana {
   color:3b619b;
   position: absolute;
-  right: 15vw;
+  right: 0vw;
   bottom: 20VH;
   height: 15VH;
-  width: 20vw;
+  width: 40vw;
 }
 
 .manaAdv {

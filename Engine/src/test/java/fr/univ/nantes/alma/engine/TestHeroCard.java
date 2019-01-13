@@ -9,7 +9,7 @@ import static pl.pojo.tester.api.assertion.Method.TO_STRING;
 
 import fr.univ.nantes.alma.engine.HeroCard;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestHeroCard {
 
@@ -18,10 +18,6 @@ public class TestHeroCard {
     final Class<?> classUnderTest = HeroCard.class;
 
     assertPojoMethodsFor(classUnderTest)
-    .testing(GETTER)
-    .testing(SETTER)
-    .testing(CONSTRUCTOR)
-    .testing(TO_STRING)
       .areWellImplemented();
   }
 
@@ -47,4 +43,21 @@ public class TestHeroCard {
     assertThat(hero3.getArmorPoints()).isEqualTo(0);
     assertThat(hero3.getHealthPoints()).isEqualTo(27);
   }
+  
+  @Test
+  public void testReceiveHealing() {
+    HeroCard hero3 = new HeroCard(3, "warrior", "Garrosh", 0, 0, 0, 2, 
+        "Gain d'armure ! : Confère 2 points d'armure.", null);
+    
+    hero3.receiveDamage(3);
+    hero3.receiveHealing(-1);
+    assertThat(27).isEqualTo(hero3.getHealthPoints());
+    hero3.receiveHealing(1);
+    assertThat(28).isEqualTo(hero3.getHealthPoints());
+    hero3.receiveHealing(3);
+    assertThat(30).isEqualTo(hero3.getHealthPoints());
+    hero3.receiveHealing(3);
+    assertThat(30).isEqualTo(hero3.getHealthPoints());
+  }
+  
 }

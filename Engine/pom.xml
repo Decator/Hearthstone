@@ -9,6 +9,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<junit.jupiter.version>5.1.1</junit.jupiter.version>
+    	<junit.platform.version>1.0.1</junit.platform.version> 
 	</properties>
 
 	<parent>
@@ -65,9 +67,27 @@
         </dependency>
         
         <dependency>
-    		<groupId>org.junit.jupiter</groupId>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-api</artifactId>
+		    <version>${junit.jupiter.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
 		    <artifactId>junit-jupiter-engine</artifactId>
-		    <version>5.1.0</version>
+		    <version>${junit.jupiter.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.junit.platform</groupId>
+		    <artifactId>junit-platform-launcher</artifactId>
+		    <version>${junit.platform.version}</version>
+		    <scope>test</scope>
+		</dependency>
+		<dependency>
+		    <groupId>org.junit.platform</groupId>
+		    <artifactId>junit-platform-runner</artifactId>
+		    <version>${junit.platform.version}</version>
 		    <scope>test</scope>
 		</dependency>
 		
@@ -110,6 +130,7 @@
   			<version>3.7.1</version>
   			<type>maven-plugin</type>
 		</dependency>
+		
         <dependency>
 	        <groupId>org.apache.maven.doxia</groupId>
 	        <artifactId>doxia-site-renderer</artifactId>

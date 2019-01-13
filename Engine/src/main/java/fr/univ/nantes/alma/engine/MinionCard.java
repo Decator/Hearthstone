@@ -155,4 +155,42 @@ public class MinionCard extends AbstractCard {
     return "MinionCard [healthPoints=" + healthPoints + ", taunt=" + taunt + ", lifesteal=" + lifesteal + ", charge="
         + charge + ", attackBuffAura=" + attackBuffAura + ", attacked=" + attacked + "]";
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + attackBuffAura;
+    result = prime * result + (attacked ? 1231 : 1237);
+    result = prime * result + (charge ? 1231 : 1237);
+    result = prime * result + healthPoints;
+    result = prime * result + (lifesteal ? 1231 : 1237);
+    result = prime * result + (taunt ? 1231 : 1237);
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (!(obj instanceof MinionCard))
+      return false;
+    MinionCard other = (MinionCard) obj;
+    if (attackBuffAura != other.attackBuffAura)
+      return false;
+    if (attacked != other.attacked)
+      return false;
+    if (charge != other.charge)
+      return false;
+    if (healthPoints != other.healthPoints)
+      return false;
+    if (lifesteal != other.lifesteal)
+      return false;
+    if (taunt != other.taunt)
+      return false;
+    return true;
+  }
+  
 }

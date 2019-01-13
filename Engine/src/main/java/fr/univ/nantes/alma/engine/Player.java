@@ -37,6 +37,11 @@ public class Player {
     this.hand = hand;
     this.board = new Vector<MinionCard>();
   }
+  
+  /**
+   * Empty Constructor for Player.
+   */
+  public Player() {} 
 
   /**
    * Return the id of the game.
@@ -102,6 +107,38 @@ public class Player {
     return this.board;
   }
 
+  public void setUuid(UUID uuid) {
+    this.uuid = uuid;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public void setHero(HeroCard hero) {
+    this.hero = hero;
+  }
+
+  public void setManaPool(int manaPool) {
+    this.manaPool = manaPool;
+  }
+
+  public void setManaMaxTurn(int manaMaxTurn) {
+    this.manaMaxTurn = manaMaxTurn;
+  }
+
+  public void setDeck(AbstractCard[] deck) {
+    this.deck = deck;
+  }
+
+  public void setHand(Vector<AbstractCard> hand) {
+    this.hand = hand;
+  }
+
+  public void setBoard(Vector<MinionCard> board) {
+    this.board = board;
+  }
+
   /**
    * Set the mana pool at manaMaxTurn.
    */
@@ -147,8 +184,8 @@ public class Player {
    * Add a minion at a specific index to the player's board.
    * @param minion the minion to add
    */
-  void addCardToBoard(MinionCard minion, int handCardIndex) {
-    this.getBoard().set(handCardIndex, minion);
+  void addCardToBoard(MinionCard minion, int boardCardIndex) {
+    this.getBoard().set(boardCardIndex, minion);
   }
 
   /**

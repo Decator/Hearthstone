@@ -8,7 +8,7 @@ import static pl.pojo.tester.api.assertion.Method.TO_STRING;
 
 import fr.univ.nantes.alma.engine.SpellCard;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestSpellCard {
 
@@ -16,11 +16,6 @@ public class TestSpellCard {
   public void testPojoSpellCard() {
     final Class<?> classUnderTest = SpellCard.class;
 
-    assertPojoMethodsFor(classUnderTest)
-    .testing(GETTER)
-    .testing(SETTER)
-    .testing(CONSTRUCTOR)
-    .testing(TO_STRING)
-      .areWellImplemented();
+    assertPojoMethodsFor(classUnderTest).areWellImplemented();
   }
 }

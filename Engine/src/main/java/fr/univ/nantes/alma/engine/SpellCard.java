@@ -176,6 +176,49 @@ public class SpellCard extends AbstractCard {
     return "SpellCard [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation + ", attackBuff=" + attackBuff
         + ", armorBuff=" + armorBuff + ", nbDraw=" + nbDraw + ", polymorph=" + polymorph + ", target=" + target + "]";
   }
+
+  @Override
+  public int hashCode() {
+    final int prime = 31;
+    int result = super.hashCode();
+    result = prime * result + armorBuff;
+    result = prime * result + attackBuff;
+    result = prime * result + idInvocation;
+    result = prime * result + nbDraw;
+    result = prime * result + nbSummon;
+    result = prime * result + (polymorph ? 1231 : 1237);
+    result = prime * result + ((target == null) ? 0 : target.hashCode());
+    return result;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+    if (!super.equals(obj))
+      return false;
+    if (!(obj instanceof SpellCard))
+      return false;
+    SpellCard other = (SpellCard) obj;
+    if (armorBuff != other.armorBuff)
+      return false;
+    if (attackBuff != other.attackBuff)
+      return false;
+    if (idInvocation != other.idInvocation)
+      return false;
+    if (nbDraw != other.nbDraw)
+      return false;
+    if (nbSummon != other.nbSummon)
+      return false;
+    if (polymorph != other.polymorph)
+      return false;
+    if (target == null) {
+      if (other.target != null)
+        return false;
+    } else if (!target.equals(other.target))
+      return false;
+    return true;
+  }
   
   
 }

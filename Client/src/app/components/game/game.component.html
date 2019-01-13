@@ -48,17 +48,18 @@
             <button color="primary" mat-raised-button [disabled]="!yourTurn" (click)="endTurn()">Fin du tour</button>
         </div>
 
+        <div class="timer">
+            <p>
+                Temps restant : &nbsp; {{timeLeft}}
+            </p>
+        </div>
+
         <div class="mana">
             <p *ngIf="player.manaMaxTurn != 0" class="manaText">{{player.manaPool}}/{{player.manaMaxTurn}}</p>
             <div class="manaImages">
                 <img *ngFor="let a of manaPoolArray" src="/assets/img/mana.png" class="manaImg">
                 <img *ngFor="let a of manaMaxTurnArray" src="/assets/img/manaUsed.png" class="manaImg">
             </div>
-        </div>
-        <div class="timer">
-            <p>
-              Temps restant : &nbsp; {{timeLeft}}
-            </p>
         </div>
     </div>
 </body>

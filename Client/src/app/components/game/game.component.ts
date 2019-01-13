@@ -37,28 +37,26 @@ export class GameComponent {
 	private idWaitingCard: number;
 
 	private timeLeft: number = 120;
-	private interval;
-	private subscribeTimer: any;
-	private forTimer:boolean = true;
-
+	private interval: any;
+	private lastYourTurn = null;
 
 	constructor(private socketService: SocketService, private router: Router) {
 		if (this.socketService.getIsRedirect()) {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
-				if(this.game.gameOver){
+				if (this.game.gameOver) {
 					if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
-						if(this.game.currentPlayer.hero.healthPoints <= 0){
+						if (this.game.currentPlayer.hero.healthPoints <= 0) {
 							this.router.navigate(['/end', "lose"]);
-						} else if(this.game.otherPlayer.hero.healthPoints <= 0) {
+						} else if (this.game.otherPlayer.hero.healthPoints <= 0) {
 							this.router.navigate(['/end', "win"]);
 						} else {
 							this.router.navigate(['/end', "other"]);
 						}
 					} else {
-						if(this.game.currentPlayer.hero.healthPoints <= 0){
+						if (this.game.currentPlayer.hero.healthPoints <= 0) {
 							this.router.navigate(['/end', "win"]);
-						} else if(this.game.otherPlayer.hero.healthPoints <= 0) {
+						} else if (this.game.otherPlayer.hero.healthPoints <= 0) {
 							this.router.navigate(['/end', "lose"]);
 						} else {
 							this.router.navigate(['/end', "other"]);
@@ -76,7 +74,7 @@ export class GameComponent {
 				this.error = value;
 				console.log(this.error);
 
-				if(this.game) {
+				if (this.game) {
 					console.log('error if');
 					this.resetBooleans();
 				}
@@ -91,8 +89,6 @@ export class GameComponent {
 		} else {
 			this.router.navigate(['/hero']);
 		}
-		this.startTimer();
-		this.resetTimer();
 	}
 
 	playCard(idCard: number, uuidTarget: string, idTarget?: number) {
@@ -177,7 +173,7 @@ export class GameComponent {
 			this.heroPower(uuidTarget, -1);
 		}
 		if (this.gameOver) {
-		  this.router.navigate(['/end']);
+			this.router.navigate(['/end']);
 		}
 	}
 
@@ -200,7 +196,6 @@ export class GameComponent {
 	}
 
 	endTurn() {
-	  this.stopTimer();
 		this.socketService.endTurn(this.game.idGame);
 	}
 
@@ -208,8 +203,6 @@ export class GameComponent {
 		if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
 			this.player = this.game.currentPlayer;
 			this.otherPlayer = this.game.otherPlayer;
-
-
 
 			this.manaPoolArray = new Array(this.player.manaPool);
 			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
@@ -230,7 +223,6 @@ export class GameComponent {
 			this.player = this.game.otherPlayer;
 			this.otherPlayer = this.game.currentPlayer;
 
-
 			this.manaPoolArray = new Array(this.player.manaPool);
 			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
 
@@ -246,6 +238,11 @@ export class GameComponent {
 			this.waitingForPlayCardTarget = false;
 			this.waitingForAttackTarget = false;
 			this.waitingForHeroPowerTarget = false;
+		}
+		if(this.yourTurn != this.lastYourTurn){
+			this.lastYourTurn = this.yourTurn;
+			this.resetTimer();
+			this.startTimer();
 		}
 	}
 
@@ -295,36 +292,29 @@ export class GameComponent {
 		return (card as Spell).polymorph !== undefined;
 	}
 
-	observableTimer() {
-	  const source = timer(1000,2000);
-	  const abc = source.subscribe(val => { console.log(val, '-');
-	                               this.subscribeTimer = this.timeLeft - val;
-	                               });
-
-	}
-
 	startTimer() {
-	  this.timerLance = true;
-	  this.interval = setInterval(() => {
-	    if(this.timeLeft > 0) {
-	      this.timeLeft--;
-	    } else {
-	      if(this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
-	        this.endTurn();
-          this.timeLeft = 120;
-	      }
-
-	    }
-	  }, 1000)
+		if(!this.interval){
+			this.interval = setInterval(() => {
+				if (this.timeLeft > 0) {
+					this.timeLeft--;
+				} else {
+					this.stopTimer();
+					this.resetTimer();
+					if (this.yourTurn) {
+						this.endTurn();
+					}
+				}
+			}, 1000)
+		}
 	}
 
 	resetTimer() {
-	  this.timeLeft = 120;
-  }
+		this.timeLeft = 120;
+	}
 
-  stopTimer() {
-    this.timerLance = false;
-    clearInterval(this.interval);
-  }
+	stopTimer() {
+		clearInterval(this.interval);
+		this.interval = null;
+	}
 }
 

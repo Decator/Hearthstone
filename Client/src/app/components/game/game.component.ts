@@ -39,6 +39,7 @@ export class GameComponent {
 	private timeLeft: number = 120;
 	private interval;
 	private subscribeTimer: any;
+	private forTimer:boolean = true;
 
 
 	constructor(private socketService: SocketService, private router: Router) {
@@ -64,7 +65,6 @@ export class GameComponent {
 						}
 					}
 				}
-				
 				this.resetBooleans();
 
 				if (this.showLoader) {
@@ -92,6 +92,7 @@ export class GameComponent {
 			this.router.navigate(['/hero']);
 		}
 		this.startTimer();
+		this.resetTimer();
 	}
 
 	playCard(idCard: number, uuidTarget: string, idTarget?: number) {
@@ -199,6 +200,7 @@ export class GameComponent {
 	}
 
 	endTurn() {
+	  this.stopTimer();
 		this.socketService.endTurn(this.game.idGame);
 	}
 
@@ -207,7 +209,7 @@ export class GameComponent {
 			this.player = this.game.currentPlayer;
 			this.otherPlayer = this.game.otherPlayer;
 
-			this.resetTimer();
+
 
 			this.manaPoolArray = new Array(this.player.manaPool);
 			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
@@ -228,7 +230,6 @@ export class GameComponent {
 			this.player = this.game.otherPlayer;
 			this.otherPlayer = this.game.currentPlayer;
 
-			this.resetTimer();
 
 			this.manaPoolArray = new Array(this.player.manaPool);
 			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
@@ -303,16 +304,27 @@ export class GameComponent {
 	}
 
 	startTimer() {
+	  this.timerLance = true;
 	  this.interval = setInterval(() => {
 	    if(this.timeLeft > 0) {
 	      this.timeLeft--;
 	    } else {
-	      this.endTurn();
-	      this.timeLeft = 120;
+	      if(this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
+	        this.endTurn();
+          this.timeLeft = 120;
+	      }
+
 	    }
 	  }, 1000)
 	}
 
 	resetTimer() {
 	  this.timeLeft = 120;
+  }
+
+  stopTimer() {
+    this.timerLance = false;
+    clearInterval(this.interval);
+  }
 }
+

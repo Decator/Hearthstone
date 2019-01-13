@@ -4,6 +4,7 @@ import { SocketService } from '../../service/socket.service';
 import { Game, Player, Minion, Spell } from '../../app.models';
 import 'rxjs/add/operator/pairwise';
 import 'rxjs/add/operator/filter';
+import { timer } from 'rxjs/observable/timer';
 
 @Component({
 	selector: 'game-component',
@@ -34,6 +35,11 @@ export class GameComponent {
 	private waitingForAttackTarget = false;
 	private waitingForHeroPowerTarget = false;
 	private idWaitingCard: number;
+
+	private timeLeft: number = 120;
+	private interval;
+	private subscribeTimer: any;
+
 
 	constructor(private socketService: SocketService, private router: Router) {
 		if (this.socketService.getIsRedirect()) {
@@ -85,6 +91,7 @@ export class GameComponent {
 		} else {
 			this.router.navigate(['/hero']);
 		}
+		this.startTimer();
 	}
 
 	playCard(idCard: number, uuidTarget: string, idTarget?: number) {
@@ -200,6 +207,8 @@ export class GameComponent {
 			this.player = this.game.currentPlayer;
 			this.otherPlayer = this.game.otherPlayer;
 
+			this.resetTimer();
+
 			this.manaPoolArray = new Array(this.player.manaPool);
 			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
 
@@ -218,6 +227,8 @@ export class GameComponent {
 		} else {
 			this.player = this.game.otherPlayer;
 			this.otherPlayer = this.game.currentPlayer;
+
+			this.resetTimer();
 
 			this.manaPoolArray = new Array(this.player.manaPool);
 			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
@@ -282,4 +293,26 @@ export class GameComponent {
 	isSpell(card): boolean {
 		return (card as Spell).polymorph !== undefined;
 	}
+
+	observableTimer() {
+	  const source = timer(1000,2000);
+	  const abc = source.subscribe(val => { console.log(val, '-');
+	                               this.subscribeTimer = this.timeLeft - val;
+	                               });
+
+	}
+
+	startTimer() {
+	  this.interval = setInterval(() => {
+	    if(this.timeLeft > 0) {
+	      this.timeLeft--;
+	    } else {
+	      this.endTurn();
+	      this.timeLeft = 120;
+	    }
+	  }, 1000)
+	}
+
+	resetTimer() {
+	  this.timeLeft = 120;
 }

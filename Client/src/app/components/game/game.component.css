@@ -115,6 +115,15 @@ p {
   width: 10vw;
 }
 
+.timer {
+  position: absolute;
+  right: 1vh;
+  top: 52vh;
+  height: 5vh;
+  width: 10vw;
+
+}
+
 button {
   margin: 0;
 }

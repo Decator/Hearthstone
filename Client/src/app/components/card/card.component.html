@@ -1,9 +1,20 @@
-<div class="container" (click)="onClick()">
-    <div class="wrapper">
+<div [ngClass]="{'topAlign': type=='enemy', 'container': true} " (click)="onClick()" (mouseenter)="mouseEnter()" (mouseleave) ="mouseLeave()">
+    <div *ngIf="showFull && type == 'ally'" class="wrapper full">
         <img class="action" src="assets/img/{{card.id}}.png">
-        <img class="hover" [ngClass]="{ 'card-active': !disabled }" src="assets/img/{{card.id}}.png">
+        <div class="top-left fullText">{{card.manaCost}}</div>
+        <div *ngIf="card.healthPoints !=  null" class="bottom-left fullText">{{card.damage}}</div>
+        <div *ngIf="card.healthPoints !=  null" class="bottom-right fullText">{{card.healthPoints}}</div>
     </div>
-    <div class="top-left">{{card.manaCost}}</div>
-    <div *ngIf="card.healthPoints !=  null" class="bottom-left">{{card.damage}}</div>
-    <div *ngIf="card.healthPoints !=  null" class="bottom-right">{{card.healthPoints}}</div>
+    <div class="wrapper">
+        <img [ngClass]="{ 'card-active': !disabled }" src="assets/img/{{card.id}}.png">
+        <div class="top-left">{{card.manaCost}}</div>
+        <div *ngIf="card.healthPoints !=  null" class="bottom-left">{{card.damage}}</div>
+        <div *ngIf="card.healthPoints !=  null" class="bottom-right">{{card.healthPoints}}</div>
+    </div>
+    <div *ngIf="showFull && type == 'enemy'" class="wrapper full">
+        <img class="action" src="assets/img/{{card.id}}.png">
+        <div class="top-left fullText">{{card.manaCost}}</div>
+        <div *ngIf="card.healthPoints !=  null" class="bottom-left fullText">{{card.damage}}</div>
+        <div *ngIf="card.healthPoints !=  null" class="bottom-right fullText">{{card.healthPoints}}</div>
+    </div>
 </div>

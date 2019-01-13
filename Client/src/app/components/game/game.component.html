@@ -20,16 +20,16 @@
 
         <div class="advBoard">
             <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
-                (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
+                type="enemy" (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
         </div>
 
         <div class="board">
             <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && ((!card.attacked && card.damage != 0) || waitingForPlayCardTarget || waitingForAttackTarget || waitingForHeroPowerTarget))"
-                (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
+                type="ally" (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
         </div>
 
         <div class="hand">
-            <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))"
+            <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))" type="ally"
                 [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
         </div>
 
@@ -38,13 +38,14 @@
         </div>
 
         <div class="power"> 
-            <input type="image" src="assets/img/{{player.hero.id}}_PH.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': !disabled }" (click)="onClickHeroPower()" [disabled]="!(yourTurn && showAllyHeroPower)">
+            <input type="image" src="assets/img/{{player.hero.id}}_PH.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': (yourTurn && showAllyHeroPower) }" (click)="onClickHeroPower()">
         </div>
 
         <div class="ftour">
-            <button class="endTurn" (click)="endTurn()" [disabled]="!yourTurn">
+            <!-- <button class="endTurn" (click)="endTurn()" [disabled]="!yourTurn">
                 Fin du tour
-            </button>
+            </button> -->
+            <button color="primary" mat-raised-button [disabled]="!yourTurn" (click)="endTurn()">Fin du tour</button>
         </div>
 
         <div class="mana">

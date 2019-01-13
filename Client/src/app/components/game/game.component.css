@@ -94,13 +94,13 @@ p {
 
 .power {
   position: absolute;
-  bottom: 1.5vh;
+  bottom: 10vh;
   left: 2vh;
-  width: 10vw;
+  width: 5vw;
 }
 
 .power input{
-  width: 10vw;
+  width: 5vw;
 }
 
 .hero-active {

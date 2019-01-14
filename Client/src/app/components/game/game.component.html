@@ -10,56 +10,83 @@
     </div>
     <p *ngIf="showLoader" class="waitingText">{{error}}</p>
     <div class="background" *ngIf="!showLoader">
-        <div class="imgadvhero">
-            <hero-card-component [card]="otherPlayer.hero" (clicked)="onClickHero(otherPlayer.uuid)" [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)"></hero-card-component>
-        </div>
 
-        <div class="advHand">
-            <img style="width: 15vh;" *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
-        </div>
+        <!-- ---------------------------- Opponent player side ---------------------------- -->
+        <div>
+            <div class="usernameAdv">
+                <p>{{otherPlayer.username}}</p>
+            </div>
 
-        <div class="advBoard">
-            <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
-                type="enemy" (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
-        </div>
+            <div class="manaAdv">
+                <p *ngIf="otherPlayer.manaMaxTurn != 0" class="manaText">{{otherPlayer.manaPool}}/{{otherPlayer.manaMaxTurn}}</p>
+                <div class="manaImages">
+                    <img *ngFor="let a of manaPoolArrayAdv" src="/assets/img/mana.png" class="manaImg">
+                    <img *ngFor="let a of manaMaxTurnArrayAdv" src="/assets/img/manaUsed.png" class="manaImg">
+                </div>
+            </div>
 
-        <div class="board">
-            <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && ((!card.attacked && card.damage != 0) || waitingForPlayCardTarget || waitingForAttackTarget || waitingForHeroPowerTarget))"
-                type="ally" (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
-        </div>
-
-        <div class="hand">
-            <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))" type="ally"
-                [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
-        </div>
-
-        <div class="imghero">
-            <hero-card-component [card]="player.hero" (clicked)="onClickHero(player.uuid)" [disabled]="!(yourTurn && showAllyHero)"></hero-card-component>
-        </div>
-
-        <div class="power"> 
-            <input type="image" src="assets/img/{{player.hero.id}}_PH_Min.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': (yourTurn && showAllyHeroPower && !player.heroPowerUsed && player.manaPool >= 2)}" [disabled]="!(yourTurn && showAllyHeroPower && !player.heroPowerUsed && player.manaPool >= 2)" (click)="onClickHeroPower()">
-        </div>
-
-        <div class="ftour">
-            <!-- <button class="endTurn" (click)="endTurn()" [disabled]="!yourTurn">
-                Fin du tour
-            </button> -->
-            <button color="primary" mat-raised-button [disabled]="!yourTurn" (click)="endTurn()">Fin du tour</button>
-        </div>
-
-        <div class="timer">
-            <p>
-                Temps restant : &nbsp; {{timeLeft}}
-            </p>
-        </div>
-
-        <div class="mana">
-            <p *ngIf="player.manaMaxTurn != 0" class="manaText">{{player.manaPool}}/{{player.manaMaxTurn}}</p>
-            <div class="manaImages">
-                <img *ngFor="let a of manaPoolArray" src="/assets/img/mana.png" class="manaImg">
-                <img *ngFor="let a of manaMaxTurnArray" src="/assets/img/manaUsed.png" class="manaImg">
+            <div class="powerAdv"> 
+                <input type="image" src="assets/img/{{otherPlayer.hero.id}}_PH_Min.png" alt="Pouvoir hero" [disabled]="true">
+            </div>
+    
+            <div class="imgadvhero">
+                <hero-card-component [card]="otherPlayer.hero" (clicked)="onClickHero(otherPlayer.uuid)" [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)"></hero-card-component>
+            </div>
+    
+            <div class="advHand">
+                <img style="width: 15vh;" *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
+            </div>
+    
+            <div class="advBoard">
+                <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
+                    type="enemy" (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
             </div>
         </div>
+
+        <!-- ---------------------------- CurrentPlayer side ---------------------------- -->
+        <div>
+            <div class="board">
+                <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && ((!card.attacked && card.damage != 0) || waitingForPlayCardTarget || waitingForAttackTarget || waitingForHeroPowerTarget))"
+                    type="ally" (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
+            </div>
+
+            <div class="hand">
+                <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))" type="ally"
+                    [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
+            </div>
+
+            <div class="imghero">
+                <hero-card-component [card]="player.hero" (clicked)="onClickHero(player.uuid)" [disabled]="!(yourTurn && showAllyHero)"></hero-card-component>
+            </div>
+
+            <div class="power"> 
+                <input type="image" src="assets/img/{{player.hero.id}}_PH_Min.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': (yourTurn && showAllyHeroPower && !player.heroPowerUsed && player.manaPool >= 2)}" [disabled]="!(yourTurn && showAllyHeroPower && !player.heroPowerUsed && player.manaPool >= 2)" (click)="onClickHeroPower()">
+            </div>
+
+            <div class="mana">
+                <p *ngIf="player.manaMaxTurn != 0" class="manaText">{{player.manaPool}}/{{player.manaMaxTurn}}</p>
+                <div class="manaImages">
+                    <img *ngFor="let a of manaPoolArray" src="/assets/img/mana.png" class="manaImg">
+                    <img *ngFor="let a of manaMaxTurnArray" src="/assets/img/manaUsed.png" class="manaImg">
+                </div>
+            </div>
+
+            <div class="username">
+                <p>{{player.username}}</p>
+            </div>
+        </div>
+
+        <!-- ---------------------------- Other things ---------------------------- -->
+        <div>
+            <div class="ftour">
+                <button color="primary" mat-raised-button [disabled]="!yourTurn" (click)="endTurn()">Fin du tour</button>
+            </div>
+    
+            <div class="timer">
+                <img src="/assets/img/timer.png">
+                <p>{{timeLeft}}</p>
+            </div>
+        </div>
+        
     </div>
 </body>

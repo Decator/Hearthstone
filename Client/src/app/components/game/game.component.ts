@@ -19,6 +19,8 @@ export class GameComponent {
 	private error: string;
 	private manaPoolArray = new Array(0);
 	private manaMaxTurnArray = new Array(0);
+	private manaPoolArrayAdv = new Array(0);
+	private manaMaxTurnArrayAdv = new Array(0);
 
 	private showLoader: boolean = true;
 	private showHand: boolean = false;
@@ -205,6 +207,8 @@ export class GameComponent {
 
 			this.manaPoolArray = new Array(this.player.manaPool);
 			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
+			this.manaPoolArrayAdv = new Array(this.otherPlayer.manaPool);
+			this.manaMaxTurnArrayAdv = new Array(this.otherPlayer.manaMaxTurn - this.otherPlayer.manaPool);
 
 			this.yourTurn = true;
 			this.showHand = true;
@@ -224,6 +228,8 @@ export class GameComponent {
 
 			this.manaPoolArray = new Array(this.player.manaPool);
 			this.manaMaxTurnArray = new Array(this.player.manaMaxTurn - this.player.manaPool);
+			this.manaPoolArrayAdv = new Array(this.otherPlayer.manaPool);
+			this.manaMaxTurnArrayAdv = new Array(this.otherPlayer.manaMaxTurn - this.otherPlayer.manaPool);
 
 			this.yourTurn = false;
 			this.showHand = false;

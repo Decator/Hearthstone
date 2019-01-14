@@ -4,10 +4,10 @@ body {
 }
 
 a{
-  font-size:12px;
-  color:white;
+  font-size: 12px;
+  color: white;
   margin: 0;
-  z-index:1;
+  z-index: 1;
 }
 
 p {
@@ -16,9 +16,16 @@ p {
 
 .mana {
   position: absolute;
-  display: block;
   bottom: 0vh;
   right: 0vw;
+  display: block;
+}
+
+.manaAdv {
+  position: absolute;
+  top: 0vh;
+  right: 0vw;
+  display: block;
 }
 
 .manaImages {
@@ -33,18 +40,19 @@ p {
   position: relative;
   right: 1vw;
   float: left;
+  padding: 1%;
 }
 
 .advHand {
   position: absolute;
-  top: 2vh;
+  top: 5vh;
   width: 100%;
   text-align: center;
 }
 
 .advBoard {
   position: absolute;
-  top: 25vh;
+  top: 27vh;
   width: 100%;
   text-align: center;
 }
@@ -67,7 +75,7 @@ p {
   position: absolute;
   bottom: 20vh;
   left: 2vh;
-  width: 17vh;
+  width: 20vh;
   z-index: 10;
 }
 
@@ -99,8 +107,29 @@ p {
   width: 10vh;
 }
 
-.power input{
+.powerAdv {
+  position: absolute;
+  top: 10vh;
+  left: 2vh;
   width: 10vh;
+}
+
+.powerAdv input, .power input{
+  width: 10vh;
+}
+
+.username {
+  position: absolute;
+  bottom: 3.5vh;
+  left: 2vh;
+  font-size: 1.8em;
+}
+
+.usernameAdv {
+  position: absolute;
+  top: 3.5vh;
+  left: 2vh;
+  font-size: 1.8em;
 }
 
 .hero-active {
@@ -115,13 +144,18 @@ p {
   width: 10vw;
 }
 
-.timer {
+.timer p {
   position: absolute;
-  right: 1vh;
-  top: 52vh;
-  height: 5vh;
-  width: 10vw;
+  right: 7vw;
+  top: 57vh;
+  font-size: 1.2em
+}
 
+.timer img {
+  position: absolute;
+  right: 5vw;
+  top: 52vh;
+  width: 10vh;
 }
 
 button {

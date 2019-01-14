@@ -122,14 +122,14 @@ p {
   position: absolute;
   bottom: 3.5vh;
   left: 2vh;
-  font-size: 1.8em;
+  font-size: 1.4em;
 }
 
 .usernameAdv {
   position: absolute;
   top: 3.5vh;
   left: 2vh;
-  font-size: 1.8em;
+  font-size: 1.4em;
 }
 
 .hero-active {
@@ -138,23 +138,27 @@ p {
 
 .ftour {
   position: absolute;
-  right: 1vh;
+  right: 3vh;
   top: 44vh;
   height: 5vh;
-  width: 10vw;
+}
+
+.timer {
+  position: absolute;
+  right: 3vh;
+  top: 52vh;
+  width: 10vh;
 }
 
 .timer p {
   position: absolute;
-  right: 7vw;
-  top: 57vh;
-  font-size: 1.2em
+  right: 55%;
+  bottom: 46%;
+  font-size: 1.2em;
+  transform: translateX(+50%) translateY(+50%);
 }
 
 .timer img {
-  position: absolute;
-  right: 5vw;
-  top: 52vh;
   width: 10vh;
 }
 

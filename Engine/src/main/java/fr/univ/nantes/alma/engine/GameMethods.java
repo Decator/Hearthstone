@@ -59,7 +59,7 @@ public class GameMethods {
   
   /**
    * Sets the current player.
-   * @param currentPlayer
+   * @param currentPlayer the current player
    */
   public void setCurrentPlayer(Player currentPlayer) {
     this.currentPlayer = currentPlayer;
@@ -75,7 +75,7 @@ public class GameMethods {
   
   /**
    * Sets the other player.
-   * @param otherPlayer
+   * @param otherPlayer the other player
    */
   public void setOtherPlayer(Player otherPlayer) {
     this.otherPlayer = otherPlayer;
@@ -126,7 +126,7 @@ public class GameMethods {
    * @param idCard
    * @throws EngineException
    */
-  private void summonMinionFromHand(int idCard) throws EngineException {
+  void summonMinionFromHand(int idCard) throws EngineException {
     if(GameRuleUtil.checkBoardSize(this.currentPlayer.getBoard())) {
       this.currentPlayer.addCardToBoard((MinionCard)this.currentPlayer.getHand().get(idCard));
       this.currentPlayer.removeCardFromHand(idCard);
@@ -144,7 +144,7 @@ public class GameMethods {
    * @param idTarget
    * @param spell
    */
-  private void spellDamageEffect(Player targetPlayer, int idTarget, SpellCard spell) {
+  void spellDamageEffect(Player targetPlayer, int idTarget, SpellCard spell) {
     if (spell.getDamage() > 0) {
       LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
       for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
@@ -176,7 +176,7 @@ public class GameMethods {
    * @param spell
    * @throws EngineException
    */
-  private void spellPolymorphingEffect(Player targetPlayer, int idTarget, SpellCard spell) throws EngineException {
+  void spellPolymorphingEffect(Player targetPlayer, int idTarget, SpellCard spell) throws EngineException {
     if (spell.isPolymorph()) {
       LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
       for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
@@ -199,7 +199,7 @@ public class GameMethods {
    * @param idTarget
    * @param spell
    */
-  private void spellAttackBuffingEffect(Player targetPlayer, int idTarget, SpellCard spell) {
+  void spellAttackBuffingEffect(Player targetPlayer, int idTarget, SpellCard spell) {
     if (spell.getAttackBuff() > 0) { // Adds an attack buff to the target minions 
       LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, targetPlayer, idTarget, spell.getTarget());
       for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
@@ -214,7 +214,7 @@ public class GameMethods {
    * @param spell
    * @throws EngineException
    */
-  private void spellSummoningEffect(SpellCard spell) throws EngineException {
+  void spellSummoningEffect(SpellCard spell) throws EngineException {
     if (spell.getNbSummon() > 0 && !spell.isPolymorph()) { // Summon specific minions on the board
       for (int i = 0; i < spell.getNbSummon(); i++) { // Summon as many minions as needed
         summonMinion(this.currentPlayer, spell.getIdInvocation());
@@ -226,7 +226,7 @@ public class GameMethods {
    * @param spell
    * @throws EngineException
    */
-  private void spellDrawingEffect(SpellCard spell) throws EngineException {
+  void spellDrawingEffect(SpellCard spell) throws EngineException {
     if (spell.getNbDraw() > 0) { // Add cards to hand if relevant
       for (int i = 0; i < spell.getNbDraw(); i++) { // Draw as many cards as needed
         drawCard();
@@ -238,7 +238,7 @@ public class GameMethods {
    * @param hero the hero using the spell.
    * @param spell the spell being used.
    */
-  private void spellArmorBuffing(HeroCard hero, SpellCard spell) {
+  void spellArmorBuffing(HeroCard hero, SpellCard spell) {
     if (spell.getArmorBuff() > 0) { // Adds Armor points if relevant
       hero.setArmorPoints(hero.getArmorPoints() + spell.getArmorBuff());
     }
@@ -289,7 +289,7 @@ public class GameMethods {
    * @param idTarget
    * @param heroCurrentPlayer
    */
-  private void mageHeroPower(Player playerTarget, int idTarget, HeroCard heroCurrentPlayer) {
+  void mageHeroPower(Player playerTarget, int idTarget, HeroCard heroCurrentPlayer) {
     LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, this.otherPlayer, playerTarget, idTarget, heroCurrentPlayer.getTarget());
             for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
               if (entry.getValue() instanceof HeroCard) {
@@ -518,8 +518,6 @@ public class GameMethods {
       } else {
         throw new EngineException("Le minion n'a pas pu être invoqué");
       }
-    } else {
-      throw new EngineException("Vous avez atteint le nombre maximum de serviteurs sur le plateau !");
     }
   }
 

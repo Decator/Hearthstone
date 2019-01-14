@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version 0.0.1
  */
 public class Engine implements EngineBridge {
-	private HashMap<UUID, GameMethods> games;
+  private HashMap<UUID, GameMethods> games;
 	private HashMap<UUID, Player> players;
 	private Player waitingPlayer;
 

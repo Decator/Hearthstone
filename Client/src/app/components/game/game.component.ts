@@ -45,6 +45,7 @@ export class GameComponent {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
 				if (this.game.gameOver) {
+					this.socketService.endGame();
 					if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
 						if (this.game.currentPlayer.hero.healthPoints <= 0) {
 							this.router.navigate(['/end', "lose"]);

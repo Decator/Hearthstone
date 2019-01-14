@@ -31,6 +31,15 @@ export class SocketService {
   errorObservable: Observable<String>;
 
   constructor() {
+    this.heros = new Array<Hero>();
+    this.herosSubject = new Subject<Array<Hero>>();
+    this.herosObservable = this.herosSubject.asObservable();
+
+    this.initService();
+    this.initializeWebSocketConnection();
+  }
+
+  initService(){
     this.player = null;
     this.playerSubject = new Subject<Player>();
     this.playerObservable = this.playerSubject.asObservable();
@@ -39,15 +48,9 @@ export class SocketService {
     this.gameSubject = new Subject<Game>();
     this.gameObservable = this.gameSubject.asObservable();
 
-    this.heros = new Array<Hero>();
-    this.herosSubject = new Subject<Array<Hero>>();
-    this.herosObservable = this.herosSubject.asObservable();
-
     this.error = "";
     this.errorSubject = new Subject<String>();
     this.errorObservable = this.errorSubject.asObservable();
-
-    this.initializeWebSocketConnection();
   }
 
   initializeWebSocketConnection() {
@@ -127,8 +130,9 @@ export class SocketService {
     this.stompClient.send("/app/heroPower", {}, `${uuidGame}_${uuidPlayer}_${idTarget}`);
   }
 
-  endGame(uuidGame: string, uuidPlayer1: string, uuidPlayer2: string) {
-    this.stompClient.send("/app/endGame", {}, `${uuidGame}_${uuidPlayer1}_${uuidPlayer2}`);
+  endGame() {
+    this.stompClient.send("/app/endGame", {}, `${this.game.idGame}_${this.game.currentPlayer.uuid}_${this.game.otherPlayer.uuid}`);
+    this.initService();
   }
 
   getPlayer(): Player {

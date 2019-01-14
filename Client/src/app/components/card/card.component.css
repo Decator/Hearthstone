@@ -2,12 +2,12 @@
 .container {
     position: relative;
     color: white;
-    width: 8vw;
+    width: 15vh;
     display: inline-block;
 }
 
 img {
-    width: 8vw;
+    width: 15vh;
 }
 
 .card-active {
@@ -39,7 +39,7 @@ img {
 }
 
 .action {
-    width: 15vw;
+    width: 30vh;
     position: relative;
     z-index: 10;
 }
@@ -49,7 +49,7 @@ img {
 }
 
 .full {
-    width: 15vw;
+    width: 30vh;
 }
 
 .fullText {

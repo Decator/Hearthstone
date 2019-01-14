@@ -3,12 +3,12 @@
     position: relative;
     /* text-align: center; */
     color: white;
-    width: 1Ovw;
+    width: 20vh;
     display: inline-block;
 }
 
 img {
-    width: 10vw;
+    width: 20vh;
 }
 
 .card-active {

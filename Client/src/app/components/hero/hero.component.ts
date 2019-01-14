@@ -49,7 +49,6 @@ export class HeroComponent {
 	}
 
 	chooseHero(id){
-		console.log(id);
 		this.chosenHero = id;
 	}
 }

@@ -33,7 +33,7 @@ public class WebSocketController {
 	public void createGame(String uuidPlayer) {
 		GameMethods game = Application.engineBridge.createGame(UUID.fromString(uuidPlayer));
 		if (game == null) {
-			this.template.convertAndSend("/game/" + uuidPlayer, "Waiting for another Player");
+			this.template.convertAndSend("/game/" + uuidPlayer, "En attente d'un deuxième joueur");
 		} else {
 			this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), game);
 			this.template.convertAndSend("/game/" + game.getOtherPlayer().getUuid(), game);

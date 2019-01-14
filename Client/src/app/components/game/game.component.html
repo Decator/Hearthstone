@@ -15,7 +15,7 @@
         </div>
 
         <div class="advHand">
-            <img style="width: 8vw;" *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
+            <img style="width: 15vh;" *ngFor="let card of otherPlayer.hand" src="assets/img/card-back.png" width="100px">
         </div>
 
         <div class="advBoard">
@@ -38,7 +38,7 @@
         </div>
 
         <div class="power"> 
-            <input type="image" src="assets/img/{{player.hero.id}}_PH_Min.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': (yourTurn && showAllyHeroPower && player.manaPool >= 2) }" (click)="onClickHeroPower()">
+            <input type="image" src="assets/img/{{player.hero.id}}_PH_Min.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': (yourTurn && showAllyHeroPower && !player.heroPowerUsed && player.manaPool >= 2)}" [disabled]="!(yourTurn && showAllyHeroPower && !player.heroPowerUsed && player.manaPool >= 2)" (click)="onClickHeroPower()">
         </div>
 
         <div class="ftour">

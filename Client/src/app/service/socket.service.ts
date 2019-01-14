@@ -26,9 +26,9 @@ export class SocketService {
   private herosSubject: Subject<Array<Hero>>;
   herosObservable: Observable<Array<Hero>>;
 
-  private error: String;
-  private errorSubject: Subject<String>;
-  errorObservable: Observable<String>;
+  private error: string;
+  private errorSubject: Subject<string>;
+  errorObservable: Observable<string>;
 
   constructor() {
     this.heros = new Array<Hero>();
@@ -39,7 +39,7 @@ export class SocketService {
     this.initializeWebSocketConnection();
   }
 
-  initService(){
+  initService() {
     this.player = null;
     this.playerSubject = new Subject<Player>();
     this.playerObservable = this.playerSubject.asObservable();
@@ -49,7 +49,7 @@ export class SocketService {
     this.gameObservable = this.gameSubject.asObservable();
 
     this.error = "";
-    this.errorSubject = new Subject<String>();
+    this.errorSubject = new Subject<string>();
     this.errorObservable = this.errorSubject.asObservable();
   }
 
@@ -94,14 +94,13 @@ export class SocketService {
       try {
         this.game = new Game(JSON.parse(message.body));
         this.gameSubject.next(this.game);
-        this.errorSubject.next("");
+        // this.errorSubject.next("");
         this.stompClient.subscribe(`/game/${this.game.idGame}`, (message) => {
           try {
             this.game = new Game(JSON.parse(message.body));
-            console.log(JSON.parse(message.body));
             this.gameSubject.next(this.game);
             this.errorSubject.next("");
-          } catch(err) {
+          } catch (err) {
             this.error = message.body;
             this.errorSubject.next(this.error);
           }
@@ -114,11 +113,11 @@ export class SocketService {
     this.stompClient.send("/app/createGame", {}, this.player.uuid);
   }
 
-  playCard(uuidGame: String, idCard: number, uuidPlayer: string, idTarget: number){
+  playCard(uuidGame: String, idCard: number, uuidPlayer: string, idTarget: number) {
     this.stompClient.send("/app/playCard", {}, `${uuidGame}_${idCard}_${uuidPlayer}_${idTarget}`);
   }
 
-  attack(uuidGame: string, idCard: number, idTarget: number){
+  attack(uuidGame: string, idCard: number, idTarget: number) {
     this.stompClient.send("/app/attack", {}, `${uuidGame}_${idCard}_${idTarget}`);
   }
 
@@ -126,7 +125,7 @@ export class SocketService {
     this.stompClient.send("/app/endTurn", {}, `${uuidGame}`);
   }
 
-  heroPower(uuidGame: String, uuidPlayer: string, idTarget: number){
+  heroPower(uuidGame: String, uuidPlayer: string, idTarget: number) {
     this.stompClient.send("/app/heroPower", {}, `${uuidGame}_${uuidPlayer}_${idTarget}`);
   }
 
@@ -147,7 +146,7 @@ export class SocketService {
     return this.heros;
   }
 
-  getError(): String {
+  getError(): string {
     return this.error;
   }
 

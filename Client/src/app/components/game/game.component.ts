@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { SocketService } from '../../service/socket.service';
 import { Game, Player, Minion, Spell } from '../../app.models';
-import 'rxjs/add/operator/pairwise';
-import 'rxjs/add/operator/filter';
-import { timer } from 'rxjs/observable/timer';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
 	selector: 'game-component',
@@ -18,7 +16,7 @@ export class GameComponent {
 	private otherPlayer: Player;
 	private gameOver: boolean;
 	private yourTurn: boolean = false;
-	private error: String;
+	private error: string;
 	private manaPoolArray = new Array(0);
 	private manaMaxTurnArray = new Array(0);
 
@@ -40,7 +38,7 @@ export class GameComponent {
 	private interval: any;
 	private lastYourTurn = null;
 
-	constructor(private socketService: SocketService, private router: Router) {
+	constructor(private socketService: SocketService, private router: Router, private snackBar: MatSnackBar) {
 		if (this.socketService.getIsRedirect()) {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
@@ -71,12 +69,15 @@ export class GameComponent {
 				}
 			});
 
-			this.socketService.errorObservable.subscribe((value: String) => {
+			this.socketService.errorObservable.subscribe((value: string) => {
 				this.error = value;
-				console.log(this.error);
 
 				if (this.game) {
-					console.log('error if');
+					if(this.error != ""){
+						this.snackBar.open(this.error, '', {
+							duration: 2000,
+						});
+					}
 					this.resetBooleans();
 				}
 			});
@@ -138,7 +139,6 @@ export class GameComponent {
 		} else if (this.waitingForHeroPowerTarget) {
 			this.heroPower(uuidTarget, idCard);
 		} else {
-			console.log("else");
 			this.showHand = true;
 			this.showAllyHeroPower = true;
 
@@ -152,8 +152,6 @@ export class GameComponent {
 			this.showEnemyMinions = true;
 			this.showAllyHero = false;
 			this.showEnemyHero = true;
-
-			console.log(this.showEnemyHero);
 
 			this.showOnlyTaunt = false;
 			for (const card of this.otherPlayer.board) {

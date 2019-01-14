@@ -179,7 +179,7 @@ export class GameComponent {
 	}
 
 	onClickHeroPower() {
-		if (this.player.hero.target && this.player.hero.target.includes('1')) {
+		if(this.player.manaPool >= 2 && this.player.hero.target && this.player.hero.target.includes('1')) {
 			const splitTarget = this.player.hero.target.split('_');
 
 			this.showHand = true;

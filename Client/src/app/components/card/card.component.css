@@ -49,6 +49,8 @@ img {
 }
 
 .full {
+    position: relative;
+    left: 2vw;
     width: 30vh;
 }
 

@@ -1,5 +1,6 @@
 import { Component, Input, Output } from '@angular/core';
 import { Minion } from '../../app.models';
+import { Player } from '../../app.models';
 import { EventEmitter } from '@angular/core';
 
 import * as $ from 'jquery';
@@ -14,6 +15,7 @@ export class CardComponent {
     @Input() card: Minion;
     @Input() disabled: boolean;
     @Input() type: string;
+    @Input() player: Player;
 
     @Output() clicked = new EventEmitter();
 

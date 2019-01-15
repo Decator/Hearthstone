@@ -71,11 +71,13 @@ public interface EngineBridge {
    * @param uuidGame the id of the game
    * @param uuidPlayer the uuid of the player who uses it
    * @param idAttack the id of the attacker
+   * @param uuidTarget uuid of the targeted player
    * @param idTarget the id of the target
    * @return the game
    * @throws EngineException a custom exception
    */
-  public GameMethods attack(UUID uuidGame, UUID uuidPlayer, int idAttack, int idTarget) 
+  public GameMethods attack(UUID uuidGame, UUID uuidPlayer, int idAttack, 
+      UUID uuidTarget, int idTarget) 
       throws EngineException;
   
   /**

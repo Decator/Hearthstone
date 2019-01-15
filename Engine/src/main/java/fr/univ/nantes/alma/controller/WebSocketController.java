@@ -36,25 +36,29 @@ public class WebSocketController {
       this.template.convertAndSend("/game/" + uuidPlayer, "En attente d'un deuxième joueur");
     } else {
       this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), game);
-      this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), "A vous de jouer !");
+      this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), 
+          "A vous de jouer !");
       this.template.convertAndSend("/game/" + game.getOtherPlayer().getUuid(), game);
     }
   }
 
   @MessageMapping("/endTurn")
   public void endTurn(String data) {
-	String[] dataSplit = data.split("_");
+    String[] dataSplit = data.split("_");
     try {
-	    GameMethods game = Application.engineBridge.endTurn(UUID.fromString(dataSplit[0]), UUID.fromString(dataSplit[1]));
-	    
-	    if(game.getOtherPlayer().getUuid().toString().equals(dataSplit[1])) {
-	        this.template.convertAndSend("/game/" + dataSplit[0], game);
-	        this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), "A vous de jouer !");
-	    } else {
-	    	this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), "A vous de jouer !");
-	    }
-    } catch(EngineException e) {
-    	this.template.convertAndSend("/game/" + dataSplit[1], e.getMessage());
+      GameMethods game = Application.engineBridge.endTurn(UUID.fromString(dataSplit[0]), 
+          UUID.fromString(dataSplit[1]));
+
+      if (game.getOtherPlayer().getUuid().toString().equals(dataSplit[1])) {
+        this.template.convertAndSend("/game/" + dataSplit[0], game);
+        this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), 
+            "A vous de jouer !");
+      } else {
+        this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), 
+            "A vous de jouer !");
+      }
+    } catch (EngineException e) {
+      this.template.convertAndSend("/game/" + dataSplit[1], e.getMessage());
     }
   }
 
@@ -62,11 +66,14 @@ public class WebSocketController {
   public void playCard(String data) {
     String[] dataSplit = data.split("_");
     try {
-      GameMethods game = Application.engineBridge.playCard(UUID.fromString(dataSplit[0]), UUID.fromString(dataSplit[1]), Integer.parseInt(dataSplit[2]),UUID.fromString(dataSplit[3]), Integer.parseInt(dataSplit[4]));
+      GameMethods game = Application.engineBridge.playCard(UUID.fromString(dataSplit[0]), 
+          UUID.fromString(dataSplit[1]), Integer.parseInt(dataSplit[2]),
+          UUID.fromString(dataSplit[3]), Integer.parseInt(dataSplit[4]));
       this.template.convertAndSend("/game/" + dataSplit[0], game);
       
-      if(game.isGameOver()) {
-    	  Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(), game.getOtherPlayer().getUuid());
+      if (game.isGameOver()) {
+        Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(), 
+            game.getOtherPlayer().getUuid());
       }
     } catch (EngineException e) {
       this.template.convertAndSend("/game/" + dataSplit[1], e.getMessage());
@@ -77,11 +84,14 @@ public class WebSocketController {
   public void heroPower(String data) {
     String[] dataSplit = data.split("_");
     try {
-      GameMethods game = Application.engineBridge.heroPower(UUID.fromString(dataSplit[0]), UUID.fromString(dataSplit[1]), UUID.fromString(dataSplit[2]), Integer.parseInt(dataSplit[3]));
+      GameMethods game = Application.engineBridge.heroPower(UUID.fromString(dataSplit[0]), 
+          UUID.fromString(dataSplit[1]), UUID.fromString(dataSplit[2]), 
+          Integer.parseInt(dataSplit[3]));
       this.template.convertAndSend("/game/" + dataSplit[0], game);
       
-      if(game.isGameOver()) {
-    	  Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(), game.getOtherPlayer().getUuid());
+      if (game.isGameOver()) {
+        Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(), 
+            game.getOtherPlayer().getUuid());
       }
     } catch (EngineException e) {
       this.template.convertAndSend("/game/" + dataSplit[1], e.getMessage());
@@ -92,11 +102,14 @@ public class WebSocketController {
   public void attack(String data) {
     String[] dataSplit = data.split("_");
     try {
-      GameMethods game = Application.engineBridge.attack(UUID.fromString(dataSplit[0]), UUID.fromString(dataSplit[1]), Integer.parseInt(dataSplit[2]), Integer.parseInt(dataSplit[3]));
+      GameMethods game = Application.engineBridge.attack(UUID.fromString(dataSplit[0]), 
+          UUID.fromString(dataSplit[1]), Integer.parseInt(dataSplit[2]), 
+          UUID.fromString(dataSplit[3]), Integer.parseInt(dataSplit[4]));
       this.template.convertAndSend("/game/" + dataSplit[0], game);
       
-      if(game.isGameOver()) {
-    	  Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(), game.getOtherPlayer().getUuid());
+      if (game.isGameOver()) {
+        Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(),
+            game.getOtherPlayer().getUuid());
       }
     } catch (EngineException e) {
       this.template.convertAndSend("/game/" + dataSplit[1], e.getMessage());

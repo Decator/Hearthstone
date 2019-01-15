@@ -42,7 +42,7 @@ public class Engine implements EngineBridge {
     this.games = new HashMap<UUID, GameMethods>();
     this.players = new HashMap<UUID, Player>();
   }
-
+  
   @Override
   public ArrayList<HeroCard> getHeros() {
     return this.heroRepository.findAll();
@@ -142,9 +142,9 @@ public class Engine implements EngineBridge {
 
   @Override
   public GameMethods attack(UUID uuidGame, UUID uuidPlayer, int idAttack, 
-      int idTarget) throws EngineException {
+     UUID uuidTarget, int idTarget) throws EngineException {
     try {
-      this.games.get(uuidGame).attack(uuidPlayer, idAttack, idTarget);
+      this.games.get(uuidGame).attack(uuidPlayer, idAttack, uuidTarget, idTarget);
     } catch (EngineException e) {
       throw e;
     }

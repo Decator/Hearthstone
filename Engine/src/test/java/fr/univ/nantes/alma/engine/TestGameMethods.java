@@ -11,7 +11,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
 
@@ -49,6 +51,26 @@ public class TestGameMethods {
     player2 = new Player();
     spell1 = new SpellCard();
     targets = new LinkedHashMap<String, AbstractCard>();
+  }
+  
+  @Test
+  public void testConstructeur() {
+    player1.setManaPool(0);
+    player1.setManaMaxTurn(0);
+    deck[0] = minion1;
+    player1.setDeck(deck);
+    player1.setHand(hand);
+    player1.setBoard(board);
+    hero1.setHeroPowerUsed(false);
+    player1.setHero(hero1);
+    UUID uuid = UUID.randomUUID();
+    ArrayList<MinionCard> invocations = new ArrayList<MinionCard>();
+    GameMethods gameMethods = new GameMethods(uuid, player1, player2, invocations);
+    assertThat(false).isEqualTo(gameMethods.isGameOver());
+    assertThat(invocations).isEqualTo(gameMethods.getInvocations());
+    assertThat(uuid).isEqualTo(gameMethods.getIdGame());
+    assertThat(player1).isEqualTo(gameMethods.getCurrentPlayer());
+    assertThat(player2).isEqualTo(gameMethods.getOtherPlayer());
   }
   
   @ParameterizedTest
@@ -149,11 +171,7 @@ public class TestGameMethods {
     player1.setDeck(deck);
     player1.setHand(hand);
     gameMethods.setCurrentPlayer(player1);
-    try {
-      gameMethods.drawCard();
-    } catch (EngineException e) {
-      throw e;
-    }
+    gameMethods.drawCard();
     assertThat(player1.getHand()).hasSize(1).contains(minion1);
   }
 
@@ -206,6 +224,7 @@ public class TestGameMethods {
     player1.setUuid(uuid);
     gameMethods.setCurrentPlayer(player1);
     gameMethods.setOtherPlayer(player2);
+    doNothing().when(gameMethods).initTurn();
     gameMethods.endTurn(uuid);
     assertThat(player2).isEqualTo(gameMethods.getCurrentPlayer());
     assertThat(player1).isEqualTo(gameMethods.getOtherPlayer());
@@ -482,7 +501,9 @@ public class TestGameMethods {
       boolean tauntStatus, int idTarget, int heroHP2, int heroHPEnd2, boolean gameOverStatus,
       boolean tauntStatusMinion2, int minionEndHP1, int minionEndHP2) throws EngineException {
     UUID uuid = UUID.randomUUID();
+    UUID uuid2 = UUID.randomUUID();
     player1.setUuid(uuid);
+    player2.setUuid(uuid2);
     minion1 = spy(new MinionCard());
     minion2 = spy(new MinionCard());
     minion1.setDamage(minionDamage1);
@@ -506,7 +527,7 @@ public class TestGameMethods {
     gameMethods.setGameOver(false);
     doReturn(tauntStatus).when(gameMethods).taunt(board2);
     doNothing().when(gameMethods).lifesteal(hero2, minion1);
-    gameMethods.attack(uuid, 0, idTarget);
+    gameMethods.attack(uuid, 0, uuid2, idTarget);
     assertThat(true).isEqualTo(minion1.isAttacked());
     assertThat(heroHPEnd2).isEqualTo(hero2.getHealthPoints());
     assertThat(gameOverStatus).isEqualTo(gameMethods.isGameOver());
@@ -521,6 +542,7 @@ public class TestGameMethods {
   public void testAttackExceptions(int minionDamage1, boolean minionAttacked1, 
       boolean tauntStatus, int idTarget, boolean tauntStatusMinion2, String exceptionMessage) throws EngineException {
     UUID uuid = UUID.randomUUID();
+    UUID uuid2 = UUID.randomUUID();
     minion1 = spy(new MinionCard());
     minion2 = spy(new MinionCard());
     minion1.setDamage(minionDamage1);
@@ -534,6 +556,7 @@ public class TestGameMethods {
     player1.setBoard(board);
     player1.setUuid(uuid);
     player2.setBoard(board2);
+    player2.setUuid(uuid2);
     gameMethods.setCurrentPlayer(player1);
     gameMethods.setOtherPlayer(player2);
     gameMethods.setGameOver(false);
@@ -541,7 +564,7 @@ public class TestGameMethods {
     doNothing().when(gameMethods).lifesteal(hero2, minion1);
     Throwable exception = assertThrows(
         EngineException.class, () -> {
-          gameMethods.attack(uuid, 0, idTarget);
+          gameMethods.attack(uuid, 0, uuid2, idTarget);
         }
     );
     
@@ -556,11 +579,26 @@ public class TestGameMethods {
     gameMethods.setCurrentPlayer(player1);
     Throwable exception = assertThrows(
         EngineException.class, () -> {
-          gameMethods.attack(uuid, 0, 0);
+          gameMethods.attack(uuid, 0, uuid2, 0);
         }
-    );
-    
+    );    
     assertThat("Ce n'est pas votre tour !").isEqualTo(exception.getMessage());
+  }
+  
+  @Test
+  public void testAttackYourselfException() {
+    UUID uuid = UUID.randomUUID();
+    UUID uuid2 = UUID.randomUUID();
+    player1.setUuid(uuid);
+    player2.setUuid(uuid2);
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    Throwable exception = assertThrows(
+        EngineException.class, () -> {
+          gameMethods.attack(uuid, 0, uuid, 0);
+        }
+    );    
+    assertThat("Vous ne pouvez attaquer que l'adversaire !").isEqualTo(exception.getMessage());
   }
   
   @ParameterizedTest
@@ -837,6 +875,42 @@ public class TestGameMethods {
     LinkedHashMap<String, AbstractCard> result = new LinkedHashMap<String, AbstractCard>();
     result = gameMethods.targetsFromTargetString(player1, player2, player1, 0, spellTarget);
     assertThat(result).isEmpty();
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"minion_all_enemy, -1, '1_1,1_0', 0", "minion_all_ally, -1, '0_1,0_0', 0",
+    "minion_all_all, -1, '1_1,1_0,0_1,0_0', 0", "minion_1_enemy, 0, '1_0', 0",
+    "minion_1_ally, 0, '0_0', 0", "all_all_enemy, 0, '1_1,1_0,1', 0",
+    "all_all_ally, 0, '0_1,0_0,0', 0", "all_all_all, 0, '0_1,0_0,1_1,1_0,0,1', 0",
+    "all_1_enemy, -1, '1', 0", "all_1_enemy, 0, '1_0', 0", "all_1_ally, -1, '0', 0",
+    "all_1_ally, 0, '0_0', 0"})
+  public void testTargetsFromTargetString(String spellTarget, int idTarget, 
+      String keys, int playerChosen) {
+    spell1.setTarget(spellTarget);
+    player1.setHero(hero1);
+    player2.setHero(hero2);
+    MinionCard minion00 = new MinionCard();
+    MinionCard minion01 = new MinionCard();
+    board.add(minion00);
+    board.add(minion01);
+    player1.setBoard(board);
+    Vector<MinionCard> board2 = new Vector<MinionCard>();
+    MinionCard minion10 = new MinionCard();
+    MinionCard minion11 = new MinionCard();
+    board2.add(minion10);
+    board2.add(minion11);
+    player2.setBoard(board2);
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    LinkedHashMap<String, AbstractCard> result = new LinkedHashMap<String, AbstractCard>();
+    result = gameMethods.targetsFromTargetString(player1, player2, player1, idTarget, spellTarget);
+    String[] keysArray = keys.split(",");
+    List<String> keysList = new ArrayList<String>();
+    keysList = Arrays.asList(keysArray);
+    for (String key : keysList) {
+      assertThat(result).containsKey(key);
+    }
+    
   }
   
 }

@@ -386,59 +386,64 @@ public class GameMethods {
    * Attacks a target with an attacker given in parameter.
    * @param uuidPlayer the uuid of the player who uses it
    * @param idAttack the id of the attacker
+   * @param uuidTarget the uuid of the targeted player
    * @param idTarget the id of the target
    * @throws EngineException custom exception
    */
-  void attack(UUID uuidPlayer, int idAttack, int idTarget) throws EngineException {
+  void attack(UUID uuidPlayer, int idAttack, UUID uuidTarget, int idTarget) throws EngineException {
     if (this.currentPlayer.getUuid().equals(uuidPlayer)) {
-      MinionCard minion = this.currentPlayer.getBoard().get(idAttack);
-      HeroCard hero = this.currentPlayer.getHero();
-      HeroCard heroEnemy = this.otherPlayer.getHero();
-      if (minion.getDamage() > 0) {
-        //Checks if the minion already attacked or not
-        if (minion != null && !GameRuleUtil.checkMinionAttacked(minion)) {
-          /* If no enemy minion has taunt and enemy Hero is target, 
-          then attacking is possible*/
-          if (!taunt(this.otherPlayer.getBoard()) && idTarget == -1) { 
-            int damage = minion.getDamage();
-            heroEnemy.receiveDamage(damage); //attacks the enemy Hero
-            minion.setAttacked(true);
-            lifesteal(hero, minion);
-            if (!GameRuleUtil.checkAlive(heroEnemy.getHealthPoints())) {
-              this.gameOver = true;
-            }
-            /* If no enemy minion has taunt, 
-            or target minion has taunt, attacking is possible*/
-          } else if (!taunt(this.otherPlayer.getBoard()) 
-              || this.otherPlayer.getBoard().get(idTarget).isTaunt()) { 
-            MinionCard victim = this.otherPlayer.getBoard().get(idTarget);
-            if (victim != null) {
-              minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
-              lifesteal(hero, minion);
-              victim.receiveDamage(minion.getDamage()); //attacks the minion
-              lifesteal(heroEnemy, victim);
+      if (this.otherPlayer.getUuid().equals(uuidTarget)) {
+        MinionCard minion = this.currentPlayer.getBoard().get(idAttack);
+        HeroCard hero = this.currentPlayer.getHero();
+        HeroCard heroEnemy = this.otherPlayer.getHero();
+        if (minion.getDamage() > 0) {
+          //Checks if the minion already attacked or not
+          if (minion != null && !GameRuleUtil.checkMinionAttacked(minion)) {
+            /* If no enemy minion has taunt and enemy Hero is target, 
+            then attacking is possible*/
+            if (!taunt(this.otherPlayer.getBoard()) && idTarget == -1) { 
+              int damage = minion.getDamage();
+              heroEnemy.receiveDamage(damage); //attacks the enemy Hero
               minion.setAttacked(true);
-              if (!GameRuleUtil.checkAlive(minion.getHealthPoints())) {
-                //removes attack buff from other minions if relevant
-                removeAttackAuraFromMinions(this.currentPlayer.getBoard(), minion);
-                this.currentPlayer.removeCardFromBoard(idAttack);
+              lifesteal(hero, minion);
+              if (!GameRuleUtil.checkAlive(heroEnemy.getHealthPoints())) {
+                this.gameOver = true;
               }
-              if (!GameRuleUtil.checkAlive(victim.getHealthPoints())) {
-                //removes attack buff from other minions if relevant
-                removeAttackAuraFromMinions(this.otherPlayer.getBoard(), victim);
-                this.otherPlayer.removeCardFromBoard(idTarget);
+              /* If no enemy minion has taunt, 
+              or target minion has taunt, attacking is possible*/
+            } else if (!taunt(this.otherPlayer.getBoard()) 
+                || this.otherPlayer.getBoard().get(idTarget).isTaunt()) { 
+              MinionCard victim = this.otherPlayer.getBoard().get(idTarget);
+              if (victim != null) {
+                minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
+                lifesteal(hero, minion);
+                victim.receiveDamage(minion.getDamage()); //attacks the minion
+                lifesteal(heroEnemy, victim);
+                minion.setAttacked(true);
+                if (!GameRuleUtil.checkAlive(minion.getHealthPoints())) {
+                  //removes attack buff from other minions if relevant
+                  removeAttackAuraFromMinions(this.currentPlayer.getBoard(), minion);
+                  this.currentPlayer.removeCardFromBoard(idAttack);
+                }
+                if (!GameRuleUtil.checkAlive(victim.getHealthPoints())) {
+                  //removes attack buff from other minions if relevant
+                  removeAttackAuraFromMinions(this.otherPlayer.getBoard(), victim);
+                  this.otherPlayer.removeCardFromBoard(idTarget);
+                }
+              } else {
+                throw new EngineException("Le serviteur que vous cherchez à attaquer n'existe pas !");
               }
             } else {
-              throw new EngineException("Le serviteur que vous cherchez à attaquer n'existe pas !");
+              throw new EngineException("Cible incorrecte, un serviteur adverse a provocation !");
             }
           } else {
-            throw new EngineException("Cible incorrecte, un serviteur adverse a provocation !");
+            throw new EngineException("Ce serviteur a déjà attaqué durant ce tour !");
           }
         } else {
-          throw new EngineException("Ce serviteur a déjà attaqué durant ce tour !");
+          throw new EngineException("Ce serviteur ne peut pas attaquer !");
         }
       } else {
-        throw new EngineException("Ce serviteur ne peut pas attaquer !");
+        throw new EngineException("Vous ne pouvez attaquer que l'adversaire !");
       }
     } else {
       throw new EngineException("Ce n'est pas votre tour !");
@@ -455,7 +460,6 @@ public class GameMethods {
     try {
       drawCard();
     } catch (EngineException e) {
-      System.out.println(e.getMessage());
     } finally {
       if (GameRuleUtil.checkManaTurn(player.getManaMaxTurn())) {
         player.setManaMaxTurn();

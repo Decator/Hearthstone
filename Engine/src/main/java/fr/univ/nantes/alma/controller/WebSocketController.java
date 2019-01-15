@@ -17,11 +17,18 @@ public class WebSocketController {
   @Autowired
   private SimpMessagingTemplate template;
 
+  /**
+   * Get the Heros. 
+   */
   @MessageMapping("/getHeros")
   public void getHeros() {
     this.template.convertAndSend("/heros", Application.engineBridge.getHeros());
   }
   
+  /**
+   * Create a Player with a username and a chosen Hero. 
+   * @param data the data from the user
+   */
   @MessageMapping("/createPlayer")
   public void createPlayer(String data) {
     String[] dataSplit = data.split("_");
@@ -29,6 +36,10 @@ public class WebSocketController {
         Application.engineBridge.createPlayer(Integer.parseInt(dataSplit[1]), dataSplit[0]));
   }
 
+  /**
+   * Create a Game or tell the Player to wait for another Player.
+   * @param uuidPlayer the id of the Player
+   */
   @MessageMapping("/createGame")
   public void createGame(String uuidPlayer) {
     GameMethods game = Application.engineBridge.createGame(UUID.fromString(uuidPlayer));
@@ -42,6 +53,11 @@ public class WebSocketController {
     }
   }
 
+  /**
+   * End the current turn with the data from the client containing the id of the game 
+   * and the id of the player ending the turn.
+   * @param data the data from the client
+   */
   @MessageMapping("/endTurn")
   public void endTurn(String data) {
     String[] dataSplit = data.split("_");
@@ -62,6 +78,10 @@ public class WebSocketController {
     }
   }
 
+  /**
+   * Play a card with the information sent by the client. 
+   * @param data the data from the client
+   */
   @MessageMapping("/playCard")
   public void playCard(String data) {
     String[] dataSplit = data.split("_");
@@ -80,6 +100,10 @@ public class WebSocketController {
     }
   }
 
+  /**
+   * Activate a Hero Power with the information sent by the client. 
+   * @param data the data from the client
+   */
   @MessageMapping("/heroPower")
   public void heroPower(String data) {
     String[] dataSplit = data.split("_");
@@ -98,6 +122,10 @@ public class WebSocketController {
     }
   }
 
+  /**
+   * Attack a card with the information sent by the client. 
+   * @param data the data from the client
+   */
   @MessageMapping("/attack")
   public void attack(String data) {
     String[] dataSplit = data.split("_");

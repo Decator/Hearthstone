@@ -44,7 +44,6 @@ export class GameComponent {
 		if (this.socketService.getIsRedirect()) {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
-				console.log(this.game);
 				if (this.game.gameOver) {
 					if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
 						if (this.game.currentPlayer.hero.healthPoints <= 0) {
@@ -102,7 +101,7 @@ export class GameComponent {
 	}
 
 	playCard(idCard: number, uuidPlayer: string, uuidTarget?: string, idTarget?: number) {
-		if (uuidTarget && idTarget) {
+		if (idTarget != null) {
 			this.socketService.playCard(this.game.idGame, uuidPlayer, idCard, uuidTarget, idTarget);
 		} else {
 			this.socketService.playCard(this.game.idGame, uuidPlayer, idCard, uuidPlayer, 0);
@@ -156,17 +155,9 @@ export class GameComponent {
 					this.waitingForPlayCardTarget = false;
 					this.waitingForAttackTarget = true;
 					this.waitingForHeroPowerTarget = false;
-		
-					console.log("ok");
+
 					this.idWaitingCard = idCard;
 					this.waitingCardSource = "board";
-					console.log(this.waitingCardSource);
-					console.log(this.idWaitingCard);
-					console.log(card);
-					console.log(this.player.board);
-					console.log(this.player.board.indexOf(card));
-					console.log(this.waitingCardSource == 'board' && this.idWaitingCard == this.player.board.indexOf(card));
-					console.log(idCard);
 		
 					this.showAllyMinions = false;
 					this.showEnemyMinions = true;

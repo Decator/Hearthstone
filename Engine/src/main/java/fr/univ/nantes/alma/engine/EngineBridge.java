@@ -36,41 +36,45 @@ public interface EngineBridge {
   /**
    * End the turn.
    * @param uuidGame the id of the game 
+   * @param uuidPlayer the uuid of the player who uses it
    * @return the game
    */
-  public GameMethods endTurn(UUID uuidGame);
+  public GameMethods endTurn(UUID uuidGame, UUID uuidPlayer) throws EngineException;
 
   /**
    * Play a card. Either put a minion card on the board or activate a spell card.
    * @param uuidGame the id of the game
+   * @param uuidPlayer the uuid of the player who uses it
    * @param idCard the id of the card
-   * @param uuidPlayer the player choose (for some spells)
+   * @param uuidTargetPlayer the player choose (for some spells)
    * @param idTarget the id of the target
    * @return the game
    * @throws EngineException a custom exception
    */
-  public GameMethods playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) 
+  public GameMethods playCard(UUID uuidGame, UUID player, int idCard, UUID uuidTargetPlayer, int idTarget) 
       throws EngineException;
 
   /**
    * Activate the hero's power.
    * @param uuidGame the id of the game
-   * @param uuidPlayer the chosen player (for some power)
+   * @param uuidPlayer the uuid of the player who uses it
+   * @param uuidTargetPlayer the chosen player (for some power)
    * @param idTarget the id of the target, if the power doesn't need a target then set idTarget to 1
    * @return the game
    * @throws EngineException a custom exception
    */
-  public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) throws EngineException;
+  public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, UUID uuidTargetPlayer, int idTarget) throws EngineException;
 
   /**
    * Attack a card or a hero.
    * @param uuidGame the id of the game
+   * @param uuidPlayer the uuid of the player who uses it
    * @param idAttack the id of the attacker
    * @param idTarget the id of the target
    * @return the game
    * @throws EngineException a custom exception
    */
-  public GameMethods attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException;
+  public GameMethods attack(UUID uuidGame, UUID uuidPlayer, int idAttack, int idTarget) throws EngineException;
   
   /**
    * Remove the game when it is finish.

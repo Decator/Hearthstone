@@ -14,7 +14,6 @@ export class GameComponent {
 	private game: Game;
 	private player: Player;
 	private otherPlayer: Player;
-	private gameOver: boolean;
 	private yourTurn: boolean = false;
 	private error: string;
 	private manaPoolArray = new Array(0);
@@ -95,26 +94,26 @@ export class GameComponent {
 		}
 	}
 
-	playCard(idCard: number, uuidTarget: string, idTarget?: number) {
-		if (idTarget) {
-			this.socketService.playCard(this.game.idGame, idCard, uuidTarget, idTarget);
+	playCard(idCard: number, uuidPlayer: string, uuidTarget?: string, idTarget?: number) {
+		if (uuidTarget && idTarget) {
+			this.socketService.playCard(this.game.idGame, uuidPlayer, idCard, uuidTarget, idTarget);
 		} else {
-			this.socketService.playCard(this.game.idGame, idCard, uuidTarget, 0);
+			this.socketService.playCard(this.game.idGame, uuidPlayer, idCard, uuidPlayer, 0);
 		}
 	}
 
-	attack(idCard: number, idTarget: number) {
-		this.socketService.attack(this.game.idGame, idCard, idTarget);
+	attack(idCard: number, uuidPlayer: string, idTarget: number) {
+		this.socketService.attack(this.game.idGame, uuidPlayer, idCard, idTarget);
 	}
 
-	heroPower(uuidTarget: string, idTarget: number) {
-		this.socketService.heroPower(this.game.idGame, uuidTarget, idTarget);
+	heroPower(uuidPlayer: string, uuidTarget: string, idTarget: number) {
+		this.socketService.heroPower(this.game.idGame, uuidPlayer, uuidTarget, idTarget);
 	}
 
 	onClickHand(idCard: number) {
 		const card = this.player.hand[idCard];
 
-		if (this.isSpell(card) && (card as Spell).target != undefined && (card as Spell).target.includes('1')) {
+		if (card.manaCost <= this.player.manaPool && this.isSpell(card) && (card as Spell).target != undefined && (card as Spell).target.includes('1')) {
 			const spell = (card as Spell);
 			const splitTarget = spell.target.split('_');
 
@@ -135,11 +134,11 @@ export class GameComponent {
 
 	onClickMinion(uuidTarget: string, idCard: number) {
 		if (this.waitingForPlayCardTarget) {
-			this.playCard(this.idWaitingCard, uuidTarget, idCard);
+			this.playCard(this.idWaitingCard, this.player.uuid, uuidTarget, idCard);
 		} else if (this.waitingForAttackTarget) {
-			this.attack(this.idWaitingCard, idCard);
+			this.attack(this.idWaitingCard, this.player.uuid, idCard);
 		} else if (this.waitingForHeroPowerTarget) {
-			this.heroPower(uuidTarget, idCard);
+			this.heroPower(this.player.uuid, uuidTarget, idCard);
 		} else {
 			this.showHand = true;
 			this.showAllyHeroPower = true;
@@ -167,14 +166,11 @@ export class GameComponent {
 
 	onClickHero(uuidTarget: string) {
 		if (this.waitingForPlayCardTarget) {
-			this.playCard(this.idWaitingCard, uuidTarget, -1);
+			this.playCard(this.idWaitingCard, this.player.uuid, uuidTarget, -1);
 		} else if (this.waitingForAttackTarget) {
-			this.attack(this.idWaitingCard, -1);
+			this.attack(this.idWaitingCard, this.player.uuid, -1);
 		} else if (this.waitingForHeroPowerTarget) {
-			this.heroPower(uuidTarget, -1);
-		}
-		if (this.gameOver) {
-			this.router.navigate(['/end']);
+			this.heroPower(this.player.uuid, uuidTarget, -1);
 		}
 	}
 
@@ -192,12 +188,12 @@ export class GameComponent {
 
 			this.showTargets(splitTarget);
 		} else {
-			this.socketService.heroPower(this.game.idGame, this.otherPlayer.uuid, 1);
+			this.socketService.heroPower(this.game.idGame, this.player.uuid, this.otherPlayer.uuid, 1);
 		}
 	}
 
 	endTurn() {
-		this.socketService.endTurn(this.game.idGame);
+		this.socketService.endTurn(this.game.idGame, this.player.uuid);
 	}
 
 	resetBooleans() {

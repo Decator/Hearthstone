@@ -115,43 +115,49 @@ public class GameMethods {
   
   /**
    * Play the card with the specified id.
+   * @param uuidPlayer the uuid of the player who uses it
    * @param idCard the id of the card the player wants to play
    * @param targetPlayer the player that might be the target of the played card
    * @param idTarget the id of the target
    * @throws EngineException custom exception
    */
-  void playCard(int idCard, Player targetPlayer, int idTarget) throws EngineException  {
-    AbstractCard card = null; // Create the card according to the id given on parameters
-    HeroCard hero = this.currentPlayer.getHero();
-    if (idCard >= 0 && idCard < this.currentPlayer.getHand().size()) {
-      card = this.currentPlayer.getHand().get(idCard);
-      // If the player has enough mana, play the card
-      if (GameRuleUtil.checkManaPool(this.currentPlayer.getManaPool(), card.getManaCost())) { 
-        if (card instanceof MinionCard) { // If it's a Minion
-          summonMinionFromHand(idCard);
-        } else if (card instanceof SpellCard) {
-          this.currentPlayer.removeCardFromHand(idCard);
-          SpellCard spell = (SpellCard) card;
-          spellDrawingEffect(spell);
-          spellArmorBuffing(hero, spell);
-          spellSummoningEffect(spell);
-          spellAttackBuffingEffect(targetPlayer, idTarget, spell);
-          spellPolymorphingEffect(targetPlayer, idTarget, spell);
-          spellDamageEffect(targetPlayer, idTarget, spell);
-        } else {
-          throw new EngineException("Ceci n'est pas une carte valide !");
-        }
-        // Decrements manaCost from player's manaPool
-        this.currentPlayer.setManaPoolAfterPlay(card.getManaCost()); 
-      } else {
-        throw new EngineException("Vous n'avez pas assez de mana !");
-      }
-    } else {
-      throw new EngineException("Votre carte est inexistante !");
-    }
+  void playCard(UUID uuidPlayer, int idCard, Player targetPlayer, int idTarget) throws EngineException  {
+	if(this.currentPlayer.getUuid().equals(uuidPlayer)) {
+		AbstractCard card = null; // Create the card according to the id given on parameters
+	    HeroCard hero = this.currentPlayer.getHero();
+	    if (idCard >= 0 && idCard < this.currentPlayer.getHand().size()) {
+	      card = this.currentPlayer.getHand().get(idCard);
+	      // If the player has enough mana, play the card
+	      if (GameRuleUtil.checkManaPool(this.currentPlayer.getManaPool(), card.getManaCost())) { 
+	        if (card instanceof MinionCard) { // If it's a Minion
+	          summonMinionFromHand(idCard);
+	        } else if (card instanceof SpellCard) {
+	          this.currentPlayer.removeCardFromHand(idCard);
+	          SpellCard spell = (SpellCard) card;
+	          spellDrawingEffect(spell);
+	          spellArmorBuffing(hero, spell);
+	          spellSummoningEffect(spell);
+	          spellAttackBuffingEffect(targetPlayer, idTarget, spell);
+	          spellPolymorphingEffect(targetPlayer, idTarget, spell);
+	          spellDamageEffect(targetPlayer, idTarget, spell);
+	        } else {
+	          throw new EngineException("Ceci n'est pas une carte valide !");
+	        }
+	        // Decrements manaCost from player's manaPool
+	        this.currentPlayer.setManaPoolAfterPlay(card.getManaCost()); 
+	      } else {
+	        throw new EngineException("Vous n'avez pas assez de mana !");
+	      }
+	    } else {
+	      throw new EngineException("Votre carte est inexistante !");
+	    }
+	} else {
+		throw new EngineException("Ce n'est pas votre tour !");
+	}
   }
 
-  /** Summons a minion from the nad of the player onto the board.
+  /**
+   * Summons a minion from the nad of the player onto the board.
    * @param idCard Hand index of the minion to summon
    * @throws EngineException custom exception
    */
@@ -171,7 +177,8 @@ public class GameMethods {
     }
   }
 
-  /** Deals damage to targets depending on the spell.
+  /**
+   * Deals damage to targets depending on the spell.
    * @param targetPlayer player targeted by the spell
    * @param idTarget board in dex of the target of the spell
    * @param spell spell being cast
@@ -209,7 +216,8 @@ public class GameMethods {
     }
   }
 
-  /** Polymorphs a specific minion.
+  /**
+   * Polymorphs a specific minion.
    * @param targetPlayer player controlling the minion being polymorphed
    * @param idTarget board index of the minion being polymorphed
    * @param spell spell being cast
@@ -236,7 +244,8 @@ public class GameMethods {
     }
   }
 
-  /** Buffs the attack of a minion according to the spell.
+  /**
+   * Buffs the attack of a minion according to the spell.
    * @param targetPlayer player controlling the minion
    * @param idTarget board index of the minion
    * @param spell the spell that is cast
@@ -254,7 +263,8 @@ public class GameMethods {
     }
   }
 
-  /** Summons minions according to the spell.
+  /**
+   * Summons minions according to the spell.
    * @param spell the spell that is cast
    * @throws EngineException custom exception
    */
@@ -266,7 +276,8 @@ public class GameMethods {
     }
   }
 
-  /** Draws card according to the spell.
+  /**
+   * Draws card according to the spell.
    * @param spell the spell that is cast
    * @throws EngineException custom exception
    */
@@ -278,7 +289,8 @@ public class GameMethods {
     }
   }
 
-  /** Gives armorPoints to the hero using the spell.
+  /**
+   * Gives armorPoints to the hero using the spell.
    * @param hero the hero using the spell.
    * @param spell the spell being used.
    */
@@ -290,48 +302,53 @@ public class GameMethods {
   
   /**
    * Triggers the hero power of the current player based on its class.
+   * @param uuidPlayer the uuid of the player who uses it
    * @param playerTarget the player that might be the target of the hero power
    * @param idTarget the specific target of the hero power
    * @throws EngineException custom exception
    */
-  void heroPower(Player playerTarget, int idTarget) throws EngineException {
-    HeroCard heroCurrentPlayer = this.currentPlayer.getHero();
-    
-    // If the hero has already used his power
-    if (!heroCurrentPlayer.isHeroPowerUsed()) { 
-      if (GameRuleUtil.checkManaPool(this.currentPlayer.getManaPool(), 
-          GameRuleUtil.MANA_HERO_POWER)) {
-        switch (heroCurrentPlayer.getType()) {
-          case "warrior":
-            heroCurrentPlayer.setArmorPoints(heroCurrentPlayer.getArmorPoints() 
-                + heroCurrentPlayer.getArmorBuff());
-            heroCurrentPlayer.setHeroPowerUsed(true);
-            this.currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
-            break;
-          case "mage":
-            mageHeroPower(playerTarget, idTarget, heroCurrentPlayer);
-            heroCurrentPlayer.setHeroPowerUsed(true);
-            this.currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
-            break;
-          case "paladin":
-            summonMinion(currentPlayer, heroCurrentPlayer.getIdInvocation());
-            heroCurrentPlayer.setHeroPowerUsed(true);
-            currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
-            break;
-          default :
-            heroCurrentPlayer.setHeroPowerUsed(true);
-            currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
-            throw new EngineException("Impossible de récupérer la classe du héros !");
-        }
-      } else {
-        throw new EngineException("Vous n'avez pas assez de mana !");
-      }
-    } else {
-      throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !");
-    }
+  void heroPower(UUID uuidPlayer, Player playerTarget, int idTarget) throws EngineException {
+	  if(this.currentPlayer.getUuid().equals(uuidPlayer)) {
+		HeroCard heroCurrentPlayer = this.currentPlayer.getHero();
+	    // If the hero has already used his power
+	    if (!heroCurrentPlayer.isHeroPowerUsed()) { 
+	      if (GameRuleUtil.checkManaPool(this.currentPlayer.getManaPool(), 
+	          GameRuleUtil.MANA_HERO_POWER)) {
+	        switch (heroCurrentPlayer.getType()) {
+	          case "warrior":
+	            heroCurrentPlayer.setArmorPoints(heroCurrentPlayer.getArmorPoints() 
+	                + heroCurrentPlayer.getArmorBuff());
+	            heroCurrentPlayer.setHeroPowerUsed(true);
+	            this.currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
+	            break;
+	          case "mage":
+	            mageHeroPower(playerTarget, idTarget, heroCurrentPlayer);
+	            heroCurrentPlayer.setHeroPowerUsed(true);
+	            this.currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
+	            break;
+	          case "paladin":
+	            summonMinion(currentPlayer, heroCurrentPlayer.getIdInvocation());
+	            heroCurrentPlayer.setHeroPowerUsed(true);
+	            currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
+	            break;
+	          default :
+	            heroCurrentPlayer.setHeroPowerUsed(true);
+	            currentPlayer.setManaPoolAfterPlay(GameRuleUtil.MANA_HERO_POWER);
+	            throw new EngineException("Impossible de récupérer la classe du héros !");
+	        }
+	      } else {
+	        throw new EngineException("Vous n'avez pas assez de mana !");
+	      }
+	    } else {
+	      throw new EngineException("Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !");
+	    }
+	  } else {
+		  throw new EngineException("Ce n'est pas votre tour !");
+	 }
   }
 
-  /** Activates the hero power of the mage, thus dealing some damage to a target.
+  /**
+   * Activates the hero power of the mage, thus dealing some damage to a target.
    * @param playerTarget player target of the hero power
    * @param idTarget board index of the actual target of the hero power
    * @param heroCurrentPlayer hero of the player using the hero power
@@ -364,61 +381,66 @@ public class GameMethods {
   
   /**
    * Attacks a target with an attacker given in parameter.
+   * @param uuidPlayer the uuid of the player who uses it
    * @param idAttack the id of the attacker
    * @param idTarget the id of the target
    * @throws EngineException custom exception
    */
-  void attack(int idAttack, int idTarget) throws EngineException {
-    MinionCard minion = this.currentPlayer.getBoard().get(idAttack);
-    HeroCard hero = this.currentPlayer.getHero();
-    HeroCard heroEnemy = this.otherPlayer.getHero();
-    
-    if (minion.getDamage() > 0) {
-      //Checks if the minion already attacked or not
-      if (minion != null && !GameRuleUtil.checkMinionAttacked(minion)) {
-        /* If no enemy minion has taunt and enemy Hero is target, 
-        then attacking is possible*/
-        if (!taunt(this.otherPlayer.getBoard()) && idTarget == -1) { 
-          int damage = minion.getDamage();
-          heroEnemy.receiveDamage(damage); //attacks the enemy Hero
-          minion.setAttacked(true);
-          lifesteal(hero, minion);
-          if (!GameRuleUtil.checkAlive(heroEnemy.getHealthPoints())) {
-            this.gameOver = true;
-          }
-          /* If no enemy minion has taunt, 
-          or target minion has taunt, attacking is possible*/
-        } else if (!taunt(this.otherPlayer.getBoard()) 
-            || this.otherPlayer.getBoard().get(idTarget).isTaunt()) { 
-          MinionCard victim = this.otherPlayer.getBoard().get(idTarget);
-          if (victim != null) {
-            minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
-            lifesteal(hero, minion);
-            victim.receiveDamage(minion.getDamage()); //attacks the minion
-            lifesteal(heroEnemy, victim);
-            minion.setAttacked(true);
-            if (!GameRuleUtil.checkAlive(minion.getHealthPoints())) {
-              //removes attack buff from other minions if relevant
-              removeAttackAuraFromMinions(this.currentPlayer.getBoard(), minion);
-              this.currentPlayer.removeCardFromBoard(idAttack);
-            }
-            if (!GameRuleUtil.checkAlive(victim.getHealthPoints())) {
-              //removes attack buff from other minions if relevant
-              removeAttackAuraFromMinions(this.otherPlayer.getBoard(), victim);
-              this.otherPlayer.removeCardFromBoard(idTarget);
-            }
-          } else {
-            throw new EngineException("Le serviteur que vous cherchez à attaquer n'existe pas !");
-          }
-        } else {
-          throw new EngineException("Cible incorrecte, un serviteur adverse a provocation !");
-        }
-      } else {
-        throw new EngineException("Ce serviteur a déjà attaqué durant ce tour !");
-      }
-    } else {
-      throw new EngineException("Ce serviteur ne peut pas attaquer !");
-    }
+  void attack(UUID uuidPlayer, int idAttack, int idTarget) throws EngineException {
+	if(this.currentPlayer.getUuid().equals(uuidPlayer)) {
+		MinionCard minion = this.currentPlayer.getBoard().get(idAttack);
+	    HeroCard hero = this.currentPlayer.getHero();
+	    HeroCard heroEnemy = this.otherPlayer.getHero();
+	    
+	    if (minion.getDamage() > 0) {
+	      //Checks if the minion already attacked or not
+	      if (minion != null && !GameRuleUtil.checkMinionAttacked(minion)) {
+	        /* If no enemy minion has taunt and enemy Hero is target, 
+	        then attacking is possible*/
+	        if (!taunt(this.otherPlayer.getBoard()) && idTarget == -1) { 
+	          int damage = minion.getDamage();
+	          heroEnemy.receiveDamage(damage); //attacks the enemy Hero
+	          minion.setAttacked(true);
+	          lifesteal(hero, minion);
+	          if (!GameRuleUtil.checkAlive(heroEnemy.getHealthPoints())) {
+	            this.gameOver = true;
+	          }
+	          /* If no enemy minion has taunt, 
+	          or target minion has taunt, attacking is possible*/
+	        } else if (!taunt(this.otherPlayer.getBoard()) 
+	            || this.otherPlayer.getBoard().get(idTarget).isTaunt()) { 
+	          MinionCard victim = this.otherPlayer.getBoard().get(idTarget);
+	          if (victim != null) {
+	            minion.receiveDamage(victim.getDamage()); // minion takes victim's damage
+	            lifesteal(hero, minion);
+	            victim.receiveDamage(minion.getDamage()); //attacks the minion
+	            lifesteal(heroEnemy, victim);
+	            minion.setAttacked(true);
+	            if (!GameRuleUtil.checkAlive(minion.getHealthPoints())) {
+	              //removes attack buff from other minions if relevant
+	              removeAttackAuraFromMinions(this.currentPlayer.getBoard(), minion);
+	              this.currentPlayer.removeCardFromBoard(idAttack);
+	            }
+	            if (!GameRuleUtil.checkAlive(victim.getHealthPoints())) {
+	              //removes attack buff from other minions if relevant
+	              removeAttackAuraFromMinions(this.otherPlayer.getBoard(), victim);
+	              this.otherPlayer.removeCardFromBoard(idTarget);
+	            }
+	          } else {
+	            throw new EngineException("Le serviteur que vous cherchez à attaquer n'existe pas !");
+	          }
+	        } else {
+	          throw new EngineException("Cible incorrecte, un serviteur adverse a provocation !");
+	        }
+	      } else {
+	        throw new EngineException("Ce serviteur a déjà attaqué durant ce tour !");
+	      }
+	    } else {
+	      throw new EngineException("Ce serviteur ne peut pas attaquer !");
+	    }
+	} else {
+		throw new EngineException("Ce n'est pas votre tour !");
+	 }
   }
   
   /**
@@ -446,12 +468,18 @@ public class GameMethods {
   
   /**
    * End the turn of the current player and switches to the other player.
+   * @param uuidPlayer the uuid of the player who uses it
+   * @throws EngineException 
    */
-  void endTurn() {
-    Player tmp = this.currentPlayer;
-    this.currentPlayer = this.otherPlayer;
-    this.otherPlayer = tmp;
-    initTurn();
+  void endTurn(UUID uuidPlayer) throws EngineException {
+	if(this.currentPlayer.getUuid().equals(uuidPlayer)) {
+	    Player tmp = this.currentPlayer;
+	    this.currentPlayer = this.otherPlayer;
+	    this.otherPlayer = tmp;
+	    initTurn();
+	} else {
+		throw new EngineException("Ce n'est pas votre tour !");
+	}
   }
   
   /**

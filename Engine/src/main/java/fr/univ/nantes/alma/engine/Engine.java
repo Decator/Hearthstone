@@ -7,6 +7,9 @@ import java.util.Vector;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import fr.univ.nantes.alma.engine.EngineException;
+import fr.univ.nantes.alma.engine.GameMethods;
+
 /**
  * The game engine performing the Game Methods.
  * 
@@ -93,53 +96,53 @@ public class Engine implements EngineBridge {
     return game;
   }
 
-  @Override
-  public GameMethods endTurn(UUID uuidGame) {
-    this.games.get(uuidGame).endTurn();
-    return this.games.get(uuidGame);
-  }
+	@Override
+	public GameMethods endTurn(UUID uuidGame, UUID uuidPlayer) throws EngineException {
+		try {
+			this.games.get(uuidGame).endTurn(uuidPlayer);
+		} catch (EngineException e) {
+			throw e;
+		}
+		return this.games.get(uuidGame);
+	}
 
-  @Override
-  public GameMethods playCard(UUID uuidGame, int idCard, UUID uuidPlayer, int idTarget) 
-      throws EngineException {
-    try {
-      if (this.games.get(uuidGame).getOtherPlayer().getUuid().equals(uuidPlayer)) {
-        this.games.get(uuidGame).playCard(idCard, this.games.get(uuidGame).getOtherPlayer(), 
-            idTarget);
-      } else {
-        this.games.get(uuidGame).playCard(idCard, this.games.get(uuidGame).getCurrentPlayer(), 
-            idTarget);
-      }
-    } catch (EngineException e) {
-      throw e;
-    }
-    return games.get(uuidGame);
-  }
+	@Override
+	public GameMethods playCard(UUID uuidGame, UUID uuidPlayer, int idCard, UUID uuidTargetPlayer, int idTarget) throws EngineException {
+		try {
+			if (this.games.get(uuidGame).getOtherPlayer().getUuid().equals(uuidTargetPlayer)) {
+				this.games.get(uuidGame).playCard(uuidPlayer,idCard, this.games.get(uuidGame).getOtherPlayer(), idTarget);
+			} else {
+				this.games.get(uuidGame).playCard(uuidPlayer, idCard, this.games.get(uuidGame).getCurrentPlayer(), idTarget);
+			}
+		} catch (EngineException e) {
+			throw e;
+		}
+		return games.get(uuidGame);
+	}
 
-  @Override
-  public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, int idTarget) 
-      throws EngineException {
-    try {
-      if (this.games.get(uuidGame).getCurrentPlayer().getUuid().equals(uuidPlayer)) {
-        this.games.get(uuidGame).heroPower(this.games.get(uuidGame).getCurrentPlayer(), idTarget);
-      } else {
-        this.games.get(uuidGame).heroPower(this.games.get(uuidGame).getOtherPlayer(), idTarget);
-      }
-    } catch (EngineException e) {
-      throw e;
-    }
-    return this.games.get(uuidGame);
-  }
+	@Override
+	public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, UUID uuidTargetPlayer, int idTarget) throws EngineException {
+		try {
+			if (this.games.get(uuidGame).getCurrentPlayer().getUuid().equals(uuidTargetPlayer)) {
+				this.games.get(uuidGame).heroPower(uuidPlayer, this.games.get(uuidGame).getCurrentPlayer(), idTarget);
+			} else {
+				this.games.get(uuidGame).heroPower(uuidPlayer, this.games.get(uuidGame).getOtherPlayer(), idTarget);
+			}
+		} catch (EngineException e) {
+			throw e;
+		}
+		return this.games.get(uuidGame);
+	}
 
-  @Override
-  public GameMethods attack(UUID uuidGame, int idAttack, int idTarget) throws EngineException {
-    try {
-      this.games.get(uuidGame).attack(idAttack, idTarget);
-    } catch (EngineException e) {
-      throw e;
-    }
-    return this.games.get(uuidGame);
-  }
+	@Override
+	public GameMethods attack(UUID uuidGame, UUID uuidPlayer, int idAttack, int idTarget) throws EngineException {
+		try {
+			this.games.get(uuidGame).attack(uuidPlayer, idAttack, idTarget);
+		} catch (EngineException e) {
+			throw e;
+		}
+		return this.games.get(uuidGame);
+	}
 
   @Override
   public void endGame(UUID uuidGame, UUID uuidPlayer1, UUID uuidPlayer2) {

@@ -61,7 +61,7 @@
 
             <div class="power"> 
                 <input type="image" src="assets/img/{{player.hero.id}}_PH_Min.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': (yourTurn && showAllyHeroPower && !player.hero.heroPowerUsed &&
-                    player.manaPool >= 2)}" [disabled]="!(yourTurn && showAllyHeroPower)" (click)="onClickHeroPower()">
+                    player.manaPool >= 2)}" (click)="onClickHeroPower()">
             </div>
 
             <div class="mana">

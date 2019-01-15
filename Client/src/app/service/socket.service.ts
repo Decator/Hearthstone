@@ -135,20 +135,20 @@ export class SocketService {
     this.stompClient.send("/app/createGame", {}, this.player.uuid);
   }
 
-  playCard(uuidGame: String, idCard: number, uuidPlayer: string, idTarget: number) {
-    this.stompClient.send("/app/playCard", {}, `${uuidGame}_${idCard}_${uuidPlayer}_${idTarget}`);
+  playCard(uuidGame: String, uuidPlayer: string, idCard: number, uuidTargetPlayer: string, idTarget: number) {
+    this.stompClient.send("/app/playCard", {}, `${uuidGame}_${uuidPlayer}_${idCard}_${uuidTargetPlayer}_${idTarget}`);
   }
 
-  attack(uuidGame: string, idCard: number, idTarget: number) {
-    this.stompClient.send("/app/attack", {}, `${uuidGame}_${idCard}_${idTarget}`);
+  attack(uuidGame: string, uuidPlayer: string, idCard: number, idTarget: number) {
+    this.stompClient.send("/app/attack", {}, `${uuidGame}_${uuidPlayer}_${idCard}_${idTarget}`);
   }
 
-  endTurn(uuidGame: String) {
-    this.stompClient.send("/app/endTurn", {}, `${uuidGame}`);
+  endTurn(uuidGame: String, uuidPlayer: string) {
+    this.stompClient.send("/app/endTurn", {}, `${uuidGame}_${uuidPlayer}`);
   }
 
-  heroPower(uuidGame: String, uuidPlayer: string, idTarget: number) {
-    this.stompClient.send("/app/heroPower", {}, `${uuidGame}_${uuidPlayer}_${idTarget}`);
+  heroPower(uuidGame: String, uuidPlayer: string, uuidTargetPlayer: string, idTarget: number) {
+    this.stompClient.send("/app/heroPower", {}, `${uuidGame}_${uuidPlayer}_${uuidTargetPlayer}_${idTarget}`);
   }
 
   endGame() {

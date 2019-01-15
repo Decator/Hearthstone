@@ -25,9 +25,9 @@ export class CardComponent {
     constructor(){}
 
     onClick() {
-        if(!this.disabled){
+        // if(!this.disabled){
             this.clicked.emit("clicked");
-        }
+        // }
     }
 
     mouseEnter() {

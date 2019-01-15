@@ -114,7 +114,7 @@ export class GameComponent {
 	onClickHand(idCard: number) {
 		const card = this.player.hand[idCard];
 
-		if (card.manaCost <= this.player.manaPool && this.isSpell(card) && (card as Spell).target != undefined && (card as Spell).target.includes('1')) {
+		if (this.yourTurn && card.manaCost <= this.player.manaPool && this.isSpell(card) && (card as Spell).target != undefined && (card as Spell).target.includes('1')) {
 			const spell = (card as Spell);
 			const splitTarget = spell.target.split('_');
 
@@ -141,25 +141,31 @@ export class GameComponent {
 		} else if (this.waitingForHeroPowerTarget) {
 			this.heroPower(this.player.uuid, uuidTarget, idCard);
 		} else {
-			this.showHand = true;
-			this.showAllyHeroPower = true;
-
-			this.waitingForPlayCardTarget = false;
-			this.waitingForAttackTarget = true;
-			this.waitingForHeroPowerTarget = false;
-
-			this.idWaitingCard = idCard;
-
-			this.showAllyMinions = false;
-			this.showEnemyMinions = true;
-			this.showAllyHero = false;
-			this.showEnemyHero = true;
-
-			this.showOnlyTaunt = false;
-			for (const card of this.otherPlayer.board) {
-				if (card.taunt) {
-					this.showOnlyTaunt = true;
-					break;
+			if(uuidTarget == this.player.uuid){
+				if(this.player.board[idCard].damage > 0 && !this.player.board[idCard].attacked){
+					this.showHand = true;
+					this.showAllyHeroPower = true;
+		
+					this.waitingForPlayCardTarget = false;
+					this.waitingForAttackTarget = true;
+					this.waitingForHeroPowerTarget = false;
+		
+					this.idWaitingCard = idCard;
+		
+					this.showAllyMinions = false;
+					this.showEnemyMinions = true;
+					this.showAllyHero = false;
+					this.showEnemyHero = true;
+		
+					this.showOnlyTaunt = false;
+					for (const card of this.otherPlayer.board) {
+						if (card.taunt) {
+							this.showOnlyTaunt = true;
+							break;
+						}
+					}
+				} else {
+					this.attack(idCard, this.player.uuid, 1);
 				}
 			}
 		}

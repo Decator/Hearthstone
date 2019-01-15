@@ -43,7 +43,6 @@ export class GameComponent {
 		if (this.socketService.getIsRedirect()) {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
-				console.log(this.game);
 				if (this.game.gameOver) {
 					this.socketService.endGame();
 					if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
@@ -77,7 +76,7 @@ export class GameComponent {
 				if (this.game) {
 					if(this.error != ""){
 						this.snackBar.open(this.error, '', {
-							duration: 2000,
+							duration: 2000
 						});
 					}
 					this.resetBooleans();

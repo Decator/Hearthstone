@@ -152,7 +152,6 @@ export class SocketService {
   }
 
   endGame() {
-    this.stompClient.send("/app/endGame", {}, `${this.game.idGame}_${this.game.currentPlayer.uuid}_${this.game.otherPlayer.uuid}`);
     this.initService();
   }
 

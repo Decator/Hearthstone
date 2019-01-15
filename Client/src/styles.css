@@ -13,3 +13,7 @@ body, html {
     font-weight: normal;
     font-style:normal;
 }
+
+.mat-snack-bar-container {
+    min-width: 0px !important;
+}

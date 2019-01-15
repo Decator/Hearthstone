@@ -38,7 +38,7 @@
             </div>
     
             <div class="advBoard">
-                <card-component *ngFor="let card of otherPlayer.board" [card]="card" [player]="player" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
+                <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
                     type="enemy" (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
             </div>
         </div>
@@ -46,13 +46,13 @@
         <!-- ---------------------------- CurrentPlayer side ---------------------------- -->
         <div>
             <div class="board">
-                <card-component *ngFor="let card of player.board" [card]="card" [player]="player" [disabled]="!(yourTurn && showAllyMinions && ((!card.attacked && card.damage != 0) || waitingForPlayCardTarget ||
+                <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && ((!card.attacked && card.damage != 0) || waitingForPlayCardTarget ||
                     waitingForAttackTarget || waitingForHeroPowerTarget))" type="ally" (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
             </div>
 
             <div class="hand">
-                <card-component *ngFor="let card of player.hand" [card]="card" [player]="player" (clicked)="onClickHand(player.hand.indexOf(card))" type="ally"
-                    [disabled]="!(yourTurn && showHand)"></card-component>
+                <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))" type="ally"
+                    [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
             </div>
 
             <div class="imghero">

@@ -19,8 +19,6 @@ export class HeroCardComponent {
     }
 
     onClick() {
-        // if (!this.disabled) {
-            this.clicked.emit('clicked');
-        // }
+        this.clicked.emit('clicked');
     }
 }

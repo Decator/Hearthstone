@@ -15,7 +15,6 @@ export class CardComponent {
     @Input() card: Minion;
     @Input() disabled: boolean;
     @Input() type: string;
-    @Input() player: Player;
 
     @Output() clicked = new EventEmitter();
 
@@ -25,9 +24,7 @@ export class CardComponent {
     constructor(){}
 
     onClick() {
-        // if(!this.disabled){
-            this.clicked.emit("clicked");
-        // }
+        this.clicked.emit("clicked");
     }
 
     mouseEnter() {

@@ -43,6 +43,7 @@ export class GameComponent {
 		if (this.socketService.getIsRedirect()) {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
+				console.log(this.game);
 				if (this.game.gameOver) {
 					this.socketService.endGame();
 					if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
@@ -175,7 +176,7 @@ export class GameComponent {
 	}
 
 	onClickHeroPower() {
-		if(this.player.manaPool >= 2 && this.player.hero.target && this.player.hero.target.includes('1')) {
+		if(this.player.manaPool >= 2 && !this.player.hero.heroPowerUsed && this.player.hero.target && this.player.hero.target.includes('1')) {
 			const splitTarget = this.player.hero.target.split('_');
 
 			this.showHand = true;

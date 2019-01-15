@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: Mini_Hearthstone
+Implementation-Version: 0.0.1
+Built-By: arsma
+Implementation-Vendor-Id: fr.univ_nantes.alma
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/Mini_Hearthstone
+Created-By: Maven Integration for Eclipse
+

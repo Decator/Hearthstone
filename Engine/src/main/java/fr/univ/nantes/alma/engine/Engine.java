@@ -195,7 +195,7 @@ public class Engine implements EngineBridge {
 
   /**
    * Get the hero.
-   * 
+   * @param hero id of the hero
    * @return the hero
    */
   public HeroCard retrieveHero(int hero) {

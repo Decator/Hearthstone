@@ -38,6 +38,7 @@ public interface EngineBridge {
    * @param uuidGame the id of the game 
    * @param uuidPlayer the uuid of the player who uses it
    * @return the game
+   * @throws EngineException custom exception
    */
   public GameMethods endTurn(UUID uuidGame, UUID uuidPlayer) throws EngineException;
 

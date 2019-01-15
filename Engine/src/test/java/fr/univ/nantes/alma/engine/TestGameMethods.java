@@ -883,12 +883,18 @@ public class TestGameMethods {
     "minion_1_ally, 0, '0_0', 0", "all_all_enemy, 0, '1_1,1_0,1', 0",
     "all_all_ally, 0, '0_1,0_0,0', 0", "all_all_all, 0, '0_1,0_0,1_1,1_0,0,1', 0",
     "all_1_enemy, -1, '1', 0", "all_1_enemy, 0, '1_0', 0", "all_1_ally, -1, '0', 0",
-    "all_1_ally, 0, '0_0', 0"})
+    "all_1_ally, 0, '0_0', 0", "minion_1_all, 0, '0_0', 0", "minion_1_all, 0, '1_0', 1",
+    "all_1_all, -1, '0', 0", "all_1_all, 0, '0_0', 0", "all_1_all, -1, '1', 1",
+    "all_1_all, 0, '1_0', 1"})
   public void testTargetsFromTargetString(String spellTarget, int idTarget, 
       String keys, int playerChosen) {
     spell1.setTarget(spellTarget);
+    UUID uuid = UUID.randomUUID();
     player1.setHero(hero1);
+    player1.setUuid(uuid);
+    UUID uuid2 = UUID.randomUUID();
     player2.setHero(hero2);
+    player2.setUuid(uuid2);
     MinionCard minion00 = new MinionCard();
     MinionCard minion01 = new MinionCard();
     board.add(minion00);
@@ -903,7 +909,11 @@ public class TestGameMethods {
     gameMethods.setCurrentPlayer(player1);
     gameMethods.setOtherPlayer(player2);
     LinkedHashMap<String, AbstractCard> result = new LinkedHashMap<String, AbstractCard>();
-    result = gameMethods.targetsFromTargetString(player1, player2, player1, idTarget, spellTarget);
+    if (playerChosen == 0) {
+      result = gameMethods.targetsFromTargetString(player1, player2, player1, idTarget, spellTarget);
+    } else if (playerChosen == 1) {
+      result = gameMethods.targetsFromTargetString(player1, player2, player2, idTarget, spellTarget);
+    }
     String[] keysArray = keys.split(",");
     List<String> keysList = new ArrayList<String>();
     keysList = Arrays.asList(keysArray);

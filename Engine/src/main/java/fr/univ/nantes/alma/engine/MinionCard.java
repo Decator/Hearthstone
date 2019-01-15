@@ -152,8 +152,9 @@ public class MinionCard extends AbstractCard {
 
   @Override
   public String toString() {
-    return "MinionCard [healthPoints=" + healthPoints + ", taunt=" + taunt + ", lifesteal=" + lifesteal + ", charge="
-        + charge + ", attackBuffAura=" + attackBuffAura + ", attacked=" + attacked + "]";
+    return "MinionCard [healthPoints=" + healthPoints + ", taunt=" + taunt + ", lifesteal=" 
+        + lifesteal + ", charge=" + charge + ", attackBuffAura=" + attackBuffAura 
+        + ", attacked=" + attacked + "]";
   }
 
   @Override
@@ -171,25 +172,34 @@ public class MinionCard extends AbstractCard {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (!super.equals(obj))
+    }
+    if (!super.equals(obj)) {
       return false;
-    if (!(obj instanceof MinionCard))
+    }
+    if (!(obj instanceof MinionCard)) {
       return false;
+    }
     MinionCard other = (MinionCard) obj;
-    if (attackBuffAura != other.attackBuffAura)
+    if (attackBuffAura != other.attackBuffAura) {
       return false;
-    if (attacked != other.attacked)
+    }
+    if (attacked != other.attacked) {
       return false;
-    if (charge != other.charge)
+    }
+    if (charge != other.charge) {
       return false;
-    if (healthPoints != other.healthPoints)
+    }
+    if (healthPoints != other.healthPoints) {
       return false;
-    if (lifesteal != other.lifesteal)
+    }
+    if (lifesteal != other.lifesteal) {
       return false;
-    if (taunt != other.taunt)
+    }
+    if (taunt != other.taunt) {
       return false;
+    }
     return true;
   }
   

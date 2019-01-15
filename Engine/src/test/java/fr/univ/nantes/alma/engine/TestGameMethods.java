@@ -12,13 +12,13 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.UUID;
 import java.util.Vector;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 public class TestGameMethods {
   GameMethods gameMethods = spy(new GameMethods());
@@ -268,19 +268,331 @@ public class TestGameMethods {
     assertThat(attackEnd).isEqualTo(hero1.getDamage());
   }
   
-  /*@ParameterizedTest
-  @CsvSource({"true, 0, 0, 1"})
-  public void testSpellPolymorphingEffectCurrentPlayer(boolean polymorph, String targetKey1, String targetKey2, int nbCallPolymorph) throws EngineException {
+  @ParameterizedTest
+  @CsvSource({"false, 0, 0, '0_0', 1", "true, 1, 0, '0_0', 1", "true, 0, 1, '1_0', 1" , "true, 0, 0, '2_0', 1"})
+  public void testSpellPolymorphingEffect(boolean polymorph,
+      int nbCallsPolymorphCurrentPlayer, int nbCallsPolymorphOtherPlayer, 
+      String keyTarget, int playerChosen) throws EngineException {
     spell1.setPolymorph(polymorph);
-    targets.put(targetKey1+"_"+targetKey2, minion1);
-    gameMethods.setCurrentPlayer(player1);
+    spell1.setIdInvocation(1);
+    spell1.setTarget("");
     board.add(minion1);
     player1.setBoard(board);
-    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, 0, spell1.getTarget());
+    Vector<MinionCard> board2 = new Vector<MinionCard>();
+    board2.add(minion2);
+    player2.setBoard(board2);
+    ArrayList<MinionCard> invocations = new ArrayList<MinionCard>();
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    gameMethods.setInvocations(invocations);
+    targets.put(keyTarget, minion1);
+    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, 0, "");
+    doNothing().when(gameMethods).polymorph(player1, 1, "0");
     doNothing().when(gameMethods).removeAttackAuraFromMinions(board, minion1);
-    doNothing().when(gameMethods).polymorph(gameMethods.getCurrentPlayer(), 13, "0");
-    gameMethods.spellPolymorphingEffect(player1, 0, spell1);
-    verify(gameMethods, times(nbCallPolymorph)).polymorph(gameMethods.getCurrentPlayer(), 13, "0");
-  }*/
+    doNothing().when(gameMethods).polymorph(player2, 1, "0");
+    doNothing().when(gameMethods).removeAttackAuraFromMinions(board2, minion2);
+    if (playerChosen == 1) {
+      gameMethods.spellPolymorphingEffect(player1, 0, spell1);
+    } else if (playerChosen == 2) {
+      gameMethods.spellPolymorphingEffect(player2, 0, spell1);
+    }
+    verify(gameMethods, times(nbCallsPolymorphCurrentPlayer)).polymorph(player1, 1, "0");
+    verify(gameMethods, times(nbCallsPolymorphOtherPlayer)).polymorph(player2, 1, "0");
+      
+  }
   
+  
+  @ParameterizedTest
+  @CsvSource({"1, 0, 1, 1, false, false, -1, 1, 0, true, false, 1, 1", "1, 0, 1, 1, false, false, -1, 3, 2, false, false, 1, 1",
+    "1, 1, 1, 1, false, true, 0, 1, 1, false, true, 0, 0","1, 1, 2, 2, false, true, 0, 1, 1, false, true, 1, 1"})
+  public void testAttack(int minionDamage1, int minionDamage2, int minionHP1, int minionHP2, boolean minionAttacked1, 
+      boolean tauntStatus, int idTarget, int heroHP2, int heroHPEnd2, boolean gameOverStatus,
+      boolean tauntStatusMinion2, int minionEndHP1, int minionEndHP2) throws EngineException {
+    minion1 = spy(new MinionCard());
+    minion2 = spy(new MinionCard());
+    minion1.setDamage(minionDamage1);
+    minion1.setHealthPoints(minionHP1);
+    minion1.setAttacked(minionAttacked1);
+    minion2.setDamage(minionDamage2);
+    minion2.setHealthPoints(minionHP2);
+    minion2.setTaunt(tauntStatusMinion2);
+    hero1 = spy(HeroCard.class);
+    hero2 = spy(HeroCard.class);
+    hero2.setHealthPoints(heroHP2);
+    player1.setHero(hero1);
+    player2.setHero(hero2);
+    board.add(minion1);
+    Vector<MinionCard> board2 = new Vector<MinionCard>();
+    board2.add(minion2);
+    player1.setBoard(board);
+    player2.setBoard(board2);
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    gameMethods.setGameOver(false);
+    doReturn(tauntStatus).when(gameMethods).taunt(board2);
+    doNothing().when(gameMethods).lifesteal(hero2, minion1);
+    gameMethods.attack(0, idTarget);
+    assertThat(true).isEqualTo(minion1.isAttacked());
+    assertThat(heroHPEnd2).isEqualTo(hero2.getHealthPoints());
+    assertThat(gameOverStatus).isEqualTo(gameMethods.isGameOver());
+    assertThat(minionEndHP1).isEqualTo(minion1.getHealthPoints());
+    assertThat(minionEndHP2).isEqualTo(minion2.getHealthPoints());
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"0, false, false, -1, false, Ce serviteur ne peut pas attaquer !", 
+    "1, true, false, -1, false, Ce serviteur a déjà attaqué durant ce tour !",
+    "1, false, true, 0, false, 'Cible incorrecte, un serviteur adverse a provocation !'"})
+  public void testAttackExceptions(int minionDamage1, boolean minionAttacked1, 
+      boolean tauntStatus, int idTarget, boolean tauntStatusMinion2, String exceptionMessage) throws EngineException {
+    minion1 = spy(new MinionCard());
+    minion2 = spy(new MinionCard());
+    minion1.setDamage(minionDamage1);
+    minion1.setAttacked(minionAttacked1);
+    minion2.setTaunt(tauntStatusMinion2);
+    hero1 = spy(HeroCard.class);
+    hero2 = spy(HeroCard.class);
+    board.add(minion1);
+    Vector<MinionCard> board2 = new Vector<MinionCard>();
+    board2.add(minion2);
+    player1.setBoard(board);
+    player2.setBoard(board2);
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    gameMethods.setGameOver(false);
+    doReturn(tauntStatus).when(gameMethods).taunt(board2);
+    doNothing().when(gameMethods).lifesteal(hero2, minion1);
+    Throwable exception = assertThrows(
+        EngineException.class, () -> {
+          gameMethods.attack(0, idTarget);
+        }
+    );
+    
+    assertThat(exceptionMessage).isEqualTo(exception.getMessage());
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"mage, 2, 0, -1, false, true, 1, 0, 0", "warrior, 2, 0, -1, false, true, 0, 0, 2",
+    "paladin, 2, 0, -1, false, true, 0, 1, 0"})
+  public void testHeroPower(String heroType, int playerManaPool1, int playerManaPoolEnd1, int idTarget, 
+      boolean heroPowerUsed1, boolean heroPowerUsedEnd1, int mageHeroPowerUsedCount, int summonEffectCount, 
+      int heroArmorEnd) throws EngineException {
+    hero1 = spy(new HeroCard());
+    hero1.setArmorPoints(0);
+    hero1.setHeroPowerUsed(heroPowerUsed1);
+    hero1.setArmorBuff(2);
+    hero1.setType(heroType);
+    hero1.setIdInvocation(12);
+    player1.setHero(hero1);
+    player1.setManaPool(playerManaPool1);
+    gameMethods.setCurrentPlayer(player1);
+    doNothing().when(gameMethods).mageHeroPower(player1, idTarget, hero1);
+    doNothing().when(gameMethods).summonMinion(player1, 12);
+    gameMethods.heroPower(player1, idTarget);
+    assertThat(playerManaPoolEnd1).isEqualTo(player1.getManaPool());
+    assertThat(heroArmorEnd).isEqualTo(hero1.getArmorPoints());
+    assertThat(heroPowerUsedEnd1).isEqualTo(hero1.isHeroPowerUsed());
+    verify(gameMethods, times(mageHeroPowerUsedCount)).mageHeroPower(player1, idTarget, hero1);
+    verify(gameMethods, times(summonEffectCount)).summonMinion(player1, 12);
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"bonjour, 2, 0, -1, false, true, Impossible de récupérer la classe du héros !", 
+    "warrior, 2, 2, -1, true, true, Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !",
+    "warrior, 1, 1, -1, false, false, Vous n'avez pas assez de mana !"})
+  public void testHeroPowerExceptions(String heroType, int playerManaPool1, int playerManaPoolEnd1, int idTarget, 
+      boolean heroPowerUsed1, boolean heroPowerUsedEnd1, String exceptionMessage) throws EngineException {
+    hero1 = spy(new HeroCard());
+    hero1.setHeroPowerUsed(heroPowerUsed1);
+    hero1.setType(heroType);
+    player1.setHero(hero1);
+    player1.setManaPool(playerManaPool1);
+    gameMethods.setCurrentPlayer(player1);
+    Throwable exception = assertThrows(
+        EngineException.class, () -> {
+          gameMethods.heroPower(player1, idTarget);
+        }
+    );
+    
+    assertThat(exceptionMessage).isEqualTo(exception.getMessage());
+    assertThat(playerManaPoolEnd1).isEqualTo(player1.getManaPool());
+    assertThat(heroPowerUsedEnd1).isEqualTo(hero1.isHeroPowerUsed());
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"0, 10, 8, 0, 1, 0", "1, 10, 8, 0, 0, 1"})
+  public void testPlayCard(int idCard, int manaPoolBegin1, int manaPoolEnd1, int idTarget, 
+      int countSummonMinion, int countSpellSubMethods) throws EngineException {
+    minion1.setManaCost(2);
+    spell1.setManaCost(2);
+    hand.add(minion1);
+    hand.addElement(spell1);
+    player1.setManaPool(manaPoolBegin1);
+    player1.setHero(hero1);
+    player1.setHand(hand);
+    gameMethods.setCurrentPlayer(player1);
+    doNothing().when(gameMethods).summonMinionFromHand(idCard);
+    doNothing().when(gameMethods).spellDrawingEffect(spell1);
+    doNothing().when(gameMethods).spellArmorBuffing(hero1, spell1);
+    doNothing().when(gameMethods).spellSummoningEffect(spell1);
+    doNothing().when(gameMethods).spellAttackBuffingEffect(player1, idTarget, spell1);
+    doNothing().when(gameMethods).spellPolymorphingEffect(player1, idTarget, spell1);
+    doNothing().when(gameMethods).spellDamageEffect(player1, idTarget, spell1);
+    gameMethods.playCard(idCard, player1, idTarget);
+    assertThat(manaPoolEnd1).isEqualTo(player1.getManaPool());
+    verify(gameMethods, times(countSummonMinion)).summonMinionFromHand(idCard);
+    verify(gameMethods, times(countSpellSubMethods)).spellDrawingEffect(spell1);
+    verify(gameMethods, times(countSpellSubMethods)).spellArmorBuffing(hero1, spell1);
+    verify(gameMethods, times(countSpellSubMethods)).spellSummoningEffect(spell1);
+    verify(gameMethods, times(countSpellSubMethods)).spellAttackBuffingEffect(player1, idTarget, spell1);
+    verify(gameMethods, times(countSpellSubMethods)).spellPolymorphingEffect(player1, idTarget, spell1);
+    verify(gameMethods, times(countSpellSubMethods)).spellDamageEffect(player1, idTarget, spell1);
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"0, 1, 1, 0, Vous n'avez pas assez de mana !", "-1, 10, 10, 0, Votre carte est inexistante !",
+    "5, 10, 10, 0, Votre carte est inexistante !", "2, 10, 10, 0, Ceci n'est pas une carte valide !"})
+  public void testPlayCardExceptions(int idCard, int manaPoolBegin1, int manaPoolEnd1, int idTarget, 
+      String exceptionMessage) throws EngineException {
+    minion1.setManaCost(2);
+    spell1.setManaCost(2);
+    hero2.setManaCost(0);
+    hand.add(minion1);
+    hand.addElement(spell1);
+    hand.add(hero2);
+    player1.setManaPool(manaPoolBegin1);
+    player1.setHero(hero1);
+    player1.setHand(hand);
+    gameMethods.setCurrentPlayer(player1);
+    Throwable exception = assertThrows(
+        EngineException.class, () -> {
+          gameMethods.playCard(idCard, player1, idTarget);
+        }
+    );
+    
+    assertThat(exceptionMessage).isEqualTo(exception.getMessage());
+    assertThat(manaPoolEnd1).isEqualTo(player1.getManaPool());
+  }
+  
+  @Test
+  public void testSummonMinionFromHand() throws EngineException {
+    player1 = spy(new Player());
+    board = spy(new Vector<MinionCard>());
+    player1.setBoard(board);
+    hand.add(minion1);
+    player1.setHand(hand);
+    gameMethods.setCurrentPlayer(player1);
+    doReturn(0).when(board).size();
+    doReturn(minion1).when(board).lastElement();
+    doNothing().when(player1).addCardToBoard(minion1);
+    doNothing().when(player1).removeCardFromHand(0);
+    doNothing().when(gameMethods).charge(minion1);
+    doNothing().when(gameMethods).giveAttackAuraToOtherMinions(board, minion1);
+    doNothing().when(gameMethods).getAttackAuraFromOtherMinions(board, minion1);
+    gameMethods.summonMinionFromHand(0);
+    verify(player1, times(1)).addCardToBoard(minion1);
+    verify(player1, times(1)).removeCardFromHand(0);
+    verify(gameMethods, times(1)).charge(minion1);
+    verify(gameMethods, times(1)).giveAttackAuraToOtherMinions(board, minion1);
+    verify(gameMethods, times(1)).getAttackAuraFromOtherMinions(board, minion1);
+  }
+  
+  @Test
+  public void testSummonMinionFromHandException() throws EngineException {
+    player1 = spy(new Player());
+    board = spy(new Vector<MinionCard>());
+    player1.setBoard(board);
+    hand.add(minion1);
+    player1.setHand(hand);
+    gameMethods.setCurrentPlayer(player1);
+    doReturn(7).when(board).size();
+    Throwable exception = assertThrows(
+        EngineException.class, () -> {
+          gameMethods.summonMinionFromHand(0);
+        }
+    );
+    
+    assertThat("Vous avez atteint le nombre maximum de serviteurs sur le plateau !")
+      .isEqualTo(exception.getMessage());
+  }
+  
+  @Test
+  public void testSummonMinion() throws EngineException {
+    board = spy(new Vector<MinionCard>());
+    player1 = spy(new Player());
+    player1.setBoard(board);
+    ArrayList<MinionCard> invocations = spy(new ArrayList<MinionCard>());
+    minion2.setId(3);
+    invocations.add(minion2);
+    gameMethods.setInvocations(invocations);
+    doReturn(0).when(board).size();
+    doReturn(minion2).when(board).lastElement();
+    doNothing().when(player1).addCardToBoard(minion2);
+    doNothing().when(gameMethods).giveAttackAuraToOtherMinions(board, minion2);
+    doNothing().when(gameMethods).getAttackAuraFromOtherMinions(board, minion2);
+    gameMethods.summonMinion(player1, 3);
+    verify(player1, times(1)).addCardToBoard(minion2);
+    verify(gameMethods, times(1)).giveAttackAuraToOtherMinions(board, minion2);
+    verify(gameMethods, times(1)).getAttackAuraFromOtherMinions(board, minion2); 
+  }
+  
+  @Test
+  public void testSummonMinionException() throws EngineException {
+    board = spy(new Vector<MinionCard>());
+    player1 = new Player();
+    player1.setBoard(board);
+    ArrayList<MinionCard> invocations = new ArrayList<MinionCard>();
+    gameMethods.setInvocations(invocations);
+    doReturn(0).when(board).size();
+    Throwable exception = assertThrows(
+        EngineException.class, () -> {
+          gameMethods.summonMinion(player1, 3);
+        }
+    );
+    
+    assertThat("Le minion n'a pas pu être invoqué !").isEqualTo(exception.getMessage());
+    
+  }
+  
+  @Test
+  public void testPolymorph() throws EngineException {
+    board = spy(new Vector<MinionCard>());
+    player1 = spy(new Player());
+    player1.setBoard(board);
+    ArrayList<MinionCard> invocations = spy(new ArrayList<MinionCard>());
+    minion2.setId(3);
+    invocations.add(minion2);
+    gameMethods.setInvocations(invocations);
+    doReturn(1).when(board).size();
+    doReturn(minion2).when(board).get(0);
+    doNothing().when(player1).addCardToBoard(minion2, 0);
+    doNothing().when(gameMethods).giveAttackAuraToOtherMinions(board, minion2);
+    doNothing().when(gameMethods).getAttackAuraFromOtherMinions(board, minion2);
+    gameMethods.polymorph(player1, 3, "0");
+    verify(player1, times(1)).addCardToBoard(minion2, 0);
+    verify(gameMethods, times(1)).giveAttackAuraToOtherMinions(board, minion2);
+    verify(gameMethods, times(1)).getAttackAuraFromOtherMinions(board, minion2);
+  }
+  
+  @Test
+  public void testPolymorphException() throws EngineException {
+    board = spy(new Vector<MinionCard>());
+    player1 = new Player();
+    player1.setBoard(board);
+    ArrayList<MinionCard> invocations = new ArrayList<MinionCard>();
+    gameMethods.setInvocations(invocations);
+    doReturn(0).when(board).size();
+    Throwable exception = assertThrows(
+        EngineException.class, () -> {
+          gameMethods.polymorph(player1, 3, "0");
+        }
+    );
+    
+    assertThat("Le minion n'a pas pu être invoqué !").isEqualTo(exception.getMessage());
+    
+  }
+  
+  static MinionCard[] makeMinions() {
+    return new MinionCard[] {new MinionCard(), new MinionCard()};
+  }
 }

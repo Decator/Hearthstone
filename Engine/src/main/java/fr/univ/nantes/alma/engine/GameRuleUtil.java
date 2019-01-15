@@ -1,6 +1,5 @@
 package fr.univ.nantes.alma.engine;
 
-import java.util.LinkedHashMap;
 import java.util.Vector;
 
 /**

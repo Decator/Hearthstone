@@ -173,8 +173,9 @@ public class SpellCard extends AbstractCard {
 
   @Override
   public String toString() {
-    return "SpellCard [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation + ", attackBuff=" + attackBuff
-        + ", armorBuff=" + armorBuff + ", nbDraw=" + nbDraw + ", polymorph=" + polymorph + ", target=" + target + "]";
+    return "SpellCard [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation 
+        + ", attackBuff=" + attackBuff + ", armorBuff=" + armorBuff + ", nbDraw=" 
+        + nbDraw + ", polymorph=" + polymorph + ", target=" + target + "]";
   }
 
   @Override
@@ -193,30 +194,41 @@ public class SpellCard extends AbstractCard {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (!super.equals(obj))
+    }
+    if (!super.equals(obj)) {
       return false;
-    if (!(obj instanceof SpellCard))
+    }
+    if (!(obj instanceof SpellCard)) {
       return false;
+    }
     SpellCard other = (SpellCard) obj;
-    if (armorBuff != other.armorBuff)
+    if (armorBuff != other.armorBuff) {
       return false;
-    if (attackBuff != other.attackBuff)
+    }
+    if (attackBuff != other.attackBuff) {
       return false;
-    if (idInvocation != other.idInvocation)
+    }
+    if (idInvocation != other.idInvocation) {
       return false;
-    if (nbDraw != other.nbDraw)
+    }
+    if (nbDraw != other.nbDraw) {
       return false;
-    if (nbSummon != other.nbSummon)
+    }
+    if (nbSummon != other.nbSummon) {
       return false;
-    if (polymorph != other.polymorph)
+    }
+    if (polymorph != other.polymorph) {
       return false;
+    }
     if (target == null) {
-      if (other.target != null)
+      if (other.target != null) {
         return false;
-    } else if (!target.equals(other.target))
+      }
+    } else if (!target.equals(other.target)) {
       return false;
+    }
     return true;
   }
   

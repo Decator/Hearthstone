@@ -122,6 +122,13 @@ public class Player {
   public void setManaPool(int manaPool) {
     this.manaPool = manaPool;
   }
+  
+  /**
+   * Increase the mana pool each turn until it reaches 10.
+   */
+  void setManaMaxTurn() {
+    this.manaMaxTurn++;
+  }
 
   public void setManaMaxTurn(int manaMaxTurn) {
     this.manaMaxTurn = manaMaxTurn;
@@ -151,13 +158,6 @@ public class Player {
    */
   void setManaPoolAfterPlay(int mana) {
     this.manaPool -= mana;
-  }
-
-  /**
-   * Increase the mana pool each turn until it reaches 10.
-   */
-  void setManaMaxTurn() {
-    this.manaMaxTurn++;
   }
 
   /**

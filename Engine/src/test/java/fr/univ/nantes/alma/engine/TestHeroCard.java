@@ -2,10 +2,6 @@ package fr.univ.nantes.alma.engine;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static pl.pojo.tester.api.assertion.Assertions.assertPojoMethodsFor;
-import static pl.pojo.tester.api.assertion.Method.CONSTRUCTOR;
-import static pl.pojo.tester.api.assertion.Method.GETTER;
-import static pl.pojo.tester.api.assertion.Method.SETTER;
-import static pl.pojo.tester.api.assertion.Method.TO_STRING;
 
 import fr.univ.nantes.alma.engine.HeroCard;
 

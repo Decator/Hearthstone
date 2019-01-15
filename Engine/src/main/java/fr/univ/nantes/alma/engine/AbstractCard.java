@@ -107,36 +107,46 @@ public abstract class AbstractCard implements Cloneable {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (obj == null)
+    }
+    if (obj == null) {
       return false;
-    if (!(obj instanceof AbstractCard))
+    }
+    if (!(obj instanceof AbstractCard)) {
       return false;
+    }
     AbstractCard other = (AbstractCard) obj;
-    if (damage != other.damage)
+    if (damage != other.damage) {
       return false;
+    }
     if (description == null) {
-      if (other.description != null)
+      if (other.description != null) {
         return false;
-    } else if (!description.equals(other.description))
+      }
+    } else if (!description.equals(other.description)) {
       return false;
-    if (idCard != other.idCard)
+    }
+    if (idCard != other.idCard) {
       return false;
-    if (manaCost != other.manaCost)
+    }
+    if (manaCost != other.manaCost) {
       return false;
+    }
     if (name == null) {
-      if (other.name != null)
+      if (other.name != null) {
         return false;
-    } else if (!name.equals(other.name))
+      }
+    } else if (!name.equals(other.name)) {
       return false;
+    }
     if (type == null) {
-      if (other.type != null)
+      if (other.type != null) {
         return false;
-    } else if (!type.equals(other.type))
+      }
+    } else if (!type.equals(other.type)) {
       return false;
+    }
     return true;
-  }
-  
-  
+  } 
 }

@@ -183,9 +183,9 @@ public class HeroCard extends AbstractCard {
 
   @Override
   public String toString() {
-    return "HeroCard [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation + ", armorBuff=" + armorBuff
-        + ", target=" + target + ", healthPoints=" + healthPoints + ", armorPoints=" + armorPoints + ", heroPowerUsed="
-        + heroPowerUsed + "]";
+    return "HeroCard [nbSummon=" + nbSummon + ", idInvocation=" + idInvocation + ", armorBuff=" 
+        + armorBuff + ", target=" + target + ", healthPoints=" + healthPoints + ", armorPoints=" 
+        + armorPoints + ", heroPowerUsed=" + heroPowerUsed + "]";
   }
 
   @Override
@@ -204,30 +204,41 @@ public class HeroCard extends AbstractCard {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj)
+    if (this == obj) {
       return true;
-    if (!super.equals(obj))
+    }
+    if (!super.equals(obj)) {
       return false;
-    if (!(obj instanceof HeroCard))
+    }
+    if (!(obj instanceof HeroCard)) {
       return false;
+    }
     HeroCard other = (HeroCard) obj;
-    if (armorBuff != other.armorBuff)
+    if (armorBuff != other.armorBuff) {
       return false;
-    if (armorPoints != other.armorPoints)
+    }
+    if (armorPoints != other.armorPoints) {
       return false;
-    if (healthPoints != other.healthPoints)
+    }
+    if (healthPoints != other.healthPoints) {
       return false;
-    if (heroPowerUsed != other.heroPowerUsed)
+    }
+    if (heroPowerUsed != other.heroPowerUsed) {
       return false;
-    if (idInvocation != other.idInvocation)
+    }
+    if (idInvocation != other.idInvocation) {
       return false;
-    if (nbSummon != other.nbSummon)
+    }
+    if (nbSummon != other.nbSummon) {
       return false;
+    }
     if (target == null) {
-      if (other.target != null)
+      if (other.target != null) {
         return false;
-    } else if (!target.equals(other.target))
+      }
+    } else if (!target.equals(other.target)) {
       return false;
+    }
     return true;
   }
   

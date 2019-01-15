@@ -11,6 +11,7 @@ export class SocketService {
 
   private isRedirect: boolean = false;
 
+  private userSubscription: Subscription;
   private playerSubscription: Subscription;
   private gameSubscription: Subscription;
 
@@ -51,6 +52,21 @@ export class SocketService {
     this.error = "";
     this.errorSubject = new Subject<string>();
     this.errorObservable = this.errorSubject.asObservable();
+
+    if(this.userSubscription){
+      this.userSubscription.unsubscribe();
+      this.userSubscription = null;
+    }
+
+    if(this.playerSubscription){
+      this.playerSubscription.unsubscribe();
+      this.playerSubscription = null;
+    }
+
+    if(this.gameSubscription) {
+      this.gameSubscription.unsubscribe();
+      this.gameSubscription = null;
+    }
   }
 
   initializeWebSocketConnection() {
@@ -69,15 +85,17 @@ export class SocketService {
   }
 
   play(username: string, idHero: number) {
-    if (this.playerSubscription) {
-      this.playerSubscription.unsubscribe();
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+      this.userSubscription = null;
     }
-    this.playerSubscription = this.stompClient.subscribe(`/player/${username}`, (message) => {
+    this.userSubscription = this.stompClient.subscribe(`/player/${username}`, (message) => {
       try {
         this.player = new Player(JSON.parse(message.body));
         this.playerSubject.next(this.player);
         this.createGame();
-        this.playerSubscription.unsubscribe();
+        this.userSubscription.unsubscribe();
+        this.userSubscription = null;
       } catch (err) {
         this.error = message.body;
         this.errorSubject.next(this.error);
@@ -87,15 +105,19 @@ export class SocketService {
   }
 
   createGame() {
-    if (this.gameSubscription) {
-      this.gameSubscription.unsubscribe();
+    if (this.playerSubscription) {
+      this.playerSubscription.unsubscribe();
+      this.playerSubscription = null;
     }
-    this.gameSubscription = this.stompClient.subscribe(`/game/${this.player.uuid}`, (message) => {
+    this.playerSubscription = this.stompClient.subscribe(`/game/${this.player.uuid}`, (message) => {
       try {
         this.game = new Game(JSON.parse(message.body));
         this.gameSubject.next(this.game);
-        // this.errorSubject.next("");
-        this.stompClient.subscribe(`/game/${this.game.idGame}`, (message) => {
+        if(this.gameSubscription){
+          this.gameSubscription.unsubscribe();
+          this.gameSubscription = null;
+        }
+        this.gameSubscription = this.stompClient.subscribe(`/game/${this.game.idGame}`, (message) => {
           try {
             this.game = new Game(JSON.parse(message.body));
             this.gameSubject.next(this.game);

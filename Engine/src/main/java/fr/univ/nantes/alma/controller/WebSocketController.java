@@ -36,14 +36,16 @@ public class WebSocketController {
       this.template.convertAndSend("/game/" + uuidPlayer, "En attente d'un deuxième joueur");
     } else {
       this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), game);
+      this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), "A vous de jouer !");
       this.template.convertAndSend("/game/" + game.getOtherPlayer().getUuid(), game);
     }
   }
 
   @MessageMapping("/endTurn")
   public void endTurn(String uuidGame) {
-    this.template.convertAndSend("/game/" + uuidGame, 
-        Application.engineBridge.endTurn(UUID.fromString(uuidGame)));
+    GameMethods game = Application.engineBridge.endTurn(UUID.fromString(uuidGame));
+    this.template.convertAndSend("/game/" + uuidGame, game);
+    this.template.convertAndSend("/game/" + game.getCurrentPlayer().getUuid(), "A vous de jouer !");
   }
 
   @MessageMapping("/playCard")

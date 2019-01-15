@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>HeroCard.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</a> &gt; <a href="../../index.html" class="el_group">Engine</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">fr.univ.nantes.alma.engine</a> &gt; <span class="el_source">HeroCard.java</span></div><h1>HeroCard.java</h1><pre class="source lang-java linenums">package fr.univ.nantes.alma.engine;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * The complete description of a Hero.
+ *
+ * @author Martin Ars Alexis Claveau Alexis Loret Maud Van Dorssen
+ * @version 0.0.1
+ */
+@Entity
+@Table(name = &quot;hero&quot;)
+public class HeroCard extends AbstractCard {
+  @Column(name = &quot;nb_summon_hero&quot;) private int nbSummon;
+  @Column(name = &quot;id_invocation_hero&quot;)private int idInvocation; 
+  @Column(name = &quot;armor_buff_hero&quot;) private int armorBuff;
+  @Column(name = &quot;target_hero&quot;) private String target;
+  @Column(name = &quot;health_points_hero&quot;) private int healthPoints;
+  @Column(name = &quot;armor_points_hero&quot;) private int armorPoints;
+  @Column(name = &quot;hero_power_used&quot;) private boolean heroPowerUsed;
+    
+  /**
+   * Initialize the attributes of this class.
+   * @param idHero the id of the hero
+   * @param type There are three types : mage, paladin, warrior
+   * @param name the name of the hero
+   * @param damage the amount of damage that the hero can inflict
+   * @param nbSummon the amount of invocations that the hero can perform
+   * @param idInvocation the id of the hero's invocation
+   * @param armorBuff the amount of armor buff that the hero can give
+   * @param description the description of the hero
+   * @param target the target of the hero power
+   */
+  HeroCard(int idHero, String type, String name, int damage, int nbSummon,
+      int idInvocation, int armorBuff, String description, String target) {
+<span class="fc" id="L38">    super(idHero, type, name, 0, damage, description);</span>
+<span class="fc" id="L39">    this.nbSummon = nbSummon;</span>
+<span class="fc" id="L40">    this.idInvocation = idInvocation;</span>
+<span class="fc" id="L41">    this.armorBuff = armorBuff;</span>
+<span class="fc" id="L42">    this.heroPowerUsed = false;</span>
+<span class="fc" id="L43">    this.armorPoints = 0;</span>
+<span class="fc" id="L44">    this.healthPoints = GameRuleUtil.MAX_HERO_HP;</span>
+<span class="fc" id="L45">    this.target = target;</span>
+<span class="fc" id="L46">  }</span>
+
+  /**
+   * Empty Constructor.
+   */
+<span class="fc" id="L51">  public HeroCard() { }</span>
+
+  /** Gets the number of minions summoned by the hero power.
+   * @return the number of summoned minions.
+   */
+  public int getNbSummon() {
+<span class="fc" id="L57">    return nbSummon;</span>
+  }
+
+  /** Sets the number of minions summoned by the hero power.
+   * @param nbSummon the number of minions to summon.
+   */
+  public void setNbSummon(int nbSummon) {
+<span class="fc" id="L64">    this.nbSummon = nbSummon;</span>
+<span class="fc" id="L65">  }</span>
+  
+  /** Get the ID of the minion summoned by the hero power.
+   * @return the ID of the minion summoned minion.
+   */
+  public int getIdInvocation() {
+<span class="fc" id="L71">    return idInvocation;</span>
+  }
+
+  /** Sets the ID of the minion summoned by the hero power.
+   * @param idInvocation the ID if the minion to summon.
+   */
+  public void setIdInvocation(int idInvocation) {
+<span class="fc" id="L78">    this.idInvocation = idInvocation;</span>
+<span class="fc" id="L79">  }</span>
+
+  /** Gets the armor buff of the hero power.
+   * @return the armorBuff. 
+   */
+  public int getArmorBuff() {
+<span class="fc" id="L85">    return armorBuff;</span>
+  }
+
+  /** Sets the armor buff of the hero power.
+   * @param armorBuff the armor buff to set.
+   */
+  public void setArmorBuff(int armorBuff) {
+<span class="fc" id="L92">    this.armorBuff = armorBuff;</span>
+<span class="fc" id="L93">  }</span>
+
+  /** Gets the potential target(s) of the hero power.
+   * @return the target.
+   */
+  public String getTarget() {
+<span class="fc" id="L99">    return target;</span>
+  }
+
+  /** Sets the potential target(s) of the hero power.
+   * @param target the target to set.
+   */
+  public void setTarget(String target) {
+<span class="fc" id="L106">    this.target = target;</span>
+<span class="fc" id="L107">  }</span>
+
+  /** Gets the health points of the hero.
+   * @return the healthPoints.
+   */
+  public int getHealthPoints() {
+<span class="fc" id="L113">    return healthPoints;</span>
+  }
+
+  /** Sets the health points of the hero.
+   * @param healthPoints the health points to set.
+   */
+  public void setHealthPoints(int healthPoints) {
+<span class="fc" id="L120">    this.healthPoints = healthPoints;</span>
+<span class="fc" id="L121">  }</span>
+
+  /** Gets the armor points of the hero.
+   * @return the armorPoints.
+   */
+  public int getArmorPoints() {
+<span class="fc" id="L127">    return armorPoints;</span>
+  }
+
+  /** Sets the armor points of the hero.
+   * @param armorPoints the armor points to set.
+   */
+  public void setArmorPoints(int armorPoints) {
+<span class="fc" id="L134">    this.armorPoints = armorPoints;</span>
+<span class="fc" id="L135">  }</span>
+
+  /** Gets if the hero power has already been used.
+   * @return the heroPowerUsed status.
+   */
+  public boolean isHeroPowerUsed() {
+<span class="fc" id="L141">    return heroPowerUsed;</span>
+  }
+
+  /** Sets if the hero power has already been used.
+   * @param heroPowerUsed the heroPowerUsed to set.
+   */
+  public void setHeroPowerUsed(boolean heroPowerUsed) {
+<span class="fc" id="L148">    this.heroPowerUsed = heroPowerUsed;</span>
+<span class="fc" id="L149">  }</span>
+
+  /**
+   * Receives damage from an attack. If the hero has armor, 
+   * then armor is reduced before health points.
+   * @param damage the received damage.
+   */
+  void receiveDamage(int damage) {
+<span class="fc bfc" id="L157" title="All 2 branches covered.">    if (damage &gt;= 0) {</span>
+<span class="pc bpc" id="L158" title="1 of 4 branches missed.">      if (this.armorPoints &gt;= damage &amp;&amp; this.armorPoints &gt; 0) {</span>
+<span class="fc" id="L159">        this.armorPoints -= damage;</span>
+<span class="pc bpc" id="L160" title="1 of 4 branches missed.">      } else if (this.armorPoints &lt; damage &amp;&amp; this.armorPoints &gt; 0) {</span>
+<span class="fc" id="L161">        int remainingDamage = damage - this.armorPoints;</span>
+<span class="fc" id="L162">        this.armorPoints = 0;</span>
+<span class="fc" id="L163">        this.healthPoints -= remainingDamage;</span>
+<span class="fc" id="L164">      } else {</span>
+<span class="fc" id="L165">        this.healthPoints -= damage;</span>
+      }
+    }
+<span class="fc" id="L168">  }</span>
+
+  /**
+   * Receives healing from an effect.
+   * @param healing the receive heal.
+   */
+  void receiveHealing(int healing) {
+<span class="fc bfc" id="L175" title="All 2 branches covered.">    if (healing &gt;= 0) {</span>
+<span class="fc bfc" id="L176" title="All 2 branches covered.">      if (!GameRuleUtil.checkHealthPoints(this.getHealthPoints() + healing)) {</span>
+<span class="fc" id="L177">        this.setHealthPoints(GameRuleUtil.MAX_HERO_HP);</span>
+<span class="fc" id="L178">      } else {</span>
+<span class="fc" id="L179">        this.healthPoints += healing;</span>
+      }
+    }
+<span class="fc" id="L182">  }</span>
+
+  @Override
+  public String toString() {
+<span class="fc" id="L186">    return &quot;HeroCard [nbSummon=&quot; + nbSummon + &quot;, idInvocation=&quot; + idInvocation + &quot;, armorBuff=&quot; </span>
+<span class="fc" id="L187">        + armorBuff + &quot;, target=&quot; + target + &quot;, healthPoints=&quot; + healthPoints + &quot;, armorPoints=&quot; </span>
+<span class="fc" id="L188">        + armorPoints + &quot;, heroPowerUsed=&quot; + heroPowerUsed + &quot;]&quot;;</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="fc" id="L193">    final int prime = 31;</span>
+<span class="fc" id="L194">    int result = super.hashCode();</span>
+<span class="fc" id="L195">    result = prime * result + armorBuff;</span>
+<span class="fc" id="L196">    result = prime * result + armorPoints;</span>
+<span class="fc" id="L197">    result = prime * result + healthPoints;</span>
+<span class="fc bfc" id="L198" title="All 2 branches covered.">    result = prime * result + (heroPowerUsed ? 1231 : 1237);</span>
+<span class="fc" id="L199">    result = prime * result + idInvocation;</span>
+<span class="fc" id="L200">    result = prime * result + nbSummon;</span>
+<span class="fc bfc" id="L201" title="All 2 branches covered.">    result = prime * result + ((target == null) ? 0 : target.hashCode());</span>
+<span class="fc" id="L202">    return result;</span>
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+<span class="fc bfc" id="L207" title="All 2 branches covered.">    if (this == obj) {</span>
+<span class="fc" id="L208">      return true;</span>
+    }
+<span class="fc bfc" id="L210" title="All 2 branches covered.">    if (!super.equals(obj)) {</span>
+<span class="fc" id="L211">      return false;</span>
+    }
+<span class="pc bpc" id="L213" title="1 of 2 branches missed.">    if (!(obj instanceof HeroCard)) {</span>
+<span class="nc" id="L214">      return false;</span>
+    }
+<span class="fc" id="L216">    HeroCard other = (HeroCard) obj;</span>
+<span class="fc bfc" id="L217" title="All 2 branches covered.">    if (armorBuff != other.armorBuff) {</span>
+<span class="fc" id="L218">      return false;</span>
+    }
+<span class="fc bfc" id="L220" title="All 2 branches covered.">    if (armorPoints != other.armorPoints) {</span>
+<span class="fc" id="L221">      return false;</span>
+    }
+<span class="fc bfc" id="L223" title="All 2 branches covered.">    if (healthPoints != other.healthPoints) {</span>
+<span class="fc" id="L224">      return false;</span>
+    }
+<span class="fc bfc" id="L226" title="All 2 branches covered.">    if (heroPowerUsed != other.heroPowerUsed) {</span>
+<span class="fc" id="L227">      return false;</span>
+    }
+<span class="fc bfc" id="L229" title="All 2 branches covered.">    if (idInvocation != other.idInvocation) {</span>
+<span class="fc" id="L230">      return false;</span>
+    }
+<span class="fc bfc" id="L232" title="All 2 branches covered.">    if (nbSummon != other.nbSummon) {</span>
+<span class="fc" id="L233">      return false;</span>
+    }
+<span class="pc bpc" id="L235" title="1 of 2 branches missed.">    if (target == null) {</span>
+<span class="fc bfc" id="L236" title="All 2 branches covered.">      if (other.target != null) {</span>
+<span class="fc" id="L237">        return false;</span>
+      }
+<span class="nc bnc" id="L239" title="All 2 branches missed.">    } else if (!target.equals(other.target)) {</span>
+<span class="nc" id="L240">      return false;</span>
+    }
+<span class="fc" id="L242">    return true;</span>
+  }
+  
+  
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</div></body></html>

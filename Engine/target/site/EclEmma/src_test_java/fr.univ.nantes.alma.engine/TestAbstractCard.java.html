@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TestAbstractCard.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</a> &gt; <a href="../../index.html" class="el_group">Engine</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">fr.univ.nantes.alma.engine</a> &gt; <span class="el_source">TestAbstractCard.java</span></div><h1>TestAbstractCard.java</h1><pre class="source lang-java linenums">package fr.univ.nantes.alma.engine;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
+import org.powermock.reflect.Whitebox;
+
+<span class="fc" id="L10">public class TestAbstractCard {</span>
+
+  @Test
+  public void testGetId() {
+<span class="fc" id="L14">    AbstractCard absCard = Mockito.mock(AbstractCard.class);</span>
+<span class="fc" id="L15">    PowerMockito.doCallRealMethod().when(absCard).getId();</span>
+<span class="fc" id="L16">    Whitebox.setInternalState(absCard, &quot;idCard&quot;, 1);</span>
+<span class="fc" id="L17">    assertThat(1).isEqualTo(absCard.getId());</span>
+<span class="fc" id="L18">  }</span>
+  
+  @Test
+  public void testGetType() {
+<span class="fc" id="L22">    AbstractCard absCard = Mockito.mock(AbstractCard.class);</span>
+<span class="fc" id="L23">    PowerMockito.doCallRealMethod().when(absCard).getType();</span>
+<span class="fc" id="L24">    Whitebox.setInternalState(absCard, &quot;type&quot;, &quot;mage&quot;);</span>
+<span class="fc" id="L25">    assertThat(&quot;mage&quot;).isEqualTo(absCard.getType());</span>
+<span class="fc" id="L26">  }</span>
+  
+  @Test
+  public void testGetName() {
+<span class="fc" id="L30">    AbstractCard absCard = Mockito.mock(AbstractCard.class);</span>
+<span class="fc" id="L31">    PowerMockito.doCallRealMethod().when(absCard).getName();</span>
+<span class="fc" id="L32">    Whitebox.setInternalState(absCard, &quot;name&quot;, &quot;Jaina&quot;);</span>
+<span class="fc" id="L33">    assertThat(&quot;Jaina&quot;).isEqualTo(absCard.getName());</span>
+<span class="fc" id="L34">  }</span>
+  
+  @Test
+  public void testGetManaCost() {
+<span class="fc" id="L38">    AbstractCard absCard = Mockito.mock(AbstractCard.class);</span>
+<span class="fc" id="L39">    PowerMockito.doCallRealMethod().when(absCard).getManaCost();</span>
+<span class="fc" id="L40">    Whitebox.setInternalState(absCard, &quot;manaCost&quot;, 2);</span>
+<span class="fc" id="L41">    assertThat(2).isEqualTo(absCard.getManaCost());</span>
+<span class="fc" id="L42">  }</span>
+  
+  @Test
+  public void testGetDamage() {
+<span class="fc" id="L46">    AbstractCard absCard = Mockito.mock(AbstractCard.class);</span>
+<span class="fc" id="L47">    PowerMockito.doCallRealMethod().when(absCard).getDamage();</span>
+<span class="fc" id="L48">    Whitebox.setInternalState(absCard, &quot;damage&quot;, 1);</span>
+<span class="fc" id="L49">    assertThat(1).isEqualTo(absCard.getDamage());</span>
+<span class="fc" id="L50">  }</span>
+  
+  @Test
+  public void testGetDescription() {
+<span class="fc" id="L54">    AbstractCard absCard = Mockito.mock(AbstractCard.class);</span>
+<span class="fc" id="L55">    PowerMockito.doCallRealMethod().when(absCard).getDescription();</span>
+<span class="fc" id="L56">    Whitebox.setInternalState(absCard, &quot;description&quot;, &quot;charge&quot;);</span>
+<span class="fc" id="L57">    assertThat(&quot;charge&quot;).isEqualTo(absCard.getDescription());</span>
+<span class="fc" id="L58">  }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</div></body></html>

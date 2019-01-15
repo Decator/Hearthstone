@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: fr.univ.nantes.alma.engine.TestHeroCardRepository
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.134 s - in fr.univ.nantes.alma.engine.TestHeroCardRepository

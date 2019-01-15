@@ -1,0 +1,16 @@
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/AbstractCard.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/Player.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/Application.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/controller/WebSocketController.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/HeroCardRepository.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/GameMethods.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/Engine.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/SpellCard.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/MinionCard.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/GameRuleUtil.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/controller/WebSocketConfig.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/EngineBridge.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/HeroCard.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/SpellCardRepository.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/MinionCardRepository.java
+/Users/alexis/Documents/Analyse_et_Conception/Hearthstone/Engine/src/main/java/fr/univ/nantes/alma/engine/EngineException.java

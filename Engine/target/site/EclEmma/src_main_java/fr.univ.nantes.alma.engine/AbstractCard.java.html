@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>AbstractCard.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</a> &gt; <a href="../../index.html" class="el_group">Engine</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">fr.univ.nantes.alma.engine</a> &gt; <span class="el_source">AbstractCard.java</span></div><h1>AbstractCard.java</h1><pre class="source lang-java linenums">package fr.univ.nantes.alma.engine;
+
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+
+/**
+ * The complete description of a card wihch can be a Minion, a Spell or a Hero. 
+ *
+ * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
+ * @version 0.0.1
+ */
+@MappedSuperclass
+public abstract class AbstractCard implements Cloneable {
+  @Id
+  @Column(name = &quot;id&quot;) private int idCard;
+  @Column(name = &quot;type&quot;) private String type;
+  @Column(name = &quot;name&quot;) private String name;
+  @Column(name = &quot;mana_cost&quot;) private int manaCost;
+  @Column(name = &quot;damage&quot;) private int damage;
+  @Column(name = &quot;description&quot;) private String description;
+
+  /**
+   * Initialize the attributes of this class. 
+   * @param idCard the id of the card.
+   * @param type There are five types : common, mage, paladin, warrior and invocation. 
+   * @param name the name of the card.
+   * @param manaCost the amount of mana the card costs.
+   * @param damage the amount of damage the card can inflict.
+   * @param description the description of the card.
+   */
+<span class="fc" id="L32">  AbstractCard(int idCard, String type, String name, int manaCost, int damage, String description) {</span>
+<span class="fc" id="L33">    this.idCard = idCard;</span>
+<span class="fc" id="L34">    this.type = type;</span>
+<span class="fc" id="L35">    this.name = name;</span>
+<span class="fc" id="L36">    this.manaCost = manaCost;</span>
+<span class="fc" id="L37">    this.damage = damage;</span>
+<span class="fc" id="L38">    this.description = description;</span>
+<span class="fc" id="L39">  }</span>
+    
+<span class="fc" id="L41">  AbstractCard() {}</span>
+    
+  public Object clone() throws CloneNotSupportedException { 
+<span class="fc" id="L44">    return super.clone();</span>
+  }
+
+  public int getId() {
+<span class="fc" id="L48">    return this.idCard;</span>
+  }
+
+  public void setId(int idCard) {
+<span class="fc" id="L52">    this.idCard = idCard;</span>
+<span class="fc" id="L53">  }</span>
+
+  public String getType() {
+<span class="fc" id="L56">    return this.type;</span>
+  }
+
+  public void setType(String type) {
+<span class="fc" id="L60">    this.type = type;</span>
+<span class="fc" id="L61">  }</span>
+
+  public String getName() {
+<span class="fc" id="L64">    return this.name;</span>
+  }
+
+  public void setName(String name) {
+<span class="nc" id="L68">    this.name = name;</span>
+<span class="nc" id="L69">  }</span>
+
+  public int getManaCost() {
+<span class="fc" id="L72">    return this.manaCost;</span>
+  }
+
+  public void setManaCost(int manaCost) {
+<span class="fc" id="L76">    this.manaCost = manaCost;</span>
+<span class="fc" id="L77">  }</span>
+
+  public int getDamage() {
+<span class="fc" id="L80">    return this.damage;</span>
+  }
+
+  public void setDamage(int damage) {
+<span class="fc" id="L84">    this.damage = damage;</span>
+<span class="fc" id="L85">  }</span>
+
+  public String getDescription() {
+<span class="fc" id="L88">    return this.description;</span>
+  }
+
+  public void setDescription(String description) {
+<span class="nc" id="L92">    this.description = description;</span>
+<span class="nc" id="L93">  }</span>
+
+  @Override
+  public int hashCode() {
+<span class="fc" id="L97">    final int prime = 31;</span>
+<span class="fc" id="L98">    int result = 1;</span>
+<span class="fc" id="L99">    result = prime * result + damage;</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">    result = prime * result + ((description == null) ? 0 : description.hashCode());</span>
+<span class="fc" id="L101">    result = prime * result + idCard;</span>
+<span class="fc" id="L102">    result = prime * result + manaCost;</span>
+<span class="pc bpc" id="L103" title="1 of 2 branches missed.">    result = prime * result + ((name == null) ? 0 : name.hashCode());</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">    result = prime * result + ((type == null) ? 0 : type.hashCode());</span>
+<span class="fc" id="L105">    return result;</span>
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">    if (this == obj) {</span>
+<span class="nc" id="L111">      return true;</span>
+    }
+<span class="fc bfc" id="L113" title="All 2 branches covered.">    if (obj == null) {</span>
+<span class="fc" id="L114">      return false;</span>
+    }
+<span class="fc bfc" id="L116" title="All 2 branches covered.">    if (!(obj instanceof AbstractCard)) {</span>
+<span class="fc" id="L117">      return false;</span>
+    }
+<span class="fc" id="L119">    AbstractCard other = (AbstractCard) obj;</span>
+<span class="fc bfc" id="L120" title="All 2 branches covered.">    if (damage != other.damage) {</span>
+<span class="fc" id="L121">      return false;</span>
+    }
+<span class="fc bfc" id="L123" title="All 2 branches covered.">    if (description == null) {</span>
+<span class="fc bfc" id="L124" title="All 2 branches covered.">      if (other.description != null) {</span>
+<span class="fc" id="L125">        return false;</span>
+      }
+<span class="pc bpc" id="L127" title="1 of 2 branches missed.">    } else if (!description.equals(other.description)) {</span>
+<span class="fc" id="L128">      return false;</span>
+    }
+<span class="pc bpc" id="L130" title="1 of 2 branches missed.">    if (idCard != other.idCard) {</span>
+<span class="nc" id="L131">      return false;</span>
+    }
+<span class="pc bpc" id="L133" title="1 of 2 branches missed.">    if (manaCost != other.manaCost) {</span>
+<span class="nc" id="L134">      return false;</span>
+    }
+<span class="fc bfc" id="L136" title="All 2 branches covered.">    if (name == null) {</span>
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">      if (other.name != null) {</span>
+<span class="nc" id="L138">        return false;</span>
+      }
+<span class="pc bpc" id="L140" title="1 of 2 branches missed.">    } else if (!name.equals(other.name)) {</span>
+<span class="nc" id="L141">      return false;</span>
+    }
+<span class="fc bfc" id="L143" title="All 2 branches covered.">    if (type == null) {</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">      if (other.type != null) {</span>
+<span class="nc" id="L145">        return false;</span>
+      }
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">    } else if (!type.equals(other.type)) {</span>
+<span class="nc" id="L148">      return false;</span>
+    }
+<span class="fc" id="L150">    return true;</span>
+  } 
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</div></body></html>

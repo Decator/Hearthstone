@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>Engine.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</a> &gt; <a href="../../index.html" class="el_group">Engine</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">fr.univ.nantes.alma.engine</a> &gt; <span class="el_source">Engine.java</span></div><h1>Engine.java</h1><pre class="source lang-java linenums">package fr.univ.nantes.alma.engine;
+
+import fr.univ.nantes.alma.engine.EngineException;
+import fr.univ.nantes.alma.engine.GameMethods;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.UUID;
+import java.util.Vector;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+/**
+ * The game engine performing the Game Methods.
+ * 
+ * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
+ * @version 0.0.1
+ */
+public class Engine implements EngineBridge {
+  private HashMap&lt;UUID, GameMethods&gt; games;
+  private HashMap&lt;UUID, Player&gt; players;
+  private Player waitingPlayer;
+
+  @Autowired
+  private MinionCardRepository minionRepository;
+  @Autowired
+  private SpellCardRepository spellRepository;
+  @Autowired
+  private HeroCardRepository heroRepository;
+
+  /**
+   * Constructor.
+   * @param minion repository containing the minions
+   * @param spell repository containing the spells
+   * @param hero repository containing the heros
+   */
+<span class="fc" id="L37">  public Engine(MinionCardRepository minion, SpellCardRepository spell, </span>
+      HeroCardRepository hero) {
+<span class="fc" id="L39">    this.minionRepository = minion;</span>
+<span class="fc" id="L40">    this.spellRepository = spell;</span>
+<span class="fc" id="L41">    this.heroRepository = hero;</span>
+<span class="fc" id="L42">    this.games = new HashMap&lt;UUID, GameMethods&gt;();</span>
+<span class="fc" id="L43">    this.players = new HashMap&lt;UUID, Player&gt;();</span>
+<span class="fc" id="L44">  }</span>
+  
+  @Override
+  public ArrayList&lt;HeroCard&gt; getHeros() {
+<span class="nc" id="L48">    return this.heroRepository.findAll();</span>
+  }
+
+  @Override
+  public Player createPlayer(int idHero, String username) {
+<span class="nc" id="L53">    HeroCard hero = this.retrieveHero(idHero);</span>
+<span class="nc" id="L54">    ArrayList&lt;MinionCard&gt; minion = retrieveMinions(hero.getType());</span>
+<span class="nc" id="L55">    ArrayList&lt;SpellCard&gt; spell = retrieveSpells(hero.getType());</span>
+
+    // Create deck
+<span class="nc" id="L58">    ArrayList&lt;AbstractCard&gt; card = new ArrayList&lt;AbstractCard&gt;();</span>
+<span class="nc" id="L59">    card.addAll(minion);</span>
+<span class="nc" id="L60">    card.addAll(spell);</span>
+<span class="nc" id="L61">    AbstractCard[] deck = card.toArray(new AbstractCard[card.size()]);</span>
+
+    // Create hand
+<span class="nc" id="L64">    Vector&lt;AbstractCard&gt; hand = new Vector&lt;AbstractCard&gt;();</span>
+<span class="nc" id="L65">    AbstractCard card1 = deck[(int) (Math.random() * deck.length)];</span>
+<span class="nc" id="L66">    AbstractCard card2 = deck[(int) (Math.random() * deck.length)];</span>
+<span class="nc" id="L67">    AbstractCard card3 = deck[(int) (Math.random() * deck.length)];</span>
+    try {
+<span class="nc" id="L69">      hand.add((AbstractCard) card1.clone());</span>
+<span class="nc" id="L70">      hand.add((AbstractCard) card2.clone());</span>
+<span class="nc" id="L71">      hand.add((AbstractCard) card3.clone());</span>
+<span class="nc" id="L72">    } catch (CloneNotSupportedException e) {</span>
+<span class="nc" id="L73">      e.printStackTrace();</span>
+    }
+
+<span class="nc" id="L76">    Player player = new Player(UUID.randomUUID(), username, hero, deck, hand);</span>
+<span class="nc" id="L77">    this.players.put(player.getUuid(), player); // Put in hashmap</span>
+<span class="nc" id="L78">    return player;</span>
+  }
+
+  @Override
+  public GameMethods createGame(UUID uuidPlayer) {
+<span class="nc" id="L83">    GameMethods game = null;</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">    if (this.waitingPlayer == null) {</span>
+<span class="nc bnc" id="L85" title="All 2 branches missed.">      if (this.players.containsKey(uuidPlayer)) {</span>
+<span class="nc" id="L86">        this.waitingPlayer = this.players.get(uuidPlayer);</span>
+      }
+<span class="nc" id="L88">    } else {</span>
+<span class="nc bnc" id="L89" title="All 2 branches missed.">      if (this.players.containsKey(uuidPlayer)) {</span>
+<span class="nc" id="L90">        game = new GameMethods(UUID.randomUUID(), this.waitingPlayer, this.players.get(uuidPlayer),</span>
+<span class="nc" id="L91">            retrieveInvocations());</span>
+<span class="nc" id="L92">        this.waitingPlayer = null;</span>
+<span class="nc" id="L93">        this.games.put(game.getIdGame(), game);</span>
+      }
+    }
+<span class="nc" id="L96">    return game;</span>
+  }
+
+  @Override
+  public GameMethods endTurn(UUID uuidGame, UUID uuidPlayer) throws EngineException {
+    try {
+<span class="nc" id="L102">      this.games.get(uuidGame).endTurn(uuidPlayer);</span>
+<span class="nc" id="L103">    } catch (EngineException e) {</span>
+<span class="nc" id="L104">      throw e;</span>
+    }
+<span class="nc" id="L106">    return this.games.get(uuidGame);</span>
+  }
+
+  @Override
+  public GameMethods playCard(UUID uuidGame, UUID uuidPlayer, int idCard, 
+      UUID uuidTargetPlayer, int idTarget) throws EngineException {
+    try {
+<span class="nc bnc" id="L113" title="All 2 branches missed.">      if (this.games.get(uuidGame).getOtherPlayer().getUuid().equals(uuidTargetPlayer)) {</span>
+<span class="nc" id="L114">        this.games.get(uuidGame).playCard(uuidPlayer,idCard, </span>
+<span class="nc" id="L115">            this.games.get(uuidGame).getOtherPlayer(), idTarget);</span>
+<span class="nc" id="L116">      } else {</span>
+<span class="nc" id="L117">        this.games.get(uuidGame).playCard(uuidPlayer, idCard, </span>
+<span class="nc" id="L118">            this.games.get(uuidGame).getCurrentPlayer(), idTarget);</span>
+      }
+<span class="nc" id="L120">    } catch (EngineException e) {</span>
+<span class="nc" id="L121">      throw e;</span>
+    }
+<span class="nc" id="L123">    return games.get(uuidGame);</span>
+  }
+
+  @Override
+  public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, UUID uuidTargetPlayer, 
+      int idTarget) throws EngineException {
+    try {
+<span class="nc bnc" id="L130" title="All 2 branches missed.">      if (this.games.get(uuidGame).getCurrentPlayer().getUuid().equals(uuidTargetPlayer)) {</span>
+<span class="nc" id="L131">        this.games.get(uuidGame).heroPower(uuidPlayer, </span>
+<span class="nc" id="L132">            this.games.get(uuidGame).getCurrentPlayer(), idTarget);</span>
+<span class="nc" id="L133">      } else {</span>
+<span class="nc" id="L134">        this.games.get(uuidGame).heroPower(uuidPlayer, </span>
+<span class="nc" id="L135">            this.games.get(uuidGame).getOtherPlayer(), idTarget);</span>
+      }
+<span class="nc" id="L137">    } catch (EngineException e) {</span>
+<span class="nc" id="L138">      throw e;</span>
+    }
+<span class="nc" id="L140">    return this.games.get(uuidGame);</span>
+  }
+
+  @Override
+  public GameMethods attack(UUID uuidGame, UUID uuidPlayer, int idAttack, 
+     UUID uuidTarget, int idTarget) throws EngineException {
+    try {
+<span class="nc" id="L147">      this.games.get(uuidGame).attack(uuidPlayer, idAttack, uuidTarget, idTarget);</span>
+<span class="nc" id="L148">    } catch (EngineException e) {</span>
+<span class="nc" id="L149">      throw e;</span>
+    }
+<span class="nc" id="L151">    return this.games.get(uuidGame);</span>
+  }
+
+  @Override
+  public void endGame(UUID uuidGame, UUID uuidPlayer1, UUID uuidPlayer2) {
+<span class="nc" id="L156">    this.players.remove(uuidPlayer1);</span>
+<span class="nc" id="L157">    this.players.remove(uuidPlayer2);</span>
+<span class="nc" id="L158">    this.games.remove(uuidGame);</span>
+<span class="nc" id="L159">  }</span>
+
+  /**
+   * Get all the Minions a Hero can use.
+   * 
+   * @param heroType the type of Hero
+   * @return the list of Minions
+   */
+  public ArrayList&lt;MinionCard&gt; retrieveMinions(String heroType) {
+<span class="nc" id="L168">    ArrayList&lt;MinionCard&gt; commonList = this.minionRepository.findByType(&quot;common&quot;);</span>
+<span class="nc" id="L169">    ArrayList&lt;MinionCard&gt; heroList = this.minionRepository.findByType(heroType);</span>
+<span class="nc" id="L170">    heroList.addAll(commonList);</span>
+<span class="nc" id="L171">    return heroList;</span>
+  }
+
+  /**
+   * Get all Spells a Hero can use.
+   * 
+   * @param heroType the type of Hero
+   * @return the list of Spells
+   */
+  public ArrayList&lt;SpellCard&gt; retrieveSpells(String heroType) {
+<span class="nc" id="L181">    ArrayList&lt;SpellCard&gt; commonList = this.spellRepository.findByType(&quot;common&quot;);</span>
+<span class="nc" id="L182">    ArrayList&lt;SpellCard&gt; heroList = this.spellRepository.findByType(heroType);</span>
+<span class="nc" id="L183">    heroList.addAll(commonList);</span>
+<span class="nc" id="L184">    return heroList;</span>
+  }
+
+  /**
+   * Get all the invocations.
+   * 
+   * @return the list of invocations
+   */
+  public ArrayList&lt;MinionCard&gt; retrieveInvocations() {
+<span class="nc" id="L193">    return this.minionRepository.findByType(&quot;invocation&quot;);</span>
+  }
+
+  /**
+   * Get the hero.
+   * 
+   * @return the hero
+   */
+  public HeroCard retrieveHero(int hero) {
+<span class="nc bnc" id="L202" title="All 2 branches missed.">    if (this.heroRepository.findById(hero) != null) {</span>
+<span class="nc" id="L203">      return this.heroRepository.findById(hero);</span>
+    }
+<span class="nc" id="L205">    return this.heroRepository.findById(1);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</div></body></html>

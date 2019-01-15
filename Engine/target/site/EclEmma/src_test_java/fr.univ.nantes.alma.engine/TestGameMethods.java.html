@@ -1,0 +1,927 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>TestGameMethods.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</a> &gt; <a href="../../index.html" class="el_group">Engine</a> &gt; <a href="../index.html" class="el_bundle">src/test/java</a> &gt; <a href="index.source.html" class="el_package">fr.univ.nantes.alma.engine</a> &gt; <span class="el_source">TestGameMethods.java</span></div><h1>TestGameMethods.java</h1><pre class="source lang-java linenums">package fr.univ.nantes.alma.engine;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.UUID;
+import java.util.Vector;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+<span class="fc" id="L26">public class TestGameMethods {</span>
+<span class="fc" id="L27">  GameMethods gameMethods = spy(new GameMethods());</span>
+<span class="fc" id="L28">  Vector&lt;MinionCard&gt; board = new Vector&lt;MinionCard&gt;();</span>
+<span class="fc" id="L29">  MinionCard minion1 = new MinionCard();</span>
+<span class="fc" id="L30">  MinionCard minion2 = new MinionCard();</span>
+<span class="fc" id="L31">  HeroCard hero1 = new HeroCard();</span>
+<span class="fc" id="L32">  HeroCard hero2 = new HeroCard();</span>
+<span class="fc" id="L33">  AbstractCard[] deck = new AbstractCard[1];</span>
+<span class="fc" id="L34">  Vector&lt;AbstractCard&gt; hand = new Vector&lt;AbstractCard&gt;();</span>
+<span class="fc" id="L35">  Player player1 = new Player();</span>
+<span class="fc" id="L36">  Player player2 = new Player();</span>
+<span class="fc" id="L37">  SpellCard spell1 = new SpellCard();</span>
+<span class="fc" id="L38">  LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+  
+  @BeforeEach
+  public void init() {
+<span class="fc" id="L42">    board = new Vector&lt;MinionCard&gt;();</span>
+<span class="fc" id="L43">    minion1 = new MinionCard();</span>
+<span class="fc" id="L44">    minion2 = new MinionCard();</span>
+<span class="fc" id="L45">    hero1 = new HeroCard();</span>
+<span class="fc" id="L46">    hero2 = new HeroCard();</span>
+<span class="fc" id="L47">    gameMethods  = spy(new GameMethods());</span>
+<span class="fc" id="L48">    deck = new AbstractCard[1];</span>
+<span class="fc" id="L49">    hand = new Vector&lt;AbstractCard&gt;();</span>
+<span class="fc" id="L50">    player1 = new Player();</span>
+<span class="fc" id="L51">    player2 = new Player();</span>
+<span class="fc" id="L52">    spell1 = new SpellCard();</span>
+<span class="fc" id="L53">    targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L54">  }</span>
+  
+  @Test
+  public void testConstructeur() {
+<span class="fc" id="L58">    player1.setManaPool(0);</span>
+<span class="fc" id="L59">    player1.setManaMaxTurn(0);</span>
+<span class="fc" id="L60">    deck[0] = minion1;</span>
+<span class="fc" id="L61">    player1.setDeck(deck);</span>
+<span class="fc" id="L62">    player1.setHand(hand);</span>
+<span class="fc" id="L63">    player1.setBoard(board);</span>
+<span class="fc" id="L64">    hero1.setHeroPowerUsed(false);</span>
+<span class="fc" id="L65">    player1.setHero(hero1);</span>
+<span class="fc" id="L66">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L67">    ArrayList&lt;MinionCard&gt; invocations = new ArrayList&lt;MinionCard&gt;();</span>
+<span class="fc" id="L68">    GameMethods gameMethods = new GameMethods(uuid, player1, player2, invocations);</span>
+<span class="fc" id="L69">    assertThat(false).isEqualTo(gameMethods.isGameOver());</span>
+<span class="fc" id="L70">    assertThat(invocations).isEqualTo(gameMethods.getInvocations());</span>
+<span class="fc" id="L71">    assertThat(uuid).isEqualTo(gameMethods.getIdGame());</span>
+<span class="fc" id="L72">    assertThat(player1).isEqualTo(gameMethods.getCurrentPlayer());</span>
+<span class="fc" id="L73">    assertThat(player2).isEqualTo(gameMethods.getOtherPlayer());</span>
+<span class="fc" id="L74">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;true, true, false&quot;, &quot;true, false, true&quot;, &quot;false, true, false&quot;, &quot;false, false, true&quot; })
+  public void testCharge(boolean attackedBegin, boolean charge, boolean attackedEnd) {
+<span class="fc" id="L79">    minion1.setAttacked(attackedBegin);</span>
+<span class="fc" id="L80">    minion1.setCharge(charge);</span>
+<span class="fc" id="L81">    gameMethods.charge(minion1);</span>
+<span class="fc" id="L82">    assertThat(attackedEnd).isEqualTo(minion1.isAttacked());</span>
+<span class="fc" id="L83">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;1,true,28,29&quot;,&quot;2,true,29,30&quot;, &quot;2,true,30,30&quot;, &quot;2,false,28,28&quot;})
+  public void testLifesteal(int damageMinion, boolean lifestealMinion, int heroHealthPointsBegin, int heroHealthPointsEnd) {
+<span class="fc" id="L88">    minion1.setDamage(damageMinion);</span>
+<span class="fc" id="L89">    minion1.setLifesteal(lifestealMinion);</span>
+
+<span class="fc" id="L91">    hero1.setHealthPoints(heroHealthPointsBegin);</span>
+<span class="fc" id="L92">    gameMethods.lifesteal(hero1, minion1);</span>
+<span class="fc" id="L93">    assertThat(heroHealthPointsEnd).isEqualTo(hero1.getHealthPoints());</span>
+<span class="fc" id="L94">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;true, false, true, true&quot;, &quot;false, true, false, true&quot;, &quot;true, true, true, true&quot;, &quot;false, false, false, false&quot;})
+  public void testTaunt(boolean tauntMinion1, boolean tauntMinion2, boolean tauntStatus1, boolean tauntStatus2) {
+<span class="fc" id="L99">    assertThat(false).isEqualTo(gameMethods.taunt(board));</span>
+<span class="fc" id="L100">    minion1.setTaunt(tauntMinion1);</span>
+<span class="fc" id="L101">    board.add(minion1);</span>
+<span class="fc" id="L102">    assertThat(tauntStatus1).isEqualTo(gameMethods.taunt(board));</span>
+<span class="fc" id="L103">    minion2.setTaunt(tauntMinion2);</span>
+<span class="fc" id="L104">    board.add(minion2);</span>
+<span class="fc" id="L105">    assertThat(tauntStatus2).isEqualTo(gameMethods.taunt(board));</span>
+<span class="fc" id="L106">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;1,1,2,1&quot;,&quot;1,0,1,1&quot;})
+  public void testGiveAttackAuraToOtherMinions(int buffMinion1, int buffMinion2, int finalDamageMinion1, int finalDamageMinion2) {
+<span class="fc" id="L111">    minion1.setDamage(1);</span>
+<span class="fc" id="L112">    minion1.setAttackBuffAura(buffMinion1);</span>
+<span class="fc" id="L113">    minion2.setAttackBuffAura(buffMinion2);</span>
+<span class="fc" id="L114">    minion2.setDamage(1);</span>
+<span class="fc" id="L115">    board.add(minion1);</span>
+<span class="fc" id="L116">    board.add(minion2);</span>
+<span class="fc" id="L117">    gameMethods.giveAttackAuraToOtherMinions(board, minion2);</span>
+<span class="fc" id="L118">    assertThat(finalDamageMinion1).isEqualTo(board.get(0).getDamage());</span>
+<span class="fc" id="L119">    assertThat(finalDamageMinion2).isEqualTo(board.get(1).getDamage());</span>
+<span class="fc" id="L120">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;2,1,1,2&quot;,&quot;0,1,1,0&quot;})
+  public void testGetAttackAuraFromOtherMinions(int buffMinion1, int buffMinion2, int finalDamageMinion1, int finalDamageMinion2) {
+<span class="fc" id="L125">    minion1.setAttackBuffAura(buffMinion1);</span>
+<span class="fc" id="L126">    minion1.setDamage(1);</span>
+<span class="fc" id="L127">    minion2.setAttackBuffAura(buffMinion2);</span>
+<span class="fc" id="L128">    minion2.setDamage(0);</span>
+<span class="fc" id="L129">    board.add(minion1);</span>
+<span class="fc" id="L130">    board.addElement(minion2);</span>
+<span class="fc" id="L131">    gameMethods.getAttackAuraFromOtherMinions(board, minion2);</span>
+<span class="fc" id="L132">    assertThat(finalDamageMinion1).isEqualTo(board.get(0).getDamage());</span>
+<span class="fc" id="L133">    assertThat(finalDamageMinion2).isEqualTo(board.get(1).getDamage());</span>
+    
+<span class="fc" id="L135">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;2,1,1,2&quot;,&quot;2,0,2,3&quot;})
+  public void testRemoveAttackAuraFromMinions(int buffMinion1, int buffMinion2, int finalDamageMinion1, int finalDamageMinion2) {
+<span class="fc" id="L140">    minion1.setAttackBuffAura(buffMinion1);</span>
+<span class="fc" id="L141">    minion1.setDamage(2);</span>
+<span class="fc" id="L142">    minion2.setAttackBuffAura(buffMinion2);</span>
+<span class="fc" id="L143">    minion2.setDamage(3);</span>
+<span class="fc" id="L144">    board.add(minion1);</span>
+<span class="fc" id="L145">    board.add(minion2);</span>
+<span class="fc" id="L146">    gameMethods.removeAttackAuraFromMinions(board, minion2);</span>
+<span class="fc" id="L147">    assertThat(finalDamageMinion1).isEqualTo(board.get(0).getDamage());</span>
+<span class="fc" id="L148">    assertThat(finalDamageMinion2).isEqualTo(board.get(1).getDamage());</span>
+<span class="fc" id="L149">  }</span>
+  
+  @Test
+  public void testDrawCardException() {
+<span class="fc" id="L153">    deck[0] = minion1;</span>
+<span class="fc" id="L154">    player1.setDeck(deck);</span>
+<span class="fc" id="L155">    hand = mock(Vector.class);</span>
+<span class="fc" id="L156">    when(hand.size()).thenReturn(10);</span>
+<span class="fc" id="L157">    player1.setHand(hand);</span>
+<span class="fc" id="L158">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L159">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L160">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L161">          gameMethods.drawCard();</span>
+<span class="nc" id="L162">        }</span>
+    );
+    
+<span class="fc" id="L165">    assertThat(&quot;Votre main est pleine !&quot;).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L166">  }</span>
+  
+  @Test
+  public void testDrawCard() throws EngineException {
+<span class="fc" id="L170">    deck[0] = minion1;</span>
+<span class="fc" id="L171">    player1.setDeck(deck);</span>
+<span class="fc" id="L172">    player1.setHand(hand);</span>
+<span class="fc" id="L173">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L174">    gameMethods.drawCard();</span>
+<span class="fc" id="L175">    assertThat(player1.getHand()).hasSize(1).contains(minion1);</span>
+<span class="fc" id="L176">  }</span>
+
+  @ParameterizedTest
+  @CsvSource({&quot;0,0,1,1&quot;,&quot;10,10,10,10&quot;})
+  public void testInitTurn(int manaMaxInit, int manaPoolInit, int manaMaxEnd, int manaPoolEnd) {
+<span class="fc" id="L181">    hero1.setHeroPowerUsed(true);</span>
+<span class="fc" id="L182">    minion1.setAttacked(true);</span>
+<span class="fc" id="L183">    board.add(minion1);</span>
+<span class="fc" id="L184">    player1.setBoard(board);</span>
+<span class="fc" id="L185">    player1.setHero(hero1);</span>
+<span class="fc" id="L186">    player1.setManaMaxTurn(manaMaxInit);</span>
+<span class="fc" id="L187">    player1.setManaPool(manaPoolInit);</span>
+<span class="fc" id="L188">    player1.setHand(hand);</span>
+<span class="fc" id="L189">    deck[0] = minion1;</span>
+<span class="fc" id="L190">    player1.setDeck(deck);</span>
+<span class="fc" id="L191">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L192">    gameMethods.initTurn();</span>
+<span class="fc" id="L193">    assertThat(manaMaxEnd).isEqualTo(player1.getManaMaxTurn());</span>
+<span class="fc" id="L194">    assertThat(manaPoolEnd).isEqualTo(player1.getManaPool());</span>
+<span class="fc" id="L195">    assertThat(false).isEqualTo(player1.getHero().isHeroPowerUsed());</span>
+<span class="fc" id="L196">    assertThat(false).isEqualTo(player1.getBoard().get(0).isAttacked());</span>
+<span class="fc" id="L197">  }</span>
+  
+  @Test
+  public void testInitTurnException() {
+<span class="fc" id="L201">    hero1.setHeroPowerUsed(true);</span>
+<span class="fc" id="L202">    minion1.setAttacked(true);</span>
+<span class="fc" id="L203">    board.add(minion1);</span>
+<span class="fc" id="L204">    player1.setBoard(board);</span>
+<span class="fc" id="L205">    player1.setHero(hero1);</span>
+<span class="fc" id="L206">    player1.setManaMaxTurn(0);</span>
+<span class="fc" id="L207">    player1.setManaPool(0);</span>
+<span class="fc" id="L208">    hand = mock(Vector.class);</span>
+<span class="fc" id="L209">    when(hand.size()).thenReturn(10);</span>
+<span class="fc" id="L210">    player1.setHand(hand);</span>
+<span class="fc" id="L211">    player1.setDeck(deck);</span>
+<span class="fc" id="L212">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L213">    gameMethods.initTurn();</span>
+<span class="fc" id="L214">    assertThat(1).isEqualTo(player1.getManaMaxTurn());</span>
+<span class="fc" id="L215">    assertThat(1).isEqualTo(player1.getManaPool());</span>
+<span class="fc" id="L216">    assertThat(false).isEqualTo(player1.getHero().isHeroPowerUsed());</span>
+<span class="fc" id="L217">    assertThat(false).isEqualTo(player1.getBoard().get(0).isAttacked());</span>
+<span class="fc" id="L218">  }</span>
+  
+  @Test
+  public void testEndTurn() throws EngineException {
+<span class="fc" id="L222">    doNothing().when(gameMethods).initTurn();</span>
+<span class="fc" id="L223">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L224">    player1.setUuid(uuid);</span>
+<span class="fc" id="L225">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L226">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L227">    doNothing().when(gameMethods).initTurn();</span>
+<span class="fc" id="L228">    gameMethods.endTurn(uuid);</span>
+<span class="fc" id="L229">    assertThat(player2).isEqualTo(gameMethods.getCurrentPlayer());</span>
+<span class="fc" id="L230">    assertThat(player1).isEqualTo(gameMethods.getOtherPlayer());</span>
+<span class="fc" id="L231">  }</span>
+ 
+  @Test
+  public void testEndTurnException() {
+<span class="fc" id="L235">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L236">    UUID uuid2 = UUID.randomUUID();</span>
+<span class="fc" id="L237">    player1.setUuid(uuid2);</span>
+<span class="fc" id="L238">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L239">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L240">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L241">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L242">          gameMethods.endTurn(uuid);</span>
+<span class="nc" id="L243">        }</span>
+    );
+    
+<span class="fc" id="L246">    assertThat(&quot;Ce n'est pas votre tour !&quot;).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L247">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;-1,0&quot;,&quot;0,0&quot;,&quot;1,1&quot;, &quot;3,3&quot;})
+  public void testSpellArmorBuffing(int armorBuff, int armorHeroEnd) {
+<span class="fc" id="L252">    spell1.setArmorBuff(armorBuff);</span>
+<span class="fc" id="L253">    hero1.setArmorPoints(0);</span>
+<span class="fc" id="L254">    gameMethods.spellArmorBuffing(hero1, spell1);</span>
+<span class="fc" id="L255">    assertThat(armorHeroEnd).isEqualTo(hero1.getArmorPoints());</span>
+<span class="fc" id="L256">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;-1,0&quot;, &quot;0,0&quot;, &quot;1,1&quot;, &quot;3,3&quot;})
+  public void testSpellDrawingEffect(int nbDraw, int callDrawCard) throws EngineException {
+<span class="fc" id="L261">    spell1.setNbDraw(nbDraw);</span>
+<span class="fc" id="L262">    doNothing().when(gameMethods).drawCard();</span>
+<span class="fc" id="L263">    gameMethods.spellDrawingEffect(spell1);</span>
+<span class="fc" id="L264">    verify(gameMethods, times(callDrawCard)).drawCard();</span>
+<span class="fc" id="L265">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;-1,0, false&quot;, &quot;0,0, false&quot;, &quot;1,1, false&quot;, &quot;3,3, false&quot;, &quot;1,0,true&quot;})
+  public void testSpellSummoningEffect(int nbSummon, int actualSummon, boolean polymorph) throws EngineException {
+<span class="fc" id="L270">    spell1.setNbSummon(nbSummon);</span>
+<span class="fc" id="L271">    spell1.setIdInvocation(1);</span>
+<span class="fc" id="L272">    spell1.setPolymorph(polymorph);</span>
+<span class="fc" id="L273">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L274">    doNothing().when(gameMethods).summonMinion(player1,spell1.getIdInvocation());</span>
+<span class="fc" id="L275">    gameMethods.spellSummoningEffect(spell1);</span>
+<span class="fc" id="L276">    verify(gameMethods, times(actualSummon)).summonMinion(player1,spell1.getIdInvocation());</span>
+<span class="fc" id="L277">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;-1,1&quot;, &quot;0,1&quot;,&quot;1, 2&quot;,&quot;3,4&quot;})
+  public void testSpellAttackBuffingEffect(int attackBuff, int attackEnd) {
+<span class="fc" id="L282">    spell1.setAttackBuff(attackBuff);</span>
+<span class="fc" id="L283">    spell1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L284">    minion1.setDamage(1);</span>
+<span class="fc" id="L285">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L286">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L287">    LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L288">    targets.put(&quot;0_0&quot;, minion1);</span>
+<span class="fc" id="L289">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, 1, spell1.getTarget());</span>
+<span class="fc" id="L290">    gameMethods.spellAttackBuffingEffect(player1, 1, spell1);</span>
+<span class="fc" id="L291">    assertThat(attackEnd).isEqualTo(minion1.getDamage());</span>
+<span class="fc" id="L292">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;-1,0&quot;, &quot;0,0&quot;,&quot;1,0&quot;,&quot;3,0&quot;})
+  public void testSpellAttackBuffingEffectNotMinion(int attackBuff, int attackEnd) {
+<span class="fc" id="L297">    hero1.setDamage(0);</span>
+<span class="fc" id="L298">    spell1.setAttackBuff(attackBuff);</span>
+<span class="fc" id="L299">    spell1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L300">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L301">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L302">    LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L303">    targets.put(&quot;0&quot;, hero1);</span>
+<span class="fc" id="L304">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, -1, spell1.getTarget());</span>
+<span class="fc" id="L305">    gameMethods.spellAttackBuffingEffect(player1, -1, spell1);</span>
+<span class="fc" id="L306">    assertThat(attackEnd).isEqualTo(hero1.getDamage());</span>
+<span class="fc" id="L307">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;false, 0, 0, '0_0'&quot;, &quot;true, 1, 0, '0_0'&quot; , &quot;true, 0, 0, '2_0'&quot;})
+  public void testSpellPolymorphingEffectCurrentPlayer(boolean polymorph,
+      int nbCallsPolymorphCurrentPlayer, int nbCallsPolymorphOtherPlayer, 
+      String keyTarget) throws EngineException {
+<span class="fc" id="L314">    spell1.setPolymorph(polymorph);</span>
+<span class="fc" id="L315">    spell1.setIdInvocation(1);</span>
+<span class="fc" id="L316">    spell1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L317">    board.add(minion1);</span>
+<span class="fc" id="L318">    player1.setBoard(board);</span>
+<span class="fc" id="L319">    Vector&lt;MinionCard&gt; board2 = new Vector&lt;MinionCard&gt;();</span>
+<span class="fc" id="L320">    board2.add(minion2);</span>
+<span class="fc" id="L321">    player2.setBoard(board2);</span>
+<span class="fc" id="L322">    ArrayList&lt;MinionCard&gt; invocations = new ArrayList&lt;MinionCard&gt;();</span>
+<span class="fc" id="L323">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L324">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L325">    gameMethods.setInvocations(invocations);</span>
+<span class="fc" id="L326">    targets.put(keyTarget, minion1);</span>
+<span class="fc" id="L327">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, 0, &quot;&quot;);</span>
+<span class="fc" id="L328">    doNothing().when(gameMethods).polymorph(player1, 1, &quot;0&quot;);</span>
+<span class="fc" id="L329">    doNothing().when(gameMethods).removeAttackAuraFromMinions(board, minion1);</span>
+<span class="fc" id="L330">    doNothing().when(gameMethods).polymorph(player2, 1, &quot;0&quot;);</span>
+<span class="fc" id="L331">    doNothing().when(gameMethods).removeAttackAuraFromMinions(board2, minion2);</span>
+<span class="fc" id="L332">    gameMethods.spellPolymorphingEffect(player1, 0, spell1);</span>
+<span class="fc" id="L333">    verify(gameMethods, times(nbCallsPolymorphCurrentPlayer)).polymorph(player1, 1, &quot;0&quot;);</span>
+<span class="fc" id="L334">    verify(gameMethods, times(nbCallsPolymorphOtherPlayer)).polymorph(player2, 1, &quot;0&quot;);</span>
+<span class="fc" id="L335">  }</span>
+  
+  @Test
+  public void testSpellPolymorphingEffectOtherPlayer() throws EngineException {
+<span class="fc" id="L339">    spell1.setPolymorph(true);</span>
+<span class="fc" id="L340">    spell1.setIdInvocation(1);</span>
+<span class="fc" id="L341">    spell1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L342">    board.add(minion1);</span>
+<span class="fc" id="L343">    player1.setBoard(board);</span>
+<span class="fc" id="L344">    Vector&lt;MinionCard&gt; board2 = new Vector&lt;MinionCard&gt;();</span>
+<span class="fc" id="L345">    board2.add(minion2);</span>
+<span class="fc" id="L346">    player2.setBoard(board2);</span>
+<span class="fc" id="L347">    ArrayList&lt;MinionCard&gt; invocations = new ArrayList&lt;MinionCard&gt;();</span>
+<span class="fc" id="L348">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L349">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L350">    gameMethods.setInvocations(invocations);</span>
+<span class="fc" id="L351">    targets.put(&quot;1_0&quot;, minion1);</span>
+<span class="fc" id="L352">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, 0, &quot;&quot;);</span>
+<span class="fc" id="L353">    doNothing().when(gameMethods).polymorph(player1, 1, &quot;0&quot;);</span>
+<span class="fc" id="L354">    doNothing().when(gameMethods).removeAttackAuraFromMinions(board, minion1);</span>
+<span class="fc" id="L355">    doNothing().when(gameMethods).polymorph(player2, 1, &quot;0&quot;);</span>
+<span class="fc" id="L356">    doNothing().when(gameMethods).removeAttackAuraFromMinions(board2, minion2);</span>
+<span class="fc" id="L357">    gameMethods.spellPolymorphingEffect(player1, 0, spell1);</span>
+<span class="fc" id="L358">    verify(gameMethods, times(0)).polymorph(player1, 1, &quot;0&quot;);</span>
+<span class="fc" id="L359">    verify(gameMethods, times(1)).polymorph(player2, 1, &quot;0&quot;);</span>
+<span class="fc" id="L360">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;0, -1, false, 1, 0&quot;,&quot;1, -1, false, 1, 1&quot;,&quot;1, -1, true, 0, 1&quot; })
+  public void testSpellDamageEffectHero(int spellDamage, int idTarget, boolean gameOver, 
+      int heroHP, int nbCallsSubMethod) {
+<span class="fc" id="L366">    hero1 = spy(new HeroCard());</span>
+<span class="fc" id="L367">    spell1.setDamage(spellDamage);</span>
+<span class="fc" id="L368">    spell1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L369">    hero1.setHealthPoints(heroHP);</span>
+<span class="fc" id="L370">    player1.setHero(hero1);</span>
+<span class="fc" id="L371">    LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L372">    targets.put(&quot;0&quot;, hero1);</span>
+<span class="fc" id="L373">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L374">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L375">    gameMethods.setGameOver(false);</span>
+<span class="fc" id="L376">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, idTarget, &quot;&quot;);</span>
+<span class="fc" id="L377">    doNothing().when(hero1).receiveDamage(spellDamage);</span>
+<span class="fc" id="L378">    gameMethods.spellDamageEffect(player1, idTarget, spell1);</span>
+<span class="fc" id="L379">    verify(hero1, times(nbCallsSubMethod)).receiveDamage(spellDamage);</span>
+<span class="fc" id="L380">    assertThat(gameOver).isEqualTo(gameMethods.isGameOver());</span>
+<span class="fc" id="L381">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;1, -1, 1, 1, 0&quot;, &quot;1, -1, 0, 1, 1&quot;})
+  public void testSpellDamageEffectMinionP1(int spellDamage, int idTarget, int minionHP, 
+      int nbCallsSubMethods1, int nbCallsSubMethods2) {
+<span class="fc" id="L387">    minion1 = spy(new MinionCard());</span>
+<span class="fc" id="L388">    player1 = spy(new Player());</span>
+<span class="fc" id="L389">    spell1.setDamage(spellDamage);</span>
+<span class="fc" id="L390">    spell1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L391">    minion1.setHealthPoints(minionHP);</span>
+<span class="fc" id="L392">    board.add(minion1);</span>
+<span class="fc" id="L393">    player1.setBoard(board);</span>
+<span class="fc" id="L394">    LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L395">    targets.put(&quot;0_0&quot;, minion1);</span>
+<span class="fc" id="L396">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L397">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L398">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, idTarget, &quot;&quot;);</span>
+<span class="fc" id="L399">    doNothing().when(minion1).receiveDamage(spellDamage);</span>
+<span class="fc" id="L400">    gameMethods.spellDamageEffect(player1, idTarget, spell1);</span>
+<span class="fc" id="L401">    verify(minion1, times(nbCallsSubMethods1)).receiveDamage(spellDamage);</span>
+<span class="fc" id="L402">    verify(gameMethods, times(nbCallsSubMethods2)).removeAttackAuraFromMinions(board, minion1);</span>
+<span class="fc" id="L403">    verify(player1, times(nbCallsSubMethods2)).removeCardFromBoard(0);</span>
+<span class="fc" id="L404">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;1, -1, 1, 1, 0&quot;, &quot;1, -1, 0, 1, 1&quot;})
+  public void testSpellDamageEffectMinionP2(int spellDamage, int idTarget, int minionHP, 
+      int nbCallsSubMethods1, int nbCallsSubMethods2) {
+<span class="fc" id="L410">    minion1 = spy(new MinionCard());</span>
+<span class="fc" id="L411">    player2 = spy(new Player());</span>
+<span class="fc" id="L412">    spell1.setDamage(spellDamage);</span>
+<span class="fc" id="L413">    spell1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L414">    minion1.setHealthPoints(minionHP);</span>
+<span class="fc" id="L415">    board.add(minion1);</span>
+<span class="fc" id="L416">    player2.setBoard(board);</span>
+<span class="fc" id="L417">    LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L418">    targets.put(&quot;1_0&quot;, minion1);</span>
+<span class="fc" id="L419">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L420">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L421">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player2, idTarget, &quot;&quot;);</span>
+<span class="fc" id="L422">    doNothing().when(minion1).receiveDamage(spellDamage);</span>
+<span class="fc" id="L423">    gameMethods.spellDamageEffect(player2, idTarget, spell1);</span>
+<span class="fc" id="L424">    verify(minion1, times(nbCallsSubMethods1)).receiveDamage(spellDamage);</span>
+<span class="fc" id="L425">    verify(gameMethods, times(nbCallsSubMethods2)).removeAttackAuraFromMinions(board, minion1);</span>
+<span class="fc" id="L426">    verify(player2, times(nbCallsSubMethods2)).removeCardFromBoard(0);</span>
+<span class="fc" id="L427">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;0, -1, false, 1, 0&quot;,&quot;1, -1, false, 1, 1&quot;,&quot;1, -1, true, 0, 1&quot; })
+  public void testMageHeroPowerHero(int spellDamage, int idTarget, boolean gameOver, 
+      int heroHP, int nbCallsSubMethod) {
+<span class="fc" id="L433">    hero1 = spy(new HeroCard());</span>
+<span class="fc" id="L434">    hero1.setDamage(spellDamage);</span>
+<span class="fc" id="L435">    hero1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L436">    hero1.setHealthPoints(heroHP);</span>
+<span class="fc" id="L437">    player1.setHero(hero1);</span>
+<span class="fc" id="L438">    LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L439">    targets.put(&quot;0&quot;, hero1);</span>
+<span class="fc" id="L440">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L441">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L442">    gameMethods.setGameOver(false);</span>
+<span class="fc" id="L443">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, idTarget, &quot;&quot;);</span>
+<span class="fc" id="L444">    doNothing().when(hero1).receiveDamage(spellDamage);</span>
+<span class="fc" id="L445">    gameMethods.mageHeroPower(player1, idTarget, hero1);</span>
+<span class="fc" id="L446">    verify(hero1, times(nbCallsSubMethod)).receiveDamage(spellDamage);</span>
+<span class="fc" id="L447">    assertThat(gameOver).isEqualTo(gameMethods.isGameOver());</span>
+<span class="fc" id="L448">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;1, -1, 1, 1, 0&quot;, &quot;1, -1, 0, 1, 1&quot;})
+  public void testMageHeroPowerP1(int spellDamage, int idTarget, int minionHP, 
+      int nbCallsSubMethods1, int nbCallsSubMethods2) {
+<span class="fc" id="L454">    minion1 = spy(new MinionCard());</span>
+<span class="fc" id="L455">    player1 = spy(new Player());</span>
+<span class="fc" id="L456">    hero1.setDamage(spellDamage);</span>
+<span class="fc" id="L457">    hero1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L458">    minion1.setHealthPoints(minionHP);</span>
+<span class="fc" id="L459">    board.add(minion1);</span>
+<span class="fc" id="L460">    player1.setBoard(board);</span>
+<span class="fc" id="L461">    LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L462">    targets.put(&quot;0_0&quot;, minion1);</span>
+<span class="fc" id="L463">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L464">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L465">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, idTarget, &quot;&quot;);</span>
+<span class="fc" id="L466">    doNothing().when(minion1).receiveDamage(spellDamage);</span>
+<span class="fc" id="L467">    gameMethods.mageHeroPower(player1, idTarget, hero1);</span>
+<span class="fc" id="L468">    verify(minion1, times(nbCallsSubMethods1)).receiveDamage(spellDamage);</span>
+<span class="fc" id="L469">    verify(gameMethods, times(nbCallsSubMethods2)).removeAttackAuraFromMinions(board, minion1);</span>
+<span class="fc" id="L470">    verify(player1, times(nbCallsSubMethods2)).removeCardFromBoard(0);</span>
+<span class="fc" id="L471">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;1, -1, 1, 1, 0&quot;, &quot;1, -1, 0, 1, 1&quot;})
+  public void testMageHeroPowerP2(int spellDamage, int idTarget, int minionHP, 
+      int nbCallsSubMethods1, int nbCallsSubMethods2) {
+<span class="fc" id="L477">    minion1 = spy(new MinionCard());</span>
+<span class="fc" id="L478">    player2 = spy(new Player());</span>
+<span class="fc" id="L479">    hero1.setDamage(spellDamage);</span>
+<span class="fc" id="L480">    hero1.setTarget(&quot;&quot;);</span>
+<span class="fc" id="L481">    minion1.setHealthPoints(minionHP);</span>
+<span class="fc" id="L482">    board.add(minion1);</span>
+<span class="fc" id="L483">    player2.setBoard(board);</span>
+<span class="fc" id="L484">    LinkedHashMap&lt;String, AbstractCard&gt; targets = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L485">    targets.put(&quot;1_0&quot;, minion1);</span>
+<span class="fc" id="L486">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L487">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L488">    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player2, idTarget, &quot;&quot;);</span>
+<span class="fc" id="L489">    doNothing().when(minion1).receiveDamage(spellDamage);</span>
+<span class="fc" id="L490">    gameMethods.mageHeroPower(player2, idTarget, hero1);</span>
+<span class="fc" id="L491">    verify(minion1, times(nbCallsSubMethods1)).receiveDamage(spellDamage);</span>
+<span class="fc" id="L492">    verify(gameMethods, times(nbCallsSubMethods2)).removeAttackAuraFromMinions(board, minion1);</span>
+<span class="fc" id="L493">    verify(player2, times(nbCallsSubMethods2)).removeCardFromBoard(0);</span>
+<span class="fc" id="L494">  }</span>
+  
+  
+  @ParameterizedTest
+  @CsvSource({&quot;1, 0, 1, 1, false, false, -1, 1, 0, true, false, 1, 1&quot;, &quot;1, 0, 1, 1, false, false, -1, 3, 2, false, false, 1, 1&quot;,
+    &quot;1, 1, 1, 1, false, true, 0, 1, 1, false, true, 0, 0&quot;,&quot;1, 1, 2, 2, false, true, 0, 1, 1, false, true, 1, 1&quot;})
+  public void testAttack(int minionDamage1, int minionDamage2, int minionHP1, int minionHP2, boolean minionAttacked1, 
+      boolean tauntStatus, int idTarget, int heroHP2, int heroHPEnd2, boolean gameOverStatus,
+      boolean tauntStatusMinion2, int minionEndHP1, int minionEndHP2) throws EngineException {
+<span class="fc" id="L503">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L504">    UUID uuid2 = UUID.randomUUID();</span>
+<span class="fc" id="L505">    player1.setUuid(uuid);</span>
+<span class="fc" id="L506">    player2.setUuid(uuid2);</span>
+<span class="fc" id="L507">    minion1 = spy(new MinionCard());</span>
+<span class="fc" id="L508">    minion2 = spy(new MinionCard());</span>
+<span class="fc" id="L509">    minion1.setDamage(minionDamage1);</span>
+<span class="fc" id="L510">    minion1.setHealthPoints(minionHP1);</span>
+<span class="fc" id="L511">    minion1.setAttacked(minionAttacked1);</span>
+<span class="fc" id="L512">    minion2.setDamage(minionDamage2);</span>
+<span class="fc" id="L513">    minion2.setHealthPoints(minionHP2);</span>
+<span class="fc" id="L514">    minion2.setTaunt(tauntStatusMinion2);</span>
+<span class="fc" id="L515">    hero1 = spy(HeroCard.class);</span>
+<span class="fc" id="L516">    hero2 = spy(HeroCard.class);</span>
+<span class="fc" id="L517">    hero2.setHealthPoints(heroHP2);</span>
+<span class="fc" id="L518">    player1.setHero(hero1);</span>
+<span class="fc" id="L519">    player2.setHero(hero2);</span>
+<span class="fc" id="L520">    board.add(minion1);</span>
+<span class="fc" id="L521">    Vector&lt;MinionCard&gt; board2 = new Vector&lt;MinionCard&gt;();</span>
+<span class="fc" id="L522">    board2.add(minion2);</span>
+<span class="fc" id="L523">    player1.setBoard(board);</span>
+<span class="fc" id="L524">    player2.setBoard(board2);</span>
+<span class="fc" id="L525">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L526">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L527">    gameMethods.setGameOver(false);</span>
+<span class="fc" id="L528">    doReturn(tauntStatus).when(gameMethods).taunt(board2);</span>
+<span class="fc" id="L529">    doNothing().when(gameMethods).lifesteal(hero2, minion1);</span>
+<span class="fc" id="L530">    gameMethods.attack(uuid, 0, uuid2, idTarget);</span>
+<span class="fc" id="L531">    assertThat(true).isEqualTo(minion1.isAttacked());</span>
+<span class="fc" id="L532">    assertThat(heroHPEnd2).isEqualTo(hero2.getHealthPoints());</span>
+<span class="fc" id="L533">    assertThat(gameOverStatus).isEqualTo(gameMethods.isGameOver());</span>
+<span class="fc" id="L534">    assertThat(minionEndHP1).isEqualTo(minion1.getHealthPoints());</span>
+<span class="fc" id="L535">    assertThat(minionEndHP2).isEqualTo(minion2.getHealthPoints());</span>
+<span class="fc" id="L536">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;0, false, false, -1, false, Ce serviteur ne peut pas attaquer !&quot;, 
+    &quot;1, true, false, -1, false, Ce serviteur a déjà attaqué durant ce tour !&quot;,
+    &quot;1, false, true, 0, false, 'Cible incorrecte, un serviteur adverse a provocation !'&quot;})
+  public void testAttackExceptions(int minionDamage1, boolean minionAttacked1, 
+      boolean tauntStatus, int idTarget, boolean tauntStatusMinion2, String exceptionMessage) throws EngineException {
+<span class="fc" id="L544">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L545">    UUID uuid2 = UUID.randomUUID();</span>
+<span class="fc" id="L546">    minion1 = spy(new MinionCard());</span>
+<span class="fc" id="L547">    minion2 = spy(new MinionCard());</span>
+<span class="fc" id="L548">    minion1.setDamage(minionDamage1);</span>
+<span class="fc" id="L549">    minion1.setAttacked(minionAttacked1);</span>
+<span class="fc" id="L550">    minion2.setTaunt(tauntStatusMinion2);</span>
+<span class="fc" id="L551">    hero1 = spy(HeroCard.class);</span>
+<span class="fc" id="L552">    hero2 = spy(HeroCard.class);</span>
+<span class="fc" id="L553">    board.add(minion1);</span>
+<span class="fc" id="L554">    Vector&lt;MinionCard&gt; board2 = new Vector&lt;MinionCard&gt;();</span>
+<span class="fc" id="L555">    board2.add(minion2);</span>
+<span class="fc" id="L556">    player1.setBoard(board);</span>
+<span class="fc" id="L557">    player1.setUuid(uuid);</span>
+<span class="fc" id="L558">    player2.setBoard(board2);</span>
+<span class="fc" id="L559">    player2.setUuid(uuid2);</span>
+<span class="fc" id="L560">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L561">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L562">    gameMethods.setGameOver(false);</span>
+<span class="fc" id="L563">    doReturn(tauntStatus).when(gameMethods).taunt(board2);</span>
+<span class="fc" id="L564">    doNothing().when(gameMethods).lifesteal(hero2, minion1);</span>
+<span class="fc" id="L565">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L566">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L567">          gameMethods.attack(uuid, 0, uuid2, idTarget);</span>
+<span class="nc" id="L568">        }</span>
+    );
+    
+<span class="fc" id="L571">    assertThat(exceptionMessage).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L572">  }</span>
+  
+  @Test
+  public void testAttackExceptionTurn() {
+<span class="fc" id="L576">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L577">    UUID uuid2 = UUID.randomUUID();</span>
+<span class="fc" id="L578">    player1.setUuid(uuid2);</span>
+<span class="fc" id="L579">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L580">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L581">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L582">          gameMethods.attack(uuid, 0, uuid2, 0);</span>
+<span class="nc" id="L583">        }</span>
+    );    
+<span class="fc" id="L585">    assertThat(&quot;Ce n'est pas votre tour !&quot;).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L586">  }</span>
+  
+  @Test
+  public void testAttackYourselfException() {
+<span class="fc" id="L590">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L591">    UUID uuid2 = UUID.randomUUID();</span>
+<span class="fc" id="L592">    player1.setUuid(uuid);</span>
+<span class="fc" id="L593">    player2.setUuid(uuid2);</span>
+<span class="fc" id="L594">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L595">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L596">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L597">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L598">          gameMethods.attack(uuid, 0, uuid, 0);</span>
+<span class="nc" id="L599">        }</span>
+    );    
+<span class="fc" id="L601">    assertThat(&quot;Vous ne pouvez attaquer que l'adversaire !&quot;).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L602">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;mage, 2, 0, -1, false, true, 1, 0, 0&quot;, &quot;warrior, 2, 0, -1, false, true, 0, 0, 2&quot;,
+    &quot;paladin, 2, 0, -1, false, true, 0, 1, 0&quot;})
+  public void testHeroPower(String heroType, int playerManaPool1, int playerManaPoolEnd1, int idTarget, 
+      boolean heroPowerUsed1, boolean heroPowerUsedEnd1, int mageHeroPowerUsedCount, int summonEffectCount, 
+      int heroArmorEnd) throws EngineException {
+<span class="fc" id="L610">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L611">    hero1 = spy(new HeroCard());</span>
+<span class="fc" id="L612">    hero1.setArmorPoints(0);</span>
+<span class="fc" id="L613">    hero1.setHeroPowerUsed(heroPowerUsed1);</span>
+<span class="fc" id="L614">    hero1.setArmorBuff(2);</span>
+<span class="fc" id="L615">    hero1.setType(heroType);</span>
+<span class="fc" id="L616">    hero1.setIdInvocation(12);</span>
+<span class="fc" id="L617">    player1.setHero(hero1);</span>
+<span class="fc" id="L618">    player1.setUuid(uuid);</span>
+<span class="fc" id="L619">    player1.setManaPool(playerManaPool1);</span>
+<span class="fc" id="L620">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L621">    doNothing().when(gameMethods).mageHeroPower(player1, idTarget, hero1);</span>
+<span class="fc" id="L622">    doNothing().when(gameMethods).summonMinion(player1, 12);</span>
+<span class="fc" id="L623">    gameMethods.heroPower(uuid, player1, idTarget);</span>
+<span class="fc" id="L624">    assertThat(playerManaPoolEnd1).isEqualTo(player1.getManaPool());</span>
+<span class="fc" id="L625">    assertThat(heroArmorEnd).isEqualTo(hero1.getArmorPoints());</span>
+<span class="fc" id="L626">    assertThat(heroPowerUsedEnd1).isEqualTo(hero1.isHeroPowerUsed());</span>
+<span class="fc" id="L627">    verify(gameMethods, times(mageHeroPowerUsedCount)).mageHeroPower(player1, idTarget, hero1);</span>
+<span class="fc" id="L628">    verify(gameMethods, times(summonEffectCount)).summonMinion(player1, 12);</span>
+<span class="fc" id="L629">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;bonjour, 2, 0, -1, false, true, Impossible de récupérer la classe du héros !&quot;, 
+    &quot;warrior, 2, 2, -1, true, true, Vous avez déjà utilisé votre pouvoir héroïque durant ce tour !&quot;,
+    &quot;warrior, 1, 1, -1, false, false, Vous n'avez pas assez de mana !&quot;})
+  public void testHeroPowerExceptions(String heroType, int playerManaPool1, int playerManaPoolEnd1, int idTarget, 
+      boolean heroPowerUsed1, boolean heroPowerUsedEnd1, String exceptionMessage) throws EngineException {
+<span class="fc" id="L637">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L638">    hero1 = spy(new HeroCard());</span>
+<span class="fc" id="L639">    hero1.setHeroPowerUsed(heroPowerUsed1);</span>
+<span class="fc" id="L640">    hero1.setType(heroType);</span>
+<span class="fc" id="L641">    player1.setHero(hero1);</span>
+<span class="fc" id="L642">    player1.setUuid(uuid);</span>
+<span class="fc" id="L643">    player1.setManaPool(playerManaPool1);</span>
+<span class="fc" id="L644">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L645">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L646">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L647">          gameMethods.heroPower(uuid, player1, idTarget);</span>
+<span class="nc" id="L648">        }</span>
+    );
+    
+<span class="fc" id="L651">    assertThat(exceptionMessage).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L652">    assertThat(playerManaPoolEnd1).isEqualTo(player1.getManaPool());</span>
+<span class="fc" id="L653">    assertThat(heroPowerUsedEnd1).isEqualTo(hero1.isHeroPowerUsed());</span>
+<span class="fc" id="L654">  }</span>
+  
+  @Test
+  public void testHeroPowerExceptionTurn() {
+<span class="fc" id="L658">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L659">    UUID uuid2 = UUID.randomUUID();</span>
+<span class="fc" id="L660">    hero1 = spy(new HeroCard());</span>
+<span class="fc" id="L661">    hero1.setHeroPowerUsed(false);</span>
+<span class="fc" id="L662">    hero1.setType(&quot;mage&quot;);</span>
+<span class="fc" id="L663">    player1.setHero(hero1);</span>
+<span class="fc" id="L664">    player1.setUuid(uuid2);</span>
+<span class="fc" id="L665">    player1.setManaPool(2);</span>
+<span class="fc" id="L666">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L667">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L668">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L669">          gameMethods.heroPower(uuid, player1, -1);</span>
+<span class="nc" id="L670">        }</span>
+    );
+    
+<span class="fc" id="L673">    assertThat(&quot;Ce n'est pas votre tour !&quot;).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L674">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;0, 10, 8, 0, 1, 0&quot;, &quot;1, 10, 8, 0, 0, 1&quot;})
+  public void testPlayCard(int idCard, int manaPoolBegin1, int manaPoolEnd1, int idTarget, 
+      int countSummonMinion, int countSpellSubMethods) throws EngineException {
+<span class="fc" id="L680">    minion1.setManaCost(2);</span>
+<span class="fc" id="L681">    spell1.setManaCost(2);</span>
+<span class="fc" id="L682">    hand.add(minion1);</span>
+<span class="fc" id="L683">    hand.addElement(spell1);</span>
+<span class="fc" id="L684">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L685">    player1.setUuid(uuid);</span>
+<span class="fc" id="L686">    player1.setManaPool(manaPoolBegin1);</span>
+<span class="fc" id="L687">    player1.setHero(hero1);</span>
+<span class="fc" id="L688">    player1.setHand(hand);</span>
+<span class="fc" id="L689">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L690">    doNothing().when(gameMethods).summonMinionFromHand(idCard);</span>
+<span class="fc" id="L691">    doNothing().when(gameMethods).spellDrawingEffect(spell1);</span>
+<span class="fc" id="L692">    doNothing().when(gameMethods).spellArmorBuffing(hero1, spell1);</span>
+<span class="fc" id="L693">    doNothing().when(gameMethods).spellSummoningEffect(spell1);</span>
+<span class="fc" id="L694">    doNothing().when(gameMethods).spellAttackBuffingEffect(player1, idTarget, spell1);</span>
+<span class="fc" id="L695">    doNothing().when(gameMethods).spellPolymorphingEffect(player1, idTarget, spell1);</span>
+<span class="fc" id="L696">    doNothing().when(gameMethods).spellDamageEffect(player1, idTarget, spell1);</span>
+<span class="fc" id="L697">    gameMethods.playCard(uuid, idCard, player1, idTarget);</span>
+<span class="fc" id="L698">    assertThat(manaPoolEnd1).isEqualTo(player1.getManaPool());</span>
+<span class="fc" id="L699">    verify(gameMethods, times(countSummonMinion)).summonMinionFromHand(idCard);</span>
+<span class="fc" id="L700">    verify(gameMethods, times(countSpellSubMethods)).spellDrawingEffect(spell1);</span>
+<span class="fc" id="L701">    verify(gameMethods, times(countSpellSubMethods)).spellArmorBuffing(hero1, spell1);</span>
+<span class="fc" id="L702">    verify(gameMethods, times(countSpellSubMethods)).spellSummoningEffect(spell1);</span>
+<span class="fc" id="L703">    verify(gameMethods, times(countSpellSubMethods)).spellAttackBuffingEffect(player1, idTarget, spell1);</span>
+<span class="fc" id="L704">    verify(gameMethods, times(countSpellSubMethods)).spellPolymorphingEffect(player1, idTarget, spell1);</span>
+<span class="fc" id="L705">    verify(gameMethods, times(countSpellSubMethods)).spellDamageEffect(player1, idTarget, spell1);</span>
+<span class="fc" id="L706">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;0, 1, 1, 0, Vous n'avez pas assez de mana !&quot;, &quot;-1, 10, 10, 0, Votre carte est inexistante !&quot;,
+    &quot;5, 10, 10, 0, Votre carte est inexistante !&quot;, &quot;2, 10, 10, 0, Ceci n'est pas une carte valide !&quot;})
+  public void testPlayCardExceptions(int idCard, int manaPoolBegin1, int manaPoolEnd1, int idTarget, 
+      String exceptionMessage) throws EngineException {
+<span class="fc" id="L713">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L714">    minion1.setManaCost(2);</span>
+<span class="fc" id="L715">    spell1.setManaCost(2);</span>
+<span class="fc" id="L716">    hero2.setManaCost(0);</span>
+<span class="fc" id="L717">    hand.add(minion1);</span>
+<span class="fc" id="L718">    hand.addElement(spell1);</span>
+<span class="fc" id="L719">    hand.add(hero2);</span>
+<span class="fc" id="L720">    player1.setManaPool(manaPoolBegin1);</span>
+<span class="fc" id="L721">    player1.setHero(hero1);</span>
+<span class="fc" id="L722">    player1.setHand(hand);</span>
+<span class="fc" id="L723">    player1.setUuid(uuid);</span>
+<span class="fc" id="L724">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L725">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L726">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L727">          gameMethods.playCard(uuid, idCard, player1, idTarget);</span>
+<span class="nc" id="L728">        }</span>
+    );
+    
+<span class="fc" id="L731">    assertThat(exceptionMessage).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L732">    assertThat(manaPoolEnd1).isEqualTo(player1.getManaPool());</span>
+<span class="fc" id="L733">  }</span>
+  
+  @Test 
+  public void testPlayCardTurnException() {
+<span class="fc" id="L737">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L738">    UUID uuid2 = UUID.randomUUID();</span>
+<span class="fc" id="L739">    player1.setUuid(uuid2);</span>
+<span class="fc" id="L740">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L741">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L742">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L743">          gameMethods.playCard(uuid, 0, player1, 0);</span>
+<span class="nc" id="L744">        }</span>
+    );
+
+<span class="fc" id="L747">    assertThat(&quot;Ce n'est pas votre tour !&quot;).isEqualTo(exception.getMessage());</span>
+    
+<span class="fc" id="L749">  }</span>
+  
+  @Test
+  public void testSummonMinionFromHand() throws EngineException {
+<span class="fc" id="L753">    player1 = spy(new Player());</span>
+<span class="fc" id="L754">    board = spy(new Vector&lt;MinionCard&gt;());</span>
+<span class="fc" id="L755">    player1.setBoard(board);</span>
+<span class="fc" id="L756">    hand.add(minion1);</span>
+<span class="fc" id="L757">    player1.setHand(hand);</span>
+<span class="fc" id="L758">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L759">    doReturn(0).when(board).size();</span>
+<span class="fc" id="L760">    doReturn(minion1).when(board).lastElement();</span>
+<span class="fc" id="L761">    doNothing().when(player1).addCardToBoard(minion1);</span>
+<span class="fc" id="L762">    doNothing().when(player1).removeCardFromHand(0);</span>
+<span class="fc" id="L763">    doNothing().when(gameMethods).charge(minion1);</span>
+<span class="fc" id="L764">    doNothing().when(gameMethods).giveAttackAuraToOtherMinions(board, minion1);</span>
+<span class="fc" id="L765">    doNothing().when(gameMethods).getAttackAuraFromOtherMinions(board, minion1);</span>
+<span class="fc" id="L766">    gameMethods.summonMinionFromHand(0);</span>
+<span class="fc" id="L767">    verify(player1, times(1)).addCardToBoard(minion1);</span>
+<span class="fc" id="L768">    verify(player1, times(1)).removeCardFromHand(0);</span>
+<span class="fc" id="L769">    verify(gameMethods, times(1)).charge(minion1);</span>
+<span class="fc" id="L770">    verify(gameMethods, times(1)).giveAttackAuraToOtherMinions(board, minion1);</span>
+<span class="fc" id="L771">    verify(gameMethods, times(1)).getAttackAuraFromOtherMinions(board, minion1);</span>
+<span class="fc" id="L772">  }</span>
+  
+  @Test
+  public void testSummonMinionFromHandException() throws EngineException {
+<span class="fc" id="L776">    player1 = spy(new Player());</span>
+<span class="fc" id="L777">    board = spy(new Vector&lt;MinionCard&gt;());</span>
+<span class="fc" id="L778">    player1.setBoard(board);</span>
+<span class="fc" id="L779">    hand.add(minion1);</span>
+<span class="fc" id="L780">    player1.setHand(hand);</span>
+<span class="fc" id="L781">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L782">    doReturn(7).when(board).size();</span>
+<span class="fc" id="L783">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L784">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L785">          gameMethods.summonMinionFromHand(0);</span>
+<span class="nc" id="L786">        }</span>
+    );
+    
+<span class="fc" id="L789">    assertThat(&quot;Vous avez atteint le nombre maximum de serviteurs sur le plateau !&quot;)</span>
+<span class="fc" id="L790">      .isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L791">  }</span>
+  
+  @Test
+  public void testSummonMinion() throws EngineException {
+<span class="fc" id="L795">    board = spy(new Vector&lt;MinionCard&gt;());</span>
+<span class="fc" id="L796">    player1 = spy(new Player());</span>
+<span class="fc" id="L797">    player1.setBoard(board);</span>
+<span class="fc" id="L798">    ArrayList&lt;MinionCard&gt; invocations = spy(new ArrayList&lt;MinionCard&gt;());</span>
+<span class="fc" id="L799">    minion2.setId(3);</span>
+<span class="fc" id="L800">    invocations.add(minion2);</span>
+<span class="fc" id="L801">    gameMethods.setInvocations(invocations);</span>
+<span class="fc" id="L802">    doReturn(0).when(board).size();</span>
+<span class="fc" id="L803">    doReturn(minion2).when(board).lastElement();</span>
+<span class="fc" id="L804">    doNothing().when(player1).addCardToBoard(minion2);</span>
+<span class="fc" id="L805">    doNothing().when(gameMethods).giveAttackAuraToOtherMinions(board, minion2);</span>
+<span class="fc" id="L806">    doNothing().when(gameMethods).getAttackAuraFromOtherMinions(board, minion2);</span>
+<span class="fc" id="L807">    gameMethods.summonMinion(player1, 3);</span>
+<span class="fc" id="L808">    verify(player1, times(1)).addCardToBoard(minion2);</span>
+<span class="fc" id="L809">    verify(gameMethods, times(1)).giveAttackAuraToOtherMinions(board, minion2);</span>
+<span class="fc" id="L810">    verify(gameMethods, times(1)).getAttackAuraFromOtherMinions(board, minion2); </span>
+<span class="fc" id="L811">  }</span>
+  
+  @Test
+  public void testSummonMinionException() throws EngineException {
+<span class="fc" id="L815">    board = spy(new Vector&lt;MinionCard&gt;());</span>
+<span class="fc" id="L816">    player1 = new Player();</span>
+<span class="fc" id="L817">    player1.setBoard(board);</span>
+<span class="fc" id="L818">    ArrayList&lt;MinionCard&gt; invocations = new ArrayList&lt;MinionCard&gt;();</span>
+<span class="fc" id="L819">    gameMethods.setInvocations(invocations);</span>
+<span class="fc" id="L820">    doReturn(0).when(board).size();</span>
+<span class="fc" id="L821">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L822">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L823">          gameMethods.summonMinion(player1, 3);</span>
+<span class="nc" id="L824">        }</span>
+    );
+    
+<span class="fc" id="L827">    assertThat(&quot;Le minion n'a pas pu être invoqué !&quot;).isEqualTo(exception.getMessage());</span>
+    
+<span class="fc" id="L829">  }</span>
+  
+  @Test
+  public void testPolymorph() throws EngineException {
+<span class="fc" id="L833">    board = spy(new Vector&lt;MinionCard&gt;());</span>
+<span class="fc" id="L834">    player1 = spy(new Player());</span>
+<span class="fc" id="L835">    player1.setBoard(board);</span>
+<span class="fc" id="L836">    ArrayList&lt;MinionCard&gt; invocations = spy(new ArrayList&lt;MinionCard&gt;());</span>
+<span class="fc" id="L837">    minion2.setId(3);</span>
+<span class="fc" id="L838">    invocations.add(minion2);</span>
+<span class="fc" id="L839">    gameMethods.setInvocations(invocations);</span>
+<span class="fc" id="L840">    doReturn(1).when(board).size();</span>
+<span class="fc" id="L841">    doReturn(minion2).when(board).get(0);</span>
+<span class="fc" id="L842">    doNothing().when(player1).addCardToBoard(minion2, 0);</span>
+<span class="fc" id="L843">    doNothing().when(gameMethods).giveAttackAuraToOtherMinions(board, minion2);</span>
+<span class="fc" id="L844">    doNothing().when(gameMethods).getAttackAuraFromOtherMinions(board, minion2);</span>
+<span class="fc" id="L845">    gameMethods.polymorph(player1, 3, &quot;0&quot;);</span>
+<span class="fc" id="L846">    verify(player1, times(1)).addCardToBoard(minion2, 0);</span>
+<span class="fc" id="L847">    verify(gameMethods, times(1)).giveAttackAuraToOtherMinions(board, minion2);</span>
+<span class="fc" id="L848">    verify(gameMethods, times(1)).getAttackAuraFromOtherMinions(board, minion2);</span>
+<span class="fc" id="L849">  }</span>
+  
+  @Test
+  public void testPolymorphException() throws EngineException {
+<span class="fc" id="L853">    board = spy(new Vector&lt;MinionCard&gt;());</span>
+<span class="fc" id="L854">    player1 = new Player();</span>
+<span class="fc" id="L855">    player1.setBoard(board);</span>
+<span class="fc" id="L856">    ArrayList&lt;MinionCard&gt; invocations = new ArrayList&lt;MinionCard&gt;();</span>
+<span class="fc" id="L857">    gameMethods.setInvocations(invocations);</span>
+<span class="fc" id="L858">    doReturn(0).when(board).size();</span>
+<span class="fc" id="L859">    Throwable exception = assertThrows(</span>
+<span class="fc" id="L860">        EngineException.class, () -&gt; {</span>
+<span class="nc" id="L861">          gameMethods.polymorph(player1, 3, &quot;0&quot;);</span>
+<span class="nc" id="L862">        }</span>
+    );
+    
+<span class="fc" id="L865">    assertThat(&quot;Le minion n'a pas pu être invoqué !&quot;).isEqualTo(exception.getMessage());</span>
+<span class="fc" id="L866">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;minion_all_hello&quot;, &quot;minion_1_hello&quot;, &quot;minion_hello_hello&quot;, 
+    &quot;all_all_hello&quot;, &quot;all_1_hello&quot;, &quot;all_hello_hello&quot;,&quot;hello_hello_hello&quot;})
+  public void testTargetsFromTargetStringDefault(String spellTarget) {
+<span class="fc" id="L872">    spell1.setTarget(spellTarget);</span>
+<span class="fc" id="L873">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L874">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L875">    LinkedHashMap&lt;String, AbstractCard&gt; result = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc" id="L876">    result = gameMethods.targetsFromTargetString(player1, player2, player1, 0, spellTarget);</span>
+<span class="fc" id="L877">    assertThat(result).isEmpty();</span>
+<span class="fc" id="L878">  }</span>
+  
+  @ParameterizedTest
+  @CsvSource({&quot;minion_all_enemy, -1, '1_1,1_0', 0&quot;, &quot;minion_all_ally, -1, '0_1,0_0', 0&quot;,
+    &quot;minion_all_all, -1, '1_1,1_0,0_1,0_0', 0&quot;, &quot;minion_1_enemy, 0, '1_0', 0&quot;,
+    &quot;minion_1_ally, 0, '0_0', 0&quot;, &quot;all_all_enemy, 0, '1_1,1_0,1', 0&quot;,
+    &quot;all_all_ally, 0, '0_1,0_0,0', 0&quot;, &quot;all_all_all, 0, '0_1,0_0,1_1,1_0,0,1', 0&quot;,
+    &quot;all_1_enemy, -1, '1', 0&quot;, &quot;all_1_enemy, 0, '1_0', 0&quot;, &quot;all_1_ally, -1, '0', 0&quot;,
+    &quot;all_1_ally, 0, '0_0', 0&quot;, &quot;minion_1_all, 0, '0_0', 0&quot;, &quot;minion_1_all, 0, '1_0', 1&quot;,
+    &quot;all_1_all, -1, '0', 0&quot;, &quot;all_1_all, 0, '0_0', 0&quot;, &quot;all_1_all, -1, '1', 1&quot;,
+    &quot;all_1_all, 0, '1_0', 1&quot;})
+  public void testTargetsFromTargetString(String spellTarget, int idTarget, 
+      String keys, int playerChosen) {
+<span class="fc" id="L891">    spell1.setTarget(spellTarget);</span>
+<span class="fc" id="L892">    UUID uuid = UUID.randomUUID();</span>
+<span class="fc" id="L893">    player1.setHero(hero1);</span>
+<span class="fc" id="L894">    player1.setUuid(uuid);</span>
+<span class="fc" id="L895">    UUID uuid2 = UUID.randomUUID();</span>
+<span class="fc" id="L896">    player2.setHero(hero2);</span>
+<span class="fc" id="L897">    player2.setUuid(uuid2);</span>
+<span class="fc" id="L898">    MinionCard minion00 = new MinionCard();</span>
+<span class="fc" id="L899">    MinionCard minion01 = new MinionCard();</span>
+<span class="fc" id="L900">    board.add(minion00);</span>
+<span class="fc" id="L901">    board.add(minion01);</span>
+<span class="fc" id="L902">    player1.setBoard(board);</span>
+<span class="fc" id="L903">    Vector&lt;MinionCard&gt; board2 = new Vector&lt;MinionCard&gt;();</span>
+<span class="fc" id="L904">    MinionCard minion10 = new MinionCard();</span>
+<span class="fc" id="L905">    MinionCard minion11 = new MinionCard();</span>
+<span class="fc" id="L906">    board2.add(minion10);</span>
+<span class="fc" id="L907">    board2.add(minion11);</span>
+<span class="fc" id="L908">    player2.setBoard(board2);</span>
+<span class="fc" id="L909">    gameMethods.setCurrentPlayer(player1);</span>
+<span class="fc" id="L910">    gameMethods.setOtherPlayer(player2);</span>
+<span class="fc" id="L911">    LinkedHashMap&lt;String, AbstractCard&gt; result = new LinkedHashMap&lt;String, AbstractCard&gt;();</span>
+<span class="fc bfc" id="L912" title="All 2 branches covered.">    if (playerChosen == 0) {</span>
+<span class="fc" id="L913">      result = gameMethods.targetsFromTargetString(player1, player2, player1, idTarget, spellTarget);</span>
+<span class="pc bpc" id="L914" title="1 of 2 branches missed.">    } else if (playerChosen == 1) {</span>
+<span class="fc" id="L915">      result = gameMethods.targetsFromTargetString(player1, player2, player2, idTarget, spellTarget);</span>
+    }
+<span class="fc" id="L917">    String[] keysArray = keys.split(&quot;,&quot;);</span>
+<span class="fc" id="L918">    List&lt;String&gt; keysList = new ArrayList&lt;String&gt;();</span>
+<span class="fc" id="L919">    keysList = Arrays.asList(keysArray);</span>
+<span class="fc bfc" id="L920" title="All 2 branches covered.">    for (String key : keysList) {</span>
+<span class="fc" id="L921">      assertThat(result).containsKey(key);</span>
+    }
+    
+<span class="fc" id="L924">  }</span>
+  
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</div></body></html>

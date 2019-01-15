@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>WebSocketController.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</a> &gt; <a href="../../index.html" class="el_group">Engine</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">fr.univ.nantes.alma.controller</a> &gt; <span class="el_source">WebSocketController.java</span></div><h1>WebSocketController.java</h1><pre class="source lang-java linenums">package fr.univ.nantes.alma.controller;
+
+import fr.univ.nantes.alma.Application;
+import fr.univ.nantes.alma.engine.EngineException;
+import fr.univ.nantes.alma.engine.GameMethods;
+
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
+import org.springframework.stereotype.Controller;
+
+@Controller
+<span class="nc" id="L15">public class WebSocketController {</span>
+
+  @Autowired
+  private SimpMessagingTemplate template;
+
+  @MessageMapping(&quot;/getHeros&quot;)
+  public void getHeros() {
+<span class="nc" id="L22">    this.template.convertAndSend(&quot;/heros&quot;, Application.engineBridge.getHeros());</span>
+<span class="nc" id="L23">  }</span>
+  
+  @MessageMapping(&quot;/createPlayer&quot;)
+  public void createPlayer(String data) {
+<span class="nc" id="L27">    String[] dataSplit = data.split(&quot;_&quot;);</span>
+<span class="nc" id="L28">    this.template.convertAndSend(&quot;/player/&quot; + dataSplit[0],</span>
+<span class="nc" id="L29">        Application.engineBridge.createPlayer(Integer.parseInt(dataSplit[1]), dataSplit[0]));</span>
+<span class="nc" id="L30">  }</span>
+
+  @MessageMapping(&quot;/createGame&quot;)
+  public void createGame(String uuidPlayer) {
+<span class="nc" id="L34">    GameMethods game = Application.engineBridge.createGame(UUID.fromString(uuidPlayer));</span>
+<span class="nc bnc" id="L35" title="All 2 branches missed.">    if (game == null) {</span>
+<span class="nc" id="L36">      this.template.convertAndSend(&quot;/game/&quot; + uuidPlayer, &quot;En attente d'un deuxième joueur&quot;);</span>
+<span class="nc" id="L37">    } else {</span>
+<span class="nc" id="L38">      this.template.convertAndSend(&quot;/game/&quot; + game.getCurrentPlayer().getUuid(), game);</span>
+<span class="nc" id="L39">      this.template.convertAndSend(&quot;/game/&quot; + game.getCurrentPlayer().getUuid(), </span>
+<span class="nc" id="L40">          &quot;A vous de jouer !&quot;);</span>
+<span class="nc" id="L41">      this.template.convertAndSend(&quot;/game/&quot; + game.getOtherPlayer().getUuid(), game);</span>
+    }
+<span class="nc" id="L43">  }</span>
+
+  @MessageMapping(&quot;/endTurn&quot;)
+  public void endTurn(String data) {
+<span class="nc" id="L47">    String[] dataSplit = data.split(&quot;_&quot;);</span>
+    try {
+<span class="nc" id="L49">      GameMethods game = Application.engineBridge.endTurn(UUID.fromString(dataSplit[0]), </span>
+<span class="nc" id="L50">          UUID.fromString(dataSplit[1]));</span>
+
+<span class="nc bnc" id="L52" title="All 2 branches missed.">      if (game.getOtherPlayer().getUuid().toString().equals(dataSplit[1])) {</span>
+<span class="nc" id="L53">        this.template.convertAndSend(&quot;/game/&quot; + dataSplit[0], game);</span>
+<span class="nc" id="L54">        this.template.convertAndSend(&quot;/game/&quot; + game.getCurrentPlayer().getUuid(), </span>
+<span class="nc" id="L55">            &quot;A vous de jouer !&quot;);</span>
+<span class="nc" id="L56">      } else {</span>
+<span class="nc" id="L57">        this.template.convertAndSend(&quot;/game/&quot; + game.getCurrentPlayer().getUuid(), </span>
+<span class="nc" id="L58">            &quot;A vous de jouer !&quot;);</span>
+      }
+<span class="nc" id="L60">    } catch (EngineException e) {</span>
+<span class="nc" id="L61">      this.template.convertAndSend(&quot;/game/&quot; + dataSplit[1], e.getMessage());</span>
+    }
+<span class="nc" id="L63">  }</span>
+
+  @MessageMapping(&quot;/playCard&quot;)
+  public void playCard(String data) {
+<span class="nc" id="L67">    String[] dataSplit = data.split(&quot;_&quot;);</span>
+    try {
+<span class="nc" id="L69">      GameMethods game = Application.engineBridge.playCard(UUID.fromString(dataSplit[0]), </span>
+<span class="nc" id="L70">          UUID.fromString(dataSplit[1]), Integer.parseInt(dataSplit[2]),</span>
+<span class="nc" id="L71">          UUID.fromString(dataSplit[3]), Integer.parseInt(dataSplit[4]));</span>
+<span class="nc" id="L72">      this.template.convertAndSend(&quot;/game/&quot; + dataSplit[0], game);</span>
+      
+<span class="nc bnc" id="L74" title="All 2 branches missed.">      if (game.isGameOver()) {</span>
+<span class="nc" id="L75">        Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(), </span>
+<span class="nc" id="L76">            game.getOtherPlayer().getUuid());</span>
+      }
+<span class="nc" id="L78">    } catch (EngineException e) {</span>
+<span class="nc" id="L79">      this.template.convertAndSend(&quot;/game/&quot; + dataSplit[1], e.getMessage());</span>
+    }
+<span class="nc" id="L81">  }</span>
+
+  @MessageMapping(&quot;/heroPower&quot;)
+  public void heroPower(String data) {
+<span class="nc" id="L85">    String[] dataSplit = data.split(&quot;_&quot;);</span>
+    try {
+<span class="nc" id="L87">      GameMethods game = Application.engineBridge.heroPower(UUID.fromString(dataSplit[0]), </span>
+<span class="nc" id="L88">          UUID.fromString(dataSplit[1]), UUID.fromString(dataSplit[2]), </span>
+<span class="nc" id="L89">          Integer.parseInt(dataSplit[3]));</span>
+<span class="nc" id="L90">      this.template.convertAndSend(&quot;/game/&quot; + dataSplit[0], game);</span>
+      
+<span class="nc bnc" id="L92" title="All 2 branches missed.">      if (game.isGameOver()) {</span>
+<span class="nc" id="L93">        Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(), </span>
+<span class="nc" id="L94">            game.getOtherPlayer().getUuid());</span>
+      }
+<span class="nc" id="L96">    } catch (EngineException e) {</span>
+<span class="nc" id="L97">      this.template.convertAndSend(&quot;/game/&quot; + dataSplit[1], e.getMessage());</span>
+    }
+<span class="nc" id="L99">  }</span>
+
+  @MessageMapping(&quot;/attack&quot;)
+  public void attack(String data) {
+<span class="nc" id="L103">    String[] dataSplit = data.split(&quot;_&quot;);</span>
+    try {
+<span class="nc" id="L105">      GameMethods game = Application.engineBridge.attack(UUID.fromString(dataSplit[0]), </span>
+<span class="nc" id="L106">          UUID.fromString(dataSplit[1]), Integer.parseInt(dataSplit[2]), </span>
+<span class="nc" id="L107">          UUID.fromString(dataSplit[3]), Integer.parseInt(dataSplit[4]));</span>
+<span class="nc" id="L108">      this.template.convertAndSend(&quot;/game/&quot; + dataSplit[0], game);</span>
+      
+<span class="nc bnc" id="L110" title="All 2 branches missed.">      if (game.isGameOver()) {</span>
+<span class="nc" id="L111">        Application.engineBridge.endGame(game.getIdGame(), game.getCurrentPlayer().getUuid(),</span>
+<span class="nc" id="L112">            game.getOtherPlayer().getUuid());</span>
+      }
+<span class="nc" id="L114">    } catch (EngineException e) {</span>
+<span class="nc" id="L115">      this.template.convertAndSend(&quot;/game/&quot; + dataSplit[1], e.getMessage());</span>
+    }
+<span class="nc" id="L117">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</div></body></html>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>SpellCard.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</a> &gt; <a href="../../index.html" class="el_group">Engine</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">fr.univ.nantes.alma.engine</a> &gt; <span class="el_source">SpellCard.java</span></div><h1>SpellCard.java</h1><pre class="source lang-java linenums">package fr.univ.nantes.alma.engine;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+/**
+ * The complete description of a Spell Card. 
+ *
+ * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
+ * @version 0.0.1
+ */
+@Entity
+@Table(name = &quot;spell&quot;)
+public class SpellCard extends AbstractCard {
+  @Column(name = &quot;nb_summon_spell&quot;) private int nbSummon;
+  @Column(name = &quot;id_invocation_spell&quot;) private int idInvocation;
+  @Column(name = &quot;attack_buff_spell&quot;) private int attackBuff;
+  @Column(name = &quot;armor_buff_spell&quot;) private int armorBuff;
+  @Column(name = &quot;nb_draw_spell&quot;) private int nbDraw;
+  @Column(name = &quot;polymorph_spell&quot;) private boolean polymorph;
+  @Column(name = &quot;target_spell&quot;) private String target;
+    
+  /**
+   * Initialize the attributes of this class. 
+   * @param idSpell the id of the card
+   * @param type There are five types : common, mage, paladin, warrior and invocation 
+   * @param name the name of the card
+   * @param manaCost the amount of mana that the card costs
+   * @param damage the amount of damage that the card can inflict
+   * @param description the description of the card
+   * @param nbSummon the amount of invocations that the card can perfom
+   * @param idInvocation the card's id of the invocation
+   * @param attackBuff the amount of the attack buff that the card can give
+   * @param armorBuff the amount of the armor buff that the card can give
+   * @param nbDraw the amount of cards that the player can draw
+   * @param polymorph a boolean to indicate if the card is polymorphic or not
+   * @param target a simple text with the target of the card
+   */
+  SpellCard(int idSpell, String type, String name, int manaCost, int damage, 
+      String description, int nbSummon, int idInvocation, int attackBuff, 
+      int armorBuff, int nbDraw, boolean polymorph, String target) {
+<span class="fc" id="L43">    super(idSpell, type, name, manaCost, damage, description);</span>
+<span class="fc" id="L44">    this.nbSummon = nbSummon;</span>
+<span class="fc" id="L45">    this.idInvocation = idInvocation;</span>
+<span class="fc" id="L46">    this.attackBuff = attackBuff;</span>
+<span class="fc" id="L47">    this.armorBuff = armorBuff;</span>
+<span class="fc" id="L48">    this.nbDraw = nbDraw;</span>
+<span class="fc" id="L49">    this.polymorph = polymorph;</span>
+<span class="fc" id="L50">    this.target = target;</span>
+<span class="fc" id="L51">  }</span>
+    
+<span class="fc" id="L53">  public SpellCard() {}</span>
+    
+  /**
+   * Returns a clone of the spell (based on Card clone()).
+   */
+  public Object clone() throws CloneNotSupportedException { 
+<span class="nc" id="L59">    return super.clone(); </span>
+  }
+
+  /**
+   * Gets the number of minions summoned by the spell.
+   * @return the number of summoned minions.
+   */
+  public int getNbSummon() {
+<span class="fc" id="L67">    return this.nbSummon;</span>
+  }
+
+  /**
+   * Sets the number of minions summoned by the spell.
+   * @param nbSummon the number of summoned minions.
+   */
+  public void setNbSummon(int nbSummon) {
+<span class="fc" id="L75">    this.nbSummon = nbSummon;</span>
+<span class="fc" id="L76">  }</span>
+
+  /**
+   * Gets the ID of the minion to be summoned by the spell.
+   * @return the ID of the minion to be summoned.
+   */
+  public int getIdInvocation() {
+<span class="fc" id="L83">    return this.idInvocation;</span>
+  }
+
+  /**
+   * Sets the ID of the minion to be summoned by the spell.
+   * @param idInvocation the ID of the minion to be summoned.
+   */
+  public void setIdInvocation(int idInvocation) {
+<span class="fc" id="L91">    this.idInvocation = idInvocation;</span>
+<span class="fc" id="L92">  }</span>
+
+  /**
+   * Gets the attack buff given by the spell.
+   * @return the attack buff.
+   */
+  public int getAttackBuff() {
+<span class="fc" id="L99">    return this.attackBuff;</span>
+  }
+
+  /**
+   * Sets the attack buff given by the spell.
+   * @param attackBuff the attack buff.
+   */
+  public void setAttackBuff(int attackBuff) {
+<span class="fc" id="L107">    this.attackBuff = attackBuff;</span>
+<span class="fc" id="L108">  }</span>
+
+  /**
+   * Gets the armor buff given by the spell.
+   * @return the armor buff.
+   */
+  public int getArmorBuff() {
+<span class="fc" id="L115">    return this.armorBuff;</span>
+  }
+
+  /**
+   * Sets the armor buff given by the spell.
+   * @param armorBuff the armor buff.
+   */
+  public void setArmorBuff(int armorBuff) {
+<span class="fc" id="L123">    this.armorBuff = armorBuff;</span>
+<span class="fc" id="L124">  }</span>
+  
+  /**
+   * Gets the number of cards drawn thanks to the spell.
+   * @return the number of cards drawn.
+   */
+  public int getNbDraw() {
+<span class="fc" id="L131">    return this.nbDraw;</span>
+  }
+
+  /**
+   * Sets the number of cards drawn thanks to the spell.
+   * @param nbDraw the number of cards drawn.
+   */
+  public void setNbDraw(int nbDraw) {
+<span class="fc" id="L139">    this.nbDraw = nbDraw;</span>
+<span class="fc" id="L140">  }</span>
+
+  /**
+   * Gets if the spell has a polymorphing effect.
+   * @return a statement about the polymorphing effect.
+   */
+  public boolean isPolymorph() {
+<span class="fc" id="L147">    return this.polymorph;</span>
+  }
+
+  /**
+   * Sets if the spell has a polymorphing effect.
+   * @param polymorph the statement about the polymorphing effect.
+   */
+  public void setPolymorph(boolean polymorph) {
+<span class="fc" id="L155">    this.polymorph = polymorph;</span>
+<span class="fc" id="L156">  }</span>
+
+  /**
+   * Gets the potential target(s) of the spell.
+   * @return the potential target(s).
+   */
+  public String getTarget() {
+<span class="fc" id="L163">    return this.target;</span>
+  }
+
+  /**
+   * Sets the potential target(s) of the spell.
+   * @param target the potential target(s) of the spell.
+   */
+  public void setTarget(String target) {
+<span class="fc" id="L171">    this.target = target;</span>
+<span class="fc" id="L172">  }</span>
+
+  @Override
+  public String toString() {
+<span class="fc" id="L176">    return &quot;SpellCard [nbSummon=&quot; + nbSummon + &quot;, idInvocation=&quot; + idInvocation </span>
+<span class="fc" id="L177">        + &quot;, attackBuff=&quot; + attackBuff + &quot;, armorBuff=&quot; + armorBuff + &quot;, nbDraw=&quot; </span>
+<span class="fc" id="L178">        + nbDraw + &quot;, polymorph=&quot; + polymorph + &quot;, target=&quot; + target + &quot;]&quot;;</span>
+  }
+
+  @Override
+  public int hashCode() {
+<span class="fc" id="L183">    final int prime = 31;</span>
+<span class="fc" id="L184">    int result = super.hashCode();</span>
+<span class="fc" id="L185">    result = prime * result + armorBuff;</span>
+<span class="fc" id="L186">    result = prime * result + attackBuff;</span>
+<span class="fc" id="L187">    result = prime * result + idInvocation;</span>
+<span class="fc" id="L188">    result = prime * result + nbDraw;</span>
+<span class="fc" id="L189">    result = prime * result + nbSummon;</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">    result = prime * result + (polymorph ? 1231 : 1237);</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">    result = prime * result + ((target == null) ? 0 : target.hashCode());</span>
+<span class="fc" id="L192">    return result;</span>
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+<span class="fc bfc" id="L197" title="All 2 branches covered.">    if (this == obj) {</span>
+<span class="fc" id="L198">      return true;</span>
+    }
+<span class="fc bfc" id="L200" title="All 2 branches covered.">    if (!super.equals(obj)) {</span>
+<span class="fc" id="L201">      return false;</span>
+    }
+<span class="pc bpc" id="L203" title="1 of 2 branches missed.">    if (!(obj instanceof SpellCard)) {</span>
+<span class="nc" id="L204">      return false;</span>
+    }
+<span class="fc" id="L206">    SpellCard other = (SpellCard) obj;</span>
+<span class="fc bfc" id="L207" title="All 2 branches covered.">    if (armorBuff != other.armorBuff) {</span>
+<span class="fc" id="L208">      return false;</span>
+    }
+<span class="fc bfc" id="L210" title="All 2 branches covered.">    if (attackBuff != other.attackBuff) {</span>
+<span class="fc" id="L211">      return false;</span>
+    }
+<span class="fc bfc" id="L213" title="All 2 branches covered.">    if (idInvocation != other.idInvocation) {</span>
+<span class="fc" id="L214">      return false;</span>
+    }
+<span class="fc bfc" id="L216" title="All 2 branches covered.">    if (nbDraw != other.nbDraw) {</span>
+<span class="fc" id="L217">      return false;</span>
+    }
+<span class="fc bfc" id="L219" title="All 2 branches covered.">    if (nbSummon != other.nbSummon) {</span>
+<span class="fc" id="L220">      return false;</span>
+    }
+<span class="fc bfc" id="L222" title="All 2 branches covered.">    if (polymorph != other.polymorph) {</span>
+<span class="fc" id="L223">      return false;</span>
+    }
+<span class="pc bpc" id="L225" title="1 of 2 branches missed.">    if (target == null) {</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">      if (other.target != null) {</span>
+<span class="fc" id="L227">        return false;</span>
+      }
+<span class="nc bnc" id="L229" title="All 2 branches missed.">    } else if (!target.equals(other.target)) {</span>
+<span class="nc" id="L230">      return false;</span>
+    }
+<span class="fc" id="L232">    return true;</span>
+  }
+  
+  
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</div></body></html>

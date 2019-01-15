@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../../../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../../../jacoco-resources/report.gif" type="image/gif"/><title>GameRuleUtil.java</title><link rel="stylesheet" href="../../../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../../../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=2;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../../../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../../../index.html" class="el_report">fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</a> &gt; <a href="../../index.html" class="el_group">Engine</a> &gt; <a href="../index.html" class="el_bundle">src/main/java</a> &gt; <a href="index.source.html" class="el_package">fr.univ.nantes.alma.engine</a> &gt; <span class="el_source">GameRuleUtil.java</span></div><h1>GameRuleUtil.java</h1><pre class="source lang-java linenums">package fr.univ.nantes.alma.engine;
+
+import java.util.Vector;
+
+/**
+ * Manage all the game's rule.
+ *
+ * @author Alexis Claveau, Martin Ars, Maud Van Dorssen, Alexis Loret
+ * @version 0.0.1
+ */
+<span class="nc" id="L11">public class GameRuleUtil {</span>
+
+  static final int MANA_MAX = 10;
+  static final int MANA_HERO_POWER = 2;
+  static final int MAX_HAND_SIZE = 10;
+  static final int MAX_BOARD_SIZE = 7;
+  static final int MAX_HERO_HP = 30;
+
+  /**
+   * Check if the player has reached the maximum mana.
+   * @param manaMaxTurn the mana of the player
+   * @return true of false
+   */
+  static boolean checkManaTurn(int manaMaxTurn) {
+<span class="fc bfc" id="L25" title="All 2 branches covered.">    return manaMaxTurn &lt; MANA_MAX;</span>
+  }
+
+  /**
+  * Check if the player has reached the maximum hand size.
+  * @param handSize the hand's size
+  * @return true of false
+  */
+  static boolean checkHandSize(Vector&lt;AbstractCard&gt; hand) {
+<span class="fc bfc" id="L34" title="All 2 branches covered.">    return hand.size() &lt; MAX_HAND_SIZE;</span>
+  }
+
+  /**
+   * Check if the player has reached the maximum board size.
+   * @param boardSize the board's size
+   * @return true of false
+   */
+  static boolean checkBoardSize(Vector&lt;MinionCard&gt; board) {
+<span class="fc bfc" id="L43" title="All 2 branches covered.">    return board.size() &lt; MAX_BOARD_SIZE;</span>
+  }
+
+  /**
+  * Check if the player has reached the maximum health points.
+  * @param healthPoints the player's healthPoints
+  * @return true of false
+  */
+  static boolean checkHealthPoints(int healthPoints) {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">    return healthPoints &lt; MAX_HERO_HP;</span>
+  }
+
+  /**
+   * Check if the player has enough manaPoints to cast his spell.
+   * @param manaCost the spell's cost
+   * @param manaPool the player's manaPool
+   * @return true of false
+   */
+  static boolean checkManaPool(int manaPool, int manaCost) {
+<span class="fc bfc" id="L62" title="All 2 branches covered.">    return manaPool - manaCost &gt;= 0;</span>
+  }
+   
+  /**
+   * Check if the minion or Hero is alive.
+   * @param healthPoints minion's/hero's health points
+   * @return true or false
+   */
+  static boolean checkAlive(int healthPoints) {
+<span class="fc bfc" id="L71" title="All 2 branches covered.">    return healthPoints &gt; 0;</span>
+  }
+    
+  /**
+   * Check if the minion has already attacked. 
+   * @param minion the minion to check
+   * @return true or false
+   */
+  static boolean checkMinionAttacked(MinionCard minion) {
+<span class="fc" id="L80">    return minion.isAttacked();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.2.201808211720</span>fr.univ.nantes.alma.engine (15 janv. 2019 20:58:15)</div></body></html>

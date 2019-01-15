@@ -44,14 +44,14 @@ public interface EngineBridge {
   /**
    * Play a card. Either put a minion card on the board or activate a spell card.
    * @param uuidGame the id of the game
-   * @param player the uuid of the player who uses it
+   * @param uuidPlayer the uuid of the player who uses it
    * @param idCard the id of the card
    * @param uuidTargetPlayer the player choose (for some spells)
    * @param idTarget the id of the target
    * @return the game
    * @throws EngineException a custom exception
    */
-  public GameMethods playCard(UUID uuidGame, UUID player, int idCard, UUID uuidTargetPlayer, 
+  public GameMethods playCard(UUID uuidGame, UUID uuidPlayer, int idCard, UUID uuidTargetPlayer, 
       int idTarget) throws EngineException;
 
   /**

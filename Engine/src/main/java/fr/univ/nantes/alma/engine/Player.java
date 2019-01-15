@@ -27,7 +27,8 @@ public class Player {
    * @param hero the hero of the player
    */
 
-  Player(UUID uuid, String username, HeroCard hero, AbstractCard[] deck, Vector<AbstractCard> hand) {
+  Player(UUID uuid, String username, HeroCard hero, 
+      AbstractCard[] deck, Vector<AbstractCard> hand) {
     this.uuid = uuid;
     this.username = username;
     this.hero = hero;
@@ -107,18 +108,34 @@ public class Player {
     return this.board;
   }
 
+  /**
+   * Sets the uuid of the player.
+   * @param uuid of the player
+   */
   public void setUuid(UUID uuid) {
     this.uuid = uuid;
   }
 
+  /**
+   * Sets the username of the player.
+   * @param username of the player
+   */
   public void setUsername(String username) {
     this.username = username;
   }
 
+  /**
+   * Sets the hero of the player.
+   * @param hero of the player
+   */
   public void setHero(HeroCard hero) {
     this.hero = hero;
   }
 
+  /**
+   * Sets the manaPool of the player.
+   * @param manaPool of the player
+   */
   public void setManaPool(int manaPool) {
     this.manaPool = manaPool;
   }
@@ -130,18 +147,34 @@ public class Player {
     this.manaMaxTurn++;
   }
 
+  /**
+   * Sets the manaMaxTurn.
+   * @param manaMaxTurn the maximum of mana for this turn
+   */
   public void setManaMaxTurn(int manaMaxTurn) {
     this.manaMaxTurn = manaMaxTurn;
   }
 
+  /**
+   * Sets the deck.
+   * @param deck the potential cards that can be drawn
+   */
   public void setDeck(AbstractCard[] deck) {
     this.deck = deck;
   }
 
+  /**
+   * Sets the hand of the player.
+   * @param hand of the player
+   */
   public void setHand(Vector<AbstractCard> hand) {
     this.hand = hand;
   }
 
+  /**
+   * Sets the board of the player.
+   * @param board of the player
+   */
   public void setBoard(Vector<MinionCard> board) {
     this.board = board;
   }

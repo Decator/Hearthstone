@@ -44,15 +44,15 @@ public interface EngineBridge {
   /**
    * Play a card. Either put a minion card on the board or activate a spell card.
    * @param uuidGame the id of the game
-   * @param uuidPlayer the uuid of the player who uses it
+   * @param player the uuid of the player who uses it
    * @param idCard the id of the card
    * @param uuidTargetPlayer the player choose (for some spells)
    * @param idTarget the id of the target
    * @return the game
    * @throws EngineException a custom exception
    */
-  public GameMethods playCard(UUID uuidGame, UUID player, int idCard, UUID uuidTargetPlayer, int idTarget) 
-      throws EngineException;
+  public GameMethods playCard(UUID uuidGame, UUID player, int idCard, UUID uuidTargetPlayer, 
+      int idTarget) throws EngineException;
 
   /**
    * Activate the hero's power.
@@ -63,7 +63,8 @@ public interface EngineBridge {
    * @return the game
    * @throws EngineException a custom exception
    */
-  public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, UUID uuidTargetPlayer, int idTarget) throws EngineException;
+  public GameMethods heroPower(UUID uuidGame, UUID uuidPlayer, UUID uuidTargetPlayer, int idTarget) 
+      throws EngineException;
 
   /**
    * Attack a card or a hero.
@@ -74,7 +75,8 @@ public interface EngineBridge {
    * @return the game
    * @throws EngineException a custom exception
    */
-  public GameMethods attack(UUID uuidGame, UUID uuidPlayer, int idAttack, int idTarget) throws EngineException;
+  public GameMethods attack(UUID uuidGame, UUID uuidPlayer, int idAttack, int idTarget) 
+      throws EngineException;
   
   /**
    * Remove the game when it is finish.

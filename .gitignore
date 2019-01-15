@@ -21,4 +21,3 @@
 *.settings
 *.idea
 
-/Engine/src/main/resources/Application.properties

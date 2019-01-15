@@ -1,3 +1,6 @@
+/**
+ * A representation of a Game object from the server.
+ */
 export interface IGame {
     idGame: string;
     gameOver: boolean;
@@ -5,12 +8,19 @@ export interface IGame {
     otherPlayer: Player;
 }
 
+/**
+ * A representation of a Game object from the server.
+ */
 export class Game {
     idGame: string;
     gameOver: boolean;
     currentPlayer: Player;
     otherPlayer: Player;
     
+    /**
+     * Build the Game from a Game-like object. 
+     * @param obj The game recieved from the server. 
+     */
     constructor(obj?: IGame){
         if(obj){
             this.idGame = obj.idGame;
@@ -21,6 +31,9 @@ export class Game {
     }
 }
 
+/**
+ * A representation of a Player object from the server.
+ */
 export interface IPlayer {
     uuid: string;
     username: string;
@@ -32,6 +45,9 @@ export interface IPlayer {
     board: Array<Minion>;
 }
 
+/**
+ * A representation of a Player object from the server.
+ */
 export class Player implements IPlayer {
     uuid: string;
     username: string;
@@ -42,6 +58,10 @@ export class Player implements IPlayer {
     hand: Array<ICard>;
     board: Array<Minion>;
 
+    /**
+     * Build the Player from a Player-like object. 
+     * @param obj The player recieved from the server. 
+     */
     constructor(obj?: IPlayer){
         if(obj){
             this.uuid = obj.uuid;
@@ -73,6 +93,9 @@ export class Player implements IPlayer {
     }
 }
 
+/**
+ * A representation of a Card object from the server.
+ */
 export interface ICard {
     id: number;
     type: string;
@@ -82,6 +105,9 @@ export interface ICard {
     description: string;
 }
 
+/**
+ * A representation of a Hero Card from the server.
+ */
 export interface IHero extends ICard {
     id: number;
     type: string;
@@ -98,6 +124,9 @@ export interface IHero extends ICard {
     target: string;
 }
 
+/**
+ * A representation of a Hero Card from the server.
+ */
 export class Hero implements IHero {
     id: number;
     type: string;
@@ -113,6 +142,10 @@ export class Hero implements IHero {
     heroPowerUsed: boolean;
     target: string;
 
+    /**
+     * Build the Hero Card from a Hero-like object. 
+     * @param obj The hero recieved from the server. 
+     */
     constructor(obj?: IHero){
         if(obj){
             this.id = obj.id;
@@ -132,6 +165,9 @@ export class Hero implements IHero {
     }
 }
 
+/**
+ * A representation of a Minion Card from the server.
+ */
 export interface IMinion extends ICard {
     id: number;
     type: string;
@@ -147,6 +183,9 @@ export interface IMinion extends ICard {
     attacked: boolean;
 }
 
+/**
+ * A representation of a Minion Card from the server.
+ */
 export class Minion implements IMinion {
     id: number;
     type: string;
@@ -161,6 +200,10 @@ export class Minion implements IMinion {
     attackBuffAura: number;
     attacked: boolean;
 
+    /**
+     * Build the Minion Card from a Minion-like object. 
+     * @param obj The minion recieved from the server. 
+     */
     constructor(obj?: IMinion){
         if(obj){
             this.id = obj.id;
@@ -179,6 +222,9 @@ export class Minion implements IMinion {
     }
 }
 
+/**
+ * A representation of a Spell Card from the server.
+ */
 export interface ISpell extends ICard {
     id: number;
     type: string;
@@ -195,6 +241,9 @@ export interface ISpell extends ICard {
     target: string;
 }
 
+/**
+ * A representation of a Spell Card from the server.
+ */
 export class Spell implements ISpell {
     id: number;
     type: string;
@@ -210,6 +259,10 @@ export class Spell implements ISpell {
     polymorph: boolean;
     target: string;
 
+    /**
+     * Build the Spell Card from a Spell-like object. 
+     * @param obj The spell recieved from the server. 
+     */
     constructor(obj?: ISpell){
         if(obj){
             this.id = obj.id;

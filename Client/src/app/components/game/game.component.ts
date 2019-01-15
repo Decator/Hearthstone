@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationStart } from '@angular/router';
+import { Router } from '@angular/router';
 import { SocketService } from '../../service/socket.service';
 import { Game, Player, Minion, Spell } from '../../app.models';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -100,6 +100,13 @@ export class GameComponent {
 		}
 	}
 
+	/**
+	 * Play a card.
+	 * @param idCard the id of the played card
+	 * @param uuidPlayer the id of the player who plays the card
+	 * @param uuidTarget the id of the player to whom the targeted card belongs
+	 * @param idTarget the id of the targeted card
+	 */
 	playCard(idCard: number, uuidPlayer: string, uuidTarget?: string, idTarget?: number) {
 		if (idTarget != null) {
 			this.socketService.playCard(this.game.idGame, uuidPlayer, idCard, uuidTarget, idTarget);
@@ -108,14 +115,32 @@ export class GameComponent {
 		}
 	}
 
+	/**
+	 * Attack a card. 
+	 * @param idCard the id of the attacking card
+	 * @param uuidPlayer the id of the attacking player
+	 * @param uuidTarget this id of the targeted player
+	 * @param idTarget the id of the targeted card
+	 */
 	attack(idCard: number, uuidPlayer: string, uuidTarget: string, idTarget: number) {
 		this.socketService.attack(this.game.idGame, uuidPlayer, idCard, uuidTarget, idTarget);
 	}
 
+	/**
+	 * Player a hero's power. 
+	 * @param uuidPlayer the id of the player playing the power
+	 * @param uuidTarget the id of the targeted player
+	 * @param idTarget the id of the targeted card
+	 */
 	heroPower(uuidPlayer: string, uuidTarget: string, idTarget: number) {
 		this.socketService.heroPower(this.game.idGame, uuidPlayer, uuidTarget, idTarget);
 	}
 
+	/**
+	 * When clicking on a Card from the hand, if it needs a target, wait for the target. 
+	 * Else, play the card.
+	 * @param idCard 
+	 */
 	onClickHand(idCard: number) {
 		const card = this.player.hand[idCard];
 
@@ -139,7 +164,13 @@ export class GameComponent {
 		}
 	}
 
-	onClickMinion(uuidTarget: string, idCard: number, card?: any) {
+	/**
+	 * When clicking on a Minion, find out whether its a target of if it's attacking.
+	 * Apply the given methods.
+	 * @param uuidTarget the id of the player of the Minion
+	 * @param idCard the id of the Minion Card
+	 */
+	onClickMinion(uuidTarget: string, idCard: number) {
 		if (this.waitingForPlayCardTarget) {
 			this.playCard(this.idWaitingCard, this.player.uuid, uuidTarget, idCard);
 		} else if (this.waitingForAttackTarget) {
@@ -178,6 +209,10 @@ export class GameComponent {
 		}
 	}
 
+	/**
+	 * When clicking on a hero, apply the action for which the Hero is a target.
+	 * @param uuidTarget the id of the player of the Hero
+	 */
 	onClickHero(uuidTarget: string) {
 		if (this.waitingForPlayCardTarget) {
 			this.playCard(this.idWaitingCard, this.player.uuid, uuidTarget, -1);
@@ -188,6 +223,9 @@ export class GameComponent {
 		}
 	}
 
+	/**
+	 * Activate a Hero power or wait for a target.
+	 */
 	onClickHeroPower() {
 		if(this.player.manaPool >= 2 && !this.player.hero.heroPowerUsed && this.player.hero.target && this.player.hero.target.includes('1')) {
 			const splitTarget = this.player.hero.target.split('_');
@@ -206,10 +244,18 @@ export class GameComponent {
 		}
 	}
 
+	/**
+	 * End the turn.
+	 */
 	endTurn() {
 		this.socketService.endTurn(this.game.idGame, this.player.uuid);
 	}
 
+	/**
+	 * Reset the booleans. 
+	 * These booleans say which elements are enabled or disabled in the html.
+	 * It also resets the timer if needed.
+	 */
 	resetBooleans() {
 		if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
 			this.player = this.game.currentPlayer;
@@ -262,6 +308,10 @@ export class GameComponent {
 		this.waitingCardSource = "none";
 	}
 
+	/**
+	 * Check which targets to enable or disable.
+	 * @param splitTarget the target string to analyze
+	 */
 	showTargets(splitTarget: Array<String>) {
 		if (splitTarget[0] === 'minion') {
 			if (splitTarget[2] === 'ally') {
@@ -300,14 +350,25 @@ export class GameComponent {
 		}
 	}
 
+	/**
+	 * Return true if the card is a Minion Card. 
+	 * @param card the card
+	 */
 	isMinion(card): boolean {
 		return (card as Minion).taunt !== undefined;
 	}
 
+	/**
+	 * Return true if the card is a Spell Card. 
+	 * @param card the card
+	 */
 	isSpell(card): boolean {
 		return (card as Spell).polymorph !== undefined;
 	}
 
+	/**
+	 * Start the timer if it hasn't already started. 
+	 */
 	startTimer() {
 		if(!this.interval){
 			this.interval = setInterval(() => {
@@ -324,10 +385,16 @@ export class GameComponent {
 		}
 	}
 
+	/**
+	 * Reset the timer. 
+	 */
 	resetTimer() {
 		this.timeLeft = 120;
 	}
 
+	/**
+	 * Stop the timer. 
+	 */
 	stopTimer() {
 		clearInterval(this.interval);
 		this.interval = null;

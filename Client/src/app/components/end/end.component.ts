@@ -13,6 +13,7 @@ export class EndComponent {
 	private sub: any;
 
 	constructor(private route: ActivatedRoute, private socketService: SocketService, private router: Router) {
+		// Redirect to the hero component when not allowed
 		if (!this.socketService.getIsRedirect()) {
 			this.router.navigate(['/hero']);
 		}

@@ -20,15 +20,23 @@ export class CardComponent {
 
     @Output() clicked = new EventEmitter();
 
+    // When true, show the full size card
     private showFull = false;
+    // When true, the mouse is on the card
     private mouseIn = false;
 
     constructor(){}
 
+    /**
+     * When clicking on the card, emit the click event to the game component. 
+     */
     onClick() {
         this.clicked.emit("clicked");
     }
 
+    /**
+     * If the mouse stays on the card for more than 1 second, show the full size card.
+     */
     mouseEnter() {
         this.mouseIn = true;
 
@@ -39,6 +47,9 @@ export class CardComponent {
         }, 1000);
     }
 
+    /**
+     * When the mouse leaves the card, stop showing the full size card.
+     */
     mouseLeave() {
         this.mouseIn = false;
         this.showFull = false;

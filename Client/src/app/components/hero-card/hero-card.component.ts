@@ -14,10 +14,11 @@ export class HeroCardComponent {
 
     @Output() clicked = new EventEmitter();
 
-    constructor() {
+    constructor() {}
 
-    }
-
+    /**
+     * When clicking on the hero, emit the click event to the game component. 
+     */
     onClick() {
         this.clicked.emit('clicked');
     }

@@ -47,7 +47,7 @@
         <div>
             <div class="board">
                 <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && ((!card.attacked && card.damage != 0) || waitingForPlayCardTarget ||
-                    waitingForAttackTarget || waitingForHeroPowerTarget))" type="ally" (clicked)="onClickMinion(player.uuid, player.board.indexOf(card), card)"
+                    waitingForAttackTarget || waitingForHeroPowerTarget))" type="ally" (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"
                     [selected]="waitingCardSource == 'board' && idWaitingCard == player.board.indexOf(card)" [target]="yourTurn && showAllyMinions && (waitingForPlayCardTarget ||
                     waitingForAttackTarget || waitingForHeroPowerTarget)"></card-component>
             </div>

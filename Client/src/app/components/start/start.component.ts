@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { SocketService } from '../../service/socket.service';
 
 @Component({
 	selector: 'start-component',
@@ -8,5 +7,5 @@ import { SocketService } from '../../service/socket.service';
 })
 export class StartComponent {
 
-	constructor(private socketService: SocketService) {}
+	constructor() {}
 }

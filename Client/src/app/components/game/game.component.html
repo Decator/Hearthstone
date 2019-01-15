@@ -30,7 +30,7 @@
             </div>
     
             <div class="imgadvhero">
-                <hero-card-component [card]="otherPlayer.hero" (clicked)="onClickHero(otherPlayer.uuid)" [disabled]="!(yourTurn && showEnemyHero && !showOnlyTaunt)"></hero-card-component>
+                <hero-card-component [card]="otherPlayer.hero" (clicked)="onClickHero(otherPlayer.uuid)" [target]="yourTurn && showEnemyHero && !showOnlyTaunt"></hero-card-component>
             </div>
     
             <div class="advHand">
@@ -38,8 +38,8 @@
             </div>
     
             <div class="advBoard">
-                <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="!(yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt))"
-                    type="enemy" (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))"></card-component>
+                <card-component *ngFor="let card of otherPlayer.board" [card]="card" [disabled]="true"
+                    type="enemy" (clicked)="onClickMinion(otherPlayer.uuid, otherPlayer.board.indexOf(card))" [target]="yourTurn && showEnemyMinions && (!showOnlyTaunt || card.taunt)"></card-component>
             </div>
         </div>
 
@@ -47,21 +47,23 @@
         <div>
             <div class="board">
                 <card-component *ngFor="let card of player.board" [card]="card" [disabled]="!(yourTurn && showAllyMinions && ((!card.attacked && card.damage != 0) || waitingForPlayCardTarget ||
-                    waitingForAttackTarget || waitingForHeroPowerTarget))" type="ally" (clicked)="onClickMinion(player.uuid, player.board.indexOf(card))"></card-component>
+                    waitingForAttackTarget || waitingForHeroPowerTarget))" type="ally" (clicked)="onClickMinion(player.uuid, player.board.indexOf(card), card)"
+                    [selected]="waitingCardSource == 'board' && idWaitingCard == player.board.indexOf(card)" [target]="yourTurn && showAllyMinions && (waitingForPlayCardTarget ||
+                    waitingForAttackTarget || waitingForHeroPowerTarget)"></card-component>
             </div>
 
             <div class="hand">
                 <card-component *ngFor="let card of player.hand" [card]="card" (clicked)="onClickHand(player.hand.indexOf(card))" type="ally"
-                    [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)"></card-component>
+                    [disabled]="!(yourTurn && showHand && card.manaCost <= player.manaPool)" [selected]="waitingCardSource == 'hand' && idWaitingCard == player.hand.indexOf(card)"></card-component>
             </div>
 
             <div class="imghero">
-                <hero-card-component [card]="player.hero" (clicked)="onClickHero(player.uuid)" [disabled]="!(yourTurn && showAllyHero)"></hero-card-component>
+                <hero-card-component [card]="player.hero" (clicked)="onClickHero(player.uuid)" [target]="yourTurn && showAllyHero"></hero-card-component>
             </div>
 
             <div class="power"> 
                 <input type="image" src="assets/img/{{player.hero.id}}_PH_Min.png" alt="Pouvoir hero" [ngClass]="{ 'hero-active': (yourTurn && showAllyHeroPower && !player.hero.heroPowerUsed &&
-                    player.manaPool >= 2)}" (click)="onClickHeroPower()">
+                    player.manaPool >= 2 && !waitingForHeroPowerTarget), 'hero-selected': waitingForHeroPowerTarget}" (click)="onClickHeroPower()">
             </div>
 
             <div class="mana">

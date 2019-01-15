@@ -11,7 +11,15 @@ img {
 }
 
 .card-active {
-    background-image: radial-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
+    background-image: radial-gradient(rgba(0, 255, 0, 1), rgba(0,255,0,0));
+}
+
+.card-selected {
+    background-image: radial-gradient(rgba(118, 36, 151, 1), rgba(118, 36, 151, 0.2));
+}
+
+.card-target {
+    background-image: radial-gradient(rgba(247, 232, 31, 1), rgba(247, 232, 31, 0.3));
 }
 
 /* Top left text */

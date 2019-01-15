@@ -14,6 +14,8 @@ export class CardComponent {
 
     @Input() card: Minion;
     @Input() disabled: boolean;
+    @Input() selected: boolean;
+    @Input() target: boolean;
     @Input() type: string;
 
     @Output() clicked = new EventEmitter();
@@ -34,7 +36,7 @@ export class CardComponent {
             if(this.mouseIn){
                 this.showFull = true;
             }
-        }, 500);
+        }, 1000);
     }
 
     mouseLeave() {

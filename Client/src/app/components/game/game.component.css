@@ -133,7 +133,11 @@ p {
 }
 
 .hero-active {
-  background-image: radial-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
+  background-image: radial-gradient(rgba(0, 255, 0, 1), rgba(0,255,0,0));
+}
+
+.hero-selected {
+  background-image: radial-gradient(rgba(118, 36, 151, 1), rgba(118, 36, 151, 0.2));
 }
 
 .ftour {

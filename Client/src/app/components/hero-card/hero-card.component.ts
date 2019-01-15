@@ -10,7 +10,7 @@ import { EventEmitter } from '@angular/core';
 export class HeroCardComponent {
 
     @Input() card: Hero;
-    @Input() disabled: boolean;
+    @Input() target: boolean;
 
     @Output() clicked = new EventEmitter();
 

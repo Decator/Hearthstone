@@ -1,5 +1,5 @@
 <div class="container" (click)="onClick()" class="background">
-    <img [ngClass]="{ 'card-active': !disabled }" src="assets/img/{{card.id}}.png">
+    <img [ngClass]="{'card-target': target}" src="assets/img/{{card.id}}.png">
     <div class="bottom-right">{{card.healthPoints}}</div>
     <img *ngIf="card.armorPoints != 0" class="armor" src="assets/img/Armor.png">
     <div *ngIf="card.armorPoints != 0" class="armor-text">{{card.armorPoints}}</div>

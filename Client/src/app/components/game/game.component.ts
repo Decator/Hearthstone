@@ -34,6 +34,7 @@ export class GameComponent {
 	private waitingForAttackTarget = false;
 	private waitingForHeroPowerTarget = false;
 	private idWaitingCard: number;
+	private waitingCardSource: string;
 
 	private timeLeft: number = 120;
 	private interval: any;
@@ -43,22 +44,28 @@ export class GameComponent {
 		if (this.socketService.getIsRedirect()) {
 			this.socketService.gameObservable.subscribe((value: Game) => {
 				this.game = value;
+				console.log(this.game);
 				if (this.game.gameOver) {
-					this.socketService.endGame();
 					if (this.game.currentPlayer.uuid === this.socketService.getPlayer().uuid) {
 						if (this.game.currentPlayer.hero.healthPoints <= 0) {
+							this.socketService.endGame();
 							this.router.navigate(['/end', "lose"]);
 						} else if (this.game.otherPlayer.hero.healthPoints <= 0) {
+							this.socketService.endGame();
 							this.router.navigate(['/end', "win"]);
 						} else {
+							this.socketService.endGame();
 							this.router.navigate(['/end', "other"]);
 						}
 					} else {
 						if (this.game.currentPlayer.hero.healthPoints <= 0) {
+							this.socketService.endGame();
 							this.router.navigate(['/end', "win"]);
 						} else if (this.game.otherPlayer.hero.healthPoints <= 0) {
+							this.socketService.endGame();
 							this.router.navigate(['/end', "lose"]);
 						} else {
+							this.socketService.endGame();
 							this.router.navigate(['/end', "other"]);
 						}
 					}
@@ -102,8 +109,8 @@ export class GameComponent {
 		}
 	}
 
-	attack(idCard: number, uuidPlayer: string, idTarget: number) {
-		this.socketService.attack(this.game.idGame, uuidPlayer, idCard, idTarget);
+	attack(idCard: number, uuidPlayer: string, uuidTarget: string, idTarget: number) {
+		this.socketService.attack(this.game.idGame, uuidPlayer, idCard, uuidTarget, idTarget);
 	}
 
 	heroPower(uuidPlayer: string, uuidTarget: string, idTarget: number) {
@@ -125,6 +132,7 @@ export class GameComponent {
 			this.waitingForAttackTarget = false;
 			this.waitingForHeroPowerTarget = false;
 			this.idWaitingCard = idCard;
+			this.waitingCardSource = "hand";
 
 			this.showTargets(splitTarget);
 		} else {
@@ -132,11 +140,11 @@ export class GameComponent {
 		}
 	}
 
-	onClickMinion(uuidTarget: string, idCard: number) {
+	onClickMinion(uuidTarget: string, idCard: number, card?: any) {
 		if (this.waitingForPlayCardTarget) {
 			this.playCard(this.idWaitingCard, this.player.uuid, uuidTarget, idCard);
 		} else if (this.waitingForAttackTarget) {
-			this.attack(this.idWaitingCard, this.player.uuid, idCard);
+			this.attack(this.idWaitingCard, this.player.uuid, uuidTarget, idCard);
 		} else if (this.waitingForHeroPowerTarget) {
 			this.heroPower(this.player.uuid, uuidTarget, idCard);
 		} else {
@@ -149,7 +157,16 @@ export class GameComponent {
 					this.waitingForAttackTarget = true;
 					this.waitingForHeroPowerTarget = false;
 		
+					console.log("ok");
 					this.idWaitingCard = idCard;
+					this.waitingCardSource = "board";
+					console.log(this.waitingCardSource);
+					console.log(this.idWaitingCard);
+					console.log(card);
+					console.log(this.player.board);
+					console.log(this.player.board.indexOf(card));
+					console.log(this.waitingCardSource == 'board' && this.idWaitingCard == this.player.board.indexOf(card));
+					console.log(idCard);
 		
 					this.showAllyMinions = false;
 					this.showEnemyMinions = true;
@@ -164,7 +181,7 @@ export class GameComponent {
 						}
 					}
 				} else {
-					this.attack(idCard, this.player.uuid, 1);
+					this.attack(idCard, this.player.uuid, this.otherPlayer.uuid, 1);
 				}
 			}
 		}
@@ -174,7 +191,7 @@ export class GameComponent {
 		if (this.waitingForPlayCardTarget) {
 			this.playCard(this.idWaitingCard, this.player.uuid, uuidTarget, -1);
 		} else if (this.waitingForAttackTarget) {
-			this.attack(this.idWaitingCard, this.player.uuid, -1);
+			this.attack(this.idWaitingCard, this.player.uuid, uuidTarget, -1);
 		} else if (this.waitingForHeroPowerTarget) {
 			this.heroPower(this.player.uuid, uuidTarget, -1);
 		}
@@ -251,6 +268,7 @@ export class GameComponent {
 			this.resetTimer();
 			this.startTimer();
 		}
+		this.waitingCardSource = "none";
 	}
 
 	showTargets(splitTarget: Array<String>) {

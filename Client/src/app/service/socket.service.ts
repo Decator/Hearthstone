@@ -139,8 +139,8 @@ export class SocketService {
     this.stompClient.send("/app/playCard", {}, `${uuidGame}_${uuidPlayer}_${idCard}_${uuidTargetPlayer}_${idTarget}`);
   }
 
-  attack(uuidGame: string, uuidPlayer: string, idCard: number, idTarget: number) {
-    this.stompClient.send("/app/attack", {}, `${uuidGame}_${uuidPlayer}_${idCard}_${idTarget}`);
+  attack(uuidGame: string, uuidPlayer: string, idCard: number, uuidTarget: string, idTarget: number) {
+    this.stompClient.send("/app/attack", {}, `${uuidGame}_${uuidPlayer}_${idCard}_${uuidTarget}_${idTarget}`);
   }
 
   endTurn(uuidGame: String, uuidPlayer: string) {

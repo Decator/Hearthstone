@@ -3,18 +3,17 @@
     font-size: 2em;
     position: relative;
     top: 20%;
-    width: 100%;
 }
 
 .background {
     /* The image background */
     background-image: url("/assets/img/background.jpg");
   
-    /* Full height */
-    height: 100%; 
-  
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }

@@ -342,7 +342,8 @@ public class TestGameMethods {
   
   @ParameterizedTest
   @CsvSource({"0, -1, false, 1, 0","1, -1, false, 1, 1","1, -1, true, 0, 1" })
-  public void testSpellDamageEffectHero(int spellDamage, int idTarget, boolean gameOver, int heroHP, int nbCallsSubMethod) {
+  public void testSpellDamageEffectHero(int spellDamage, int idTarget, boolean gameOver, 
+      int heroHP, int nbCallsSubMethod) {
     hero1 = spy(new HeroCard());
     spell1.setDamage(spellDamage);
     spell1.setTarget("");
@@ -401,6 +402,73 @@ public class TestGameMethods {
     doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player2, idTarget, "");
     doNothing().when(minion1).receiveDamage(spellDamage);
     gameMethods.spellDamageEffect(player2, idTarget, spell1);
+    verify(minion1, times(nbCallsSubMethods1)).receiveDamage(spellDamage);
+    verify(gameMethods, times(nbCallsSubMethods2)).removeAttackAuraFromMinions(board, minion1);
+    verify(player2, times(nbCallsSubMethods2)).removeCardFromBoard(0);
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"0, -1, false, 1, 0","1, -1, false, 1, 1","1, -1, true, 0, 1" })
+  public void testMageHeroPowerHero(int spellDamage, int idTarget, boolean gameOver, 
+      int heroHP, int nbCallsSubMethod) {
+    hero1 = spy(new HeroCard());
+    hero1.setDamage(spellDamage);
+    hero1.setTarget("");
+    hero1.setHealthPoints(heroHP);
+    player1.setHero(hero1);
+    LinkedHashMap<String, AbstractCard> targets = new LinkedHashMap<String, AbstractCard>();
+    targets.put("0", hero1);
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    gameMethods.setGameOver(false);
+    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, idTarget, "");
+    doNothing().when(hero1).receiveDamage(spellDamage);
+    gameMethods.mageHeroPower(player1, idTarget, hero1);
+    verify(hero1, times(nbCallsSubMethod)).receiveDamage(spellDamage);
+    assertThat(gameOver).isEqualTo(gameMethods.isGameOver());
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"1, -1, 1, 1, 0", "1, -1, 0, 1, 1"})
+  public void testMageHeroPowerP1(int spellDamage, int idTarget, int minionHP, 
+      int nbCallsSubMethods1, int nbCallsSubMethods2) {
+    minion1 = spy(new MinionCard());
+    player1 = spy(new Player());
+    hero1.setDamage(spellDamage);
+    hero1.setTarget("");
+    minion1.setHealthPoints(minionHP);
+    board.add(minion1);
+    player1.setBoard(board);
+    LinkedHashMap<String, AbstractCard> targets = new LinkedHashMap<String, AbstractCard>();
+    targets.put("0_0", minion1);
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player1, idTarget, "");
+    doNothing().when(minion1).receiveDamage(spellDamage);
+    gameMethods.mageHeroPower(player1, idTarget, hero1);
+    verify(minion1, times(nbCallsSubMethods1)).receiveDamage(spellDamage);
+    verify(gameMethods, times(nbCallsSubMethods2)).removeAttackAuraFromMinions(board, minion1);
+    verify(player1, times(nbCallsSubMethods2)).removeCardFromBoard(0);
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"1, -1, 1, 1, 0", "1, -1, 0, 1, 1"})
+  public void testMageHeroPowerP2(int spellDamage, int idTarget, int minionHP, 
+      int nbCallsSubMethods1, int nbCallsSubMethods2) {
+    minion1 = spy(new MinionCard());
+    player2 = spy(new Player());
+    hero1.setDamage(spellDamage);
+    hero1.setTarget("");
+    minion1.setHealthPoints(minionHP);
+    board.add(minion1);
+    player2.setBoard(board);
+    LinkedHashMap<String, AbstractCard> targets = new LinkedHashMap<String, AbstractCard>();
+    targets.put("1_0", minion1);
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    doReturn(targets).when(gameMethods).targetsFromTargetString(player1, player2, player2, idTarget, "");
+    doNothing().when(minion1).receiveDamage(spellDamage);
+    gameMethods.mageHeroPower(player2, idTarget, hero1);
     verify(minion1, times(nbCallsSubMethods1)).receiveDamage(spellDamage);
     verify(gameMethods, times(nbCallsSubMethods2)).removeAttackAuraFromMinions(board, minion1);
     verify(player2, times(nbCallsSubMethods2)).removeCardFromBoard(0);
@@ -757,6 +825,18 @@ public class TestGameMethods {
     );
     
     assertThat("Le minion n'a pas pu être invoqué !").isEqualTo(exception.getMessage());
+  }
+  
+  @ParameterizedTest
+  @CsvSource({"minion_all_hello", "minion_1_hello", "minion_hello_hello", 
+    "all_all_hello", "all_1_hello", "all_hello_hello","hello_hello_hello"})
+  public void testTargetsFromTargetStringDefault(String spellTarget) {
+    spell1.setTarget(spellTarget);
+    gameMethods.setCurrentPlayer(player1);
+    gameMethods.setOtherPlayer(player2);
+    LinkedHashMap<String, AbstractCard> result = new LinkedHashMap<String, AbstractCard>();
+    result = gameMethods.targetsFromTargetString(player1, player2, player1, 0, spellTarget);
+    assertThat(result).isEmpty();
   }
   
 }

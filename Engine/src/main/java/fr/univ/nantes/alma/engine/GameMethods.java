@@ -355,25 +355,27 @@ public class GameMethods {
    * @param heroCurrentPlayer hero of the player using the hero power
    */
   void mageHeroPower(Player playerTarget, int idTarget, HeroCard heroCurrentPlayer) {
-    LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, 
-        this.otherPlayer, playerTarget, idTarget, heroCurrentPlayer.getTarget());
-    for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
-      if (entry.getValue() instanceof HeroCard) {
-        ((HeroCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
-        if (!GameRuleUtil.checkAlive(((HeroCard)entry.getValue()).getHealthPoints())) {
-          this.gameOver = true;
-        }
-      } else if (entry.getValue() instanceof MinionCard) {
-        ((MinionCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
-        if (!GameRuleUtil.checkAlive(((MinionCard) entry.getValue()).getHealthPoints())) {
-          String[] keys = entry.getKey().split("_");
-          if (keys[0].equals("0")) { 
-            removeAttackAuraFromMinions(this.currentPlayer.getBoard(), 
-                (MinionCard) entry.getValue());
-            this.currentPlayer.removeCardFromBoard(Integer.parseInt(keys[1]));
-          } else if (keys[0].equals("1")) {
-            removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (MinionCard) entry.getValue());
-            this.otherPlayer.removeCardFromBoard(Integer.parseInt(keys[1]));
+    if (heroCurrentPlayer.getDamage() > 0) {
+      LinkedHashMap<String, AbstractCard> targets = targetsFromTargetString(this.currentPlayer, 
+          this.otherPlayer, playerTarget, idTarget, heroCurrentPlayer.getTarget());
+      for (Map.Entry<String, AbstractCard> entry : targets.entrySet()) {
+        if (entry.getValue() instanceof HeroCard) {
+          ((HeroCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
+          if (!GameRuleUtil.checkAlive(((HeroCard)entry.getValue()).getHealthPoints())) {
+            this.gameOver = true;
+          }
+        } else if (entry.getValue() instanceof MinionCard) {
+          ((MinionCard) entry.getValue()).receiveDamage(heroCurrentPlayer.getDamage());
+          if (!GameRuleUtil.checkAlive(((MinionCard) entry.getValue()).getHealthPoints())) {
+            String[] keys = entry.getKey().split("_");
+            if (keys[0].equals("0")) { 
+              removeAttackAuraFromMinions(this.currentPlayer.getBoard(), 
+                  (MinionCard) entry.getValue());
+              this.currentPlayer.removeCardFromBoard(Integer.parseInt(keys[1]));
+            } else if (keys[0].equals("1")) {
+              removeAttackAuraFromMinions(this.otherPlayer.getBoard(), (MinionCard) entry.getValue());
+              this.otherPlayer.removeCardFromBoard(Integer.parseInt(keys[1]));
+            }
           }
         }
       }

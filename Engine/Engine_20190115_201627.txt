@@ -1,6 +1,0 @@
-WARNING - 20:16:28: Creating types 
-WARNING - 20:16:28: Initializing types
-WARNING - 20:16:36: Generic post-process : Creating usages and associations
-WARNING - 20:16:36: Generic post-process : Creating activities
-WARNING - 20:16:36: Saving uml file /resource/Engine/Engine.uml
-WARNING - 20:16:36: Uml file /resource/Engine/Engine.uml saved

@@ -15,7 +15,7 @@ img {
 }
 
 .card-selected {
-    background-image: radial-gradient(rgba(118, 36, 151, 1), rgba(118, 36, 151, 0.2));
+    background-image: radial-gradient(rgba(118, 36, 151, 1), rgba(118, 36, 151, 0));
 }
 
 .card-target {

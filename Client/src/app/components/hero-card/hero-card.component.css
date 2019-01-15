@@ -12,7 +12,7 @@ img {
 }
 
 .card-target {
-    background-image: radial-gradient(rgba(247, 232, 31, 1), rgba(247, 232, 31, 0.3));
+    background-image: radial-gradient(rgba(247, 232, 31, 1), rgba(0,255,0,0));
 }
 
 /* Bottom right text */

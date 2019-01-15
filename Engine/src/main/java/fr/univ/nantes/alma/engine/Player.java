@@ -160,7 +160,7 @@ public class Player {
    * @param deck the potential cards that can be drawn
    */
   public void setDeck(AbstractCard[] deck) {
-    this.deck = deck;
+    this.deck = Arrays.copyOf(deck, deck.length);
   }
 
   /**

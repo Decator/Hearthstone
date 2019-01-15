@@ -1,3 +1,8 @@
+# Hearthstone
+
+Martin Ars, Alexis Claveau, Alexis Loret, Maud Van Dorssen</br>
+Université de Nantes, Master M1 ALMA
+
 # Setting up the MySQL server container
 Go to the [Docker](https://www.docker.com/get-started) website and download the version of Docker suited to your OS.
 Once it is set up, launch it and go to the root folder of the Hearthstone project in the terminal.
@@ -31,4 +36,14 @@ $docker kill HSDock
 To remove HSDock completely (for a cleaner rebuild) : 
 ```
 $docker rm HSDock
-``` 
+```
+
+# Starting the server
+
+Using your favorite IDE, go into Engine/src/main/java/fr/univ/nantes/alma and run the Application.java file once the docker has been set up.
+You can now start the client using Angular. (see Readme.md in Client folder)
+
+# Tests
+
+Static tests were conducted using PMD and Checkstyle (Google checks). 
+Unit tests were carried out using JUnit 5 and Mockito and test coverage was edited using EclEmma (see EclEmma folder in site). The overall coverage was 77%.
